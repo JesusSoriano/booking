@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+
+<!--    <filter>
+        <filter-name>PrimeFaces FileUpload Filter</filter-name>
+        <filter-class>org.primefaces.webapp.filter.FileUploadFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>PrimeFaces FileUpload Filter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>-->
+    
+    <!-- Removes the comments in facelets when compiles -->
+    <context-param>
+        <param-name>javax.faces.FACELETS_SKIP_COMMENTS</param-name>
+        <param-value>true</param-value>
+    </context-param>
+    <!-- Used for converting dates to system time -->
+    <context-param>
+        <param-name>javax.faces.DATETIMECONVERTER_DEFAULT_TIMEZONE_IS_SYSTEM_TIMEZONE</param-name>
+        <param-value>true</param-value>
+    </context-param>
+    
+    <servlet>
+        <servlet-name>Faces Servlet</servlet-name>
+        <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Faces Servlet</servlet-name>
+        <url-pattern>*.xhtml</url-pattern>
+    </servlet-mapping>
+    
+    <mime-mapping>
+        <extension>jsp</extension>
+        <mime-type>text/html</mime-type>
+    </mime-mapping>
+    
+    <session-config>
+        <session-timeout>
+            120
+        </session-timeout>
+    </session-config>
+    
+    <welcome-file-list>
+        <welcome-file>login.xhtml</welcome-file>
+    </welcome-file-list>
+        
+    <login-config>
+        <auth-method>FORM</auth-method>
+        <realm-name>booking-security-jdbcrealm</realm-name>
+        <form-login-config>
+            <form-login-page>/login.xhtml</form-login-page>
+            <form-error-page>/login.xhtml</form-error-page>
+        </form-login-config>
+    </login-config>
+    
+    <security-constraint>
+        <display-name>NOT-ALLOWED-ANY</display-name>
+        <web-resource-collection>
+            <web-resource-name>NOT-ALLOWED-ANY</web-resource-name>
+            <description/>
+            <url-pattern>/includes/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint/>
+    </security-constraint>
+    <security-constraint>
+        <display-name>ADMIN</display-name>
+        <web-resource-collection>
+            <web-resource-name>ADMIN</web-resource-name>
+            <description/>
+            <url-pattern>/admin/*</url-pattern>
+            <!-- without using <http-method> will allow all http methods to be constrained : GET, PUT ETC... -->
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>ADMIN</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <security-constraint>
+        <display-name>CLIENT</display-name>
+        <web-resource-collection>
+            <web-resource-name>CLIENT</web-resource-name>
+            <description/>
+            <url-pattern>/client/*</url-pattern>
+            <!-- without using <http-method> will allow all http methods to be constrained : GET, PUT ETC... -->
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>CLIENT</role-name>
+        </auth-constraint>
+    </security-constraint>
+    
+    <security-role>
+        <description/>
+        <role-name>ADMIN</role-name>
+    </security-role>
+    <security-role>
+        <description/>
+        <role-name>CLIENT</role-name>
+    </security-role>
+    
+    <error-page>
+        <!-- Unauthorized --> 
+        <error-code>401</error-code>
+        <location>/error-page.xhtml</location>
+    </error-page>
+    <error-page>
+        <!-- Forbidden --> 
+        <error-code>403</error-code>
+        <location>/error-page.xhtml</location>
+    </error-page>
+    <error-page>
+        <!-- Not found --> 
+        <error-code>404</error-code>
+        <location>/error-page.xhtml</location>
+    </error-page>
+    <error-page>
+        <!-- Internal Server Error -->
+        <error-code>500</error-code>
+        <location>/error-page.xhtml</location>
+    </error-page>
+    <error-page>
+        <!-- Service Unavailable -->
+        <error-code>503</error-code>
+        <location>/error-page.xhtml</location>
+    </error-page>
+    <error-page>
+        <exception-type>javax.faces.application.ViewExpiredException</exception-type>
+        <location>/info.xhtml?info=session-expired</location>
+    </error-page>
+    <error-page>
+        <exception-type>java.lang.Throwable</exception-type>
+        <location>/error-page.xhtml</location>
+    </error-page>
+    
+</web-app>

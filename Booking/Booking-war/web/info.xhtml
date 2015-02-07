@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html" 
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <h:head>
+        <ui:include src="/WEB-INF/head.xhtml" />
+    </h:head>
+    <h:body>
+
+        <f:view contentType="text/html">
+            <div id="loginformholder">
+                <h:form id="loginForm">
+
+                    <div>
+                        <div id="header">
+                            <div class="header-top">
+                                <div class="container">
+                                    <a href="login.xhtml"><img src="/resources/images/logo.png"/></a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="login-box">
+                            <h:panelGroup rendered="#{infoController.invalidLink}">
+                                <h2>Invalid link</h2>
+                                <div class="login-content">
+                                    <p>
+                                        Sorry, incorrect or expired link.
+                                    </p>
+                                </div>
+                            </h:panelGroup>
+
+                            <h:panelGroup rendered="#{infoController.validReset}">
+                                <h2>Reset password</h2>
+                                <div class="login-content">
+                                    <p>
+                                        You have successfully reset your password. <br/>
+                                        You can sign in now from the <a href="/login.xhtml">login page</a>.
+                                    </p>
+                                </div>
+                            </h:panelGroup>
+
+                            <h:panelGroup rendered="#{infoController.passwordReset}">
+                                <h2>Forgotten password</h2>
+                                <div class="login-content">
+                                    <p>
+                                        Password reset link has been sent successfully. Please, check your email.
+                                    </p>
+                                </div>
+                            </h:panelGroup>
+
+                            <h:panelGroup rendered="#{infoController.sessionExpired}">
+                                <h2>Expired Session</h2>
+                                <div class="login-content">
+                                    <p>
+                                        Sorry, your session has expired, please sign in again from the <a href="/login.xhtml">login page</a>.
+                                    </p>
+                                </div>
+                            </h:panelGroup>
+
+                            <h:panelGroup rendered="#{infoController.info}">
+                                <h2>Info</h2>
+                                <div class="login-content">
+                                    <p>
+                                        To access CoreSport sign in from the <a href="/login.xhtml">login page</a>.
+                                    </p>
+                                </div>
+                            </h:panelGroup>
+                        </div>
+                    </div>
+
+                    <script>
+                        document.getElementById('loginForm:email').focus();
+                    </script>
+                </h:form>
+            </div>
+        </f:view>
+    </h:body>
+</html>
+
+
+

@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+              xmlns:h="http://java.sun.com/jsf/html"
+              xmlns:ui="http://java.sun.com/jsf/facelets"
+              xmlns:f="http://java.sun.com/jsf/core"
+              xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="settings">
+        <div class="row">
+            <div class="col-xs-12 col-md-12">
+                <h3>Mensaje</h3>
+                <br/>
+
+                <h:form id="mailForm">
+                    <h:button value="Redactar Email" outcome="compose-mail.jsf?faces-redirect=true" styleClass="btn btn-primary btn-main" style="margin-bottom:30px;" />
+
+                    <div class="tabs">
+                        <h:button value="Bandeja de Entrada" outcome="mailbox.xhtmlfaces-redirect=true" />
+                        <h:button value="Correo Enviado" outcome="sent-mail.jsf?faces-redirect=true" />
+                    </div>
+                    <h:message id="msg" for="msg" errorClass="fieldError" infoClass="fieldSuccess" />
+
+                    <div class="mailform">
+                        <h:panelGroup id="messageDisplay"  >
+                            <div class="border-gray marging-bottom-10">
+                                <h:panelGrid columns="2" class="text-left" >
+                                    <h:outputText value="Asunto: " class="padding-right-30"/> <h:outputText value="#{sessionScope.messageSess.subject}" />
+                                    <h:outputText value="De: " class="padding-right-30" /> <h:outputText value="#{sessionScope.messageSess.sender.fullName}" />
+                                    <h:outputText value="Para: " class="padding-right-30" /> <h:outputText value="#{sessionScope.messageSess.receiver.fullName}" />
+                                    <h:outputText value="Recibido: " class="padding-right-30" /> <h:outputText value="#{sessionScope.messageSess.sentDate}">   <f:convertDateTime pattern="#{dateFormatController.dateWithTimeFormatString}" /> </h:outputText>
+                                </h:panelGrid>
+                            </div>
+                            <div class="border-gray" style="text-align: justify;">
+                                <h:outputText value="#{sessionScope.messageSess.body}" escape="false" />
+                            </div>
+                        </h:panelGroup>
+                        <br/>
+
+                    </div>
+                </h:form>
+
+            </div>
+        </div>
+    </h:form>
+</ui:component>

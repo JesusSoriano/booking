@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+              xmlns:ui="http://java.sun.com/jsf/facelets"
+              xmlns:h="http://java.sun.com/jsf/html"
+              xmlns:p="http://primefaces.org/ui">
+
+    <div id="triangle-topleft"></div>
+    <div id="triangle-bottomright"></div>
+    <div class="header-top">
+        <div class="container head-bar">
+            <a href="home.xhtml"><img src="/resources/images/logo.png"/></a>
+            <div class="user-details">
+                <ul>
+                    <li>#{homeController.userFullName}</li>
+                    <li><h:commandLink value="Salir" action="#{loginController.performLogout()}"/></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</ui:component>

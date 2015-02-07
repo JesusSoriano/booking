@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <h:head>
+        <ui:include src="/WEB-INF/head.xhtml" />
+    </h:head>
+
+    <f:view contentType="text/html">
+        <h:body>
+            <div id="wrap">
+                <h:form>
+                    <div>
+                        <div id="header">
+
+                            <ui:include src="/WEB-INF/header-info.xhtml" />
+
+                            <div id="navigation">
+                                <ul id="nav" class="container">
+                                    <li><span class="dashboard-bg"></span><a href="home.xhtml">Inicio</a></li>
+                                    <li class="dropdown-li"><span class="transactions-bg"></span><a>Reservas</a>
+                                        <ul class="dropdown">
+                                            <li><span class="transactions-bg"></span><a href="#">TRX</a></li>
+                                            <li><span class="transactions-bg"></span><a href="#">Masaje</a></li>
+                                            <li><span class="list-bg"></span><a href="#">Nutrición</a></li>
+                                            <li><span class="cancel-bg"></span><a href="#">Otros</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="dropdown-li"><span class="reports-bg"></span><a>Mi Cuenta</a>
+                                        <ul class="dropdown">
+                                            <li><span class="transactions-bg"></span><a href="#">Perfil</a></li>
+                                            <li><span class="list-bg"></span><a href="change-password.xhtml">Cambiar Contraseña</a></li>
+                                            <li><span class="profit-bg"></span><a href="#">Correo Interno</a></li>
+                                            <li><span class="profit-bg"/><h:commandLink value="Cerrar Sesión" action="#{loginController.performLogout()}"/></li>
+                                        </ul>
+                                    </li>
+                                    <li class="dropdown-li"><span class="transactions-bg"></span><a>Aministración</a>
+                                        <ul class="dropdown">
+                                            <li><span class="transactions-bg"></span><a href="#">Clientes</a></li>
+                                            <li><span class="transactions-bg"></span><a href="#">Administradores</a></li>
+                                            <li><span class="list-bg"></span><a href="#">Notificaciones</a></li>
+                                        </ul>
+                                    </li>
+                                    <div class="clear"></div>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </h:form>
+
+
+                <div id="wrapper">
+                    <div class="container">
+                        <ui:insert name="content"/>
+                    </div>
+
+                </div>
+
+
+                <ui:insert name="footer">
+                    <ui:include src="/WEB-INF/footer.xhtml" />
+                </ui:insert>
+            </div>
+        </h:body>
+    </f:view>
+
+</html>

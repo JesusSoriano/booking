@@ -1,0 +1,232 @@
+package com.booking.controllers;
+
+import com.booking.entities.PasswordChangeRequest;
+import com.booking.entities.User;
+import com.booking.enums.AuditType;
+import com.booking.enums.Roles;
+import com.booking.facades.AuditFacade;
+import com.booking.facades.PasswordChangeRequestFacade;
+import com.booking.facades.UserFacade;
+import com.booking.util.Constants;
+import com.booking.util.FacesUtil;
+import com.booking.security.PBKDF2HashGenerator;
+import java.io.IOException;
+import java.io.Serializable;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+
+@ManagedBean
+@ViewScoped
+public class LoginController implements Serializable {
+
+//    @EJB
+//    private MailService mailService;
+    @EJB
+    private UserFacade userFacade;
+    @EJB
+    private AuditFacade auditFacade;
+    @EJB
+    private PasswordChangeRequestFacade passwordChangeRequestFacade;
+
+    private String email;
+    private String password;
+    private User currentUser;
+
+    /**
+     * Creates a new instance of LoginController
+     */
+    public LoginController() {
+    }
+
+    @PostConstruct
+    public void init() {
+    }
+
+    public void userLogin() {
+        String outcome = "";
+        try {
+            // remove start and end white spaces of email
+            email = email.trim();
+
+            currentUser = userFacade.findUserByEmail(email);
+
+            if (currentUser == null) {
+                FacesUtil.addErrorMessage("loginForm", "Inicio de sesión fallido, inténtalo de nuevo.");
+                return;
+            }
+
+//            if (currentUser.isLoginBlock()) {
+//                FacesUtil.addErrorMessage("loginForm", "For security reasons, your account has been blocked. Please, contact your system admin for more info.");
+//                return;
+//            }
+
+            boolean isValidPassword;
+            try {
+                isValidPassword = PBKDF2HashGenerator.validatePassword(password, currentUser.getPassword());
+            } catch (NumberFormatException | NoSuchAlgorithmException | InvalidKeySpecException nfEx) {
+                FacesUtil.addErrorMessage("loginForm", "Inicio de sesión fallido, inténtalo de nuevo.");
+                Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, nfEx);
+                return;
+            }
+
+            if (!isValidPassword) {
+//                addLoginTry();
+                FacesUtil.addErrorMessage("loginForm", "Login fallido, inténtalo de nuevo.");
+                return;
+            }
+
+//            if (currentUser.getLoginTries() > 0) {
+//                currentUser.setLoginTries(0);
+//                userFacade.edit(currentUser);
+//            }
+
+            if (!currentUser.isAccountActive()) {
+                FacesUtil.addErrorMessage("loginForm", "Tu cuenta no está activada. Consúltanos para más información.");
+                return;
+            }
+
+            HttpServletRequest request = FacesUtil.getRequest();
+            try {
+                request.logout();
+            } catch (Exception ex) {
+                Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            try {
+                request.login(email, currentUser.getPassword());
+            } catch (Exception ex) {
+                Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+                FacesUtil.addErrorMessage("loginForm", "Lo sentimos, no ha sido posible iniciar sesión en este momento. Contáctanos si el problema persiste.");
+                return;
+            }
+
+            try {
+                String ipAddress = FacesUtil.getCurrentIPAddress();
+                auditFacade.createAudit(AuditType.LOGGED_IN, currentUser, ipAddress);
+            } catch (Exception e) {
+                Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, e);
+            }
+
+            outcome = homePage();
+            FacesUtil.setSessionAttribute(Constants.CURRENT_USER, currentUser);
+
+        } catch (Exception e) {
+                FacesUtil.addErrorMessage("loginForm", "Lo sentimos, no ha sido posible iniciar sesión en este momento. Contáctanos si el problema persiste.");
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, e);
+            return;
+        }
+
+        try {
+            FacesUtil.redirectTo(outcome);
+        } catch (IOException ioEx) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ioEx);
+        }
+    }
+
+//    private void addLoginTry() {
+//        currentUser.setLoginTries(currentUser.getLoginTries() + 1);
+//        if (currentUser.getLoginTries() > 4) {
+//            currentUser.setLoginBlock(true);
+//            FacesUtil.addErrorMessage("loginForm", "For security reasons, your account has been blocked. Please, contact your the system admin for more info.");
+//            return;
+//        }
+//        userFacade.edit(currentUser);
+//    }
+
+    private String homePage() {
+        Roles userRole = currentUser.getRole().getUserRole();
+        switch (userRole) {
+            case ADMIN: {
+                return "/admin/home.xhtml";
+            }
+            case CLIENT: {
+                return "/client/home.xhtml";
+            }
+            default: {
+                return "";
+            }
+        }
+    }
+
+    public void performLogout() {
+        String redirectPage = "/login.xhtml";
+        
+        try {
+            String ipAddress = FacesUtil.getCurrentIPAddress();
+            auditFacade.createAudit(AuditType.LOGGED_OUT, FacesUtil.getCurrentUser(), ipAddress);
+        } catch (Exception e) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, e);
+        }
+
+        try {
+            HttpServletRequest request = FacesUtil.getRequest();
+            request.logout();
+            request.getSession().invalidate();
+        } catch (ServletException ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        try {
+            FacesUtil.redirectTo(redirectPage);
+        } catch (IOException ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void forgotPassword() throws IOException {
+        User user = userFacade.findUserByEmail(email);
+        if (user == null) {
+            FacesUtil.addErrorMessage("forgotPassword:email", "Usuario no válido o no dado de alta.");
+        } else {
+            try {
+                // create a PasswordChangeRequest
+                PasswordChangeRequest passwordChangeRequest = passwordChangeRequestFacade.createNewPasswordChangeRequest(user);
+                // set an encryption id to the request
+                passwordChangeRequest.setHashId(PBKDF2HashGenerator.createHash(passwordChangeRequest.getId().toString()));
+                passwordChangeRequestFacade.edit(passwordChangeRequest);
+
+                // send the email with the encrypted id
+//                mailService.sendPasswordResetEmail(user);
+
+                try {
+                    FacesUtil.redirectTo("info.xhtml", "&info=password-reset");
+                } catch (IOException ex) {
+                    Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } catch (Exception ex) {
+                FacesUtil.addErrorMessage("forgotPassword:email", "Lo sentimos, no se ha podido enviar la petición en este momento. Inténtalo de nuevo más tarde.");
+                Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
+    /* ------------------------------------------ */
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+    
+    public String getOrganisationEmailAddress() {
+        return Constants.EMAIL;
+    }
+
+}

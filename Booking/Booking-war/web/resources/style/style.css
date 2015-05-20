@@ -113,7 +113,7 @@ a {
 
 .user-details>ul>li:first-child {
     border-left:0px;
-    color: #00b5e2;
+    color: #bbb;
     margin-right: -5px;
 }
 
@@ -418,7 +418,12 @@ table {
     float:right;
     margin: 20px 0px 10px 0px;
     font-size:12px;
-    color: #e1e000;
+    color: #888;
+}
+.copy-section a {
+    margin-left: 3px;
+    color: #888;
+    font-size:13px;
 }
 
 

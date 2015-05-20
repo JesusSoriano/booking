@@ -30,7 +30,7 @@ public class Message implements Serializable {
     private long id;
     @Column(name = "subject")
     private String subject;
-    @Column(name = "body")
+    @Column(name = "body", columnDefinition="text")
     private String body;
     @Column(name = "status")
     private boolean status;
@@ -109,12 +109,16 @@ public class Message implements Serializable {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        return super.equals(obj); //To change body of generated methods, choose Tools | Templates.
+    public boolean equals(Object object) {
+        if (!(object instanceof Message)) {
+            return false;
+        }
+        Message other = (Message) object;
+        return this.id == other.id;
     }
 
     @Override
     public String toString() {
-        return "[id =" + id + "]";
+        return "[Message id = " + id + "]";
     }
 }

@@ -27,7 +27,7 @@ public class MessagesController implements Serializable {
     private UserFacade userFacade;
     @EJB
     private MessageFacade messageFacade;
-    
+
     private List<Message> allReceivedMessages;
     private List<Message> allSentMessages;
     private int allUnreadMessagesCount;
@@ -63,24 +63,25 @@ public class MessagesController implements Serializable {
         }
 
         FacesUtil.removeSessionAttribute("messageSess");
+        FacesUtil.removeSessionAttribute("mailbox");
     }
 
     public String sendMessage() {
-        // TODO: comprobar que el mensaje contenga menos de 255 caracteres.
-        messageFacade.sendMessage(subject, messageBody, receiver, logedUser);
-        FacesUtil.addSuccessMessage("mailForm:msg", "Mensaje enviado.");
-        return "mailbox.xhtml?faces-redirect=true";
+        Message message = messageFacade.sendMessage(subject, messageBody, receiver, logedUser);
+        FacesUtil.setSessionAttribute("messageSess", message);
+        FacesUtil.setSessionAttribute("mailbox", "sent");
+        return "view-message.xhtml?faces-redirect=true";
     }
 
     public String cancelMessage() {
         return "mailbox.xhtml?faces-redirect=true";
     }
 
-    public String viewMessage(Message message, boolean read) {
+    public String viewMessage(Message message, boolean read, String mailbox) {
         message.setStatus(read);
         messageFacade.edit(message);
         FacesUtil.setSessionAttribute("messageSess", message);
-        FacesUtil.getFlash().put("message", message);
+        FacesUtil.setSessionAttribute("mailbox", mailbox);
         return "view-message.xhtml?faces-redirect=true";
     }
 

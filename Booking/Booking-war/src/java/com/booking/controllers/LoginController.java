@@ -224,9 +224,5 @@ public class LoginController implements Serializable {
     public String getEmail() {
         return email;
     }
-    
-    public String getOrganisationEmailAddress() {
-        return Constants.EMAIL;
-    }
 
 }

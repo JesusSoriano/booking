@@ -27,7 +27,7 @@ public class MessageFacade extends AbstractFacade<Message> {
         super(Message.class);
     }
 
-    public void sendMessage(String subject, String body, User receiver, User sender) {
+    public Message sendMessage(String subject, String body, User receiver, User sender) {
         Message message = new Message();
         message.setSubject(subject);
         message.setBody(body);
@@ -35,6 +35,8 @@ public class MessageFacade extends AbstractFacade<Message> {
         message.setReceiver(receiver);
         message.setSentDate(new Date(System.currentTimeMillis()));
         create(message);
+        
+        return message;
     }
 
     @SuppressWarnings("unchecked")

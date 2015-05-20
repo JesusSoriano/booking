@@ -33,7 +33,7 @@
                             <f:facet name="header">
                                 Asunto
                             </f:facet>
-                            <p:commandLink id="messageLink" value="#{message.subject}" action="#{messagesController.viewMessage(message, false)}"  />
+                            <p:commandLink id="messageLink" value="#{message.subject}" action="#{messagesController.viewMessage(message, false, 'sent')}"  />
                         </p:column>
                         <p:column width="20%">
                             <f:facet name="header">

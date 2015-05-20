@@ -20,7 +20,7 @@
                         <h:button value="Correo Enviado" outcome="sent-mail.jsf?faces-redirect=true" />
                     </div>
 
-                    <h:message id="msg" for="msg" errorClass="msgError" infoClass="msgInfo" />
+                    <h:messages errorClass="msgError" infoClass="msgInfo" />
 
                     <div>
                         <p:dataTable  value="#{messagesController.allReceivedMessages}" var="message" 
@@ -39,7 +39,7 @@
                                     Asunto
                                 </f:facet>
                                 <p:commandLink id="messageLink" value="#{message.subject}" style="#{message.status ? '' : 'font-weight: bold;'}"
-                                               action="#{messagesController.viewMessage(message, true)}"  />
+                                               action="#{messagesController.viewMessage(message, true, 'received')}"  />
                             </p:column>
                             <p:column width="20%">
                                 <f:facet name="header">

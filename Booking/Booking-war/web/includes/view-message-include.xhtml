@@ -16,8 +16,8 @@
                     <h:button value="Redactar Email" outcome="compose-mail.jsf?faces-redirect=true" styleClass="btn btn-primary btn-main" style="margin-bottom:30px;" />
 
                     <div class="tabs">
-                        <h:button value="Bandeja de Entrada" outcome="mailbox.xhtmlfaces-redirect=true" />
-                        <h:button value="Correo Enviado" outcome="sent-mail.jsf?faces-redirect=true" />
+                        <h:button class="#{sessionScope.mailbox eq 'received' ? 'active-tab' : ''}" value="Bandeja de Entrada" outcome="mailbox.xhtmlfaces-redirect=true" />
+                        <h:button class="#{sessionScope.mailbox eq 'sent' ? 'active-tab' : ''}" value="Correo Enviado" outcome="sent-mail.jsf?faces-redirect=true" />
                     </div>
                     <h:message id="msg" for="msg" errorClass="fieldError" infoClass="fieldSuccess" />
 

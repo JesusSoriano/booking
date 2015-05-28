@@ -43,7 +43,7 @@ public class HomeController implements Serializable {
     }
 
     public String getRole() {
-        return currentUser.getRole().getUserRole().getName();
+        return currentUser.getUserRole().getRole().getName();
     }
     
     public String getUserFullName() {

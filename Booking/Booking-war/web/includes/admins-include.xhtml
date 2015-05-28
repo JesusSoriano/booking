@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+              xmlns:h="http://java.sun.com/jsf/html"
+              xmlns:ui="http://java.sun.com/jsf/facelets"
+              xmlns:f="http://java.sun.com/jsf/core"
+              xmlns:p="http://primefaces.org/ui">
+
+    <div class="row">        
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <h:form id="adminsForm"> 
+                <h:message for="msg" id="msg" errorClass="fieldError" infoClass="fieldSuccess" /> 
+                <br /> 
+                <div class="sub-title-page sub-title-blue"> 
+                    <h3 class="page-title" style="margin-bottom: 40px;">Administradores del sistema</h3> 
+                </div> 
+                <h:panelGroup id="rows"> 
+                    <script type="text/javascript">
+                        $(document).ready(function () {
+                            $('#adminsForm\\:adminsTable .ui-paginator-rpp-options.ui-widget.ui-state-default.ui-corner-left')
+                                    .each(function () {
+                                        $(this).children().last().html('Todos');
+                                    });
+                        });
+                    </script>
+
+                    <p:dataTable id="adminsTable" value="#{usersController.admins}" var="admin" styleClass="common-table text-center" paginator="true" rows="10" paginatorPosition="bottom" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" 
+                                 rowsPerPageTemplate="10, 20, 50, #{usersController.admins.size()}"> 
+                        <p:column headerText="Nombre" sortBy="#{admin.firstName}"> 
+                            <h:outputText value="#{admin.firstName}" /> 
+                        </p:column> 
+                        <p:column headerText="Apellidos" sortBy="#{admin.lastName}"> 
+                            <h:outputText value="#{admin.lastName}" /> 
+                        </p:column> 
+                        <p:column headerText="Email" sortBy="#{admin.email}"> 
+                            <h:outputText value="#{admin.email}" /> 
+                        </p:column> 
+                        <p:column headerText="Dirección" sortBy="#{admin.address.city}"> 
+                            <h:outputText value="#{admin.address.addressLine}" /> <br/>
+                            <h:outputText value="#{admin.address.addressLine2}" /> <br/>
+                            <h:outputText value="#{admin.address.city}" />
+                        </p:column> 
+                        <p:column headerText="Teléfono" sortBy="#{admin.phone}"> 
+                            <h:outputText value="#{admin.phone}" /> 
+                        </p:column> 
+                    </p:dataTable>
+                </h:panelGroup> 
+            </h:form>
+        </div>
+    </div>
+</ui:component>

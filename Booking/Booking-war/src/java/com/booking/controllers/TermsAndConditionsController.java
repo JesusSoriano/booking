@@ -1,7 +1,7 @@
 package com.booking.controllers;
 
 import com.booking.entities.User;
-import com.booking.enums.Roles;
+import com.booking.enums.Role;
 import com.booking.facades.UserFacade;
 import com.booking.util.Constants;
 import com.booking.util.FacesUtil;
@@ -91,12 +91,12 @@ public class TermsAndConditionsController implements Serializable {
     }
 
     private String homePage() {
-        Roles userRole = currentUser.getRole().getUserRole();
+        Role userRole = currentUser.getUserRole().getRole();
         switch (userRole) {
             case ADMIN: {
                 return "/admin/home.xhtml";
             }
-            case CLIENT: {
+            case USER: {
                 return "/client/home.xhtml";
             }
             default: {

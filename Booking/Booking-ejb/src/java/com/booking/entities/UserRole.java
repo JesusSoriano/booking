@@ -1,6 +1,6 @@
 package com.booking.entities;
 
-import com.booking.enums.Roles;
+import com.booking.enums.Role;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -30,7 +30,7 @@ public class UserRole implements Serializable {
     private long id;
     @Column(name = "role_name")
     @Enumerated(EnumType.STRING)
-    private Roles userRole;
+    private Role role;
     @OneToOne
     @JoinColumn(name = "email", referencedColumnName = "email")
     private User user;
@@ -42,12 +42,12 @@ public class UserRole implements Serializable {
         return id;
     }
 
-    public Roles getUserRole() {
-        return userRole;
+    public Role getRole() {
+        return role;
     }
 
-    public void setUserRole(Roles userRole) {
-        this.userRole = userRole;
+    public void setRole(Role role) {
+        this.role = role;
     }
 
     public User getUser() {
@@ -79,6 +79,6 @@ public class UserRole implements Serializable {
 
     @Override
     public String toString() {
-        return "[ " + id + " - " + userRole + " ]";
+        return "[ " + id + " - " + role + " ]";
     }
 }

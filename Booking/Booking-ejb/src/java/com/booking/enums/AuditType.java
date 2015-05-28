@@ -14,10 +14,8 @@ public enum AuditType {
     LOGGED_OUT("ha salido del sistema"),
     SIGN_UP("se ha registrado"),
     ACCOUNT_CANCELLED("se ha dado de baja"),
-    BOOK_TRX("ha reservado hora para TRX"),
-    BOOK_MASSAGE("ha reservado hora para masaje"),
-    BOOK_DIET("ha reservado hora para dieta"),
-    BOOK_PILATES("ha reservado hora para pilates");
+    SUSPEND_USER("ha suspendido un usuario"),
+    ACTIVATE_USER("ha activado un usuario");
     
     private final String label;
 
@@ -35,10 +33,8 @@ public enum AuditType {
         audits.add(LOGGED_OUT);
         audits.add(SIGN_UP);
         audits.add(ACCOUNT_CANCELLED);
-        audits.add(BOOK_TRX);
-        audits.add(BOOK_PILATES);
-        audits.add(BOOK_MASSAGE);
-        audits.add(BOOK_DIET);
+        audits.add(SUSPEND_USER);
+        audits.add(ACTIVATE_USER);
         return audits;
     }
     

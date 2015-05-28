@@ -1,8 +1,9 @@
 package com.booking.controllers;
 
+import com.booking.entities.Organisation;
 import com.booking.entities.User;
 import com.booking.enums.AuditType;
-import com.booking.enums.Roles;
+import com.booking.enums.Role;
 import com.booking.facades.AuditFacade;
 import com.booking.facades.UserFacade;
 import com.booking.util.Constants;
@@ -59,9 +60,11 @@ public class AccountSetupController implements Serializable {
                 return "";
             }
 
+            Organisation organisation = FacesUtil.getCurrentOrganisation();
+            
             // Password encryption
             password = PBKDF2HashGenerator.createHash(password);
-            User newUser = userFacade.createNewUser(firstName, lastName, email, phone, password, Roles.CLIENT);
+            User newUser = userFacade.createNewUser(firstName, lastName, email, phone, password, Role.USER, organisation);
 
             try {
                 HttpServletRequest request = FacesUtil.getRequest();
@@ -81,7 +84,7 @@ public class AccountSetupController implements Serializable {
 //            }
             try {
                 String ipAddress = FacesUtil.getCurrentIPAddress();
-                auditFacade.createAudit(AuditType.SIGN_UP, newUser, ipAddress);
+                auditFacade.createAudit(AuditType.SIGN_UP, newUser, ipAddress, organisation);
             } catch (Exception e) {
                 Logger.getLogger(AccountSetupController.class.getName()).log(Level.SEVERE, null, e);
             }

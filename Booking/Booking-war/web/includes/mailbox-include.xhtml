@@ -6,56 +6,55 @@
               xmlns:f="http://java.sun.com/jsf/core"
               xmlns:p="http://primefaces.org/ui">
 
-    <h:form id="settings">
-        <div class="row">
-            <div class="col-xs-12 col-md-12">
-                <h3>Correo Interno</h3>
-                <br/>
+    <div class="row">
+        <div class="col-xs-12 col-md-12">
+            <h3>Correo Interno</h3>
+            <br/>
 
-                <h:form id="mailForm">
-                    <h:button value="Redactar Email" outcome="compose-mail.jsf?faces-redirect=true" styleClass="btn btn-primary btn-main" style="margin-bottom:30px;" />
+            <h:form id="mailForm">
+                <h:button value="Redactar Email" outcome="compose-mail.jsf?faces-redirect=true" styleClass="btn btn-primary btn-main" style="margin-bottom:30px;" />
 
-                    <div class="tabs">
-                        <h:button class="active-tab" value="Bandeja de Entrada" />
-                        <h:button value="Correo Enviado" outcome="sent-mail.jsf?faces-redirect=true" />
-                    </div>
+                <div class="tabs">
+                    <h:button class="active-tab" value="Bandeja de Entrada" />
+                    <h:button value="Correo Enviado" outcome="sent-mail.jsf?faces-redirect=true" />
+                </div>
 
-                    <h:messages errorClass="msgError" infoClass="msgInfo" />
+                <h:messages errorClass="msgError" infoClass="msgInfo" />
 
-                    <div>
-                        <p:dataTable  value="#{messagesController.allReceivedMessages}" var="message" 
-                                      styleClass="ewTable" paginator="true" rows="10" paginatorPosition="bottom"
-                                      paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                                      rowsPerPageTemplate="10,20" >
+                <div>
+                    <p:dataTable  value="#{messagesController.allReceivedMessages}" var="message" 
+                                  styleClass="ewTable" paginator="true" rows="10" paginatorPosition="bottom"
+                                  paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                  rowsPerPageTemplate="10,20" >
 
-                            <p:column>
-                                <f:facet name="header">
-                                    De
-                                </f:facet>
-                                <h:outputText value="#{message.sender.fullName}" style="#{message.status ? '' : 'font-weight: bold;'}" />
-                            </p:column>
-                            <p:column width="45%">
-                                <f:facet name="header">
-                                    Asunto
-                                </f:facet>
-                                <p:commandLink id="messageLink" value="#{message.subject}" style="#{message.status ? '' : 'font-weight: bold;'}"
-                                               action="#{messagesController.viewMessage(message, true, 'received')}"  />
-                            </p:column>
-                            <p:column width="20%">
-                                <f:facet name="header">
-                                    Fecha
-                                </f:facet>
-                                <h:outputText value="#{message.sentDate}" style="#{message.status ? '' : 'font-weight: bold;'}">
-                                    <f:convertDateTime pattern="#{dateFormatController.dateWithTimeFormatString}" />
-                                </h:outputText>
-                            </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                De
+                            </f:facet>
+                            <h:outputText value="#{message.sender.fullName}" style="#{message.status ? '' : 'font-weight: bold;'}" />
+                        </p:column>
+                        <p:column width="45%">
+                            <f:facet name="header">
+                                Asunto
+                            </f:facet>
+                            <p:commandLink id="messageLink" value="#{message.subject}" style="#{message.status ? '' : 'font-weight: bold;'}"
+                                           action="#{messagesController.viewMessage(message, true, 'received')}"  />
+                        </p:column>
+                        <p:column width="20%">
+                            <f:facet name="header">
+                                Fecha
+                            </f:facet>
+                            <h:outputText value="#{message.sentDate}" style="#{message.status ? '' : 'font-weight: bold;'}">
+                                <f:convertDateTime pattern="#{dateFormatController.dateWithTimeFormatString}" />
+                            </h:outputText>
+                        </p:column>
 
-                        </p:dataTable>
-                    </div>
+                    </p:dataTable>
+                </div>
 
-                </h:form>
+            </h:form>
 
-            </div>
         </div>
-    </h:form>
+    </div>
+
 </ui:component>

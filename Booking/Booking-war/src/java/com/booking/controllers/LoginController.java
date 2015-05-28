@@ -1,9 +1,10 @@
 package com.booking.controllers;
 
+import com.booking.entities.Organisation;
 import com.booking.entities.PasswordChangeRequest;
 import com.booking.entities.User;
 import com.booking.enums.AuditType;
-import com.booking.enums.Roles;
+import com.booking.enums.Role;
 import com.booking.facades.AuditFacade;
 import com.booking.facades.PasswordChangeRequestFacade;
 import com.booking.facades.UserFacade;
@@ -39,6 +40,7 @@ public class LoginController implements Serializable {
     private String email;
     private String password;
     private User currentUser;
+    private Organisation organisation;
 
     /**
      * Creates a new instance of LoginController
@@ -48,6 +50,7 @@ public class LoginController implements Serializable {
 
     @PostConstruct
     public void init() {
+        organisation = FacesUtil.getCurrentOrganisation();
     }
 
     public void userLogin() {
@@ -67,7 +70,6 @@ public class LoginController implements Serializable {
 //                FacesUtil.addErrorMessage("loginForm", "For security reasons, your account has been blocked. Please, contact your system admin for more info.");
 //                return;
 //            }
-
             boolean isValidPassword;
             try {
                 isValidPassword = PBKDF2HashGenerator.validatePassword(password, currentUser.getPassword());
@@ -87,7 +89,6 @@ public class LoginController implements Serializable {
 //                currentUser.setLoginTries(0);
 //                userFacade.edit(currentUser);
 //            }
-
             if (!currentUser.isAccountActive()) {
                 FacesUtil.addErrorMessage("loginForm", "Tu cuenta no está activada. Consúltanos para más información.");
                 return;
@@ -110,7 +111,7 @@ public class LoginController implements Serializable {
 
             try {
                 String ipAddress = FacesUtil.getCurrentIPAddress();
-                auditFacade.createAudit(AuditType.LOGGED_IN, currentUser, ipAddress);
+                auditFacade.createAudit(AuditType.LOGGED_IN, currentUser, ipAddress, organisation);
             } catch (Exception e) {
                 Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, e);
             }
@@ -119,7 +120,7 @@ public class LoginController implements Serializable {
             FacesUtil.setSessionAttribute(Constants.CURRENT_USER, currentUser);
 
         } catch (Exception e) {
-                FacesUtil.addErrorMessage("loginForm", "Lo sentimos, no ha sido posible iniciar sesión en este momento. Contáctanos si el problema persiste.");
+            FacesUtil.addErrorMessage("loginForm", "Lo sentimos, no ha sido posible iniciar sesión en este momento. Contáctanos si el problema persiste.");
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, e);
             return;
         }
@@ -140,14 +141,13 @@ public class LoginController implements Serializable {
 //        }
 //        userFacade.edit(currentUser);
 //    }
-
     private String homePage() {
-        Roles userRole = currentUser.getRole().getUserRole();
+        Role userRole = currentUser.getUserRole().getRole();
         switch (userRole) {
             case ADMIN: {
                 return "/admin/home.xhtml";
             }
-            case CLIENT: {
+            case USER: {
                 return "/client/home.xhtml";
             }
             default: {
@@ -158,10 +158,10 @@ public class LoginController implements Serializable {
 
     public void performLogout() {
         String redirectPage = "/login.xhtml";
-        
+
         try {
             String ipAddress = FacesUtil.getCurrentIPAddress();
-            auditFacade.createAudit(AuditType.LOGGED_OUT, FacesUtil.getCurrentUser(), ipAddress);
+            auditFacade.createAudit(AuditType.LOGGED_OUT, FacesUtil.getCurrentUser(), ipAddress, organisation);
         } catch (Exception e) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, e);
         }
@@ -194,21 +194,19 @@ public class LoginController implements Serializable {
                 passwordChangeRequestFacade.edit(passwordChangeRequest);
 
                 // send the email with the encrypted id
-//                mailService.sendPasswordResetEmail(user);
-
+                // mailService.sendPasswordResetEmail(user);
                 try {
                     FacesUtil.redirectTo("info.xhtml", "&info=password-reset");
                 } catch (IOException ex) {
                     Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            } catch (Exception ex) {
+            } catch (NoSuchAlgorithmException | InvalidKeySpecException ex) {
                 FacesUtil.addErrorMessage("forgotPassword:email", "Lo sentimos, no se ha podido enviar la petición en este momento. Inténtalo de nuevo más tarde.");
                 Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
 
-    /* ------------------------------------------ */
     public String getPassword() {
         return password;
     }

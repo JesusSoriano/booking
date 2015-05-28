@@ -41,6 +41,9 @@ public class Audit implements Serializable {
     private User user;
     @Column(name = "user_ip")
     private String ip;
+    @ManyToOne
+    @JoinColumn(name = "organisation", referencedColumnName = "id")
+    private Organisation organisation;
 
     public long getId() {
         return id;
@@ -76,6 +79,14 @@ public class Audit implements Serializable {
 
     public String getIp() {
         return ip;
+    }
+
+    public Organisation getOrganisation() {
+        return organisation;
+    }
+
+    public void setOrganisation(Organisation organisation) {
+        this.organisation = organisation;
     }
 
     @Override

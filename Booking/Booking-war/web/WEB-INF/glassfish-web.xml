@@ -3,14 +3,17 @@
 <glassfish-web-app error-url="">
   <class-loader delegate="true"/>
   <parameter-encoding default-charset="UTF-8"/>
-  <context-root>/</context-root>
+  <security-role-mapping>
+    <role-name>SUPER_ADMIN</role-name>
+    <group-name>SUPER_ADMIN</group-name>
+  </security-role-mapping>
   <security-role-mapping>
     <role-name>ADMIN</role-name>
     <group-name>ADMIN</group-name>
   </security-role-mapping>
   <security-role-mapping>
-    <role-name>CLIENT</role-name>
-    <group-name>CLIENT</group-name>
+    <role-name>USER</role-name>
+    <group-name>USER</group-name>
   </security-role-mapping>
   <jsp-config>
     <property name="keepgenerated" value="true">

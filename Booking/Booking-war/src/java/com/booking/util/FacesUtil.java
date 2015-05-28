@@ -1,6 +1,8 @@
 package com.booking.util;
 
+import com.booking.entities.Organisation;
 import com.booking.entities.User;
+import com.booking.facades.OrganisationFacade;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -16,17 +18,12 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Jesus Soriano
+ * @author Jesús Soriano
  */
 public class FacesUtil implements Serializable {
 
     public static ExternalContext getExternalContext() {
         return FacesContext.getCurrentInstance().getExternalContext();
-    }
-
-    public static String getPageReferer() {
-//        return FacesContext.getCurrentInstance().getViewRoot().getViewId();
-        return getRequest().getHeader("referer");
     }
 
     public static Flash getFlash() {
@@ -76,27 +73,11 @@ public class FacesUtil implements Serializable {
     }
 
     public static void redirectTo(String path) throws IOException {
-        getExternalContext().redirect(path + Constants.FC); // ?faces-redirect=true
+        getExternalContext().redirect(path + Constants.FACES_REDIRECT); // ?faces-redirect=true
     }
 
     public static void redirectTo(String path, String params) throws IOException {
-        getExternalContext().redirect(path + Constants.FC + params); // ?faces-redirect=true
-    }
-
-    public static void addToApplicationContext(String key, Object object) {
-        ServletContext servletContext = (ServletContext) FacesUtil.getExternalContext().getContext();
-        List<Object> objects = (List<Object>) servletContext.getAttribute(key);
-
-        if (objects == null) {
-            objects = new ArrayList<>();
-            servletContext.setAttribute(key, objects);
-        }
-        objects.add(object);
-    }
-
-    public static Object getApplicationContextObject(String key) {
-        ServletContext servletContext = (ServletContext) FacesUtil.getExternalContext().getContext();
-        return servletContext.getAttribute(key);
+        getExternalContext().redirect(path + Constants.FACES_REDIRECT + params); // ?faces-redirect=true
     }
 
     public static String getCurrentIPAddress() {
@@ -109,4 +90,19 @@ public class FacesUtil implements Serializable {
         return ipAddress;
     }
 
+    public static Organisation getCurrentOrganisation() {
+        HttpServletRequest request = getRequest();
+        HttpSession session = request.getSession();
+
+        Organisation o = (Organisation) session.getAttribute(Constants.CURRENT_ORGANISATION);
+
+        if (o == null) {
+            OrganisationFacade organisationFacade = (OrganisationFacade) EJBLookup.lookUpEJB(OrganisationFacade.class);
+            // Única organización de momento
+            o = organisationFacade.getDefaultOrganisation();
+            setSessionAttribute(Constants.CURRENT_ORGANISATION, o);
+        }
+        return o;
+    }
+    
 }

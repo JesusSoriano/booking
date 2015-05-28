@@ -1,6 +1,7 @@
 package com.booking.facades;
 
 import com.booking.entities.Audit;
+import com.booking.entities.Organisation;
 import com.booking.entities.User;
 import com.booking.enums.AuditType;
 import java.util.Date;
@@ -27,9 +28,10 @@ public class AuditFacade extends AbstractFacade<Audit> {
         super(Audit.class);
     }
 
-    public Audit createAudit (AuditType action, User user, String ip) {
+    public Audit createAudit (AuditType action, User user, String ip, Organisation organisation) {
         Audit audit = new Audit();
         audit.setCreatedDate(new Date());
+        audit.setOrganisation(organisation);
         audit.setAction(action);
         audit.setUser(user);
         audit.setIp(ip);

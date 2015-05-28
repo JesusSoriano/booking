@@ -414,15 +414,15 @@ table {
     color: #00b5e2;
 }
 
-.copy-section {
+.design-by {
     float:right;
     margin: 20px 0px 10px 0px;
     font-size:12px;
     color: #888;
 }
-.copy-section a {
+.design-by a {
     margin-left: 3px;
-    color: #888;
+    color: #aaa;
     font-size:13px;
 }
 
@@ -487,6 +487,16 @@ input[type='text'], input[type='password'] {
 }
 
 
+.page-title {
+    margin-top: 0px;
+    margin-bottom: 20px;
+}
+.common-table {
+    width: 1100px;
+    margin-left: -100px;
+    margin-top: 20px;
+}
+
 .text-center {
     text-align:center;
 }
@@ -516,12 +526,6 @@ input[type='text'], input[type='password'] {
 
 .widht-100 {
     width: 100%;
-}
-
-.booking-schedule {
-    width: 1000px;
-    margin-top: 20px;
-    margin-left: -40px;
 }
 
 table {

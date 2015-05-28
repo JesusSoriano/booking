@@ -1,13 +1,19 @@
 package com.booking.entities;
 
+import com.booking.enums.Status;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -50,7 +56,16 @@ public class User implements Serializable {
     @Column(name = "terms_version_accepted")
     private boolean termsVersionAccepted;
     @OneToOne(mappedBy = "user")
-    private UserRole role;
+    private UserRole userRole;
+    @Column(name = "status")
+    @Enumerated(EnumType.STRING)
+    private Status status;
+    @OneToOne(cascade = {CascadeType.REMOVE, CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinColumn(name = "address", referencedColumnName = "id")
+    private Address address;
+    @ManyToOne
+    @JoinColumn(name = "organisation", referencedColumnName = "id")
+    private Organisation organisation;
 
     public long getId() {
         return id;
@@ -124,12 +139,12 @@ public class User implements Serializable {
         this.termsVersionAccepted = termsVersionAccepted;
     }
 
-    public UserRole getRole() {
-        return role;
+    public UserRole getUserRole() {
+        return userRole;
     }
 
-    public void setRole(UserRole role) {
-        this.role = role;
+    public void setUserRole(UserRole userRole) {
+        this.userRole = userRole;
     }
 
     public String getFullName() {
@@ -142,6 +157,30 @@ public class User implements Serializable {
 
     public String getPhone() {
         return phone;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    public Organisation getOrganisation() {
+        return organisation;
+    }
+
+    public void setOrganisation(Organisation organisation) {
+        this.organisation = organisation;
     }
 
     @Override

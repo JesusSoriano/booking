@@ -6,44 +6,42 @@
               xmlns:f="http://java.sun.com/jsf/core"
               xmlns:p="http://primefaces.org/ui">
 
-    <h:form id="settings">
+    <h:form>
         <div class="row">
             <div class="col-xs-6 col-md-6">
                 <h3>Redactar Email</h3>
 
                 <div class="row">
-                    <h:form>
-                        <table class="text-left margin-left-30" border="0" >
-                            <tr>
-                                <td class="padding-right-30"><h:outputLabel for="messageReceiverSelect" value="Para: " /></td>
-                                <td><h:selectOneMenu id="messageReceiverSelect" value="#{messagesController.receiver}" >
-                                        <f:selectItems value="#{messagesController.allUsersItems}" />
-                                        <f:converter converterId="userConverter" />
-                                    </h:selectOneMenu>
-                                </td>
-                            </tr>
+                    <table class="text-left margin-left-30" border="0" >
+                        <tr>
+                            <td class="padding-right-30"><h:outputLabel for="messageReceiverSelect" value="Para: " /></td>
+                            <td><h:selectOneMenu id="messageReceiverSelect" value="#{messagesController.receiver}" >
+                                    <f:selectItems value="#{messagesController.allUsersItems}" />
+                                    <f:converter converterId="userConverter" />
+                                </h:selectOneMenu>
+                            </td>
+                        </tr>
 
-                            <tr>
-                                <td class="padding-right-30"> <h:outputLabel for="messageSubjectInput" value="Asunto: "  /></td>
-                                <td> <h:inputText id="messageSubjectInput" value="#{messagesController.subject}"  required="true" requiredMessage="Introduce el asunto" /><br/>
-                                    <h:message for="messageSubjectInput" errorClass="msgError" infoClass="msgInfo"/>
-                                </td>
-                            </tr>
-                            <tr><td>&emsp;</td></tr>
-                            <tr>
-                                <td>&emsp;</td>
-                                <td><p:editor id="messageBodyInput" value="#{messagesController.messageBody}" required="true" requiredMessage="Escribe un mensaje"/>
-                                    <h:message for="messageBodyInput" errorClass="msgError" infoClass="msgInfo"/>
-                                </td>
-                            </tr>
-                            <tr><td>&emsp;</td></tr>
-                            <tr>
-                                <td>&emsp;</td>
-                                <td> <h:commandButton value="Enviar" action="#{messagesController.sendMessage}" styleClass="btn btn-primary btn-main" style="margin-right:10px;"  />
-                                    <p:commandButton value="Cancelar" action="#{messagesController.cancelMessage}" process="@this" styleClass="btn btn-primary btn-cancel" /></td>
-                            </tr>
-                        </table>
-                    </h:form>
+                        <tr>
+                            <td class="padding-right-30"> <h:outputLabel for="messageSubjectInput" value="Asunto: "  /></td>
+                            <td> <h:inputText id="messageSubjectInput" value="#{messagesController.subject}"  required="true" requiredMessage="Introduce el asunto" /><br/>
+                                <h:message for="messageSubjectInput" errorClass="msgError" infoClass="msgInfo"/>
+                            </td>
+                        </tr>
+                        <tr><td>&emsp;</td></tr>
+                        <tr>
+                            <td>&emsp;</td>
+                            <td><p:editor id="messageBodyInput" value="#{messagesController.messageBody}" required="true" requiredMessage="Escribe un mensaje"/>
+                                <h:message for="messageBodyInput" errorClass="msgError" infoClass="msgInfo"/>
+                            </td>
+                        </tr>
+                        <tr><td>&emsp;</td></tr>
+                        <tr>
+                            <td>&emsp;</td>
+                            <td> <h:commandButton value="Enviar" action="#{messagesController.sendMessage}" styleClass="btn btn-primary btn-main" style="margin-right:10px;"  />
+                                <p:commandButton value="Cancelar" action="#{messagesController.cancelMessage}" process="@this" styleClass="btn btn-primary btn-cancel" /></td>
+                        </tr>
+                    </table>
                 </div>
             </div>
         </div>

@@ -1,5 +1,6 @@
 package com.booking.facades;
 
+import com.booking.entities.Address;
 import com.booking.entities.Organisation;
 import com.booking.entities.User;
 import com.booking.entities.UserRole;
@@ -84,7 +85,7 @@ public class UserFacade extends AbstractFacade<User> {
         return em.createQuery("SELECT u FROM User u WHERE u.userRole.role = :client").
                 setParameter("client", Role.USER).getResultList();
     }
-    
+
     public List<User> findAllAdminsForOrganisation() {
         return em.createQuery("SELECT u FROM User u WHERE u.userRole.role = :client").
                 setParameter("client", Role.ADMIN).getResultList();

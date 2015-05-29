@@ -43,14 +43,17 @@
                             <h:outputText value="#{user.phone}" /> 
                         </p:column> 
                         <p:column headerText="Opciones"> 
-                            <h:link outcome="update-user.xhtml?faces-redirect=true&amp;user=#{user.id}"> 
-                                <h:graphicImage title="EDITAR" value="../resources/images/edit.png" width="24" height="24" class="iconActionR" /> 
+                            <h:link outcome="compose-mail.xhtml?faces-redirect=true&amp;user=#{user.id}"> 
+                                <h:graphicImage title="ENVIAR CORREO" value="../resources/images/send_email.png" class="table_action_width" /> 
+                            </h:link> 
+                            <h:link outcome="editar-usuario.xhtml?faces-redirect=true&amp;user=#{user.id}"> 
+                                <h:graphicImage title="EDITAR" value="../resources/images/edit_user.png" class="table_action" /> 
                             </h:link> 
                             <h:commandLink action="#{usersController.activateUser(user)}" rendered="#{user.status eq 'SUSPENDED'}"> 
-                                <h:graphicImage title="ACTIVAR" value="../resources/images/activate.png" width="24" height="24" class="iconActionR" /> 
+                                <h:graphicImage title="ACTIVAR" value="../resources/images/activate_user.png" class="table_action" /> 
                             </h:commandLink> 
-                            <h:commandLink action="#{usersController.deactivateUser(user)}" rendered="#{user.status eq 'CONFIRMED'}"> 
-                                <h:graphicImage title="SUSPENDER" value="../resources/images/deactivate.png" width="24" height="24" class="iconActionR" /> 
+                            <h:commandLink action="#{usersController.deactivateUser(user)}" rendered="#{user.status eq 'ACTIVATED'}"> 
+                                <h:graphicImage title="SUSPENDER" value="../resources/images/suspend_user.png" class="table_action" /> 
                             </h:commandLink> 
                         </p:column> 
                     </p:dataTable>

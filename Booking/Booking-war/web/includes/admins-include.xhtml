@@ -43,6 +43,11 @@
                         <p:column headerText="Teléfono" sortBy="#{admin.phone}"> 
                             <h:outputText value="#{admin.phone}" /> 
                         </p:column> 
+                        <p:column headerText="Opciones"> 
+                            <h:link outcome="compose-mail.xhtml?faces-redirect=true&amp;user=#{user.id}"> 
+                                <h:graphicImage title="ENVIAR CORREO" value="../resources/images/mail.png" width="24" height="24" class="iconActionR" /> 
+                            </h:link> 
+                        </p:column>
                     </p:dataTable>
                 </h:panelGroup> 
             </h:form>

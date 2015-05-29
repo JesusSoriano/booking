@@ -496,6 +496,14 @@ input[type='text'], input[type='password'] {
     margin-left: -100px;
     margin-top: 20px;
 }
+.table_action {
+    height: 22px;
+    margin-right: 10px;
+}
+.table_action_width {
+    width: 22px;
+    margin-right: 10px;
+}
 
 .text-center {
     text-align:center;

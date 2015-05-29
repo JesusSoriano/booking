@@ -64,6 +64,11 @@ public class MessagesController implements Serializable {
 
         FacesUtil.removeSessionAttribute("messageSess");
         FacesUtil.removeSessionAttribute("mailbox");
+        
+        String receiverParam = FacesUtil.getParameter("user");
+        if (receiverParam != null) {
+            receiver = userFacade.find(Long.valueOf(receiverParam));
+        }
     }
 
     public String sendMessage() {

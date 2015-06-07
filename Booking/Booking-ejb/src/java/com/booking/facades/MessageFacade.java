@@ -10,7 +10,7 @@ import javax.persistence.PersistenceContext;
 
 /**
  *
- * @author Jesus Soriano
+ * @author Jesús Soriano
  */
 @Stateless
 public class MessageFacade extends AbstractFacade<Message> {
@@ -39,13 +39,11 @@ public class MessageFacade extends AbstractFacade<Message> {
         return message;
     }
 
-    @SuppressWarnings("unchecked")
     public List<Message> findAllReceivedMessages(User user) {
         return (List<Message>) entityManager.createQuery("SELECT m FROM Message m WHERE m.receiver = :receiver ORDER BY m.sentDate DESC").
                 setParameter("receiver", user).getResultList();
     }
 
-    @SuppressWarnings("unchecked")
     public List<Message> findAllSentMessages(User user) {
         return (List<Message>) entityManager.createQuery("SELECT m FROM Message m WHERE m.sender = :sender ORDER BY m.sentDate DESC").
                 setParameter("sender", user).getResultList();

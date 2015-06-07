@@ -15,7 +15,9 @@ public enum AuditType {
     SIGN_UP("se ha registrado"),
     ACCOUNT_CANCELLED("se ha dado de baja"),
     SUSPEND_USER("ha suspendido un usuario"),
-    ACTIVATE_USER("ha activado un usuario");
+    ACTIVATE_USER("ha activado un usuario"),
+    SUSPEND_ORGANISATION("ha suspendido una organización"),
+    ACTIVATE_ORGANISATION("ha activado una organización");
     
     private final String label;
 
@@ -35,6 +37,8 @@ public enum AuditType {
         audits.add(ACCOUNT_CANCELLED);
         audits.add(SUSPEND_USER);
         audits.add(ACTIVATE_USER);
+        audits.add(SUSPEND_ORGANISATION);
+        audits.add(ACTIVATE_ORGANISATION);
         return audits;
     }
     

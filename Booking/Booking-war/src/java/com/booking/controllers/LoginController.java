@@ -5,6 +5,7 @@ import com.booking.entities.PasswordChangeRequest;
 import com.booking.entities.User;
 import com.booking.enums.AuditType;
 import com.booking.enums.Role;
+import com.booking.enums.Status;
 import com.booking.facades.AuditFacade;
 import com.booking.facades.PasswordChangeRequestFacade;
 import com.booking.facades.UserFacade;
@@ -63,6 +64,11 @@ public class LoginController implements Serializable {
 
             if (currentUser == null) {
                 FacesUtil.addErrorMessage("loginForm", "Inicio de sesión fallido, inténtalo de nuevo.");
+                return;
+            }
+
+            if (currentUser.getOrganisation().getStatus().equals(Status.SUSPENDED)) {
+                FacesUtil.addErrorMessage("loginForm", "Inicio de sesión fallido, organización suspendida.");
                 return;
             }
 
@@ -144,11 +150,14 @@ public class LoginController implements Serializable {
     private String homePage() {
         Role userRole = currentUser.getUserRole().getRole();
         switch (userRole) {
+            case USER: {
+                return "/client/home.xhtml";
+            }
             case ADMIN: {
                 return "/admin/home.xhtml";
             }
-            case USER: {
-                return "/client/home.xhtml";
+            case SUPER_ADMIN: {
+                return "/super-admin/home.xhtml";
             }
             default: {
                 return "";
@@ -223,4 +232,15 @@ public class LoginController implements Serializable {
         return email;
     }
 
+    public String getStyleFilePath() {
+        return "/resources/style/" + organisation.getStyleFile();
+    }
+
+    public String getLogoPath() {
+        return "/resources/images/" + organisation.getLogo() + ".png";
+    }
+
+    public String getOrganisationName() {
+        return organisation.getName();
+    }
 }

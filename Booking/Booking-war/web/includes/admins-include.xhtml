@@ -43,10 +43,24 @@
                         <p:column headerText="Teléfono" sortBy="#{admin.phone}"> 
                             <h:outputText value="#{admin.phone}" /> 
                         </p:column> 
+                        <p:column headerText="Organización" sortBy="#{admin.organisation}"> 
+                            <h:outputText value="#{admin.organisation}" /> 
+                        </p:column> 
                         <p:column headerText="Opciones"> 
-                            <h:link outcome="compose-mail.xhtml?faces-redirect=true&amp;user=#{user.id}"> 
-                                <h:graphicImage title="ENVIAR CORREO" value="../resources/images/mail.png" width="24" height="24" class="iconActionR" /> 
+                            <h:link outcome="compose-mail.xhtml?faces-redirect=true&amp;user=#{admin.id}"> 
+                                <h:graphicImage title="ENVIAR CORREO" value="../resources/images/send_email.png" class="table_action_width" /> 
                             </h:link> 
+                            <h:panelGroup rendered="#{usersController.userRole eq 'SUPER_ADMIN'}" >
+                                <h:link outcome="edit-user.xhtml?faces-redirect=true&amp;user=#{admin.id}"> 
+                                    <h:graphicImage title="EDITAR" value="../resources/images/edit_user.png" class="table_action" /> 
+                                </h:link> 
+                                <h:commandLink action="#{usersController.activateUser(admin)}" rendered="#{admin.status eq 'SUSPENDED'}"> 
+                                    <h:graphicImage title="ACTIVAR" value="../resources/images/activate_user.png" class="table_action" /> 
+                                </h:commandLink> 
+                                <h:commandLink action="#{usersController.deactivateUser(admin)}" rendered="#{admin.status eq 'ACTIVATED'}"> 
+                                    <h:graphicImage title="SUSPENDER" value="../resources/images/suspend_user.png" class="table_action" /> 
+                                </h:commandLink>
+                            </h:panelGroup>
                         </p:column>
                     </p:dataTable>
                 </h:panelGroup> 

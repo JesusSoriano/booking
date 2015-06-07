@@ -1,6 +1,5 @@
 package com.booking.facades;
 
-import com.booking.entities.Address;
 import com.booking.entities.Organisation;
 import com.booking.entities.User;
 import com.booking.entities.UserRole;
@@ -71,6 +70,12 @@ public class UserFacade extends AbstractFacade<User> {
         edit(user);
     }
 
+    
+    public List<User> findAllUsersOfOrganisation(Organisation organisation) {
+        return em.createQuery("SELECT u FROM User u WHERE u.organisation = :organisation").
+                setParameter("organisation", organisation).getResultList();
+    }
+    
     public User findUserByEmail(String email) {
         return findUniqueResult(em.createQuery("SELECT u FROM User u WHERE u.email = :email").
                 setParameter("email", email).getResultList());
@@ -81,13 +86,15 @@ public class UserFacade extends AbstractFacade<User> {
                 setParameter("hashId", hashId).getResultList());
     }
 
-    public List<User> findAllClientsForOrganisation() {
-        return em.createQuery("SELECT u FROM User u WHERE u.userRole.role = :client").
+    public List<User> findAllClientsOfOrganisation(Organisation organisation) {
+        return em.createQuery("SELECT u FROM User u WHERE u.organisation = :organisation AND u.userRole.role = :client").
+                setParameter("organisation", organisation).
                 setParameter("client", Role.USER).getResultList();
     }
 
-    public List<User> findAllAdminsForOrganisation() {
-        return em.createQuery("SELECT u FROM User u WHERE u.userRole.role = :client").
+    public List<User> findAllAdminsOfOrganisation(Organisation organisation) {
+        return em.createQuery("SELECT u FROM User u WHERE u.organisation = :organisation AND u.userRole.role = :client").
+                setParameter("organisation", organisation).
                 setParameter("client", Role.ADMIN).getResultList();
     }
 }

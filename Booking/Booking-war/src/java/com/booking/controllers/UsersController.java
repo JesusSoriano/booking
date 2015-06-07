@@ -1,8 +1,9 @@
-package com.booking.controllers.admin;
+package com.booking.controllers;
 
 import com.booking.entities.Organisation;
 import com.booking.entities.User;
 import com.booking.enums.AuditType;
+import com.booking.enums.Role;
 import com.booking.facades.AuditFacade;
 import com.booking.facades.UserFacade;
 import com.booking.util.Constants;
@@ -31,8 +32,8 @@ public class UsersController implements Serializable {
         logedUser = FacesUtil.getCurrentUser();
         organisation = FacesUtil.getCurrentOrganisation();
 
-        users = userFacade.findAllClientsForOrganisation();
-        admins = userFacade.findAllAdminsForOrganisation();
+        users = userFacade.findAllClientsOfOrganisation(organisation);
+        admins = userFacade.findAllAdminsOfOrganisation(organisation);
     }
 
     public String viewPayCenterAdminDetails(User user) {
@@ -52,7 +53,7 @@ public class UsersController implements Serializable {
             e.printStackTrace();
         }
 
-        return "usuarios.xhtml" + Constants.FACES_REDIRECT;
+        return "users.xhtml" + Constants.FACES_REDIRECT;
     }
 
     public String deactivateUser(User user) {
@@ -67,7 +68,7 @@ public class UsersController implements Serializable {
             e.printStackTrace();
         }
 
-        return "usuarios.xhtml" + Constants.FACES_REDIRECT;
+        return "users.xhtml" + Constants.FACES_REDIRECT;
     }
 
     public List<User> getUsers() {
@@ -77,5 +78,8 @@ public class UsersController implements Serializable {
     public List<User> getAdmins() {
         return admins;
     }
-
+    
+    public Role getUserRole() {
+        return logedUser.getUserRole().getRole();
+    }
 }

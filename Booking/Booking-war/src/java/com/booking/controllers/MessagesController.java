@@ -1,13 +1,13 @@
 package com.booking.controllers;
 
 import com.booking.entities.Message;
+import com.booking.entities.Organisation;
 import com.booking.entities.User;
 import com.booking.facades.MessageFacade;
 import com.booking.facades.UserFacade;
 import com.booking.util.FacesUtil;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -48,27 +48,20 @@ public class MessagesController implements Serializable {
 
         logedUser = FacesUtil.getCurrentUser();
         allUsersItems = new ArrayList<>();
+        Organisation organisation = FacesUtil.getCurrentOrganisation();
 
-        String replyId = FacesUtil.getParameter("reply");
-        if (replyId != null) {
-            User replyUser = userFacade.find(replyId);
-            if (replyUser != null) {
-                allUsersItems.add(new SelectItem(replyUser.getEmail(), replyUser.getFullName()));
-            }
-
-        } else {
-            for (User user : userFacade.findAll()) {
-                this.allUsersItems.add(new SelectItem(user.getEmail(), user.getFullName()));
-            }
+        allUsersItems.add(new SelectItem(organisation.getEmail(), organisation.getName()));
+        for (User user : userFacade.findAllUsersOfOrganisation(organisation)) {
+            allUsersItems.add(new SelectItem(user.getEmail(), user.getFullName()));
         }
 
-        FacesUtil.removeSessionAttribute("messageSess");
-        FacesUtil.removeSessionAttribute("mailbox");
-        
         String receiverParam = FacesUtil.getParameter("user");
         if (receiverParam != null) {
             receiver = userFacade.find(Long.valueOf(receiverParam));
         }
+
+        FacesUtil.removeSessionAttribute("messageSess");
+        FacesUtil.removeSessionAttribute("mailbox");
     }
 
     public String sendMessage() {
@@ -100,17 +93,17 @@ public class MessagesController implements Serializable {
     }
 
     public List<SelectItem> getAllUsersItems() {
-        return Collections.unmodifiableList(allUsersItems);
+        return allUsersItems;
     }
 
     public List<Message> getAllReceivedMessages() {
         allReceivedMessages = messageFacade.findAllReceivedMessages(logedUser);
-        return Collections.unmodifiableList(allReceivedMessages);
+        return allReceivedMessages;
     }
 
     public List<Message> getAllSentMessages() {
         allSentMessages = messageFacade.findAllSentMessages(logedUser);
-        return Collections.unmodifiableList(allSentMessages);
+        return allSentMessages;
     }
 
     public String getMessageBody() {

@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -43,6 +44,9 @@ public class Message implements Serializable {
     @OneToOne
     @JoinColumn(name = "receiver")
     private User receiver;
+    @ManyToOne
+    @JoinColumn(name = "organisation", referencedColumnName = "id")
+    private Organisation organisation;
 
     public Message() {
     }
@@ -101,6 +105,14 @@ public class Message implements Serializable {
 
     public void setSender(User sender) {
         this.sender = sender;
+    }
+
+    public Organisation getOrganisation() {
+        return organisation;
+    }
+
+    public void setOrganisation(Organisation organisation) {
+        this.organisation = organisation;
     }
 
     @Override

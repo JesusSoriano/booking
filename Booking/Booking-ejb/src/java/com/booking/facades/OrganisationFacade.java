@@ -37,7 +37,7 @@ public class OrganisationFacade extends AbstractFacade<Organisation> {
         address.setCity(city);
         address.setCountry(country);
         address.setPostcode(postcode);
-        em.merge(address);
+        em.persist(address);
         
         Organisation organisation = new Organisation();
         organisation.setName(name);

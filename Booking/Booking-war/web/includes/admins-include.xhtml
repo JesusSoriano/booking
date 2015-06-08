@@ -29,8 +29,8 @@
                         <p:column headerText="Nombre" sortBy="#{admin.firstName}"> 
                             <h:outputText value="#{admin.firstName}" /> 
                         </p:column> 
-                        <p:column headerText="Apellidos" sortBy="#{admin.lastName}"> 
-                            <h:outputText value="#{admin.lastName}" /> 
+                        <p:column headerText="Apellidos" sortBy="#{admin.firstLastName}"> 
+                            <h:outputText value="#{admin.fullName}" /> 
                         </p:column> 
                         <p:column headerText="Email" sortBy="#{admin.email}"> 
                             <h:outputText value="#{admin.email}" /> 
@@ -43,10 +43,13 @@
                         <p:column headerText="Teléfono" sortBy="#{admin.phone}"> 
                             <h:outputText value="#{admin.phone}" /> 
                         </p:column> 
-                        <p:column headerText="Organización" sortBy="#{admin.organisation}"> 
-                            <h:outputText value="#{admin.organisation}" /> 
+                        <p:column headerText="Organización" sortBy="#{admin.organisation.name}" rendered="#{usersController.userRole eq 'SUPER_ADMIN'}"> 
+                            <h:outputText value="#{admin.organisation.name}" /> 
                         </p:column> 
                         <p:column headerText="Opciones"> 
+                            <h:link outcome="view-user.xhtml?faces-redirect=true&amp;user=#{admin.id}"> 
+                                <h:graphicImage title="VER" value="../resources/images/view.png" class="table_action" /> 
+                            </h:link> 
                             <h:link outcome="compose-mail.xhtml?faces-redirect=true&amp;user=#{admin.id}"> 
                                 <h:graphicImage title="ENVIAR CORREO" value="../resources/images/send_email.png" class="table_action_width" /> 
                             </h:link> 

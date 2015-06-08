@@ -18,71 +18,133 @@
                         <div id="header">
                             <div class="header-top">
                                 <div class="container">
-                                    <a href="/login.xhtml"><img src="/resources/images/logo.png"/></a>
+                                    <a href="/login.xhtml"><img src="#{loginController.logoPath}" alt="#{loginController.organisationName}"/></a>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="login-box">
-                            <h2>Registro</h2>
-                            <div class="login-content">
-                                <div class="row">
-                                    <div class="col-xs-5 col-ms-5 col-md-5">
-                                        <p>Nombre</p>
+                        <div class="col-xs-offset-1 col-sm-offset-1 col-md-offset-2 col-xs-10 col-sm-10 col-md-8">
+                            <div class="login-box">
+                                <h2>Registro</h2>
+                                <div class="login-content">
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-6 col-md-6">
+                                            <div class="row">
+                                                <div class="col-xs-4">
+                                                    <p>Nombre<sup class="mandatoryField">*</sup></p>
+                                                </div>
+                                                <div class="col-xs-8">
+                                                    <h:inputText id="name" styleClass="form-control" value="#{accountSetupController.firstName}" required="true" requiredMessage="Introduce tu nombre" />
+                                                    <h:message for="name"  styleClass="loginError" errorClass="msgError" infoClass="msgInfo"/>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xs-4">
+                                                    <p>Primer Apellido<sup class="mandatoryField">*</sup></p>
+                                                </div>
+                                                <div class="col-xs-8">
+                                                    <h:inputText id="firstLastName" styleClass="form-control" value="#{accountSetupController.firstLastName}" required="true" requiredMessage="Introduce tu primer apellido" />
+                                                    <h:message for="firstLastName"  styleClass="loginError" errorClass="msgError" infoClass="msgInfo"/>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xs-4">
+                                                    <p>Segundo Apellido</p>
+                                                </div>
+                                                <div class="col-xs-8">
+                                                    <h:inputText id="secondLastName" styleClass="form-control" value="#{accountSetupController.secondLastName}" />
+                                                    <h:message for="secondLastName"  styleClass="loginError" errorClass="msgError" infoClass="msgInfo"/>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xs-4">
+                                                    <p>Email<sup class="mandatoryField">*</sup></p>
+                                                </div>
+                                                <div class="col-xs-8">
+                                                    <h:inputText id="email" styleClass="form-control" value="#{accountSetupController.email}" required="true" requiredMessage="Introduce tu email" />
+                                                    <h:message for="email"  styleClass="loginError" errorClass="msgError" infoClass="msgInfo"/>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xs-4">
+                                                    <p>Contraseña<sup class="mandatoryField">*</sup></p>
+                                                </div>
+                                                <div class="col-xs-8">
+                                                    <h:inputSecret id="password" styleClass="form-control" value="#{accountSetupController.password}" required="true" requiredMessage="Introduce tu contraseña"/>
+                                                    <h:message for="password"  styleClass="loginError" errorClass="msgError" infoClass="msgInfo"/>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xs-4">
+                                                    <p>Confirma contraseña<sup class="mandatoryField">*</sup></p>
+                                                </div>
+                                                <div class="col-xs-8">
+                                                    <h:inputSecret id="confirmPassword" styleClass="form-control" value="#{accountSetupController.confirmPassword}" required="true" requiredMessage="Confirma tu contraseña"/>
+                                                    <h:message for="confirmPassword"  styleClass="loginError" errorClass="msgError" infoClass="msgInfo"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-6 col-md-6">
+                                            <div class="row">
+                                                <div class="col-xs-4">
+                                                    <p>Teléfono</p>
+                                                </div>
+                                                <div class="col-xs-8">
+                                                    <h:inputText id="phone" styleClass="form-control" value="#{accountSetupController.phone}"/>
+                                                    <h:message for="phone"  styleClass="loginError" errorClass="msgError" infoClass="msgInfo"/>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xs-4">
+                                                    <p>Dirección</p>
+                                                </div>
+                                                <div class="col-xs-8">
+                                                    <h:inputText id="addressLine1" styleClass="form-control" value="#{accountSetupController.addressLine}"/>
+                                                    <h:message for="addressLine1"  styleClass="loginError" errorClass="msgError" infoClass="msgInfo"/>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xs-4">
+                                                    <p>Dirección (línea adicional)</p>
+                                                </div>
+                                                <div class="col-xs-8">
+                                                    <h:inputText id="addressLine2" styleClass="form-control" value="#{accountSetupController.addressLine2}"/>
+                                                    <h:message for="addressLine2"  styleClass="loginError" errorClass="msgError" infoClass="msgInfo"/>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xs-4">
+                                                    <p>Ciudad</p>
+                                                </div>
+                                                <div class="col-xs-8">
+                                                    <h:inputText id="city" styleClass="form-control" value="#{accountSetupController.city}"/>
+                                                    <h:message for="city"  styleClass="loginError" errorClass="msgError" infoClass="msgInfo"/>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xs-4">
+                                                    <p>País</p>
+                                                </div>
+                                                <div class="col-xs-8">
+                                                    <h:inputText id="country" styleClass="form-control" value="#{accountSetupController.country}"/>
+                                                    <h:message for="country"  styleClass="loginError" errorClass="msgError" infoClass="msgInfo"/>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xs-4">
+                                                    <p>Código Postal</p>
+                                                </div>
+                                                <div class="col-xs-8">
+                                                    <h:inputText id="postcode" styleClass="form-control" value="#{accountSetupController.postcode}"/>
+                                                    <h:message for="postcode"  styleClass="loginError" errorClass="msgError" infoClass="msgInfo"/>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="col-xs-7 col-ms-7 col-md-7">
-                                        <h:inputText id="name" styleClass="form-control" value="#{accountSetupController.firstName}" required="true" requiredMessage="Por favor, introduzca su nombre" />
-                                        <h:message for="name"  styleClass="loginError" errorClass="msgError" infoClass="msgInfo"/>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-xs-5 col-ms-5 col-md-5">
-                                        <p>Apellidos</p>
-                                    </div>
-                                    <div class="col-xs-7 col-ms-7 col-md-7">
-                                        <h:inputText id="lastName" styleClass="form-control" value="#{accountSetupController.lastName}" required="true" requiredMessage="Por favor, introduzca sus apellidos" />
-                                        <h:message for="lastName"  styleClass="loginError" errorClass="msgError" infoClass="msgInfo"/>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-xs-5 col-ms-5 col-md-5">
-                                        <p>Email</p>
-                                    </div>
-                                    <div class="col-xs-7 col-ms-7 col-md-7">
-                                        <h:inputText id="email" styleClass="form-control" value="#{accountSetupController.email}" required="true" requiredMessage="Por favor, introduzca su email" />
-                                        <h:message for="email"  styleClass="loginError" errorClass="msgError" infoClass="msgInfo"/>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-xs-5 col-ms-5 col-md-5">
-                                        <p>Teléfono (opcional)</p>
-                                    </div>
-                                    <div class="col-xs-7 col-ms-7 col-md-7">
-                                        <h:inputText id="phone" styleClass="form-control" value="#{accountSetupController.phone}"/>
-                                        <h:message for="phone"  styleClass="loginError" errorClass="msgError" infoClass="msgInfo"/>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-xs-5 col-ms-5 col-md-5">
-                                        <p>Contraseña</p>
-                                    </div>
-                                    <div class="col-xs-7 col-ms-7 col-md-7">
-                                        <h:inputSecret id="password" styleClass="form-control" value="#{accountSetupController.password}" required="true" requiredMessage="Por favor, introduzca contraseña"/>
-                                        <h:message for="password"  styleClass="loginError" errorClass="msgError" infoClass="msgInfo"/>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-xs-5 col-ms-5 col-md-5">
-                                        <p>Confirma contraseña</p>
-                                    </div>
-                                    <div class="col-xs-7 col-ms-7 col-md-7">
-                                        <h:inputSecret id="confirmPassword" styleClass="form-control" value="#{accountSetupController.confirmPassword}" required="true" requiredMessage="Por favor, confirme contraseña"/>
-                                        <h:message for="confirmPassword"  styleClass="loginError" errorClass="msgError" infoClass="msgInfo"/>
-                                    </div>
-                                </div>
-                                <div class="row log-in">
-                                    <div class="col-xs-offset-7 col-ms-offset-7 col-md-offset-7 col-xs-5 col-ms-5 col-md-5">
-                                        <h:commandButton id="loginButton" value="Siguiente" class="btn btn-primary btn-block btn-main" action="#{accountSetupController.userRegistration()}"/>
+                                    <div class="row">
+                                        <div class="col-xs-offset-4 col-sm-offset-2 col-md-offset-2 col-lg-offset-2 col-xs-5 col-sm-3 col-md-3 col-lg-3">
+                                            <h:commandButton value="Siguiente" class="btn btn-primary btn-block btn-main" action="#{accountSetupController.userRegistration()}"/>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

@@ -43,16 +43,20 @@ public class ResetPasswordController implements Serializable {
         String requestId = FacesUtil.getParameter("token");
         boolean valid = false;
 
-        passwordChangeRequest = passwordChangeRequestFacade.findRequestFromHashId(requestId);
-        if (passwordChangeRequest != null && passwordChangeRequest.getUser() != null && !passwordChangeRequest.isExpired()) {
-            // check if the password change request was done more than 60 minutes ago
-            long requestDateTime = passwordChangeRequest.getCreatedDate().getTime();
-            Date expirationTime = new Date(requestDateTime + (60 * 60000)); // 60 minutes expiration time (60000 milliseconds in a minute)
-            if (new Date().after(expirationTime)) {
-                passwordChangeRequestFacade.setExpiredRequest(passwordChangeRequest);
-            } else {
-                valid = true;
-                currentUser = passwordChangeRequest.getUser();
+        if (requestId == null) {
+            valid = false;
+        } else {
+            passwordChangeRequest = passwordChangeRequestFacade.findRequestFromHashId(requestId);
+            if (passwordChangeRequest != null && passwordChangeRequest.getUser() != null && !passwordChangeRequest.isExpired()) {
+                // check if the password change request was done more than 60 minutes ago
+                long requestDateTime = passwordChangeRequest.getCreatedDate().getTime();
+                Date expirationTime = new Date(requestDateTime + (60 * 60000)); // 60 minutes expiration time (60000 milliseconds in a minute)
+                if (new Date().after(expirationTime)) {
+                    passwordChangeRequestFacade.setExpiredRequest(passwordChangeRequest);
+                } else {
+                    valid = true;
+                    currentUser = passwordChangeRequest.getUser();
+                }
             }
         }
 

@@ -36,11 +36,17 @@ public class AccountSetupController implements Serializable {
     private AuditFacade auditFacade;
 
     private String firstName;
-    private String lastName;
+    private String firstLastName;
+    private String secondLastName;
     private String email;
     private String phone;
     private String password;
     private String confirmPassword;
+    private String addressLine;
+    private String addressLine2;
+    private String city;
+    private String country;
+    private String postcode;
 
     /**
      * Creates a new instance of AccountSetupController
@@ -64,7 +70,8 @@ public class AccountSetupController implements Serializable {
             
             // Password encryption
             password = PBKDF2HashGenerator.createHash(password);
-            User newUser = userFacade.createNewUser(firstName, lastName, email, phone, password, Role.USER, organisation);
+            User newUser = userFacade.createNewUser(firstName, firstLastName, secondLastName, email, password, phone, 
+                    addressLine, addressLine2, city, country, postcode, Role.USER, organisation);
 
             try {
                 HttpServletRequest request = FacesUtil.getRequest();
@@ -122,12 +129,20 @@ public class AccountSetupController implements Serializable {
         this.firstName = firstName;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getFirstLastName() {
+        return firstLastName;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setFirstLastName(String firstLastName) {
+        this.firstLastName = firstLastName;
+    }
+
+    public String getSecondLastName() {
+        return secondLastName;
+    }
+
+    public void setSecondLastName(String secondLastName) {
+        this.secondLastName = secondLastName;
     }
 
     public String getEmail() {
@@ -144,6 +159,46 @@ public class AccountSetupController implements Serializable {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public String getAddressLine() {
+        return addressLine;
+    }
+
+    public void setAddressLine(String addressLine) {
+        this.addressLine = addressLine;
+    }
+
+    public String getAddressLine2() {
+        return addressLine2;
+    }
+
+    public void setAddressLine2(String addressLine2) {
+        this.addressLine2 = addressLine2;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getPostcode() {
+        return postcode;
+    }
+
+    public void setPostcode(String postcode) {
+        this.postcode = postcode;
     }
 
 }

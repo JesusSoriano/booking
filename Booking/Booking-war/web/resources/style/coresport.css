@@ -290,12 +290,11 @@ hr {
 }
 
 .login-box {
-    width:500px;
-    margin:0 auto;
+    width: 100%;
+    margin:85px 0px;
     background-color: white;
     border: 1px solid #777;
     border-radius: 7px;
-    margin-top: 85px;
     padding: 0px 30px;
 }
 
@@ -316,12 +315,13 @@ hr {
     color:#323232;
 }
 
-.login-content .log-in {
-    margin-top:50px;
-}
-
 .login-content .field-log p {
     font-weight: 400;
+}
+
+.form-button {
+    margin-top: 15px;
+    margin-bottom: 15px;
 }
 
 
@@ -458,6 +458,10 @@ table {
     list-style-type: none;
 }
 
+.mandatoryField {
+    color: #f92600;
+}
+
 input[type='text'], input[type='password'] {
     border:1px solid #ccc;
     padding: 3px 3px;
@@ -502,6 +506,7 @@ input[type='text'], input[type='password'] {
 }
 .table_action_width {
     width: 22px;
+    height: 16px;
     margin-right: 10px;
 }
 

@@ -29,8 +29,8 @@
                         <p:column headerText="Nombre" sortBy="#{user.firstName}"> 
                             <h:outputText value="#{user.firstName}" /> 
                         </p:column> 
-                        <p:column headerText="Apellidos" sortBy="#{user.lastName}"> 
-                            <h:outputText value="#{user.lastName}" /> 
+                        <p:column headerText="Apellidos" sortBy="#{user.firstLastName}"> 
+                            <h:outputText value="#{user.fullName}" /> 
                         </p:column> 
                         <p:column headerText="Email" sortBy="#{user.email}"> 
                             <h:outputText value="#{user.email}" /> 
@@ -42,7 +42,13 @@
                         <p:column headerText="Teléfono" sortBy="#{user.phone}"> 
                             <h:outputText value="#{user.phone}" /> 
                         </p:column> 
+                        <p:column headerText="Organización" sortBy="#{user.organisation.name}" rendered="#{usersController.userRole eq 'SUPER_ADMIN'}"> 
+                            <h:outputText value="#{user.organisation.name}" /> 
+                        </p:column> 
                         <p:column headerText="Opciones"> 
+                            <h:link outcome="user-profile.xhtml?faces-redirect=true&amp;user=#{user.id}"> 
+                                <h:graphicImage title="VER" value="../resources/images/view.png" class="table_action" /> 
+                            </h:link> 
                             <h:link outcome="compose-mail.xhtml?faces-redirect=true&amp;user=#{user.id}"> 
                                 <h:graphicImage title="ENVIAR CORREO" value="../resources/images/send_email.png" class="table_action_width" /> 
                             </h:link> 

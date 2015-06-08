@@ -22,7 +22,7 @@ import javax.persistence.UniqueConstraint;
 
 /**
  *
- * @author Jesus Soriano
+ * @author Jesús Soriano
  */
 @Entity
 @Table(name = "users", uniqueConstraints = {
@@ -40,8 +40,10 @@ public class User implements Serializable {
     private String hashId;
     @Column(name = "first_name")
     private String firstName;
-    @Column(name = "last_name")
-    private String lastName;
+    @Column(name = "first_last_name")
+    private String firstLastName;
+    @Column(name = "second_last_name")
+    private String secondLastName;
     @Column(name = "email")
     private String email;
     @Column(name = "password_hash")
@@ -91,12 +93,20 @@ public class User implements Serializable {
         this.firstName = firstName;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getFirstLastName() {
+        return firstLastName;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setFirstLastName(String firstLastName) {
+        this.firstLastName = firstLastName;
+    }
+
+    public String getSecondLastName() {
+        return secondLastName;
+    }
+
+    public void setSecondLastName(String secondLastName) {
+        this.secondLastName = secondLastName;
     }
 
     public String getEmail() {
@@ -148,7 +158,7 @@ public class User implements Serializable {
     }
 
     public String getFullName() {
-        return firstName + " " + lastName;
+        return firstName + " " + firstLastName + " " + (secondLastName != null ? secondLastName : "");
     }
 
     public void setPhone(String phone) {

@@ -1,5 +1,6 @@
 package com.booking.facades;
 
+import com.booking.entities.Address;
 import com.booking.entities.Organisation;
 import com.booking.entities.User;
 import com.booking.entities.UserRole;
@@ -30,18 +31,30 @@ public class UserFacade extends AbstractFacade<User> {
         super(User.class);
     }
 
-    public User createNewUser(String firstname, String lastname, String email,
-            String phone, String password, Role userRole, Organisation organisation) {
+    public User createNewUser(String firstname, String firstLastName, String secondLastName, String email,
+            String password, String phone, String addressLine, String addressLine2, String city, String country, 
+            String postcode, Role userRole, Organisation organisation) {
+        
+        Address address = new Address();
+        address.setAddressLine(addressLine);
+        address.setAddressLine2(addressLine2);
+        address.setCity(city);
+        address.setCountry(country);
+        address.setPostcode(postcode);
+        em.persist(address);
+        
         User user = new User();
         user.setCreatedDate(new Date());
         user.setOrganisation(organisation);
         user.setFirstName(firstname);
-        user.setLastName(lastname);
+        user.setFirstLastName(firstLastName);
+        user.setSecondLastName(secondLastName);
         user.setEmail(email);
         user.setPassword(password);
         user.setAccountActive(true);
         user.setTermsVersionAccepted(false);
         user.setPhone(phone);
+        user.setAddress(address);
 
         UserRole role = new UserRole();
         role.setUser(user);
@@ -87,13 +100,13 @@ public class UserFacade extends AbstractFacade<User> {
     }
 
     public List<User> findAllClientsOfOrganisation(Organisation organisation) {
-        return em.createQuery("SELECT u FROM User u WHERE u.organisation = :organisation AND u.userRole.role = :client").
+        return em.createQuery("SELECT u FROM User u WHERE u.organisation = :organisation AND u.userRole.role = :client ORDER BY u.firstName ASC, u.lastName ASC").
                 setParameter("organisation", organisation).
                 setParameter("client", Role.USER).getResultList();
     }
 
     public List<User> findAllAdminsOfOrganisation(Organisation organisation) {
-        return em.createQuery("SELECT u FROM User u WHERE u.organisation = :organisation AND u.userRole.role = :client").
+        return em.createQuery("SELECT u FROM User u WHERE u.organisation = :organisation AND u.userRole.role = :client ORDER BY u.firstName ASC, u.lastName ASC").
                 setParameter("organisation", organisation).
                 setParameter("client", Role.ADMIN).getResultList();
     }

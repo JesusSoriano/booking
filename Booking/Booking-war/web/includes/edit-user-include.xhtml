@@ -9,22 +9,22 @@
     <h:form>
         <div class="row">
             <div class="col-xs-6 col-md-6">
-                <h3>Cambio de Contraseña</h3>
+                <h3>Edición del perfil</h3>
 
                 <div class="login-content">
                     <div class="row">
                         <div class="col-xs-5 col-sm-5 col-md-5">
-                            <h:outputText value="Contraseña Actual"/> 
+                            <h:outputText value="Nombre"/> 
                         </div>
                         <div class="col-xs-7 col-sm-7 col-md-7">
-                            <h:inputSecret id="currentPassword" styleClass="form-control" value="#{settingController.currentPassword}" required="true" requiredMessage="Introduce tu contraseña"/>
+                            <h:inputSecret id="firstName" styleClass="form-control" value="#{settingController.currentPassword}" required="true" requiredMessage="Introduce tu contraseña"/>
                             <h:message for="currentPassword" styleClass="loginError" errorStyle="color :red" infoStyle="color : green"/>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-xs-5 col-sm-5 col-md-5">
-                            <h:outputText value="Nueva Contraseña"/> 
+                            <h:outputText value="Primer Apellido"/> 
                         </div>
                         <div class="col-xs-7 col-sm-7 col-md-7">
                             <h:inputSecret id="newPassword" styleClass="form-control" value="#{settingController.newPassword}" required="true" requiredMessage="Introduce tu nueva contraseña"/>
@@ -43,7 +43,8 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-xs-offset-5 col-sm-offset-5 col-md-offset-5 col-xs-7 col-sm-7 col-md-7 form-button">
+                        <br/>
+                        <div class="col-xs-offset-5 col-sm-offset-5 col-md-offset-5 col-xs-7 col-sm-7 col-md-7">
                             <h:commandButton value="Cambiar Contraseña" action="#{settingController.setNewPassword()}"
                                              styleClass="btn btn-primary btn-main" />
                         </div>

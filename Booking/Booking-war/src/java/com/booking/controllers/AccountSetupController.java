@@ -9,6 +9,7 @@ import com.booking.facades.UserFacade;
 import com.booking.util.Constants;
 import com.booking.util.FacesUtil;
 import com.booking.security.PBKDF2HashGenerator;
+import com.booking.util.StringsUtil;
 import java.io.Serializable;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
@@ -22,7 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  *
- * @author Jesus Soriano
+ * @author Jesús Soriano
  */
 @ManagedBean
 @ViewScoped
@@ -61,15 +62,34 @@ public class AccountSetupController implements Serializable {
     public String userRegistration() {
 
         try {
+            if (StringsUtil.isNotNullNotEmpty(firstName)) {
+                FacesUtil.addErrorMessage("registrationForm", "Introduce tu nombre");
+            }
+            if (StringsUtil.isNotNullNotEmpty(firstLastName)) {
+                FacesUtil.addErrorMessage("registrationForm", "Introduce tu primer apellido");
+            }
+            
+            // Remove start and end white spaces of email
+            email = email.trim();
+            if (StringsUtil.isNotNullNotEmpty(email)) {
+                FacesUtil.addErrorMessage("registrationForm", "Introduce tu email");
+            }
+            
+            if (StringsUtil.isNotNullNotEmpty(password)) {
+                FacesUtil.addErrorMessage("registrationForm", "Introduce contraseña");
+            }
+            if (StringsUtil.isNotNullNotEmpty(confirmPassword)) {
+                FacesUtil.addErrorMessage("registrationForm", "Confirma tu contraseña");
+            }
             if (!password.equals(confirmPassword)) {
                 FacesUtil.addErrorMessage("registrationForm:confirmPassword", "Las contraseñas no coinciden.");
                 return "";
             }
-
-            Organisation organisation = FacesUtil.getCurrentOrganisation();
             
             // Password encryption
             password = PBKDF2HashGenerator.createHash(password);
+            
+            Organisation organisation = FacesUtil.getCurrentOrganisation();
             User newUser = userFacade.createNewUser(firstName, firstLastName, secondLastName, email, password, phone, 
                     addressLine, addressLine2, city, country, postcode, Role.USER, organisation);
 

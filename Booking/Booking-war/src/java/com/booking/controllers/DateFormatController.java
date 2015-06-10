@@ -17,7 +17,7 @@ public class DateFormatController {
     
 
     /**
-     * Creates a new instance of UserSessionDetecter
+     * Creates a new instance of DateFormatController
      */
     public DateFormatController() {
        dateFormatString = "dd/MM/yyyy";

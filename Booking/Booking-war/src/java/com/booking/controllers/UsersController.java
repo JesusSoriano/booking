@@ -27,6 +27,9 @@ public class UsersController implements Serializable {
     private User logedUser;
     private Organisation organisation;
 
+    public UsersController() {
+    }
+    
     @PostConstruct
     public void init() {
         logedUser = FacesUtil.getCurrentUser();

@@ -60,7 +60,7 @@ public class LoginController implements Serializable {
             // remove start and end white spaces of email
             email = email.trim();
 
-            currentUser = userFacade.findUserByEmail(email);
+            currentUser = userFacade.findUserOfOrganisationByEmail(email, organisation);
 
             if (currentUser == null) {
                 FacesUtil.addErrorMessage("loginForm", "Inicio de sesión fallido, inténtalo de nuevo.");

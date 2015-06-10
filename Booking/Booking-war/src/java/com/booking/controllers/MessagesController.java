@@ -88,10 +88,6 @@ public class MessagesController implements Serializable {
         return allUnreadMessagesCount;
     }
 
-    public void setAllUnreadMessagesCount(int allUnreadMessagesCount) {
-        this.allUnreadMessagesCount = allUnreadMessagesCount;
-    }
-
     public List<SelectItem> getAllUsersItems() {
         return allUsersItems;
     }

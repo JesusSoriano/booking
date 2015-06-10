@@ -27,7 +27,7 @@ public class TermsAndConditionsController implements Serializable {
     private boolean tNcCheckVisible;
 
     /**
-     * Creates a new instance of LoginController
+     * Creates a new instance of TermsAndConditionsController
      */
     public TermsAndConditionsController() {
     }
@@ -57,7 +57,6 @@ public class TermsAndConditionsController implements Serializable {
         if (isTNcCheckVisible()) {
             if (tncAccepted) {
                 if (currentUser != null) {
-                    currentUser = userFacade.findUserByEmail(currentUser.getEmail());
                     currentUser.setTermsVersionAccepted(true);
                     userFacade.edit(currentUser);
 

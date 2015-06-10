@@ -32,9 +32,9 @@ public class UserFacade extends AbstractFacade<User> {
     }
 
     public User createNewUser(String firstname, String firstLastName, String secondLastName, String email,
-            String password, String phone, String addressLine, String addressLine2, String city, String country, 
+            String password, String phone, String addressLine, String addressLine2, String city, String country,
             String postcode, Role userRole, Organisation organisation) {
-        
+
         Address address = new Address();
         address.setAddressLine(addressLine);
         address.setAddressLine2(addressLine2);
@@ -42,7 +42,7 @@ public class UserFacade extends AbstractFacade<User> {
         address.setCountry(country);
         address.setPostcode(postcode);
         em.persist(address);
-        
+
         User user = new User();
         user.setCreatedDate(new Date());
         user.setOrganisation(organisation);
@@ -66,6 +66,23 @@ public class UserFacade extends AbstractFacade<User> {
         return user;
     }
 
+    public void editUserProfile(User user, String firstName, String firstLastName, String secondLastName, String email,
+            String phone, String addressLine, String addressLine2, String city, String country, String postcode) {
+        
+        user.setFirstName(firstName);
+        user.setFirstLastName(firstLastName);
+        user.setSecondLastName(secondLastName);
+        user.setEmail(email);
+        user.setPhone(phone);
+        user.getAddress().setAddressLine(addressLine);
+        user.getAddress().setAddressLine2(addressLine2);
+        user.getAddress().setCity(city);
+        user.getAddress().setCountry(country);
+        user.getAddress().setPostcode(postcode);
+        
+        edit(user);
+    }
+
     public User setTermsVersionAccepted(User user) {
         user.setTermsVersionAccepted(true);
         edit(user);
@@ -83,30 +100,41 @@ public class UserFacade extends AbstractFacade<User> {
         edit(user);
     }
 
-    
     public List<User> findAllUsersOfOrganisation(Organisation organisation) {
         return em.createQuery("SELECT u FROM User u WHERE u.organisation = :organisation").
                 setParameter("organisation", organisation).getResultList();
     }
-    
+
+    public User findUserOfOrganisation(String userId, Organisation organisation) {
+        return findUniqueResult(em.createQuery("SELECT u FROM User u WHERE u.id = :userId AND u.organisation = :organisation").
+                setParameter("userId", userId).
+                setParameter("organisation", organisation).getResultList());
+    }
+
     public User findUserByEmail(String email) {
         return findUniqueResult(em.createQuery("SELECT u FROM User u WHERE u.email = :email").
                 setParameter("email", email).getResultList());
     }
 
-    public User findUserFromHashId(String hashId) {
+    public User findUserOfOrganisationByEmail(String email, Organisation organisation) {
+        return findUniqueResult(em.createQuery("SELECT u FROM User u WHERE u.email = :email AND u.organisation = :organisation").
+                setParameter("email", email).
+                setParameter("organisation", organisation).getResultList());
+    }
+
+    public User findUserFromHashId(String hashId, Organisation organisation) {
         return findUniqueResult(em.createQuery("SELECT u FROM User u WHERE u.hashId = :hashId").
                 setParameter("hashId", hashId).getResultList());
     }
 
     public List<User> findAllClientsOfOrganisation(Organisation organisation) {
-        return em.createQuery("SELECT u FROM User u WHERE u.organisation = :organisation AND u.userRole.role = :client ORDER BY u.firstName ASC, u.lastName ASC").
+        return em.createQuery("SELECT u FROM User u WHERE u.organisation = :organisation AND u.userRole.role = :client ORDER BY u.firstName ASC, u.firstLastName ASC").
                 setParameter("organisation", organisation).
                 setParameter("client", Role.USER).getResultList();
     }
 
     public List<User> findAllAdminsOfOrganisation(Organisation organisation) {
-        return em.createQuery("SELECT u FROM User u WHERE u.organisation = :organisation AND u.userRole.role = :client ORDER BY u.firstName ASC, u.lastName ASC").
+        return em.createQuery("SELECT u FROM User u WHERE u.organisation = :organisation AND u.userRole.role = :client ORDER BY u.firstName ASC, u.firstLastName ASC").
                 setParameter("organisation", organisation).
                 setParameter("client", Role.ADMIN).getResultList();
     }

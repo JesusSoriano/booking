@@ -57,7 +57,7 @@ public class User implements Serializable {
     private boolean accountActive;
     @Column(name = "terms_version_accepted")
     private boolean termsVersionAccepted;
-    @OneToOne(mappedBy = "user")
+    @OneToOne(mappedBy = "user", cascade = {CascadeType.REMOVE, CascadeType.PERSIST, CascadeType.MERGE})
     private UserRole userRole;
     @Column(name = "status")
     @Enumerated(EnumType.STRING)

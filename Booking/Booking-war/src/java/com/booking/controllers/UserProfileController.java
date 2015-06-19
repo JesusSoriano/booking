@@ -2,9 +2,11 @@ package com.booking.controllers;
 
 import com.booking.entities.Organisation;
 import com.booking.entities.User;
+import com.booking.enums.Role;
 import com.booking.facades.UserFacade;
 import com.booking.util.FacesUtil;
 import com.booking.util.StringsUtil;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -43,11 +45,12 @@ public class UserProfileController implements Serializable {
 
         Organisation organisation = FacesUtil.getCurrentOrganisation();
 
+        User logedUser = FacesUtil.getCurrentUser();
         String userId = FacesUtil.getParameter("user");
-        if (userId != null) {
-            profileUser = userFacade.findUserOfOrganisation(userId, organisation);
+        if (userId != null && (logedUser.getUserRole().getRole() == Role.ADMIN || logedUser.getUserRole().getRole() == Role.SUPER_ADMIN)) {
+            profileUser = userFacade.findUserOfOrganisation(Integer.valueOf(userId), organisation);
         } else {
-            profileUser = FacesUtil.getCurrentUser();
+            profileUser = logedUser;
         }
 
         if (profileUser != null) {
@@ -82,8 +85,16 @@ public class UserProfileController implements Serializable {
         userFacade.editUserProfile(profileUser, firstName, firstLastName, secondLastName, email,
                 phone, addressLine, addressLine2, city, country, postcode);
         try {
-            FacesUtil.redirectTo("user-profile.xhtml", "user=" + profileUser.getId());
+            FacesUtil.redirectTo("user-profile.xhtml", "&user=" + profileUser.getId());
         } catch (Exception ex) {
+            Logger.getLogger(UserProfileController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void goToProfileEdition() {
+        try {
+            FacesUtil.redirectTo("edit-user.xhtml", "&user=" + profileUser.getId());
+        } catch (IOException ex) {
             Logger.getLogger(UserProfileController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

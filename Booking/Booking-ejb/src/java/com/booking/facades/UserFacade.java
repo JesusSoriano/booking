@@ -105,7 +105,7 @@ public class UserFacade extends AbstractFacade<User> {
                 setParameter("organisation", organisation).getResultList();
     }
 
-    public User findUserOfOrganisation(String userId, Organisation organisation) {
+    public User findUserOfOrganisation(int userId, Organisation organisation) {
         return findUniqueResult(em.createQuery("SELECT u FROM User u WHERE u.id = :userId AND u.organisation = :organisation").
                 setParameter("userId", userId).
                 setParameter("organisation", organisation).getResultList());

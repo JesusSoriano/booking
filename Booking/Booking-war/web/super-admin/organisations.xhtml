@@ -35,17 +35,17 @@
                                 </p:column> 
                                 <p:column headerText="Opciones"> 
                                     <h:link outcome="compose-mail.xhtml?faces-redirect=true&amp;user=0"> 
-                                        <h:graphicImage title="ENVIAR CORREO" value="../resources/images/send_email.png" class="table_action_width" /> 
+                                        <h:graphicImage title="ENVIAR CORREO" value="../resources/images/send_email.png" class="table-action-width" /> 
                                     </h:link> 
                                     <h:panelGroup rendered="#{organisationsController.userRole eq 'SUPER_ADMIN'}" >
                                         <h:link outcome="edit-organisation.xhtml?faces-redirect=true&amp;org=#{uorganisationser.id}"> 
-                                            <h:graphicImage title="EDITAR" value="../resources/images/edit_user.png" class="table_action" /> 
+                                            <h:graphicImage title="EDITAR" value="../resources/images/edit_user.png" class="table-action" /> 
                                         </h:link> 
                                         <h:commandLink action="#{organisationsController.activateOrganisation(organisation)}" rendered="#{organisation.status eq 'SUSPENDED'}"> 
-                                            <h:graphicImage title="ACTIVAR" value="../resources/images/activate_user.png" class="table_action" /> 
+                                            <h:graphicImage title="ACTIVAR" value="../resources/images/activate_user.png" class="table-action" /> 
                                         </h:commandLink> 
                                         <h:commandLink action="#{organisationsController.deactivateOrganisation(organisation)}" rendered="#{organisation.status eq 'ACTIVATED'}"> 
-                                            <h:graphicImage title="SUSPENDER" value="../resources/images/suspend_user.png" class="table_action" /> 
+                                            <h:graphicImage title="SUSPENDER" value="../resources/images/suspend_user.png" class="table-action" /> 
                                         </h:commandLink> 
                                     </h:panelGroup>
                                 </p:column>

@@ -99,6 +99,14 @@ public class UserProfileController implements Serializable {
         }
     }
 
+    public void cancelProfileEdition() {
+        try {
+            FacesUtil.redirectTo("user-profile.xhtml", "&user=" + profileUser.getId());
+        } catch (IOException ex) {
+            Logger.getLogger(UserProfileController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     public String getFirstName() {
         return firstName;
     }

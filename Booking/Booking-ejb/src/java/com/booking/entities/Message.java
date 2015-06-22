@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -31,20 +32,20 @@ public class Message implements Serializable {
     private long id;
     @Column(name = "subject")
     private String subject;
-    @Column(name = "body", columnDefinition="text")
+    @Column(name = "body", columnDefinition = "text")
     private String body;
     @Column(name = "status")
     private boolean status;
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "sender")
     private User sender;
     @Column(name = "sent_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date sentDate;
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "receiver")
     private User receiver;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "organisation", referencedColumnName = "id")
     private Organisation organisation;
 
@@ -60,7 +61,7 @@ public class Message implements Serializable {
     }
 
     public boolean getStatus() {
-        return status;  
+        return status;
     }
 
     public long getId() {

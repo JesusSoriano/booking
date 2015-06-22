@@ -72,13 +72,16 @@ public class UserFacade extends AbstractFacade<User> {
         user.setFirstName(firstName);
         user.setFirstLastName(firstLastName);
         user.setSecondLastName(secondLastName);
-        user.setEmail(email);
+//        user.setEmail(email);
         user.setPhone(phone);
         user.getAddress().setAddressLine(addressLine);
         user.getAddress().setAddressLine2(addressLine2);
         user.getAddress().setCity(city);
         user.getAddress().setCountry(country);
         user.getAddress().setPostcode(postcode);
+        // User role email
+//        user.getUserRole().setUser(user);
+//        em.merge(user.getUserRole());
         
         edit(user);
     }

@@ -24,7 +24,7 @@ public class Organisation implements Serializable {
     private String name;
     @Column(name = "email")
     private String email;
-    @OneToOne(cascade = {CascadeType.REMOVE, CascadeType.PERSIST, CascadeType.MERGE})
+    @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REMOVE, CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "address", referencedColumnName = "id")
     private Address address;
     @Column(name = "phone")
@@ -41,6 +41,8 @@ public class Organisation implements Serializable {
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
     private Status status;
+    @Column(name = "default_language")
+    private String defaultLanguage;
     @OneToMany(mappedBy = "organisation", cascade = CascadeType.REMOVE)
     private List<User> usersEntities;
 
@@ -133,5 +135,13 @@ public class Organisation implements Serializable {
 
     public void setLogo(String logo) {
         this.logo = logo;
+    }
+
+    public String getDefaultLanguage() {
+        return defaultLanguage;
+    }
+
+    public void setDefaultLanguage(String defaultLanguage) {
+        this.defaultLanguage = defaultLanguage;
     }
 }

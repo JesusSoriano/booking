@@ -142,6 +142,10 @@
         <error-code>503</error-code>
         <location>/error-page.xhtml</location>
     </error-page>
+    <context-param>
+        <param-name>com.sun.faces.enableRestoreView11Compatibility</param-name>
+        <param-value>true</param-value>
+    </context-param>
     <error-page>
         <exception-type>javax.faces.application.ViewExpiredException</exception-type>
         <location>/info.xhtml?info=session-expired</location>

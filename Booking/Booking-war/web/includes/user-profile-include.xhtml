@@ -24,20 +24,18 @@
                         <div class="col-xs-12 col-sm-6 col-md-6">
                             <div class="row">
                                 <div class="col-xs-4">
-                                    <p>Nombre<sup class="mandatoryField">*</sup></p>
+                                    <p>Nombre</p>
                                 </div>
                                 <div class="col-xs-8">
-                                    <h:inputText id="name" styleClass="form-control" value="#{userProfileController.firstName}" required="true" requiredMessage="Introduce tu nombre" />
-                                    <h:message for="name"  styleClass="loginError" errorClass="msgError" infoClass="msgInfo"/>
+                                    <h:outputText id="name" styleClass="form-control" value="#{userProfileController.firstName}" />
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-xs-4">
-                                    <p>Primer Apellido<sup class="mandatoryField">*</sup></p>
+                                    <p>Primer Apellido</p>
                                 </div>
                                 <div class="col-xs-8">
-                                    <h:inputText id="firstLastName" styleClass="form-control" value="#{userProfileController.firstLastName}" required="true" requiredMessage="Introduce tu primer apellido" />
-                                    <h:message for="firstLastName"  styleClass="loginError" errorClass="msgError" infoClass="msgInfo"/>
+                                    <h:outputText id="firstLastName" styleClass="form-control" value="#{userProfileController.firstLastName}" />
                                 </div>
                             </div>
                             <div class="row">
@@ -45,17 +43,15 @@
                                     <p>Segundo Apellido</p>
                                 </div>
                                 <div class="col-xs-8">
-                                    <h:inputText id="secondLastName" styleClass="form-control" value="#{userProfileController.secondLastName}" />
-                                    <h:message for="secondLastName"  styleClass="loginError" errorClass="msgError" infoClass="msgInfo"/>
+                                    <h:outputText id="secondLastName" styleClass="form-control" value="#{userProfileController.secondLastName}" />
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-xs-4">
-                                    <p>Email<sup class="mandatoryField">*</sup></p>
+                                    <p>Email</p>
                                 </div>
                                 <div class="col-xs-8">
-                                    <h:inputText id="email" styleClass="form-control" value="#{userProfileController.email}" required="true" requiredMessage="Introduce tu email" />
-                                    <h:message for="email"  styleClass="loginError" errorClass="msgError" infoClass="msgInfo"/>
+                                    <h:outputText id="email" styleClass="form-control" value="#{userProfileController.email}" />
                                 </div>
                             </div>
                             <div class="row">
@@ -63,8 +59,7 @@
                                     <p>Teléfono</p>
                                 </div>
                                 <div class="col-xs-8">
-                                    <h:inputText id="phone" styleClass="form-control" value="#{userProfileController.phone}"/>
-                                    <h:message for="phone"  styleClass="loginError" errorClass="msgError" infoClass="msgInfo"/>
+                                    <h:outputText id="phone" styleClass="form-control" value="#{userProfileController.phone}"/>
                                 </div>
                             </div>
                         </div>
@@ -74,8 +69,7 @@
                                     <p>Dirección</p>
                                 </div>
                                 <div class="col-xs-8">
-                                    <h:inputText id="addressLine1" styleClass="form-control" value="#{userProfileController.addressLine}"/>
-                                    <h:message for="addressLine1"  styleClass="loginError" errorClass="msgError" infoClass="msgInfo"/>
+                                    <h:outputText id="addressLine1" styleClass="form-control" value="#{userProfileController.addressLine}"/>
                                 </div>
                             </div>
                             <div class="row">
@@ -83,8 +77,7 @@
                                     <p>Dirección (línea adicional)</p>
                                 </div>
                                 <div class="col-xs-8">
-                                    <h:inputText id="addressLine2" styleClass="form-control" value="#{userProfileController.addressLine2}"/>
-                                    <h:message for="addressLine2"  styleClass="loginError" errorClass="msgError" infoClass="msgInfo"/>
+                                    <h:outputText id="addressLine2" styleClass="form-control" value="#{userProfileController.addressLine2}"/>
                                 </div>
                             </div>
                             <div class="row">
@@ -92,8 +85,7 @@
                                     <p>Ciudad</p>
                                 </div>
                                 <div class="col-xs-8">
-                                    <h:inputText id="city" styleClass="form-control" value="#{userProfileController.city}"/>
-                                    <h:message for="city"  styleClass="loginError" errorClass="msgError" infoClass="msgInfo"/>
+                                    <h:outputText id="city" styleClass="form-control" value="#{userProfileController.city}"/>
                                 </div>
                             </div>
                             <div class="row">
@@ -101,8 +93,7 @@
                                     <p>País</p>
                                 </div>
                                 <div class="col-xs-8">
-                                    <h:inputText id="country" styleClass="form-control" value="#{userProfileController.country}"/>
-                                    <h:message for="country"  styleClass="loginError" errorClass="msgError" infoClass="msgInfo"/>
+                                    <h:outputText id="country" styleClass="form-control" value="#{userProfileController.country}"/>
                                 </div>
                             </div>
                             <div class="row">
@@ -110,8 +101,7 @@
                                     <p>Código Postal</p>
                                 </div>
                                 <div class="col-xs-8">
-                                    <h:inputText id="postcode" styleClass="form-control" value="#{userProfileController.postcode}"/>
-                                    <h:message for="postcode"  styleClass="loginError" errorClass="msgError" infoClass="msgInfo"/>
+                                    <h:outputText id="postcode" styleClass="form-control" value="#{userProfileController.postcode}"/>
                                 </div>
                             </div>
                         </div>

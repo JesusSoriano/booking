@@ -58,6 +58,8 @@ public class User implements Serializable {
     private boolean accountActive;
     @Column(name = "terms_version_accepted")
     private boolean termsVersionAccepted;
+    @Column(name = "application_language")
+    private String applicationLanguage;
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "user", cascade = {CascadeType.REMOVE, CascadeType.PERSIST, CascadeType.MERGE})
     private UserRole userRole;
     @Column(name = "status")
@@ -192,6 +194,14 @@ public class User implements Serializable {
 
     public void setOrganisation(Organisation organisation) {
         this.organisation = organisation;
+    }
+
+    public String getApplicationLanguage() {
+        return applicationLanguage;
+    }
+
+    public void setApplicationLanguage(String applicationLanguage) {
+        this.applicationLanguage = applicationLanguage;
     }
 
     @Override

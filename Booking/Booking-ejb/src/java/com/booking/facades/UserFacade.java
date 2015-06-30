@@ -103,6 +103,11 @@ public class UserFacade extends AbstractFacade<User> {
         edit(user);
     }
 
+    public void changeUserLanguage(User user, String language) {
+        user.setApplicationLanguage(language);
+        edit(user);
+    }
+
     public List<User> findAllUsersOfOrganisation(Organisation organisation) {
         return em.createQuery("SELECT u FROM User u WHERE u.organisation = :organisation").
                 setParameter("organisation", organisation).getResultList();

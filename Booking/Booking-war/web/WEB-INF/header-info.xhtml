@@ -13,7 +13,7 @@
         <div class="container head-bar">
             <a href="home.xhtml"><img src="#{loginController.logoPath}" alt="#{loginController.organisationName}"/></a>
             <div class="language-selector"> 
-                <h:selectOneMenu value="#{languageController.language}" onchange="submitForm(this);" valueChangeListener="#{languageController.changeLanguage}"> 
+                <h:selectOneMenu value="#{languageController.language}" onchange="submit();" valueChangeListener="#{languageController.changeLanguage}"> 
                     <f:selectItems value="#{languageController.supportedLanguages}" var="l" itemLabel="l.key" itemValue="l.value" /> 
                 </h:selectOneMenu> 
             </div> 

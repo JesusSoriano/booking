@@ -16,12 +16,14 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
@@ -118,6 +120,12 @@ public class LoginController implements Serializable {
             try {
                 String ipAddress = FacesUtil.getCurrentIPAddress();
                 auditFacade.createAudit(AuditType.LOGGED_IN, currentUser, ipAddress, organisation);
+
+                String language = currentUser.getApplicationLanguage();
+                if (language != null) {
+                    FacesUtil.setSessionAttribute("language", language);
+                    FacesContext.getCurrentInstance().getViewRoot().setLocale(new Locale(language));
+                }
             } catch (Exception e) {
                 Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, e);
             }

@@ -4,19 +4,18 @@
 <ui:component xmlns="http://www.w3.org/1999/xhtml"
               xmlns:ui="http://java.sun.com/jsf/facelets"
               xmlns:h="http://java.sun.com/jsf/html"
-              xmlns:p="http://primefaces.org/ui"
-              xmlns:f="http://java.sun.com/jsf/core">
+              xmlns:p="http://primefaces.org/ui">
 
     <!--    <div id="triangle-topleft"></div>
         <div id="triangle-bottomright"></div>-->
     <div class="header-top">
         <div class="container head-bar">
             <a href="home.xhtml"><img src="#{loginController.logoPath}" alt="#{loginController.organisationName}"/></a>
+
             <div class="language-selector"> 
-                <h:selectOneMenu value="#{languageController.language}" onchange="submit();" valueChangeListener="#{languageController.changeLanguage}"> 
-                    <f:selectItems value="#{languageController.supportedLanguages}" var="l" itemLabel="l.key" itemValue="l.value" /> 
-                </h:selectOneMenu> 
-            </div> 
+                <ui:include src="/WEB-INF/language-selector.xhtml" />
+            </div>
+
             <div class="user-details">
                 <ul>
                     <li>#{homeController.userFullName}</li>

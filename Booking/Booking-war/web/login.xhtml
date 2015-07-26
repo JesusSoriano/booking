@@ -22,9 +22,7 @@
                                 </div>
                             </div>
                             <div class="language-selector-before"> 
-                                <h:selectOneMenu value="#{languageController.language}" onchange="submit();" valueChangeListener="#{languageController.changeLanguage}"> 
-                                    <f:selectItems value="#{languageController.supportedLanguages}" var="l" itemLabel="l.key" itemValue="l.value" /> 
-                                </h:selectOneMenu> 
+                                <ui:include src="/WEB-INF/language-selector.xhtml" />
                             </div> 
                         </div>
 
@@ -55,7 +53,7 @@
 
                                     <div class="row" >
                                         <div class="col-xs-offset-3 col-sm-offset-3 col-md-offset-3 col-xs-6 col-sm-4 col-md-5 form-button">
-                                            <h:commandButton id="loginButton" value="Log In" class="btn btn-primary btn-block btn-main" action="#{loginController.userLogin()}"/>
+                                            <h:commandButton id="loginButton" value="Log In" class="btn btn-primary btn-block btn-main" actionListener="#{loginController.userLogin()}" action="#{languageController.getUserApplicationLanguage()}" />
                                         </div>
                                     </div>
 

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+              xmlns:ui="http://java.sun.com/jsf/facelets"
+              xmlns:h="http://java.sun.com/jsf/html"
+              xmlns:f="http://java.sun.com/jsf/core">
+
+        <h:selectOneMenu value="#{languageController.language}" onchange="submit();" valueChangeListener="#{languageController.changeLanguage}"> 
+            <f:selectItems value="#{languageController.supportedLanguages}" var="l" itemLabel="l.key" itemValue="l.value" /> 
+        </h:selectOneMenu> 
+
+</ui:component>

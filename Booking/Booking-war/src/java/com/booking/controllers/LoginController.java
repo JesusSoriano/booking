@@ -120,12 +120,6 @@ public class LoginController implements Serializable {
             try {
                 String ipAddress = FacesUtil.getCurrentIPAddress();
                 auditFacade.createAudit(AuditType.LOGGED_IN, currentUser, ipAddress, organisation);
-
-                String language = currentUser.getApplicationLanguage();
-                if (language != null) {
-                    FacesUtil.setSessionAttribute("language", language);
-                    FacesContext.getCurrentInstance().getViewRoot().setLocale(new Locale(language));
-                }
             } catch (Exception e) {
                 Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, e);
             }

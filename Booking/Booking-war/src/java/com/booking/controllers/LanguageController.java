@@ -24,7 +24,7 @@ import javax.faces.event.ValueChangeEvent;
 public class LanguageController implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
+
     @EJB
     private UserFacade userFacade;
 
@@ -67,13 +67,26 @@ public class LanguageController implements Serializable {
     public void changeLanguage(ValueChangeEvent e) {
         language = (String) e.getNewValue();
         User loggedUser = FacesUtil.getCurrentUser();
-        
+
         if (loggedUser != null) {
             userFacade.changeUserLanguage(loggedUser, language);
         }
 
         FacesUtil.setSessionAttribute("language", language);
-        FacesContext.getCurrentInstance().getViewRoot().setLocale(new Locale(language));        
+        FacesContext.getCurrentInstance().getViewRoot().setLocale(new Locale(language));
+    }
+
+    public void getUserApplicationLanguage() {
+        User loggedUser = FacesUtil.getCurrentUser();
+
+        if (loggedUser != null) {
+            language = loggedUser.getApplicationLanguage();
+            
+            if (language != null) {
+                FacesUtil.setSessionAttribute("language", language);
+                FacesContext.getCurrentInstance().getViewRoot().setLocale(new Locale(language));
+            }
+        }
     }
 
     public String getLanguage() {

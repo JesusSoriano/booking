@@ -9,59 +9,67 @@
     <div class="row">        
         <div class="col-xs-12 col-sm-12 col-md-12">
             <h:form id="adminsForm"> 
-                <h:message for="msg" id="msg" errorClass="fieldError" infoClass="fieldSuccess" /> 
-                <br /> 
+                <h:message for="msg" id="msg" errorClass="msgError" infoClass="msgInfo" /> 
+
                 <div class="sub-title-page sub-title-blue"> 
-                    <h3 class="page-title" style="margin-bottom: 40px;">Administradores del sistema</h3> 
+                    <h3 class="page-title" style="margin-bottom: 40px;">#{txt['system_administrators']}</h3> 
                 </div> 
                 <h:panelGroup id="rows"> 
                     <script type="text/javascript">
                         $(document).ready(function () {
                             $('#adminsForm\\:adminsTable .ui-paginator-rpp-options.ui-widget.ui-state-default.ui-corner-left')
                                     .each(function () {
-                                        $(this).children().last().html('Todos');
+                                        $(this).children().last().html('#{txt['all']}');
                                     });
                         });
                     </script>
 
                     <p:dataTable id="adminsTable" value="#{usersController.admins}" var="admin" styleClass="common-table text-center" paginator="true" rows="10" paginatorPosition="bottom" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" 
                                  rowsPerPageTemplate="10, 20, 50, #{usersController.admins.size()}"> 
-                        <p:column headerText="Nombre" sortBy="#{admin.firstName}"> 
-                            <h:outputText value="#{admin.firstName}" /> 
+                        <p:column headerText="#{txt['name']}" sortBy="#{admin.firstName}"> 
+                            <h:outputText value="#{admin.firstName}" rendered="#{admin.status ne 'SUSPENDED'}" /> 
+                            <h:outputText value="#{admin.firstName}" rendered="#{admin.status eq 'SUSPENDED'}" style="color:lightgray" /> 
                         </p:column> 
-                        <p:column headerText="Apellidos" sortBy="#{admin.firstLastName}"> 
-                            <h:outputText value="#{admin.firstLastName} #{admin.secondLastName}" /> 
+                        <p:column headerText="#{txt['surname']}" sortBy="#{admin.firstLastName}"> 
+                            <h:outputText value="#{admin.firstLastName} #{admin.secondLastName}" rendered="#{admin.status ne 'SUSPENDED'}" /> 
+                            <h:outputText value="#{admin.firstLastName} #{admin.secondLastName}" rendered="#{admin.status eq 'SUSPENDED'}" style="color:lightgray" /> 
                         </p:column> 
-                        <p:column headerText="Email" sortBy="#{admin.email}"> 
-                            <h:outputText value="#{admin.email}" /> 
+                        <p:column headerText="#{txt['email']}" sortBy="#{admin.email}"> 
+                            <h:outputText value="#{admin.email}" rendered="#{admin.status ne 'SUSPENDED'}" /> 
+                            <h:outputText value="#{admin.email}" rendered="#{admin.status eq 'SUSPENDED'}" style="color:lightgray" /> 
                         </p:column> 
-                        <p:column headerText="Dirección" sortBy="#{admin.address.city}"> 
-                            <h:outputText value="#{admin.address.addressLine}" /> <br/>
-                            <h:outputText value="#{admin.address.addressLine2}" /> <br/>
-                            <h:outputText value="#{admin.address.city}" />
+                        <p:column headerText="#{txt['address']}" sortBy="#{admin.address.city}"> 
+                            <h:outputText value="#{admin.address.addressLine}" style="display: block" rendered="#{admin.status ne 'SUSPENDED'}" /> 
+                            <h:outputText value="#{admin.address.addressLine2}" style="display: block" rendered="#{admin.status ne 'SUSPENDED'}" /> 
+                            <h:outputText value="#{admin.address.city}" rendered="#{admin.status ne 'SUSPENDED'}" />
+                            <h:outputText value="#{admin.address.addressLine}" rendered="#{admin.status eq 'SUSPENDED'}" style="display: block; color:lightgray" /> 
+                            <h:outputText value="#{admin.address.addressLine2}" rendered="#{admin.status eq 'SUSPENDED'}" style="display: block; color:lightgray" /> 
+                            <h:outputText value="#{admin.address.city}" rendered="#{admin.status eq 'SUSPENDED'}" style="color:lightgray" /> 
                         </p:column> 
-                        <p:column headerText="Teléfono" sortBy="#{admin.phone}"> 
-                            <h:outputText value="#{admin.phone}" /> 
+                        <p:column headerText="#{txt['phone']}" sortBy="#{admin.phone}"> 
+                            <h:outputText value="#{admin.phone}" rendered="#{admin.status ne 'SUSPENDED'}" /> 
+                            <h:outputText value="#{admin.phone}" rendered="#{admin.status eq 'SUSPENDED'}" style="color:lightgray" /> 
                         </p:column> 
-                        <p:column headerText="Organización" sortBy="#{admin.organisation.name}" rendered="#{usersController.userRole eq 'SUPER_ADMIN'}"> 
-                            <h:outputText value="#{admin.organisation.name}" /> 
+                        <p:column headerText="#{txt['organisation']}" sortBy="#{admin.organisation.name}" rendered="#{usersController.userRole eq 'SUPER_ADMIN'}"> 
+                            <h:outputText value="#{admin.organisation.name}" rendered="#{admin.status ne 'SUSPENDED'}" /> 
+                            <h:outputText value="#{admin.organisation.name}" rendered="#{admin.status eq 'SUSPENDED'}" style="color:lightgray" />  
                         </p:column> 
-                        <p:column headerText="Opciones"> 
-                            <h:link outcome="view-user.xhtml?faces-redirect=true&amp;user=#{admin.id}"> 
-                                <h:graphicImage title="VER" value="../resources/images/view.png" class="table-action" /> 
+                        <p:column headerText="#{txt['options']}"> 
+                            <h:link outcome="user-profile.xhtml?faces-redirect=true&amp;user=#{admin.id}"> 
+                                <h:graphicImage title="#{txt['cap_view']}" value="../resources/images/view.png" class="table-action" /> 
                             </h:link> 
                             <h:link outcome="compose-mail.xhtml?faces-redirect=true&amp;user=#{admin.id}"> 
-                                <h:graphicImage title="ENVIAR CORREO" value="../resources/images/send_email.png" class="table-action-width" /> 
+                                <h:graphicImage title="#{txt['cap_send_email']}" value="../resources/images/send_email.png" class="table-action-width" /> 
                             </h:link> 
                             <h:panelGroup rendered="#{usersController.userRole eq 'SUPER_ADMIN'}" >
                                 <h:link outcome="edit-user.xhtml?faces-redirect=true&amp;user=#{admin.id}"> 
-                                    <h:graphicImage title="EDITAR" value="../resources/images/edit_user.png" class="table-action" /> 
+                                    <h:graphicImage title="#{txt['cap_edit']}" value="../resources/images/edit_user.png" class="table-action" /> 
                                 </h:link> 
-                                <h:commandLink action="#{usersController.activateUser(admin)}" rendered="#{admin.status eq 'SUSPENDED'}"> 
-                                    <h:graphicImage title="ACTIVAR" value="../resources/images/activate_user.png" class="table-action" /> 
+                                <h:commandLink action="#{usersController.activateUser(admin, 'admins')}" rendered="#{admin.status eq 'SUSPENDED'}"> 
+                                    <h:graphicImage title="#{txt['cap_activate']}" value="../resources/images/activate_user.png" class="table-action" /> 
                                 </h:commandLink> 
-                                <h:commandLink action="#{usersController.deactivateUser(admin)}" rendered="#{admin.status eq 'ACTIVATED'}"> 
-                                    <h:graphicImage title="SUSPENDER" value="../resources/images/suspend_user.png" class="table-action" /> 
+                                <h:commandLink action="#{usersController.deactivateUser(admin, 'admins')}" rendered="#{admin.status eq 'ACTIVATED'}"> 
+                                    <h:graphicImage title="#{txt['cap_suspend']}" value="../resources/images/suspend_user.png" class="table-action" /> 
                                 </h:commandLink>
                             </h:panelGroup>
                         </p:column>

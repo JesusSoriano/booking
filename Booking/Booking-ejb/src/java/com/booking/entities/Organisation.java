@@ -35,6 +35,8 @@ public class Organisation implements Serializable {
     private String styleFile;
     @Column(name = "logo")
     private String logo;
+    @Column(name = "icon")
+    private String icon;
     @Column(name = "created_date")
     @Temporal(TemporalType.DATE)
     private Date createdDate;
@@ -135,6 +137,14 @@ public class Organisation implements Serializable {
 
     public void setLogo(String logo) {
         this.logo = logo;
+    }
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
     }
 
     public String getDefaultLanguage() {

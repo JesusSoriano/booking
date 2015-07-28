@@ -44,9 +44,9 @@ public class UsersController implements Serializable {
         return "user-profile.xhtml" + Constants.FACES_REDIRECT;
     }
 
-    public String activateUser(User user) {
+    public String activateUser(User user, String pageName) {
         userFacade.activateUser(user);
-        FacesUtil.addSuccessMessage("usersForm:msg", "El usuario ha sido activado correctamente.");
+        FacesUtil.addSuccessMessage(pageName + "Form:msg", "El usuario ha sido activado correctamente.");
 
         try {
             // Registrar activación de usuario
@@ -56,12 +56,12 @@ public class UsersController implements Serializable {
             e.printStackTrace();
         }
 
-        return "users.xhtml" + Constants.FACES_REDIRECT;
+        return pageName + ".xhtml" + Constants.FACES_REDIRECT;
     }
 
-    public String deactivateUser(User user) {
+    public String deactivateUser(User user, String pageName) {
         userFacade.deactivateUser(user);
-        FacesUtil.addSuccessMessage("usersForm:msg", "El usuario ha sido suspendido correctamente.");
+        FacesUtil.addSuccessMessage(pageName + "Form:msg", "El usuario ha sido suspendido correctamente.");
 
         try {
             // Registrar suspensión de usuario
@@ -71,7 +71,7 @@ public class UsersController implements Serializable {
             e.printStackTrace();
         }
 
-        return "users.xhtml" + Constants.FACES_REDIRECT;
+        return pageName + ".xhtml" + Constants.FACES_REDIRECT;
     }
 
     public List<User> getUsers() {

@@ -8,20 +8,14 @@
     <h:head>
         <ui:include src="/WEB-INF/head.xhtml" />
     </h:head>
-    <h:body>
 
-        <f:view contentType="text/html">
+    <h:body>
+        <f:view contentType="text/html" locale="#{languageController.language}">
             <div id="loginformholder">
                 <h:form id="loginForm">
 
                     <div>
-                        <div id="header">
-                            <div class="header-top">
-                                <div class="container">
-                                    <a href="login.xhtml"><img src="#{loginController.logoPath}" alt="#{loginController.organisationName}"/></a>
-                                </div>
-                            </div>
-                        </div>
+                        <ui:include src="/WEB-INF/header-info-login.xhtml" />
 
                         <div class="col-xs-offset-1 col-sm-offset-2 col-md-offset-3 col-xs-10 col-sm-8 col-md-6">
                             <div class="login-box">

@@ -9,7 +9,7 @@
         <ui:include src="/WEB-INF/head.xhtml" />
     </h:head>
 
-    <f:view contentType="text/html">
+    <f:view contentType="text/html" locale="#{languageController.language}">
         <h:body>
             <div id="wrap">
                 <h:form>
@@ -33,7 +33,7 @@
                                             <li><span class="transactions-bg"></span><a href="admins.xhtml">#{txt['m_administrators']}</a></li>
                                             <li><span class="transactions-bg"></span><a href="#">#{txt['m_services']}</a></li>
                                             <li><span class="transactions-bg"></span><a href="#">#{txt['m_groups']}</a></li>
-                                            <li><span class="list-bg"></span><a href="#">#{txt['m_notifications']}</a></li>
+                                            <li><span class="list-bg"></span><a href="audits.xhtml">#{txt['m_audits']}</a></li>
                                         </ul>
                                     </li>
                                     <li class="dropdown-li"><span class="reports-bg"></span><a>#{txt['m_account']}</a>

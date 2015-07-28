@@ -1,0 +1,129 @@
+<?xml version='1.0' encoding='UTF-8' ?> <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:ui="http://java.sun.com/jsf/facelets" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:p="http://primefaces.org/ui" 
+                xmlns:c="http://java.sun.com/jsp/jstl/core"> 
+
+    <h:form id="mainForm"> 
+        <div class="row"> 
+            <div class="grid-100"> 
+                <div class="row"> 
+                    <div class="grid-75"> 
+                        <div class="grid-15 pad-h-10">
+                            #{i18n['l_from']} 
+                        </div> 
+                        <div class="grid-75"> 
+                            <p:calendar id="fromDate" value="#{auditController.fromDate}" showOn="button" styleClass="dropdownReportsL" pattern="#{dateFormatController.dateFormatString}" required="true" requiredMessage="#{i18n['msg_please_select_the_from_date']}" /> 
+                            <h:message for="fromDate" errorClass="fieldError" infoClass="fieldSuccess" /> 
+                        </div> 
+                        <div class="grid-15 pad-h-10">
+                            #{i18n['l_to']} 
+                        </div> 
+                        <div class="grid-75"> 
+                            <p:calendar id="toDate" value="#{auditController.toDate}" showOn="button" styleClass="dropdownReports" pattern="#{dateFormatController.dateFormatString}" required="true" requiredMessage="#{i18n['msg_please_select_the_to_date']}" /> 
+                            <br /> 
+                            <h:message for="toDate" errorClass="fieldError" infoClass="fieldSuccess" /> 
+                        </div> 
+                    </div> 
+                </div> 
+                <h:panelGroup> 
+                    <div class="row"> 
+                        <div class="grid-75"> 
+                            <div class="grid-15 pad-h-10"> 
+                                <h:outputLabel for="audit-type-select" value="#{i18n['l_audit_type']}: " /> 
+                            </div> 
+                            <div class="grid-75"> 
+                                <h:selectOneMenu id="audit-type-select" value="#{auditController.selectedAuditType}"> 
+                                    <f:selectItems value="#{auditController.auditTypeList}" /> 
+                                </h:selectOneMenu> 
+                            </div> 
+                            <div class="grid-100"> 
+                                <h:outputText value="" style="color: red" /> 
+                                <h:message for="audit-type-select" errorClass="fieldError" infoClass="fieldSuccess" /> 
+                            </div> 
+                        </div> 
+                    </div> 
+                </h:panelGroup> 
+            </div> 
+        </div> 
+        <h:panelGroup rendered="#{auditController.userRole eq 'MANAGER' or auditController.userRole eq 'BANK_ADMIN' 
+                                  or auditController.userRole eq 'BRANCH_ADMIN' or auditController.userRole eq 'AGENTS'}"> 
+            <div class="row custom-style-grid"> 
+                <div class="grid-75"> 
+                    <div class="grid-15 pad-h-10"> 
+                        <h:outputLabel for="role-select" value="#{i18n['l_role']}:  " /> 
+                    </div> 
+                    <div class="grid-75"> 
+                        <h:selectOneMenu id="role-select" value="#{auditController.selectedUserRole}"> 
+                            <f:selectItems value="#{auditController.userRoleList}" /> 
+                        </h:selectOneMenu> 
+                    </div> 
+                    <div class="grid-100"> 
+                        <h:outputText value="" style="color: red" /> 
+                        <h:message for="role-select" errorClass="fieldError" infoClass="fieldSuccess" /> 
+                    </div> 
+                </div> 
+            </div> 
+        </h:panelGroup> 
+        <div class="row custom-style-grid"> 
+            <div class="grid-75"> 
+                <div class="grid-15 pad-h-10"> 
+                </div> 
+                <div class="grid-75"> 
+                    <h:commandButton action="#{auditController.search()}" styleClass="submit green_button" value="#{i18n['b_search']}" /> 
+                </div> 
+            </div> 
+        </div> 
+    </h:form> 
+    <div class="clear" style="margin-top:10px;"></div> 
+    <div class="paid-out-bottom"> 
+        <div class="sub-title-page sub-title-blue"> 
+            <h3>#{i18n['l_records']}</h3> 
+        </div> 
+        <h:form id="transaction-form"> 
+            <h:panelGroup id="summary-panel"> 
+                <table class="common-table text-center"> 
+                    <thead> 
+                        <th>#{i18n['l_no']}</th> 
+                        <th>#{i18n['l_date']}</th> 
+                        <th>#{i18n['l_role']}</th> 
+                        <th>#{i18n['l_name']}</th> 
+                        <th>#{i18n['l_action']}</th> 
+                        <!--<th>#{i18n['l_object']}</th>--> 
+                        <th>#{i18n['l_branch']}</th> 
+                        <th>#{i18n['l_ip_address']}</th> 
+                    </thead> 
+                    <ui:repeat var="bean" value="#{auditController.auditList}" varStatus="status"> 
+                        <tr class="${status.index % 2 == 1 ? 'firstRow' : 'secondRow'}"> 
+                            <td> 
+                                <h:outputText value="#{status.index+1}" /> </td> 
+                            <td> 
+                                <h:outputText value="#{bean.createdDate}"> 
+                                    <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" /> 
+                                </h:outputText> </td> 
+                            <td> 
+                                <h:outputText value="#{bean.userRole}" /> </td> 
+                            <td> 
+                                <h:outputText value="#{bean.userEntity.fullName()}" /> </td> 
+                            <td> 
+                                <h:outputText value="#{bean.action}" /> </td> 
+                            <td> 
+                                <h:outputText value="#{bean.payCenter.name}" /> </td> 
+                            <td> 
+                                <h:outputText value="#{bean.ipAddress}" /> </td> 
+                        </tr> 
+                    </ui:repeat> 
+                    <c:if test="#{auditController.auditList eq null or auditController.auditList.size() eq 0}"> 
+                        <tr> 
+                            <td colspan="8"> 
+                                <h:outputText value="#{i18n['l_empty_records']}"></h:outputText> </td> 
+                        </tr> 
+                    </c:if> 
+                </table> 
+                <br /> 
+            </h:panelGroup> 
+        </h:form> 
+    </div> 
+</ui:composition>

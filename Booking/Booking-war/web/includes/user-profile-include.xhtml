@@ -12,10 +12,10 @@
 
                 <div class="row">
                     <div class="col-xs-6 col-sm-6 col-md-6">
-                        <h3>Perfil</h3>
+                        <h3>#{txt['profile']}</h3>
                     </div>
                     <div class="col-sm-offset-3 col-md-offset-3 col-xs-6 col-sm-3 col-md-3 text-right">
-                        <h:commandButton value="Editar Perfil" class="btn btn-primary btn-block btn-main" action="#{userProfileController.goToProfileEdition()}"/>
+                        <h:commandButton value="#{txt['b_edit_profile']}" class="btn btn-primary btn-block btn-main" action="#{userProfileController.goToProfileEdition()}"/>
                     </div>
                 </div>
 
@@ -24,7 +24,7 @@
                         <div class="col-xs-12 col-sm-6 col-md-6">
                             <div class="row">
                                 <div class="col-xs-4">
-                                    <p>Nombre</p>
+                                    <p>#{txt['name']}</p>
                                 </div>
                                 <div class="col-xs-8">
                                     <h:outputText id="name" styleClass="form-control" value="#{userProfileController.firstName}" />
@@ -32,7 +32,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-xs-4">
-                                    <p>Primer Apellido</p>
+                                    <p>#{txt['first_surname']}</p>
                                 </div>
                                 <div class="col-xs-8">
                                     <h:outputText id="firstLastName" styleClass="form-control" value="#{userProfileController.firstLastName}" />
@@ -40,7 +40,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-xs-4">
-                                    <p>Segundo Apellido</p>
+                                    <p>#{txt['second_surname']}</p>
                                 </div>
                                 <div class="col-xs-8">
                                     <h:outputText id="secondLastName" styleClass="form-control" value="#{userProfileController.secondLastName}" />
@@ -48,7 +48,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-xs-4">
-                                    <p>Email</p>
+                                    <p>#{txt['email']}</p>
                                 </div>
                                 <div class="col-xs-8">
                                     <h:outputText id="email" styleClass="form-control" value="#{userProfileController.email}" />
@@ -56,7 +56,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-xs-4">
-                                    <p>Teléfono</p>
+                                    <p>#{txt['phone']}</p>
                                 </div>
                                 <div class="col-xs-8">
                                     <h:outputText id="phone" styleClass="form-control" value="#{userProfileController.phone}"/>
@@ -66,7 +66,7 @@
                         <div class="col-xs-12 col-sm-6 col-md-6">
                             <div class="row">
                                 <div class="col-xs-4">
-                                    <p>Dirección</p>
+                                    <p>#{txt['address']}</p>
                                 </div>
                                 <div class="col-xs-8">
                                     <h:outputText id="addressLine1" styleClass="form-control" value="#{userProfileController.addressLine}"/>
@@ -74,7 +74,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-xs-4">
-                                    <p>Dirección (línea adicional)</p>
+                                    <p>#{txt['address_additional_line']}</p>
                                 </div>
                                 <div class="col-xs-8">
                                     <h:outputText id="addressLine2" styleClass="form-control" value="#{userProfileController.addressLine2}"/>
@@ -82,7 +82,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-xs-4">
-                                    <p>Ciudad</p>
+                                    <p>#{txt['city']}</p>
                                 </div>
                                 <div class="col-xs-8">
                                     <h:outputText id="city" styleClass="form-control" value="#{userProfileController.city}"/>
@@ -90,7 +90,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-xs-4">
-                                    <p>País</p>
+                                    <p>#{txt['country']}</p>
                                 </div>
                                 <div class="col-xs-8">
                                     <h:outputText id="country" styleClass="form-control" value="#{userProfileController.country}"/>
@@ -98,7 +98,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-xs-4">
-                                    <p>Código Postal</p>
+                                    <p>#{txt['postcode']}</p>
                                 </div>
                                 <div class="col-xs-8">
                                     <h:outputText id="postcode" styleClass="form-control" value="#{userProfileController.postcode}"/>
@@ -109,7 +109,7 @@
 
                     <div class="row">
                         <br/>
-                        <h:messages for="userProfile" styleClass="text-left" style="margin-top: 20px" errorClass="msgError" infoClass="msgInfo"/>
+                        <h:messages for="msg" id="msg"  styleClass="text-left" style="margin-top: 20px" errorClass="msgError" infoClass="msgInfo"/>
                     </div>
                 </div>
             </div>

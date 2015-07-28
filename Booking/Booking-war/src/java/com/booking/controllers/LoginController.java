@@ -16,14 +16,12 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
-import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
@@ -110,6 +108,7 @@ public class LoginController implements Serializable {
             }
 
             try {
+                request.getSession(true);
                 request.login(email, currentUser.getPassword());
             } catch (Exception ex) {
                 Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
@@ -180,7 +179,7 @@ public class LoginController implements Serializable {
         try {
             HttpServletRequest request = FacesUtil.getRequest();
             request.logout();
-            request.getSession().invalidate();
+            request.getSession(false).invalidate();
         } catch (ServletException ex) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -239,7 +238,11 @@ public class LoginController implements Serializable {
     }
 
     public String getLogoPath() {
-        return "/resources/images/" + organisation.getLogo() + ".png";
+        return "/resources/images/" + organisation.getLogo();
+    }
+
+    public String getIconPath() {
+        return "/resources/images/" + organisation.getIcon();
     }
 
     public String getOrganisationName() {

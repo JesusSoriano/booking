@@ -18,7 +18,7 @@
                         <h:button class="#{sessionScope.mailbox eq 'received' ? 'active-tab' : ''}" value="Bandeja de Entrada" outcome="mailbox.xhtmlfaces-redirect=true" />
                         <h:button class="#{sessionScope.mailbox eq 'sent' ? 'active-tab' : ''}" value="Correo Enviado" outcome="sent-mail.jsf?faces-redirect=true" />
                     </div>
-                    <h:message id="msg" for="msg" errorClass="fieldError" infoClass="fieldSuccess" />
+                    <h:message id="msg" for="msg" errorClass="msgError" infoClass="msgInfo" />
 
                     <div class="mailform">
                         <h:panelGroup id="messageDisplay"  >

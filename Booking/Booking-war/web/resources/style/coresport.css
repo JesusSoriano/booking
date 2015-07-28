@@ -464,12 +464,20 @@ table {
 }
 
 .msgError {
-    color: red; 
+    display: inline-flex;
+    color: red;
+    padding: 10px;
+    border: solid 1px red;
+    margin-bottom: 20px;
     list-style-type: none;
 }
 
 .msgInfo {
-    color: green; 
+    display: inline-flex;
+    color: green;
+    padding: 10px;
+    border: solid 1px green;
+    margin-bottom: 20px;
     list-style-type: none;
 }
 

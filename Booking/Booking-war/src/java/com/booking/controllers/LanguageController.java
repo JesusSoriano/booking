@@ -1,6 +1,5 @@
 package com.booking.controllers;
 
-import com.booking.entities.Organisation;
 import com.booking.entities.User;
 import com.booking.facades.UserFacade;
 import com.booking.util.FacesUtil;
@@ -35,9 +34,8 @@ public class LanguageController implements Serializable {
         supportedLanguages = new LinkedHashMap<>();
         supportedLanguages.put("Español", new Locale("es"));
         supportedLanguages.put("English", Locale.ENGLISH);
+        supportedLanguages.put("Français", Locale.FRENCH);
     }
-
-    private Organisation organisation;
 
     /**
      * Creates a new instance of LanguageController
@@ -47,21 +45,9 @@ public class LanguageController implements Serializable {
 
     @PostConstruct
     public void init() {
-
-        try {
-            organisation = FacesUtil.getCurrentOrganisation();
-
-            // important
-            String lan = (String) FacesUtil.getSessionAttribute("language");
-            if (lan == null) {
-                lan = organisation.getDefaultLanguage();
-                FacesContext.getCurrentInstance().getViewRoot().setLocale(new Locale(lan));
-            }
-
-            language = lan;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        // Default language
+        // TODO: get the language depending on the organisation (url based)
+        language = "es";
     }
 
     public void changeLanguage(ValueChangeEvent e) {
@@ -71,22 +57,24 @@ public class LanguageController implements Serializable {
         if (loggedUser != null) {
             userFacade.changeUserLanguage(loggedUser, language);
         }
-
-        FacesUtil.setSessionAttribute("language", language);
-        FacesContext.getCurrentInstance().getViewRoot().setLocale(new Locale(language));
+        setLocale();
     }
 
     public void getUserApplicationLanguage() {
         User loggedUser = FacesUtil.getCurrentUser();
 
         if (loggedUser != null) {
-            language = loggedUser.getApplicationLanguage();
-            
-            if (language != null) {
-                FacesUtil.setSessionAttribute("language", language);
-                FacesContext.getCurrentInstance().getViewRoot().setLocale(new Locale(language));
+            String userLanguage = loggedUser.getApplicationLanguage();
+
+            if (userLanguage != null) {
+                language = userLanguage;
+                setLocale();
             }
         }
+    }
+
+    private void setLocale() {
+        FacesContext.getCurrentInstance().getViewRoot().setLocale(new Locale(language));
     }
 
     public String getLanguage() {

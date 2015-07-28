@@ -8,23 +8,14 @@
     <h:head>
         <ui:include src="/WEB-INF/head.xhtml" />
     </h:head>
-    <h:body>
 
-        <f:view contentType="text/html">
+    <f:view contentType="text/html" locale="#{languageController.language}">
+        <h:body>
             <div id="loginformholder">
                 <h:form id="loginForm">
 
                     <div>
-                        <div id="header">
-                            <div class="header-top">
-                                <div class="container">
-                                    <img src="#{loginController.logoPath}" alt="#{loginController.organisationName}"/>
-                                </div>
-                            </div>
-                            <div class="language-selector-before"> 
-                                <ui:include src="/WEB-INF/language-selector.xhtml" />
-                            </div> 
-                        </div>
+                        <ui:include src="/WEB-INF/header-info-login.xhtml" />
 
                         <div class="col-xs-offset-1 col-sm-offset-2 col-md-offset-3 col-xs-10 col-sm-8 col-md-6">
                             <div class="login-box">
@@ -77,6 +68,6 @@
                     </script>
                 </h:form>
             </div>
-        </f:view>
-    </h:body>
+        </h:body>
+    </f:view>
 </html>

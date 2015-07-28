@@ -3,61 +3,57 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
 
     <h:head>
         <ui:include src="/WEB-INF/head.xhtml" />
     </h:head>
-    <h:body>
 
-        <h:form id="TNCForm">
+    <f:view contentType="text/html" locale="#{languageController.language}">
 
-            <div>
-                <div id="header">
-                    <div class="header-top">
-                        <div class="container">
-                            <a href="/login.xhtml"><img src="#{loginController.logoPath}" alt="#{loginController.organisationName}"/></a>
-                        </div>
+        <h:body>
+            <h:form id="TNCForm">
+                <div>
+                    <ui:include src="/WEB-INF/header-info-login.xhtml" />
+
+                    <div class="col-xs-offset-1 col-sm-offset-2 col-md-offset-3 col-xs-10 col-sm-8 col-md-6">
+                        <div class="login-box">
+                            <h2>Terms and Conditions</h2>
+                            <h:panelGroup class="checkbox" rendered="#{termsAndConditionsController.TNcCheckVisible}">
+                                <h5>Términos y condiciones.</h5>
+                            </h:panelGroup>
+
+                            <div class="login-content">
+
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-12 col-md-12">
+                                        <p>[Términos y condiciones]</p>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row accept">
+                                <div class="col-xs-8 col-sm-8 col-md-8">
+                                    <h:panelGroup class="checkbox" rendered="#{termsAndConditionsController.TNcCheckVisible}">
+                                        <label>
+                                            <h:selectBooleanCheckbox id="terms" value="#{termsAndConditionsController.tncAccepted}" >
+                                                <p:ajax update="btn" />
+                                            </h:selectBooleanCheckbox>
+                                            <h:outputText value="He leído y acepto los términos y condiciones." />
+                                        </label>
+                                    </h:panelGroup>
+                                </div>
+                                <div class="col-xs-4 col-sm-4 col-md-4">
+                                    <h:commandButton id="btn" styleClass="btn btn-primary btn-block btn-main" action="#{termsAndConditionsController.TNCDone()}" value="OK" disabled="#{!termsAndConditionsController.tncAccepted}" />
+                                </div>
+                            </div>  
+
+                            <h:message for="TNCForm"  styleClass="loginError" errorStyle="color :red" infoStyle="color : green"/>
+                        </div>      
                     </div>
                 </div>
-
-                <div class="col-xs-offset-1 col-sm-offset-2 col-md-offset-3 col-xs-10 col-sm-8 col-md-6">
-                    <div class="login-box">
-                        <h2>Terms and Conditions</h2>
-                        <h:panelGroup class="checkbox" rendered="#{termsAndConditionsController.TNcCheckVisible}">
-                            <h5>Términos y condiciones.</h5>
-                        </h:panelGroup>
-
-                        <div class="login-content">
-
-                            <div class="row">
-                                <div class="col-xs-12 col-sm-12 col-md-12">
-                                    <p>[Términos y condiciones]</p>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="row accept">
-                            <div class="col-xs-8 col-sm-8 col-md-8">
-                                <h:panelGroup class="checkbox" rendered="#{termsAndConditionsController.TNcCheckVisible}">
-                                    <label>
-                                        <h:selectBooleanCheckbox id="terms" value="#{termsAndConditionsController.tncAccepted}" >
-                                            <p:ajax update="btn" />
-                                        </h:selectBooleanCheckbox>
-                                        <h:outputText value="He leído y acepto los términos y condiciones." />
-                                    </label>
-                                </h:panelGroup>
-                            </div>
-                            <div class="col-xs-4 col-sm-4 col-md-4">
-                                <h:commandButton id="btn" styleClass="btn btn-primary btn-block btn-main" action="#{termsAndConditionsController.TNCDone()}" value="OK" disabled="#{!termsAndConditionsController.tncAccepted}" />
-                            </div>
-                        </div>  
-
-                        <h:message for="TNCForm"  styleClass="loginError" errorStyle="color :red" infoStyle="color : green"/>
-                    </div>      
-                </div>
-            </div>
-        </h:form>
-
-    </h:body>
+            </h:form>
+        </h:body>
+    </f:view>
 </html>

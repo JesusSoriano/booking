@@ -9,7 +9,7 @@
         <ui:include src="/WEB-INF/head.xhtml" />
     </h:head>
 
-    <f:view contentType="text/html">
+    <f:view contentType="text/html" locale="#{languageController.language}">
         <h:body>
             <div id="wrap">
                 <h:form>
@@ -20,19 +20,20 @@
 
                             <div id="navigation">
                                 <ul id="nav" class="container">
-                                    <li><span class="dashboard-bg"></span><a href="home.xhtml">Inicio</a></li>
-                                    <li class="dropdown-li"><span class="transactions-bg"></span><a href="bookings.xhtml">Reservas</a>
+                                    <li><span class="dashboard-bg"></span><a href="home.xhtml">#{txt['m_home']}</a></li>
+                                    <li class="dropdown-li"><span class="transactions-bg"></span><a>#{txt['m_bookings']}</a>
                                         <ul class="dropdown">
-                                            <li><span class="transactions-bg"></span><a href="bookings.xhtml">Calendario de Reservas</a></li>
-                                            <li><span class="transactions-bg"></span><a href="#">Hacer Reserva</a></li>
+                                            <li><span class="transactions-bg"></span><a href="bookings.xhtml">#{txt['m_calendar']}</a></li>
+                                            <li><span class="transactions-bg"></span><a href="#">#{txt['m_booking']}</a></li>
                                         </ul>
                                     </li>
-                                    <li class="dropdown-li"><span class="reports-bg"></span><a>Mi Cuenta</a>
+                                    <li class="dropdown-li"><span class="reports-bg"></span><a>#{txt['m_account']}</a>
                                         <ul class="dropdown">
-                                            <li><span class="transactions-bg"></span><a href="user-profile.xhtml">Perfil</a></li>
-                                            <li><span class="list-bg"></span><a href="change-password.xhtml">Cambiar Contraseña</a></li>
-                                            <li><span class="profit-bg"></span><a href="mailbox.xhtml">Correo Interno</a></li>
-                                            <li><span class="profit-bg"/><h:commandLink value="Cerrar Sesión" action="#{loginController.performLogout()}"/></li>
+                                            <li><span class="transactions-bg"></span><a href="user-profile.xhtml">#{txt['m_profile']}</a></li>
+                                            <li><span class="list-bg"></span><a href="change-password.xhtml">#{txt['m_change_password']}</a></li>
+                                            <li><span class="profit-bg"></span><a href="mailbox.xhtml">#{txt['m_mailbox']}</a></li>
+                                            <li><span class="list-bg"></span><a href="audits.xhtml">#{txt['m_my_audits']}</a></li>
+                                            <li><span class="profit-bg"/><h:commandLink value="#{txt['m_logout']}" action="#{loginController.performLogout()}"/></li>
                                         </ul>
                                     </li>
                                     <div class="clear"></div>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+              xmlns:ui="http://java.sun.com/jsf/facelets"
+              xmlns:h="http://java.sun.com/jsf/html"
+              xmlns:p="http://primefaces.org/ui">
+
+    <div id="header">
+        <div class="header-top">
+            <div class="container">
+                <a href="/login.xhtml"><img src="#{loginController.logoPath}" alt="#{loginController.organisationName}"/></a>
+            </div>
+        </div>
+        
+        <div class="language-selector-before"> 
+            <ui:include src="/WEB-INF/language-selector.xhtml" />
+        </div> 
+    </div>
+
+</ui:component>

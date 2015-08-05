@@ -59,31 +59,45 @@ public class AccountSetupController implements Serializable {
     public void init() {
     }
 
+    /**
+     * Registers a new user and goes to the terms & conditions page
+     */
     public String userRegistration() {
 
         try {
             if (StringsUtil.isNotNullNotEmpty(firstName)) {
                 FacesUtil.addErrorMessage("registrationForm", "Introduce tu nombre");
+                return "";
             }
             if (StringsUtil.isNotNullNotEmpty(firstLastName)) {
                 FacesUtil.addErrorMessage("registrationForm", "Introduce tu primer apellido");
+                return "";
             }
             
             // Remove start and end white spaces of email
             email = email.trim();
             if (StringsUtil.isNotNullNotEmpty(email)) {
                 FacesUtil.addErrorMessage("registrationForm", "Introduce tu email");
+                return "";
             }
             
             if (StringsUtil.isNotNullNotEmpty(password)) {
                 FacesUtil.addErrorMessage("registrationForm", "Introduce contraseña");
+                return "";
             }
             if (StringsUtil.isNotNullNotEmpty(confirmPassword)) {
                 FacesUtil.addErrorMessage("registrationForm", "Confirma tu contraseña");
+                return "";
             }
             if (!password.equals(confirmPassword)) {
                 FacesUtil.addErrorMessage("registrationForm:confirmPassword", "Las contraseñas no coinciden.");
                 return "";
+            }
+            
+            if(userFacade.findUserByEmail(email) != null) {
+                FacesUtil.addErrorMessage("registrationForm", "La dirección de correo electrónico ya existe.");
+                return "";
+                
             }
             
             // Password encryption
@@ -97,6 +111,7 @@ public class AccountSetupController implements Serializable {
                 HttpServletRequest request = FacesUtil.getRequest();
                 request.logout();
                 request.login(newUser.getEmail(), password);
+            FacesUtil.setSessionAttribute(Constants.CURRENT_USER, newUser);
             } catch (Exception ex) {
                 Logger.getLogger(AccountSetupController.class.getName()).log(Level.SEVERE, null, ex);
                 FacesUtil.addErrorMessage("registrationForm", "El usuario ha sido registrado, pero el inicio de sesión ha fallado. Inténtelo de nuevo desde la página de login.");
@@ -110,8 +125,9 @@ public class AccountSetupController implements Serializable {
 //                Logger.getLogger(AccountSetupController.class.getName()).log(Level.SEVERE, null, ex);
 //            }
             try {
+                // Audit user registration
                 String ipAddress = FacesUtil.getCurrentIPAddress();
-                auditFacade.createAudit(AuditType.SIGN_UP, newUser, ipAddress, organisation);
+                auditFacade.createAudit(AuditType.SIGN_UP, newUser, ipAddress, newUser.getId(), organisation);
             } catch (Exception e) {
                 Logger.getLogger(AccountSetupController.class.getName()).log(Level.SEVERE, null, e);
             }

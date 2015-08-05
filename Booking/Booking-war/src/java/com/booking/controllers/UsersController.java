@@ -24,7 +24,7 @@ public class UsersController implements Serializable {
 
     private List<User> users;
     private List<User> admins;
-    private User logedUser;
+    private User loggedUser;
     private Organisation organisation;
 
     public UsersController() {
@@ -32,7 +32,7 @@ public class UsersController implements Serializable {
     
     @PostConstruct
     public void init() {
-        logedUser = FacesUtil.getCurrentUser();
+        loggedUser = FacesUtil.getCurrentUser();
         organisation = FacesUtil.getCurrentOrganisation();
 
         users = userFacade.findAllClientsOfOrganisation(organisation);
@@ -51,7 +51,7 @@ public class UsersController implements Serializable {
         try {
             // Registrar activación de usuario
             String ipAddress = FacesUtil.getRequest().getRemoteAddr();
-            auditFacade.createAudit(AuditType.ACTIVATE_USER, logedUser, ipAddress, organisation);
+            auditFacade.createAudit(pageName.equals("admins") ? AuditType.ACTIVATE_ADMIN : AuditType.ACTIVATE_USER, loggedUser, ipAddress, user.getId(), organisation);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -66,7 +66,7 @@ public class UsersController implements Serializable {
         try {
             // Registrar suspensión de usuario
             String ipAddress = FacesUtil.getRequest().getRemoteAddr();
-            auditFacade.createAudit(AuditType.SUSPEND_USER, logedUser, ipAddress, organisation);
+            auditFacade.createAudit(pageName.equals("admins") ? AuditType.SUSPEND_ADMIN : AuditType.SUSPEND_USER, loggedUser, ipAddress, user.getId(), organisation);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -83,6 +83,6 @@ public class UsersController implements Serializable {
     }
     
     public Role getUserRole() {
-        return logedUser.getUserRole().getRole();
+        return loggedUser.getUserRole().getRole();
     }
 }

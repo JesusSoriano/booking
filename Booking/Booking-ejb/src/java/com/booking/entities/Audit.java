@@ -42,6 +42,8 @@ public class Audit implements Serializable {
     private User user;
     @Column(name = "user_ip")
     private String ip;
+    @Column(name = "action_object_id")
+    private long actionObjectId;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "organisation", referencedColumnName = "id")
     private Organisation organisation;
@@ -88,6 +90,14 @@ public class Audit implements Serializable {
 
     public void setOrganisation(Organisation organisation) {
         this.organisation = organisation;
+    }
+
+    public long getActionObjectId() {
+        return actionObjectId;
+    }
+
+    public void setActionObjectId(long actionObjectId) {
+        this.actionObjectId = actionObjectId;
     }
 
     @Override

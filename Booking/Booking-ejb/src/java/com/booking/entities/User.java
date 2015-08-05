@@ -54,8 +54,6 @@ public class User implements Serializable {
     private Date createdDate;
     @Column(name = "phone")
     private String phone;
-    @Column(name = "account_active")
-    private boolean accountActive;
     @Column(name = "terms_version_accepted")
     private boolean termsVersionAccepted;
     @Column(name = "application_language")
@@ -136,14 +134,6 @@ public class User implements Serializable {
         this.createdDate = createdDate;
     }
 
-    public boolean isAccountActive() {
-        return accountActive;
-    }
-
-    public void setAccountActive(boolean accountActive) {
-        this.accountActive = accountActive;
-    }
-
     public boolean getTermsVersionAccepted() {
         return termsVersionAccepted;
     }
@@ -161,7 +151,7 @@ public class User implements Serializable {
     }
 
     public String getFullName() {
-        return firstName + " " + firstLastName + " " + (secondLastName != null ? secondLastName : "");
+        return firstName + " " + firstLastName + (secondLastName != null ? (" " + secondLastName) : "");
     }
 
     public void setPhone(String phone) {

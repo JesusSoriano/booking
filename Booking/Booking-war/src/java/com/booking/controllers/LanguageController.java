@@ -34,7 +34,7 @@ public class LanguageController implements Serializable {
         supportedLanguages = new LinkedHashMap<>();
         supportedLanguages.put("Español", new Locale("es"));
         supportedLanguages.put("English", Locale.ENGLISH);
-        supportedLanguages.put("Français", Locale.FRENCH);
+//        supportedLanguages.put("Français", Locale.FRENCH);
     }
 
     /**

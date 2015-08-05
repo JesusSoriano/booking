@@ -6,6 +6,7 @@ import com.booking.entities.User;
 import com.booking.entities.UserRole;
 import com.booking.enums.Role;
 import com.booking.enums.Status;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -51,7 +52,7 @@ public class UserFacade extends AbstractFacade<User> {
         user.setSecondLastName(secondLastName);
         user.setEmail(email);
         user.setPassword(password);
-        user.setAccountActive(true);
+        user.setStatus(Status.ACTIVATED);
         user.setTermsVersionAccepted(false);
         user.setPhone(phone);
         user.setAddress(address);
@@ -113,7 +114,7 @@ public class UserFacade extends AbstractFacade<User> {
                 setParameter("organisation", organisation).getResultList();
     }
 
-    public User findUserOfOrganisation(int userId, Organisation organisation) {
+    public User findUserOfOrganisation(long userId, Organisation organisation) {
         return findUniqueResult(em.createQuery("SELECT u FROM User u WHERE u.id = :userId AND u.organisation = :organisation").
                 setParameter("userId", userId).
                 setParameter("organisation", organisation).getResultList());
@@ -145,5 +146,16 @@ public class UserFacade extends AbstractFacade<User> {
         return em.createQuery("SELECT u FROM User u WHERE u.organisation = :organisation AND u.userRole.role = :client ORDER BY u.firstName ASC, u.firstLastName ASC").
                 setParameter("organisation", organisation).
                 setParameter("client", Role.ADMIN).getResultList();
+    }
+
+    public List<User> findAllAdminsAndClientsOfOrganisation(Organisation organisation) {
+        return em.createQuery("SELECT u FROM User u WHERE u.organisation = :organisation AND u.userRole.role IN :users ORDER BY u.firstName ASC, u.firstLastName ASC").
+                setParameter("organisation", organisation).
+                setParameter("users", new ArrayList<Role>() {
+                    {
+                        add(Role.ADMIN);
+                        add(Role.USER);
+                    }
+                }).getResultList();
     }
 }

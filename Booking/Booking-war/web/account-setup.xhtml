@@ -8,7 +8,7 @@
     <h:head>
         <ui:include src="/WEB-INF/head.xhtml" />
     </h:head>
-    
+
     <h:body>
         <f:view contentType="text/html" locale="#{languageController.language}">
             <div id="loginformholder">
@@ -140,11 +140,12 @@
                                             <h:commandButton value="#{txt['b_next']}" class="btn btn-primary btn-block btn-main" action="#{accountSetupController.userRegistration()}"/>
                                         </div>
                                     </div>
+
+                                    <h:message for="registrationForm"  styleClass="loginError" errorClass="msgError" infoClass="msgInfo"/>
                                 </div>
                             </div>
                         </div>
 
-                        <h:message for="registrationForm"  styleClass="loginError" errorClass="msgError" infoClass="msgInfo"/>
                     </div>
 
                     <script>

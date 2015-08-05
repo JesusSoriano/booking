@@ -67,7 +67,7 @@ public class LoginController implements Serializable {
                 return;
             }
 
-            if (currentUser.getOrganisation().getStatus().equals(Status.SUSPENDED)) {
+            if (Status.SUSPENDED.equals(currentUser.getOrganisation().getStatus())) {
                 FacesUtil.addErrorMessage("loginForm", "Inicio de sesión fallido, organización suspendida.");
                 return;
             }
@@ -95,8 +95,8 @@ public class LoginController implements Serializable {
 //                currentUser.setLoginTries(0);
 //                userFacade.edit(currentUser);
 //            }
-            if (!currentUser.isAccountActive()) {
-                FacesUtil.addErrorMessage("loginForm", "Tu cuenta no está activada. Consúltanos para más información.");
+            if (Status.SUSPENDED.equals(currentUser.getStatus())) {
+                FacesUtil.addErrorMessage("loginForm", "Tu cuenta no está activa. Consúltanos para más información.");
                 return;
             }
 
@@ -110,6 +110,7 @@ public class LoginController implements Serializable {
             try {
                 request.getSession(true);
                 request.login(email, currentUser.getPassword());
+                FacesUtil.setSessionAttribute(Constants.CURRENT_USER, currentUser);
             } catch (Exception ex) {
                 Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
                 FacesUtil.addErrorMessage("loginForm", "Lo sentimos, no ha sido posible iniciar sesión en este momento. Contáctanos si el problema persiste.");
@@ -118,13 +119,12 @@ public class LoginController implements Serializable {
 
             try {
                 String ipAddress = FacesUtil.getCurrentIPAddress();
-                auditFacade.createAudit(AuditType.LOGGED_IN, currentUser, ipAddress, organisation);
+                auditFacade.createAudit(AuditType.LOGGED_IN, currentUser, ipAddress, currentUser.getId(), organisation);
             } catch (Exception e) {
                 Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, e);
             }
 
             outcome = homePage();
-            FacesUtil.setSessionAttribute(Constants.CURRENT_USER, currentUser);
 
         } catch (Exception e) {
             FacesUtil.addErrorMessage("loginForm", "Lo sentimos, no ha sido posible iniciar sesión en este momento. Contáctanos si el problema persiste.");
@@ -171,7 +171,8 @@ public class LoginController implements Serializable {
 
         try {
             String ipAddress = FacesUtil.getCurrentIPAddress();
-            auditFacade.createAudit(AuditType.LOGGED_OUT, FacesUtil.getCurrentUser(), ipAddress, organisation);
+            User loggedUser = FacesUtil.getCurrentUser();
+            auditFacade.createAudit(AuditType.LOGGED_OUT, loggedUser, ipAddress, loggedUser.getId(), organisation);
         } catch (Exception e) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, e);
         }

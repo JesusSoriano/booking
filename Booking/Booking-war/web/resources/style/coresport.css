@@ -468,7 +468,7 @@ table {
     color: red;
     padding: 10px;
     border: solid 1px red;
-    margin-bottom: 20px;
+    margin: 20px 0px;
     list-style-type: none;
 }
 

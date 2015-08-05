@@ -12,17 +12,17 @@
                 <div class="row"> 
                     <div class="grid-75"> 
                         <div class="grid-15 pad-h-10">
-                            #{i18n['l_from']} 
+                            #{txt['from']} 
                         </div> 
                         <div class="grid-75"> 
-                            <p:calendar id="fromDate" value="#{auditController.fromDate}" showOn="button" styleClass="dropdownReportsL" pattern="#{dateFormatController.dateFormatString}" required="true" requiredMessage="#{i18n['msg_please_select_the_from_date']}" /> 
+                            <p:calendar id="fromDate" value="#{auditsController.fromDate}" showOn="button" styleClass="dropdownReportsL" pattern="#{dateFormatController.dateFormatString}" required="true" requiredMessage="#{txt['msg_please_select_the_from_date']}" /> 
                             <h:message for="fromDate" errorClass="fieldError" infoClass="fieldSuccess" /> 
                         </div> 
                         <div class="grid-15 pad-h-10">
-                            #{i18n['l_to']} 
+                            #{txt['to']} 
                         </div> 
                         <div class="grid-75"> 
-                            <p:calendar id="toDate" value="#{auditController.toDate}" showOn="button" styleClass="dropdownReports" pattern="#{dateFormatController.dateFormatString}" required="true" requiredMessage="#{i18n['msg_please_select_the_to_date']}" /> 
+                            <p:calendar id="toDate" value="#{auditsController.toDate}" showOn="button" styleClass="dropdownReports" pattern="#{dateFormatController.dateFormatString}" required="true" requiredMessage="#{txt['msg_please_select_the_to_date']}" /> 
                             <br /> 
                             <h:message for="toDate" errorClass="fieldError" infoClass="fieldSuccess" /> 
                         </div> 
@@ -32,11 +32,11 @@
                     <div class="row"> 
                         <div class="grid-75"> 
                             <div class="grid-15 pad-h-10"> 
-                                <h:outputLabel for="audit-type-select" value="#{i18n['l_audit_type']}: " /> 
+                                <h:outputLabel for="audit-type-select" value="#{txt['audit_type']}: " /> 
                             </div> 
                             <div class="grid-75"> 
-                                <h:selectOneMenu id="audit-type-select" value="#{auditController.selectedAuditType}"> 
-                                    <f:selectItems value="#{auditController.auditTypeList}" /> 
+                                <h:selectOneMenu id="audit-type-select" value="#{auditsController.selectedAuditType}"> 
+                                    <f:selectItems value="#{auditsController.auditTypes}" /> 
                                 </h:selectOneMenu> 
                             </div> 
                             <div class="grid-100"> 
@@ -48,16 +48,17 @@
                 </h:panelGroup> 
             </div> 
         </div> 
-        <h:panelGroup rendered="#{auditController.userRole eq 'MANAGER' or auditController.userRole eq 'BANK_ADMIN' 
-                                  or auditController.userRole eq 'BRANCH_ADMIN' or auditController.userRole eq 'AGENTS'}"> 
+        
+<!--        <h:panelGroup rendered="#{auditsController.userRole eq 'MANAGER' or auditsController.userRole eq 'BANK_ADMIN' 
+                                  or auditsController.userRole eq 'BRANCH_ADMIN' or auditsController.userRole eq 'AGENTS'}"> 
             <div class="row custom-style-grid"> 
                 <div class="grid-75"> 
                     <div class="grid-15 pad-h-10"> 
-                        <h:outputLabel for="role-select" value="#{i18n['l_role']}:  " /> 
+                        <h:outputLabel for="role-select" value="#{txt['role']}:  " /> 
                     </div> 
                     <div class="grid-75"> 
-                        <h:selectOneMenu id="role-select" value="#{auditController.selectedUserRole}"> 
-                            <f:selectItems value="#{auditController.userRoleList}" /> 
+                        <h:selectOneMenu id="role-select" value="#{auditsController.selectedUserRole}"> 
+                            <f:selectItems value="#{auditsController.userRoleList}" /> 
                         </h:selectOneMenu> 
                     </div> 
                     <div class="grid-100"> 
@@ -66,13 +67,14 @@
                     </div> 
                 </div> 
             </div> 
-        </h:panelGroup> 
+        </h:panelGroup> -->
+                                  
         <div class="row custom-style-grid"> 
             <div class="grid-75"> 
                 <div class="grid-15 pad-h-10"> 
                 </div> 
                 <div class="grid-75"> 
-                    <h:commandButton action="#{auditController.search()}" styleClass="submit green_button" value="#{i18n['b_search']}" /> 
+                    <h:commandButton action="#{auditsController.search()}" styleClass="submit green_button" value="#{txt['b_search']}" /> 
                 </div> 
             </div> 
         </div> 
@@ -80,45 +82,41 @@
     <div class="clear" style="margin-top:10px;"></div> 
     <div class="paid-out-bottom"> 
         <div class="sub-title-page sub-title-blue"> 
-            <h3>#{i18n['l_records']}</h3> 
+            <h3>#{txt['records']}</h3> 
         </div> 
         <h:form id="transaction-form"> 
             <h:panelGroup id="summary-panel"> 
                 <table class="common-table text-center"> 
                     <thead> 
-                        <th>#{i18n['l_no']}</th> 
-                        <th>#{i18n['l_date']}</th> 
-                        <th>#{i18n['l_role']}</th> 
-                        <th>#{i18n['l_name']}</th> 
-                        <th>#{i18n['l_action']}</th> 
-                        <!--<th>#{i18n['l_object']}</th>--> 
-                        <th>#{i18n['l_branch']}</th> 
-                        <th>#{i18n['l_ip_address']}</th> 
+                        <th>#{txt['date']}</th> 
+                        <th>#{txt['role']}</th> 
+                        <th>#{txt['name']}</th> 
+                        <th>#{txt['action']}</th> 
+                        <th>#{txt['object_id']}</th> 
+                        <th>#{txt['ip_address']}</th> 
                     </thead> 
-                    <ui:repeat var="bean" value="#{auditController.auditList}" varStatus="status"> 
+                    <ui:repeat var="audit" value="#{auditsController.auditList}" varStatus="status"> 
                         <tr class="${status.index % 2 == 1 ? 'firstRow' : 'secondRow'}"> 
                             <td> 
-                                <h:outputText value="#{status.index+1}" /> </td> 
-                            <td> 
-                                <h:outputText value="#{bean.createdDate}"> 
+                                <h:outputText value="#{audit.createdDate}"> 
                                     <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" /> 
                                 </h:outputText> </td> 
                             <td> 
-                                <h:outputText value="#{bean.userRole}" /> </td> 
+                                <h:outputText value="#{audit.user.userRole.role}" /> </td> 
                             <td> 
-                                <h:outputText value="#{bean.userEntity.fullName()}" /> </td> 
+                                <h:outputText value="#{audit.user.getFullName()}" /> </td> 
                             <td> 
-                                <h:outputText value="#{bean.action}" /> </td> 
+                                <h:outputText value="#{audit.action}" /> </td> 
                             <td> 
-                                <h:outputText value="#{bean.payCenter.name}" /> </td> 
+                                <h:outputText value="#{audit.actionObjectId}" /> </td> 
                             <td> 
-                                <h:outputText value="#{bean.ipAddress}" /> </td> 
+                                <h:outputText value="#{audit.ip}" /> </td> 
                         </tr> 
                     </ui:repeat> 
-                    <c:if test="#{auditController.auditList eq null or auditController.auditList.size() eq 0}"> 
+                    <c:if test="#{auditsController.auditList eq null or auditsController.auditList.size() eq 0}"> 
                         <tr> 
                             <td colspan="8"> 
-                                <h:outputText value="#{i18n['l_empty_records']}"></h:outputText> </td> 
+                                <h:outputText value="#{txt['empty_records']}"></h:outputText> </td> 
                         </tr> 
                     </c:if> 
                 </table> 

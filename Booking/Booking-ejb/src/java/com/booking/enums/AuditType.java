@@ -16,6 +16,8 @@ public enum AuditType {
     ACCOUNT_CANCELLED("se ha dado de baja"),
     SUSPEND_USER("ha suspendido un usuario"),
     ACTIVATE_USER("ha activado un usuario"),
+    SUSPEND_ADMIN("ha suspendido un administrador"),
+    ACTIVATE_ADMIN("ha activado un administrador"),
     SUSPEND_ORGANISATION("ha suspendido una organización"),
     ACTIVATE_ORGANISATION("ha activado una organización");
     
@@ -37,8 +39,31 @@ public enum AuditType {
         audits.add(ACCOUNT_CANCELLED);
         audits.add(SUSPEND_USER);
         audits.add(ACTIVATE_USER);
+        audits.add(SUSPEND_ADMIN);
+        audits.add(ACTIVATE_ADMIN);
         audits.add(SUSPEND_ORGANISATION);
         audits.add(ACTIVATE_ORGANISATION);
+        return audits;
+    }
+
+    public static List<AuditType> getAuditTypesForAdmin() {
+        List<AuditType> audits = new ArrayList<>();
+        audits.add(LOGGED_IN);
+        audits.add(LOGGED_OUT);
+        audits.add(SIGN_UP);
+        audits.add(ACCOUNT_CANCELLED);
+        audits.add(SUSPEND_USER);
+        audits.add(ACTIVATE_USER);
+        return audits;
+    }
+    
+
+    public static List<AuditType> getAuditTypesForClient() {
+        List<AuditType> audits = new ArrayList<>();
+        audits.add(LOGGED_IN);
+        audits.add(LOGGED_OUT);
+        audits.add(SIGN_UP);
+        audits.add(ACCOUNT_CANCELLED);
         return audits;
     }
     

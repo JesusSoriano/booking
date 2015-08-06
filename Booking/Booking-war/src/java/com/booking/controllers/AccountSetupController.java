@@ -107,16 +107,17 @@ public class AccountSetupController implements Serializable {
             User newUser = userFacade.createNewUser(firstName, firstLastName, secondLastName, email, password, phone, 
                     addressLine, addressLine2, city, country, postcode, Role.USER, organisation);
 
-            try {
-                HttpServletRequest request = FacesUtil.getRequest();
-                request.logout();
-                request.login(newUser.getEmail(), password);
-            FacesUtil.setSessionAttribute(Constants.CURRENT_USER, newUser);
-            } catch (Exception ex) {
-                Logger.getLogger(AccountSetupController.class.getName()).log(Level.SEVERE, null, ex);
-                FacesUtil.addErrorMessage("registrationForm", "El usuario ha sido registrado, pero el inicio de sesión ha fallado. Inténtelo de nuevo desde la página de login.");
-                return "";
-            }
+            // login
+//            try {
+//                HttpServletRequest request = FacesUtil.getRequest();
+//                request.logout();
+//                request.login(newUser.getEmail(), password);
+////            FacesUtil.setSessionAttribute(Constants.CURRENT_USER, newUser);
+//            } catch (Exception ex) {
+//                Logger.getLogger(AccountSetupController.class.getName()).log(Level.SEVERE, null, ex);
+//                FacesUtil.addErrorMessage("registrationForm", "El usuario ha sido registrado, pero el inicio de sesión ha fallado. Inténtelo de nuevo desde la página de login.");
+//                return "";
+//            }
 
             //TODO: Send registration completed email?
 //            try {

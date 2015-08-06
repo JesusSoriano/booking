@@ -10,10 +10,9 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <h:form id="usersForm"> 
                 <h:message for="msg" id="msg" errorClass="msgError" infoClass="msgInfo" /> 
-                
-                <div class="sub-title-page sub-title-blue"> 
-                    <h3 class="page-title" style="margin-bottom: 40px;">#{txt['system_users']}</h3> 
-                </div> 
+
+                <h3 class="page-title">#{txt['system_users']} (#{usersController.users.size()})</h3> 
+
                 <h:panelGroup id="rows"> 
                     <script type="text/javascript">
                         $(document).ready(function () {

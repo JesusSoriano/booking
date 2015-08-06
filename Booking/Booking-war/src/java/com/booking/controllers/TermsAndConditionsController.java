@@ -3,6 +3,7 @@ package com.booking.controllers;
 import com.booking.entities.User;
 import com.booking.enums.Role;
 import com.booking.facades.UserFacade;
+import com.booking.util.Constants;
 import com.booking.util.FacesUtil;
 import java.io.IOException;
 import java.io.Serializable;
@@ -53,32 +54,35 @@ public class TermsAndConditionsController implements Serializable {
      */
     public void TNCDone() {
         String outcome = "";
+        System.out.println("-------- tNcCheckVisible: " + tNcCheckVisible);
         if (tNcCheckVisible) {
+            System.out.println("-------- tncAccepted: " + tncAccepted);
             if (tncAccepted) {
+                System.out.println("-------- currentUser: " + currentUser);
                 if (currentUser != null) {
                     userFacade.setTermsVersionAccepted(currentUser);
+                    System.out.println("-------- setTermsVersionAccepted: " + true);
 
-//                    System.out.println("-------- 5");
-//                    // login
-//                    HttpServletRequest request = FacesUtil.getRequest();
-//                    try {
-//                        request.logout();
-//                    } catch (Exception ex) {
-//                        Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-//                    }
-//
-//                    try {
-//                        System.out.println("------ request");
-//                        request.getSession(true);
-//                        System.out.println("------- session");
-//                        request.login(currentUser.getEmail(), currentUser.getPassword());
-//                        System.out.println("------- login");
-//                        FacesUtil.setSessionAttribute(Constants.CURRENT_USER, currentUser);
-//                    } catch (Exception ex) {
-//                        Logger.getLogger(TermsAndConditionsController.class.getName()).log(Level.SEVERE, null, ex);
-//                        FacesUtil.addErrorMessage("TNCForm", "Lo sentimos, no ha sido posible iniciar sesión en este momento. Contáctanos si el problema persiste.");
-//                        return;
-//                    }
+                    // login
+                    HttpServletRequest request = FacesUtil.getRequest();
+                    try {
+                        request.logout();
+                    } catch (Exception ex) {
+                        Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
+                    try {
+                        System.out.println("------ request");
+                        request.getSession(true);
+                        System.out.println("------- session");
+                        request.login(currentUser.getEmail(), currentUser.getPassword());
+                        System.out.println("------- login");
+                        FacesUtil.setSessionAttribute(Constants.CURRENT_USER, currentUser);
+                    } catch (Exception ex) {
+                        Logger.getLogger(TermsAndConditionsController.class.getName()).log(Level.SEVERE, null, ex);
+                        FacesUtil.addErrorMessage("TNCForm", "Lo sentimos, no ha sido posible iniciar sesión en este momento. Contáctanos si el problema persiste.");
+                        return;
+                    }
 
                     outcome = homePage();
                 } else {
@@ -92,7 +96,9 @@ public class TermsAndConditionsController implements Serializable {
         }
 
         try {
+            System.out.println("----- redirect?: " + outcome);
             FacesUtil.redirectTo(outcome);
+            System.out.println("----- redirected");
         } catch (IOException ex) {
             Logger.getLogger(TermsAndConditionsController.class.getName()).log(Level.SEVERE, null, ex);
         }

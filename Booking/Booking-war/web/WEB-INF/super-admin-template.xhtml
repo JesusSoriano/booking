@@ -20,29 +20,36 @@
 
                             <div id="navigation">
                                 <ul id="nav" class="container">
-                                    <li><span class="dashboard-bg"></span><a href="home.xhtml">#{txt['m_home']}</a></li>
-                                    <li class="dropdown-li"><span class="transactions-bg"></span><a>#{txt['m_bookings']}</a>
+                                    <li><a href="home.xhtml">#{txt['m_home']}</a></li>
+                                    <li class="dropdown-li"><a>#{txt['m_bookings']}</a>
                                         <ul class="dropdown">
-                                            <li><span class="transactions-bg"></span><a href="bookings.xhtml">#{txt['m_calendar']}</a></li>
-                                            <li><span class="transactions-bg"></span><a href="#">#{txt['m_booking']}</a></li>
+                                            <li><a href="bookings.xhtml">#{txt['m_calendar']}</a></li>
+                                            <li><a href="#">#{txt['m_booking']}</a></li>
                                         </ul>
                                     </li>
-                                    <li class="dropdown-li"><span class="transactions-bg"></span><a>#{txt['m_management']}</a>
+                                    <li class="dropdown-li"><a>#{txt['m_management']}</a>
                                         <ul class="dropdown">
-                                            <li><span class="transactions-bg"></span><a href="users.xhtml">#{txt['m_users']}</a></li>
-                                            <li><span class="transactions-bg"></span><a href="admins.xhtml">#{txt['m_administrators']}</a></li>
-                                            <li><span class="transactions-bg"></span><a href="organisations.xhtml">#{txt['m_organisations']}</a></li>
-                                            <li><span class="transactions-bg"></span><a href="#">#{txt['m_services']}</a></li>
-                                            <li><span class="transactions-bg"></span><a href="#">#{txt['m_groups']}</a></li>
-                                            <li><span class="list-bg"></span><a href="audits.xhtml">#{txt['m_audits']}</a></li>
+                                            <li><a href="users.xhtml">#{txt['m_users']}</a></li>
+                                            <li><a href="admins.xhtml">#{txt['m_administrators']}</a></li>
+                                            <li><a href="organisations.xhtml">#{txt['m_organisations']}</a></li>
+                                            <li><a href="#">#{txt['m_services']}</a></li>
+                                            <li><a href="#">#{txt['m_groups']}</a></li>
+                                            <li><a href="audits.xhtml">#{txt['m_audits']}</a></li>
                                         </ul>
                                     </li>
-                                    <li class="dropdown-li"><span class="reports-bg"></span><a>#{txt['m_account']}</a>
+                                    <li class="dropdown-li"><a>#{txt['m_account']}</a>
                                         <ul class="dropdown">
-                                            <li><span class="transactions-bg"></span><a href="user-profile.xhtml">#{txt['m_profile']}</a></li>
-                                            <li><span class="list-bg"></span><a href="change-password.xhtml">#{txt['m_change_password']}</a></li>
-                                            <li><span class="profit-bg"></span><a href="mailbox.xhtml">#{txt['m_mailbox']}</a></li>
-                                            <li><span class="profit-bg"/><h:commandLink value="#{txt['m_logout']}" action="#{loginController.performLogout()}"/></li>
+                                            <li><a href="user-profile.xhtml">#{txt['m_profile']}</a></li>
+                                            <li><a href="change-password.xhtml">#{txt['m_change_password']}</a></li>
+                                            <li><a href="mailbox.xhtml">#{txt['m_mailbox']}</a></li>
+                                            <li><h:commandLink value="#{txt['m_logout']}" action="#{loginController.performLogout()}"/></li>
+                                        </ul>
+                                    </li>
+                                    <li class="dropdown-li"><a>#{txt['m_help']}</a>
+                                        <ul class="dropdown">
+                                            <li><a href="contact.xhtml">#{txt['m_contact']}</a></li>
+                                            <li><a href="terms-and-conditions.xhtml">#{txt['m_terms_and_conditions']}</a></li>
+                                            <li><a href="about.xhtml">#{txt['m_about']}</a></li>
                                         </ul>
                                     </li>
                                     <div class="clear"></div>

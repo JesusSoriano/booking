@@ -30,9 +30,10 @@ public class HomeController implements Serializable {
                 FacesUtil.redirectTo("/login.xhtml");
             }
 
-            if (!currentUser.getTermsVersionAccepted()) {
-                FacesUtil.redirectTo("/terms-and-conditions.xhtml");
-            }
+            // TODO: comprobar si esto hace falta (no se hace login, solo setAttribute antes de aceptar tNc
+//            if (!currentUser.getTermsVersionAccepted()) {
+//                FacesUtil.redirectTo("/terms-and-conditions.xhtml");
+//            }
         } catch (IOException ioEx) {
             Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ioEx);
         }

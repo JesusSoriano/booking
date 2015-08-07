@@ -9,12 +9,12 @@
     <h:form>
         <div class="row">
             <div class="col-xs-12 col-sm-6 col-md-6">
-                <h3>Redactar Email</h3>
+                <h3>#{txt['b_compose']}</h3>
 
                 <div class="row">
                     <table class="text-left margin-left-30" border="0" >
                         <tr>
-                            <td class="padding-right-30"><h:outputLabel for="messageReceiverSelect" value="Para: " /></td>
+                            <td class="padding-right-30"><h:outputLabel for="messageReceiverSelect" value="#{txt['to']}: " /></td>
                             <td><h:selectOneMenu id="messageReceiverSelect" value="#{messagesController.receiver}" >
                                     <f:selectItems value="#{messagesController.allUsersItems}" />
                                     <f:converter converterId="userConverter" />
@@ -23,23 +23,23 @@
                         </tr>
 
                         <tr>
-                            <td class="padding-right-30"> <h:outputLabel for="messageSubjectInput" value="Asunto: "  /></td>
-                            <td> <h:inputText id="messageSubjectInput" value="#{messagesController.subject}"  required="true" requiredMessage="Introduce el asunto" /><br/>
+                            <td class="padding-right-30"> <h:outputLabel for="messageSubjectInput" value="#{txt['subject']} "  /></td>
+                            <td> <h:inputText id="messageSubjectInput" value="#{messagesController.subject}"  required="true" requiredMessage="#{txt['introduce_subject']}" /><br/>
                                 <h:message for="messageSubjectInput" errorClass="msgError" infoClass="msgInfo"/>
                             </td>
                         </tr>
                         <tr><td>&emsp;</td></tr>
                         <tr>
                             <td>&emsp;</td>
-                            <td><p:editor id="messageBodyInput" value="#{messagesController.messageBody}" required="true" requiredMessage="Escribe un mensaje"/>
+                            <td><p:editor id="messageBodyInput" value="#{messagesController.messageBody}" required="true" requiredMessage="#{txt['write_message']}"/>
                                 <h:message for="messageBodyInput" errorClass="msgError" infoClass="msgInfo"/>
                             </td>
                         </tr>
                         <tr><td>&emsp;</td></tr>
                         <tr>
                             <td>&emsp;</td>
-                            <td> <h:commandButton value="Enviar" action="#{messagesController.sendMessage}" styleClass="btn btn-primary btn-main" style="margin-right:10px;"  />
-                                <p:commandButton value="Cancelar" action="#{messagesController.cancelMessage}" process="@this" styleClass="btn btn-primary btn-cancel" /></td>
+                            <td> <h:commandButton value="#{txt['b_send']}" action="#{messagesController.sendMessage()}" styleClass="btn btn-primary btn-main" style="margin-right:10px;"  />
+                                <p:commandButton value="#{txt['b_cancel']}" action="#{messagesController.cancelMessage()}" process="@this" styleClass="btn btn-primary btn-cancel" /></td>
                         </tr>
                     </table>
                 </div>

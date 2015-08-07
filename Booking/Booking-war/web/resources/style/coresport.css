@@ -569,6 +569,10 @@ a:hover {
     text-decoration: none;
 }
 
+.clear {
+    clear: both;
+}
+
 
 
 @media screen and (max-width:1200px) {

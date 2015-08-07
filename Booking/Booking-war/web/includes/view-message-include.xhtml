@@ -8,15 +8,15 @@
 
         <div class="row">
             <div class="col-xs-12 col-md-12">
-                <h3>Mensaje</h3>
+                <h3>#{txt['message']}</h3>
                 <br/>
 
                 <h:form id="mailForm">
-                    <h:button value="Redactar Email" outcome="compose-mail.jsf?faces-redirect=true" styleClass="btn btn-primary btn-main" style="margin-bottom:30px;" />
+                    <h:button value="#{txt['b_compose']}" outcome="compose-mail.jsf?faces-redirect=true" styleClass="btn btn-primary btn-main" style="margin-bottom:30px;" />
 
                     <div class="tabs">
-                        <h:button class="#{sessionScope.mailbox eq 'received' ? 'active-tab' : ''}" value="Bandeja de Entrada" outcome="mailbox.xhtmlfaces-redirect=true" />
-                        <h:button class="#{sessionScope.mailbox eq 'sent' ? 'active-tab' : ''}" value="Correo Enviado" outcome="sent-mail.jsf?faces-redirect=true" />
+                        <h:button class="#{sessionScope.mailbox eq 'received' ? 'active-tab' : ''}" value="#{txt['inbox']}" outcome="mailbox.xhtmlfaces-redirect=true" />
+                        <h:button class="#{sessionScope.mailbox eq 'sent' ? 'active-tab' : ''}" value="#{txt['sent_mail']}" outcome="sent-mail.jsf?faces-redirect=true" />
                     </div>
                     <h:message id="msg" for="msg" errorClass="msgError" infoClass="msgInfo" />
 
@@ -24,10 +24,10 @@
                         <h:panelGroup id="messageDisplay"  >
                             <div class="border-gray marging-bottom-10">
                                 <h:panelGrid columns="2" class="text-left" >
-                                    <h:outputText value="Asunto: " class="padding-right-30"/> <h:outputText value="#{sessionScope.messageSess.subject}" />
-                                    <h:outputText value="De: " class="padding-right-30" /> <h:outputText value="#{sessionScope.messageSess.sender.fullName}" />
-                                    <h:outputText value="Para: " class="padding-right-30" /> <h:outputText value="#{sessionScope.messageSess.receiver.fullName}" />
-                                    <h:outputText value="Recibido: " class="padding-right-30" /> <h:outputText value="#{sessionScope.messageSess.sentDate}">   <f:convertDateTime pattern="#{dateFormatController.dateWithTimeFormatString}" /> </h:outputText>
+                                    <h:outputText value="#{txt['subject']}: " class="padding-right-30"/> <h:outputText value="#{sessionScope.messageSess.subject}" />
+                                    <h:outputText value="#{txt['mail_from']}: " class="padding-right-30" /> <h:outputText value="#{sessionScope.messageSess.sender.fullName}" />
+                                    <h:outputText value="#{txt['mail_to']}: " class="padding-right-30" /> <h:outputText value="#{sessionScope.messageSess.receiver.fullName}" />
+                                    <h:outputText value="#{txt['date']}: " class="padding-right-30" /> <h:outputText value="#{sessionScope.messageSess.sentDate}">   <f:convertDateTime pattern="#{dateFormatController.dateWithTimeFormatString}" /> </h:outputText>
                                 </h:panelGrid>
                             </div>
                             <div class="border-gray" style="text-align: justify;">

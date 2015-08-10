@@ -21,7 +21,7 @@
                             <div class="login-box">
                                 <h:panelGroup rendered="#{infoController.infoType eq 'invalid-link'}">
                                     <h2>Enlace no válido</h2>
-                                    <div class="login-content">
+                                    <div class="main-content">
                                         <p>
                                             Lo sentimos, este link no es válido o ha expirado.
                                         </p>
@@ -30,7 +30,7 @@
 
                                 <h:panelGroup rendered="#{infoController.infoType eq 'valid-reset'}">
                                     <h2>Restablecer Contraseña</h2>
-                                    <div class="login-content">
+                                    <div class="main-content">
                                         <p>
                                             Tu contraseña ha sido restablecida. 
                                         </p>
@@ -42,7 +42,7 @@
 
                                 <h:panelGroup rendered="#{infoController.infoType eq 'password-reset'}">
                                     <h2>Email enviado</h2>
-                                    <div class="login-content">
+                                    <div class="main-content">
                                         <p>
                                             El enlace para restablecer tu contraseña ha sido enviado. Comprueba tu bandeja de entrada.
                                         </p>
@@ -54,7 +54,7 @@
 
                                 <h:panelGroup rendered="#{infoController.infoType eq 'session-expired'}">
                                     <h2>Sesión Expirada</h2>
-                                    <div class="login-content">
+                                    <div class="main-content">
                                         <p>
                                             Lo sentimos, tu sesión ha expirado. Accede nuevamente desde la <a href="/login.xhtml">página de inicio de sesión</a>.
                                         </p>
@@ -63,7 +63,7 @@
 
                                 <h:panelGroup rendered="#{infoController.infoType eq null}">
                                     <h2>Información</h2>
-                                    <div class="login-content">
+                                    <div class="main-content">
                                         <p>
                                             Para acceder al sistema, vaya a la <a href="/login.xhtml">página de inicio de sesión</a>.
                                         </p>

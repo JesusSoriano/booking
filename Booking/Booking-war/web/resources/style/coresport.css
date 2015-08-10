@@ -313,24 +313,23 @@ hr {
     padding: 0px 30px;
 }
 
-.login-content {
-    border:0px solid #dcdcdc;
+.main-content {
     padding:20px 3px;
 }
 
-.login-content .row {
+.main-content .row {
     margin-top:13px;
 }
 
-.login-content .loginlabel {
+.main-content .loginlabel {
     margin-top: 5px;
 }
 
-.login-content .row p {
+.main-content .row p {
     color:#323232;
 }
 
-.login-content .field-log p {
+.main-content .field-log p {
     font-weight: 400;
 }
 

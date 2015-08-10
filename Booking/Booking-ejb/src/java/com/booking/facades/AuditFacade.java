@@ -5,11 +5,13 @@ import com.booking.entities.Organisation;
 import com.booking.entities.User;
 import com.booking.enums.AuditType;
 import com.booking.enums.Role;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -43,62 +45,51 @@ public class AuditFacade extends AbstractFacade<Audit> {
         return audit;
     }
 
-    public List<Audit> findSuperAdminAudits(Date fromDate, Date toDate, Organisation organisation, AuditType selectedAuditType, User selectedUser) {
-        if (selectedUser != null) {
-            // TODO: realizados por selectedUser y los que la acción reacae en él
-            // TODO: filtrar por selectedUser y selectedAuditType (una misma query con if's)
-            return em.createQuery("SELECT a FROM Audit a WHERE a.organisation = :organisation AND a.user.userRole.role = :superAdmin AND a.createdDate BETWEEN :fromDate AND :toDate AND a.action = :selectedAuditType AND a.user = :selectedUser ORDER BY a.createdDate DESC").
-                    setParameter("organisation", organisation).
-                    setParameter("superAdmin", Role.SUPER_ADMIN).
-                    setParameter("fromDate", fromDate).
-                    setParameter("toDate", toDate).
-                    setParameter("selectedAuditType", selectedAuditType).
-                    setParameter("selectedUser", selectedUser).
-                    getResultList();
-        } else {
-            return em.createQuery("SELECT a FROM Audit a WHERE a.organisation = :organisation AND a.user.userRole.role = :superAdmin AND a.createdDate BETWEEN :fromDate AND :toDate AND a.action = :selectedAuditType ORDER BY a.createdDate DESC").
-                    setParameter("organisation", organisation).
-                    setParameter("superAdmin", Role.SUPER_ADMIN).
-                    setParameter("fromDate", fromDate).
-                    setParameter("toDate", toDate).
-                    setParameter("selectedAuditType", selectedAuditType).
-                    getResultList();
-        }
-    }
+    public List<Audit> findAllAudits(Date fromDate, Date toDate, Organisation organisation, AuditType selectedAuditType, User selectedUser, Role role) {
 
-    public List<Audit> findAdminAudits(Date fromDate, Date toDate, Organisation organisation, AuditType selectedAuditType, User selectedUser) {
+        boolean visibleUser = false;
+        String sqlString = "SELECT a FROM Audit a WHERE a.organisation = :organisation AND a.createdDate BETWEEN :fromDate AND :toDate";
+        if (selectedAuditType != null) {
+            sqlString += " AND a.action = :selectedAuditType";
+        }
         if (selectedUser != null) {
-            // TODO: realizados por selectedUser y los que la acción reacae en él
-            return em.createQuery("SELECT a FROM Audit a WHERE a.organisation = :organisation AND a.user.userRole.role = :superAdmin AND a.createdDate BETWEEN :fromDate AND :toDate AND a.action = :selectedAuditType AND a.user = :selectedUser ORDER BY a.createdDate DESC").
-                    setParameter("organisation", organisation).
-                    setParameter("superAdmin", Role.ADMIN).
-                    setParameter("fromDate", fromDate).
-                    setParameter("toDate", toDate).
-                    setParameter("selectedAuditType", selectedAuditType).
-                    setParameter("selectedUser", selectedUser).
-                    getResultList();
+        // Check if selected user is visible by the user regarding the user role (just in case user id is manually introduced in the url)
+            visibleUser = true;
+            Role userRole = selectedUser.getUserRole().getRole();
+            if (userRole != Role.USER && userRole != role) {
+                if (userRole == Role.SUPER_ADMIN) {
+                    visibleUser = false;
+                }
+            }
+        }
+        if (visibleUser) {
+            sqlString += " AND a.user = :selectedUser";
         } else {
-            return em.createQuery("SELECT a FROM Audit a WHERE a.organisation = :organisation AND a.user.userRole.role = :superAdmin AND a.createdDate BETWEEN :fromDate AND :toDate AND a.action = :selectedAuditType ORDER BY a.createdDate DESC").
-                    setParameter("organisation", organisation).
-                    setParameter("superAdmin", Role.SUPER_ADMIN).
-                    setParameter("fromDate", fromDate).
-                    setParameter("toDate", toDate).
-                    setParameter("selectedAuditType", selectedAuditType).
-                    getResultList();
+            sqlString += " AND a.user.userRole.role IN :roleList";
         }
-    }
+        sqlString += " ORDER BY a.createdDate DESC";
 
-    public List<Audit> findUserAudits(Date fromDate, Date toDate, Organisation organisation, AuditType selectedAuditType, User selectedUser) {
-        if (selectedUser != null) {
-            // TODO: realizados por selectedUser y los que la acción reacae en él
-            return em.createQuery("SELECT a FROM Audit a WHERE a.organisation = :organisation AND a.createdDate BETWEEN :fromDate AND :toDate AND a.action = :selectedAuditType AND a.user = :selectedUser ORDER BY a.createdDate DESC").
-                    setParameter("organisation", organisation).
-                    setParameter("fromDate", fromDate).
-                    setParameter("toDate", toDate).
-                    setParameter("selectedAuditType", selectedAuditType).
-                    setParameter("selectedUser", selectedUser).
-                    getResultList();
+        Query sqlQuery = em.createQuery(sqlString).
+                setParameter("organisation", organisation).
+                setParameter("fromDate", fromDate).
+                setParameter("toDate", toDate);
+        if (selectedAuditType != null) {
+            sqlQuery.setParameter("selectedAuditType", selectedAuditType);
         }
-        return null;
+        if (visibleUser) {
+            sqlQuery.setParameter("selectedUser", selectedUser);
+        } else {
+            List<Role> roleList = new ArrayList<>();
+            roleList.add(Role.USER);
+            if (!role.equals(Role.USER)) {
+                roleList.add(Role.ADMIN);
+            }
+            if (role.equals(Role.SUPER_ADMIN)) {
+                roleList.add(Role.SUPER_ADMIN);
+            }
+            sqlQuery.setParameter("roleList", roleList);
+        }
+
+        return sqlQuery.getResultList();
     }
 }

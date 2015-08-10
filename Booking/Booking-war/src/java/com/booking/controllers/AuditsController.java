@@ -11,6 +11,7 @@ import com.booking.util.DateService;
 import com.booking.util.FacesUtil;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -22,15 +23,14 @@ import javax.faces.model.SelectItem;
  *
  * @author Jesús Soriano
  */
-
 @ManagedBean
 public class AuditsController implements Serializable {
-    
+
     @EJB
     private UserFacade usersFacade;
     @EJB
     private AuditFacade auditFacade;
-    
+
     private List<Audit> auditList;
     private Role userRole;
     private Organisation organisation;
@@ -41,46 +41,52 @@ public class AuditsController implements Serializable {
     private Date fromDate;
     private Date toDate;
 
-    
     @PostConstruct
-    public void init () {
+    public void init() {
         User loggedUser = FacesUtil.getCurrentUser();
         userRole = loggedUser.getUserRole().getRole();
         organisation = FacesUtil.getCurrentOrganisation();
-        
+
         users = new ArrayList<>();
         users.add(new SelectItem(-1, "All"));
         auditTypes = new ArrayList<>();
         auditTypes.add(new SelectItem(null, "All"));
-        
+
         if (userRole == Role.SUPER_ADMIN) {
-            for (User u : usersFacade.findAllAdminsAndClientsOfOrganisation(organisation)) {
+            for (User u : usersFacade.findAllUsersOfOrganisation(organisation)) {
                 users.add(new SelectItem(u.getId(), u.getFullName()));
             }
-            
+
             for (AuditType at : AuditType.getAllAuditTypes()) {
                 auditTypes.add(new SelectItem(at.name(), at.name()));
             }
         } else if (userRole == Role.ADMIN) {
-            for (User u : usersFacade.findAllClientsOfOrganisation(organisation)) {
+            for (User u : usersFacade.findAllAdminsAndClientsOfOrganisation(organisation)) {
                 users.add(new SelectItem(u.getId(), u.getFullName()));
             }
-            
+
             for (AuditType at : AuditType.getAuditTypesForAdmin()) {
                 auditTypes.add(new SelectItem(at.name(), at.name()));
             }
         } else {
             selectedUserId = loggedUser.getId();
-            
+
             for (AuditType at : AuditType.getAuditTypesForClient()) {
                 auditTypes.add(new SelectItem(at.name(), at.name()));
             }
         }
-        
+
         fromDate = new Date();
         toDate = new Date();
+        
+        String userID = FacesUtil.getParameter("id");
+        if (userID != null) {
+            selectedUserId = Long.valueOf(userID);
+            fromDate = DateService.getDaysEarlier(new Date(), 7);
+            search();
+        }
     }
-    
+
     public void search() {
 
         fromDate = DateService.getDawnDay(fromDate);
@@ -90,14 +96,8 @@ public class AuditsController implements Serializable {
         if (selectedUserId >= 0) {
             selectedUser = usersFacade.findUserOfOrganisation(selectedUserId, organisation);
         }
-        
-        if (userRole == Role.SUPER_ADMIN) {
-            auditList = auditFacade.findSuperAdminAudits(fromDate, toDate, organisation, selectedAuditType, selectedUser);
-        } else if (userRole == Role.ADMIN) {
-            auditList = auditFacade.findAdminAudits(fromDate, toDate, organisation, selectedAuditType, selectedUser);
-        } else {
-            auditList = auditFacade.findUserAudits(fromDate, toDate, organisation, selectedAuditType, selectedUser);
-        }
+
+        auditList = auditFacade.findAllAudits(fromDate, toDate, organisation, selectedAuditType, selectedUser, userRole);
 
     }
 
@@ -148,5 +148,5 @@ public class AuditsController implements Serializable {
     public void setToDate(Date toDate) {
         this.toDate = toDate;
     }
-    
+
 }

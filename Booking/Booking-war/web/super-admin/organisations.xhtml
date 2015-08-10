@@ -17,7 +17,7 @@
 
                         <h:panelGroup id="rows"> 
                             <p:dataTable id="organisationsTable" value="#{organisationsController.organisations}" var="organisation" styleClass="common-table text-center" paginator="true" rows="10" paginatorPosition="bottom" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" 
-                                         rowsPerPageTemplate="10, 20, 50"> 
+                                         rowsPerPageTemplate="10, 20, 50" emptyMessage="#{txt['empty_records']}"> 
                                 <p:column headerText="Nombre" sortBy="#{organisation.name}"> 
                                     <h:outputText value="#{organisation.name}" /> 
                                 </p:column> 

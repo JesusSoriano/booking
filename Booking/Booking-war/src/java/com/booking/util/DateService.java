@@ -31,4 +31,9 @@ public class DateService implements Serializable {
         c1.set(Calendar.SECOND, 59);
         return c1.getTime();
     }
+
+    public static Date getDaysEarlier(Date date, int days) {
+        long DAY_IN_MS = 1000 * 60 * 60 * 24;
+        return new Date(date.getTime() - (7 * DAY_IN_MS));
+    }
 }

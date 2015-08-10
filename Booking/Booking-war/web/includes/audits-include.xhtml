@@ -6,125 +6,99 @@
                 xmlns:p="http://primefaces.org/ui" 
                 xmlns:c="http://java.sun.com/jsp/jstl/core"> 
 
-    <h:form id="auditsForm"> 
+    <h:form id="auditsForm">
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('#auditsForm\\:auditsTable .ui-paginator-rpp-options.ui-widget.ui-state-default.ui-corner-left')
+                        .each(function () {
+                            $(this).children().last().html('#{txt['all']}');
+                        });
+            });
+        </script>
 
         <h3>#{txt['audits']}</h3>
 
-        <div class="row"> 
-            <div class="grid-100"> 
+        <div class="main-content">
+            <div class="row">
+                <div class="col-xs-5 col-sm-3 col-md-2">
+                    #{txt['from']} 
+                </div>
+                <div class="col-xs-7 col-sm-9 col-md-10">
+                    <p:calendar id="fromDate" value="#{auditsController.fromDate}" showOn="button" styleClass="dropdownReportsL" pattern="#{dateFormatController.dateFormatString}" required="true" requiredMessage="#{txt['msg_please_select_the_from_date']}" /> 
+                    <br /> 
+                    <h:message for="fromDate" errorClass="fieldError" infoClass="fieldSuccess" /> 
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-5 col-sm-3 col-md-2">
+                    #{txt['to']} 
+                </div>
+                <div class="col-xs-7 col-sm-9 col-md-10">
+                    <p:calendar id="toDate" value="#{auditsController.toDate}" showOn="button" styleClass="dropdownReports" pattern="#{dateFormatController.dateFormatString}" required="true" requiredMessage="#{txt['msg_please_select_the_to_date']}" /> 
+                    <br /> 
+                    <h:message for="toDate" errorClass="fieldError" infoClass="fieldSuccess" /> 
+                </div>
+            </div>
+            <h:panelGroup> 
                 <div class="row"> 
-                    <div class="grid-75"> 
-                        <div class="grid-15 pad-h-10">
-                            #{txt['from']} 
-                        </div> 
-                        <div class="grid-75"> 
-                            <p:calendar id="fromDate" value="#{auditsController.fromDate}" showOn="button" styleClass="dropdownReportsL" pattern="#{dateFormatController.dateFormatString}" required="true" requiredMessage="#{txt['msg_please_select_the_from_date']}" /> 
-                            <h:message for="fromDate" errorClass="fieldError" infoClass="fieldSuccess" /> 
-                        </div> 
-                        <div class="grid-15 pad-h-10">
-                            #{txt['to']} 
-                        </div> 
-                        <div class="grid-75"> 
-                            <p:calendar id="toDate" value="#{auditsController.toDate}" showOn="button" styleClass="dropdownReports" pattern="#{dateFormatController.dateFormatString}" required="true" requiredMessage="#{txt['msg_please_select_the_to_date']}" /> 
-                            <br /> 
-                            <h:message for="toDate" errorClass="fieldError" infoClass="fieldSuccess" /> 
-                        </div> 
+                    <div class="col-xs-5 col-sm-3 col-md-2">
+                        #{txt['audit_type']}
+                    </div> 
+                    <div class="col-xs-7 col-sm-9 col-md-10">
+                        <h:selectOneMenu id="audit-type-select" value="#{auditsController.selectedAuditType}"> 
+                            <f:selectItems value="#{auditsController.auditTypes}" /> 
+                        </h:selectOneMenu> 
+                        <br/>
+                        <h:message for="audit-type-select" errorClass="fieldError" infoClass="fieldSuccess" /> 
                     </div> 
                 </div> 
-                <h:panelGroup> 
-                    <div class="row"> 
-                        <div class="grid-75"> 
-                            <div class="grid-15 pad-h-10"> 
-                                <h:outputLabel for="audit-type-select" value="#{txt['audit_type']}: " /> 
-                            </div> 
-                            <div class="grid-75"> 
-                                <h:selectOneMenu id="audit-type-select" value="#{auditsController.selectedAuditType}"> 
-                                    <f:selectItems value="#{auditsController.auditTypes}" /> 
-                                </h:selectOneMenu> 
-                            </div> 
-                            <div class="grid-100"> 
-                                <h:outputText value="" style="color: red" /> 
-                                <h:message for="audit-type-select" errorClass="fieldError" infoClass="fieldSuccess" /> 
-                            </div> 
-                        </div> 
-                    </div> 
-                </h:panelGroup> 
-            </div> 
-        </div> 
-
-        <!--        <h:panelGroup rendered="#{auditsController.userRole eq 'MANAGER' or auditsController.userRole eq 'BANK_ADMIN' 
-                                              or auditsController.userRole eq 'BRANCH_ADMIN' or auditsController.userRole eq 'AGENTS'}"> 
-                        <div class="row custom-style-grid"> 
-                            <div class="grid-75"> 
-                                <div class="grid-15 pad-h-10"> 
-                                    <h:outputLabel for="role-select" value="#{txt['role']}:  " /> 
-                                </div> 
-                                <div class="grid-75"> 
-                                    <h:selectOneMenu id="role-select" value="#{auditsController.selectedUserRole}"> 
-                                        <f:selectItems value="#{auditsController.userRoleList}" /> 
-                                    </h:selectOneMenu> 
-                                </div> 
-                                <div class="grid-100"> 
-                                    <h:outputText value="" style="color: red" /> 
-                                    <h:message for="role-select" errorClass="fieldError" infoClass="fieldSuccess" /> 
-                                </div> 
-                            </div> 
-                        </div> 
-                    </h:panelGroup> -->
-
-        <div class="row custom-style-grid"> 
-            <div class="grid-75"> 
-                <div class="grid-15 pad-h-10"> 
-                </div> 
-                <div class="grid-75"> 
-                    <h:commandButton action="#{auditsController.search()}" styleClass="submit green_button" value="#{txt['b_search']}" /> 
-                </div> 
-            </div> 
-        </div> 
-    </h:form> 
-    <div class="clear" style="margin-top:10px;"></div> 
-    <div class="paid-out-bottom"> 
-        <div class="sub-title-page sub-title-blue"> 
-            <h3>#{txt['records']}</h3> 
-        </div> 
-        <h:form id="transaction-form"> 
-            <h:panelGroup id="summary-panel"> 
-                <table class="common-table text-center"> 
-                    <thead> 
-                        <th>#{txt['date']}</th> 
-                        <th>#{txt['role']}</th> 
-                        <th>#{txt['name']}</th> 
-                        <th>#{txt['action']}</th> 
-                        <th>#{txt['object_id']}</th> 
-                        <th>#{txt['ip_address']}</th> 
-                    </thead> 
-                    <ui:repeat var="audit" value="#{auditsController.auditList}" varStatus="status"> 
-                        <tr class="${status.index % 2 == 1 ? 'firstRow' : 'secondRow'}"> 
-                            <td> 
-                                <h:outputText value="#{audit.createdDate}"> 
-                                    <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" /> 
-                                </h:outputText> </td> 
-                            <td> 
-                                <h:outputText value="#{audit.user.userRole.role}" /> </td> 
-                            <td> 
-                                <h:outputText value="#{audit.user.getFullName()}" /> </td> 
-                            <td> 
-                                <h:outputText value="#{audit.action}" /> </td> 
-                            <td> 
-                                <h:outputText value="#{audit.actionObjectId}" /> </td> 
-                            <td> 
-                                <h:outputText value="#{audit.ip}" /> </td> 
-                        </tr> 
-                    </ui:repeat> 
-                    <c:if test="#{auditsController.auditList eq null or auditsController.auditList.size() eq 0}"> 
-                        <tr> 
-                            <td colspan="8"> 
-                                <h:outputText value="#{txt['empty_records']}"></h:outputText> </td> 
-                        </tr> 
-                    </c:if> 
-                </table> 
-                <br /> 
             </h:panelGroup> 
-        </h:form> 
-    </div> 
+
+            <h:panelGroup rendered="#{auditsController.userRole eq 'ADMIN' or auditsController.userRole eq 'SUPER_ADMIN'}"> 
+                <div class="row"> 
+                    <div class="col-xs-5 col-sm-3 col-md-2">
+                        <h:outputText value="#{txt['user']}" />
+                    </div> 
+                    <div class="col-xs-7 col-sm-9 col-md-10">
+                        <h:selectOneMenu id="messageReceiverSelect" value="#{auditsController.selectedUserId}" >
+                            <f:selectItems value="#{auditsController.users}" />
+                            <!--<f:converter converterId="userConverter" />-->
+                        </h:selectOneMenu>
+                    </div> 
+                </div> 
+            </h:panelGroup> 
+
+            <div class="row">
+                <div class="col-xs-offset-5 col-xs-7 col-sm-offset-3 col-sm-9 col-md-offset-2 col-md-10">
+                    <h:commandButton action="#{auditsController.search()}" styleClass="btn btn-primary btn-main" value="#{txt['b_search']}" />  
+                </div>
+            </div>
+        </div>
+
+        <br/>
+
+        <p:dataTable id="auditsTable" value="#{auditsController.auditList}" var="audit" styleClass="common-table text-center" paginator="true" rows="20" paginatorPosition="bottom" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" 
+                     rowsPerPageTemplate="10, 20, 50, #{auditsController.auditList.size()}" rendered="#{auditsController.auditList ne null and auditsController.auditList.size() gt 0}" emptyMessage="#{txt['empty_records']}"> 
+            <p:column headerText="#{txt['date']}" sortBy="#{audit.createdDate}"> 
+                <h:outputText value="#{audit.createdDate}"> 
+                    <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" /> 
+                </h:outputText> 
+            </p:column> 
+            <p:column headerText="#{txt['role']}" sortBy="#{audit.user.userRole.role}"> 
+                <h:outputText value="#{audit.user.userRole.role}" />
+            </p:column> 
+            <p:column headerText="#{txt['name']}" sortBy="#{audit.user.getFullName()}"> 
+                <h:outputText value="#{audit.user.getFullName()}" />
+            </p:column> 
+            <p:column headerText="#{txt['action']}" sortBy="#{audit.action}"> 
+                <h:outputText value="#{audit.action}" />
+            </p:column> 
+            <p:column headerText="#{txt['object_id']}" sortBy="#{audit.actionObjectId}"> 
+                <h:outputText value="#{audit.actionObjectId}" />
+            </p:column> 
+            <p:column headerText="#{txt['ip_address']}" sortBy="#{audit.ip}"> 
+                <h:outputText value="#{audit.ip}" />
+            </p:column> 
+        </p:dataTable>
+    </h:form> 
 </ui:composition>

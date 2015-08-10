@@ -110,12 +110,12 @@ public class UserFacade extends AbstractFacade<User> {
     }
 
     public List<User> findAllUsersOfOrganisation(Organisation organisation) {
-        return em.createQuery("SELECT u FROM User u WHERE u.organisation = :organisation").
+        return em.createQuery("SELECT u FROM User u WHERE u.organisation = :organisation ORDER BY u.firstName ASC, u.firstLastName ASC").
                 setParameter("organisation", organisation).getResultList();
     }
 
     public User findUserOfOrganisation(long userId, Organisation organisation) {
-        return findUniqueResult(em.createQuery("SELECT u FROM User u WHERE u.id = :userId AND u.organisation = :organisation").
+        return findUniqueResult(em.createQuery("SELECT u FROM User u WHERE u.id = :userId AND u.organisation = :organisation ORDER BY u.firstName ASC, u.firstLastName ASC").
                 setParameter("userId", userId).
                 setParameter("organisation", organisation).getResultList());
     }

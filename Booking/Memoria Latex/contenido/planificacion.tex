@@ -1,0 +1,102 @@
+% !TEX encoding = UTF-8 Unicode
+% ------------------------------------------------------------------------------
+% Este fichero es parte de la plantilla LaTeX para la realización de Proyectos
+% Final de Grado, protegido bajo los términos de la licencia GFDL.
+% Para más información, la licencia completa viene incluida en el
+% fichero fdl-1.3.tex
+
+% Copyright (C) 2012 SPI-FM. Universidad de Cádiz
+% ------------------------------------------------------------------------------
+
+
+\section{Metodologí­a de desarrollo}
+
+Previamente al desarrollo de la aplicación web, se ha llevado a cabo el de la web pública de la empresa. Para ello, se ha realizado un diseño inicial de forma orientativa para su posterior desarrollo y pruebas de funcionamiento en diferentes dispositivos. Una vez finalizada, y al poder ser usada independientemente, se ha puesto en producción mientras se implementaba el área de cliente, la parte principal en la que se centrará el proyecto.
+\\
+
+Para el desarrollo de la mencionada aplicación web se ha usado un modelo incremental e iterativo. Primeramente se realizó un análisis de la aplicación en general y herramientas a utilizar para su desarrollo. A partir de ahí, se inicia el proceso de implementación del producto divido en varios ciclos, en los cuales se han ido añadiendo distintas funciones a la aplicación, obteniendo así una versión más completa al final de cada una de las fases. En cada una de ellas se analiza, diseña, implementa y prueba estas funcionalidades a añadir.
+\\
+
+A continuación, se describirá las tareas realizadas en cada uno de estos ciclos:
+
+\subsection{Primer Ciclo}
+
+Primero de todo, se ha estructurado la implementación del proyecto en distintos módulos. Una vez hecho esto, se ha configurado el servidor de aplicaciones y definido los distintos tipos de usuarios del sistema, implementando seguidamente el registro e identificación de usuarios, con manejo de sesiones y de errores.
+\\
+
+A su vez, se ha realizado el diseño general de la interfaz del software, que se ha aplicado a las pantallas de esta fase del desarrollo, como registro de usuario, inicio de sesión o la página de inicio una vez realizado el login, teniendo en cuenta que existen diferentes vistas de la interfaz dependiendo del tipo de usuario. \\
+Esta será multilenguaje, dando opción al usuario a elegir su lenguaje por defecto seleccionándolo en el menú desplegable para tal efecto.
+
+\subsection{Segundo Ciclo}
+
+En este segundo ciclo se ha implementado todo lo relacionado con la gestión de usuarios: vista y edición del perfil de los usuarios registrados, gestión de los mismos por parte de administradores, gestión de administradores por el super-administrador, comunicación entre todo tipo de usuario, histórico de acciones en el sistema, etc.
+
+\subsection{Tercer Ciclo}
+
+Este ciclo comprende la principal funcionalidad del sistema, la gestión de actividades y citas. Se ha desarrollado la creación de actividades, grupos, citas, etc., junto a consulta de los mismos, edición, altas, bajas... Siempre desde una interfaz intuitiva que incluye un calendario donde ver toda la actividad del usuario. 
+\\
+
+Es la parte más compleja e interesante del producto, ya que cumple el principal requisito funcional por el cual se ha realizado este proyecto.
+
+\subsection{Cuarto Ciclo}
+
+En este último ciclo se han añadido las funcionalidades restantes para la finalización del producto, como notificaciones, contacto o contenido de la página de inicio, por ejemplo. 
+
+
+\subsection{Quinto Ciclo: Pruebas}
+
+Finalmente, se han realizado las pruebas pertinentes del software y se ha procedido a subsanar los errores encontrados y llevar a cabo pequeñas mejoras. Aclarar que en cada ciclo se han realizado pruebas manuales de la parte correspondiente, por lo que esta fase final de pruebas se ha realizado sin mucha incidencia.
+
+
+\section{Planificación del proyecto}
+EstimaciÃ³n temporal y definiciÃ³n del calendario bÃ¡sico (hitos principales e iteraciones). Desarrollo de la planificaciÃ³n detallada, utilizando un diagrama de Gantt. Los diagramas de Gantt que se vean correctamente (girados y divididos si hace falta).\\
+
+Se debe incluir una comparaciÃ³n cuantitativa del tiempo y el esfuerzo realmente invertido frente al estimado y planificado. Estos datos pueden recogerse del sistema de gestiÃ³n de tareas empleado para el seguimiento del proyecto.
+
+\section{Organización}
+
+Respecto al desarrollo de la aplicación, he sido el único desarrollador, a la vez de testeador. La tutora del proyecto ha sido Lorena Gutiérrez Madroñal, guiándome en su proceso y asegurándose que cumplía los requisitos suficientes para que sea un proyecto completo. 
+\\
+
+En cuanto al cliente, los tres socios de \textsl{CoreSport} con los que he mantenido la comunicación durante el proceso de desarrollo, y posterior a este, han sido Ángel Soriano, Cristina Saucedo y Raúl Coca. Ellos serán los administradores del sistema, con opción de añadir algunos de los trabajadores restantes en el centro, como monitores de las clases, responsables de servicios externos o recepcionista. 
+\\
+
+El resto de usuarios del software serán los clientes de la empresa, que serán los usuarios finales del producto mediante previo registro.
+\\
+
+El hardware utilizado para el desarrollo ha sido el propio ordenador portátil del alumno, un MacBook Pro, sirviendo así de entorno de programación y pruebas mediante el uso del siguiente software: 
+
+\begin{itemize}
+\item \textbf{OS X Yosemite} (versión 10.10.3) como sistema operativo.
+\item \textbf{Glassfish} como servidor de aplicaciones local.
+\item \textbf{NetBeans} 8.0.2 como entorno de desarrollo.
+\item \textbf{pgAdmin3} como gestor y administrador de bases de datos, usando \textbf{PostgreSQL} como sistema de gestión.
+\item \textbf{Git} como sistema de control de versiones.
+\item \textbf{TeXShop} como editor de textos para la documentación en \textbf{LaTeX}.
+\end{itemize}
+
+
+\section{Costes}
+
+\textbf{TODO: Esta sección se realizará una vez finalizado el proyecto, para comprobar el tiempo empleado y hacer el coste acorde al mismo.}
+\\
+
+\textit{Estudio y presupuesto de los costes de los recursos (humanos y materiales) descritos anteriormente, necesarios para el proyecto.}
+
+\textit{Para el cálculo de costes de personal pueden consultarse las tablas salariales de la UCA para el personal técnico de apoyo contratado laboral \cite{paslaboral}, o bien otras más ajustadas a la realidad. El cálculo del coste del personal del proyecto debe hacerse en personas-mes, y luego hacer la correspondencia al coste monetario.}
+
+\section{Riesgos}
+
+Primeramente, tendremos en cuenta el riesgo del hardware. No sabemos cuál va a ser la vida de nuestro equipo en el que estamos desarrollando una aplicación, por lo que siempre debemos tener una copia de nuestro código para evitar posibles pérdidas de datos, ya sea por avería o rotura. Para ello, se ha utilizado \textit{Git}, un sistema de control de versiones que puede ser usado desde nuestro entorno de programación \textit{Netbeans}, brindando una herramienta esencial y sencilla de usar. Tendremos así nuestra implementación en un lugar seguro, además de beneficiarnos de las opciones que un control de versiones ofrece.
+\\
+
+\textbf{TODO: Riesgos del software, riesgos durante el desarrollo.}
+\\
+
+Una vez el producto esté en producción, su rendimiento dependerá de un servidor contratado, por lo que es un riesgo externo a tener en cuenta. Si el servidor bajo el que la aplicación esté funcionando falla, no se tendrá acceso a la misma. Este es un riesgo que no podemos controlar, y se confía en que la empresa encargada del mismo tome medidas de seguridad suficientes para que, en el caso de fallo, el servicio no sufra caída alguna. 
+
+
+\section{Aseguramiento de calidad}
+En esta secciÃ³n se incluirÃ¡n las actividades y tareas relacionadas con el aseguramiento de calidad a realizar durante el desarrollo del software. Se incluirÃ¡n los estÃ¡ndares, prÃ¡cticas y normas aplicables durante el desarrollo del software.\\
+
+TambiÃ©n, deberÃ¡n recogerse los diferentes tipos de revisiones, verificaciones y validaciones que se van a llevar a cabo, los criterios para la aceptaciÃ³n o rechazo de cada producto y los procedimientos para implementar acciones correctoras o preventivas.

@@ -1,0 +1,113 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+              xmlns:h="http://java.sun.com/jsf/html"
+              xmlns:ui="http://java.sun.com/jsf/facelets"
+              xmlns:f="http://java.sun.com/jsf/core"
+              xmlns:p="http://primefaces.org/ui">
+
+    <div class="row">        
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <h:form id="servicesForm"> 
+                <h:message for="msg" id="msg" errorClass="msgError" infoClass="msgInfo" /> 
+
+                <div class="row">
+                    <div class="col-xs-6 col-sm-6 col-md-6">
+                        <h3 class="page-title">#{txt['services']} (#{servicesController.services.size()})</h3> 
+                    </div>
+                    <div class="col-sm-offset-3 col-md-offset-3 col-xs-6 col-sm-3 col-md-3 text-right">
+                        <p:commandLink oncomplete="PF('newServiceDialog').show()" >
+                            <span class="btn btn-primary btn-block btn-main">#{txt['b_new_service']}</span>
+                        </p:commandLink>
+                    </div>
+                </div>
+
+                <h:panelGroup id="rows"> 
+                    <script type="text/javascript">
+                        $(document).ready(function () {
+                            $('#servicesForm\\:servicesTable .ui-paginator-rpp-options.ui-widget.ui-state-default.ui-corner-left')
+                                    .each(function () {
+                                        $(this).children().last().html('#{txt['all']}');
+                                    });
+                        });
+                    </script>
+
+                    <p:dataTable id="servicesTable" value="#{servicesController.services}" var="service" styleClass="common-table text-center" paginator="true" rows="20" paginatorPosition="bottom" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" 
+                                 rowsPerPageTemplate="10, 20, #{servicesController.services.size()}" emptyMessage="#{txt['empty_records']}"> 
+                        <p:column headerText="#{txt['name']}" sortBy="#{service.name}"> 
+                            <h:outputText value="#{service.name}" rendered="#{service.status ne 'SUSPENDED'}" /> 
+                            <h:outputText value="#{service.name}" rendered="#{service.status eq 'SUSPENDED'}" style="color:lightgray" /> 
+                        </p:column> 
+                        <p:column headerText="#{txt['description']}" sortBy="#{service.description}"> 
+                            <h:outputText value="#{service.description}" rendered="#{service.status ne 'SUSPENDED'}" /> 
+                            <h:outputText value="#{service.description}" rendered="#{service.status eq 'SUSPENDED'}" style="color:lightgray" /> 
+                        </p:column> 
+                        <p:column headerText="#{txt['created_date']}" sortBy="#{service.createdDate}"> 
+                            <h:outputText value="#{service.createdDate}" rendered="#{service.status ne 'SUSPENDED'}">
+                                <f:convertDateTime pattern="#{dateFormatController.dateWithTimeFormatString}" />
+                            </h:outputText>
+                            <h:outputText value="#{service.createdDate}" rendered="#{service.status eq 'SUSPENDED'}" style="color:lightgray" >
+                                <f:convertDateTime pattern="#{dateFormatController.dateWithTimeFormatString}" />
+                            </h:outputText>
+                        </p:column> 
+                        <p:column headerText="#{txt['organisation']}" sortBy="#{service.organisation.name}" rendered="#{servicesController.userRole eq 'SUPER_ADMIN'}"> 
+                            <h:outputText value="#{service.organisation.name}" rendered="#{service.status ne 'SUSPENDED'}" /> 
+                            <h:outputText value="#{service.organisation.name}" rendered="#{service.status eq 'SUSPENDED'}" style="color:lightgray" /> 
+                        </p:column> 
+                        <p:column headerText="#{txt['options']}"> 
+                            <p:commandLink onclick="#{servicesController.prepareService(service)}" oncomplete="PF('newServiceDialog').show()" >
+                                <h:graphicImage title="#{txt['cap_view']}" value="../resources/images/view.png" class="table-action" /> 
+                            </p:commandLink>
+                            <h:link outcome="edit-service.xhtml?faces-redirect=true&amp;service=#{service.id}"> 
+                                <h:graphicImage title="#{txt['cap_edit']}" value="../resources/images/edit_user.png" class="table-action" /> 
+                            </h:link> 
+                            <h:commandLink action="#{servicesController.activateService(service)}" rendered="#{service.status eq 'SUSPENDED'}"> 
+                                <h:graphicImage title="#{txt['cap_activate']}" value="../resources/images/activate_user.png" class="table-action" /> 
+                            </h:commandLink> 
+                            <h:commandLink action="#{servicesController.deactivateService(service)}" rendered="#{service.status eq 'ACTIVATED'}"> 
+                                <h:graphicImage title="#{txt['cap_suspend']}" value="../resources/images/suspend_user.png" class="table-action" /> 
+                            </h:commandLink> 
+                        </p:column> 
+                    </p:dataTable>
+                </h:panelGroup> 
+            </h:form>
+
+
+            <h:form enctype="multipart/form-data" id="newServiceForm">
+                <p:dialog id="newServiceDialog" widgetVar="newServiceDialog" header="#{txt['create_new_service']}" resizable="false"
+                          closable="true">
+                    <h:panelGroup id="newServiceGroup" >
+                        <table border="0" cellspacing="10" class="dialogTable">
+                            <tr>
+                                <td>#{txt['name']}:</td>
+                                <td>
+                                    <h:inputText id="newServiceName" value="#{servicesController.newServiceName}" required="true" requiredMessage="Please enter the name of the new service"/>
+                                    <br/>
+                                    <h:message for="newServiceName" styleClass="loginError" errorStyle="color :red" infoStyle="color : green"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>#{txt['description']}:</td>
+                                <td>
+                                    <h:inputTextarea id="newServiceDescription" value="#{servicesController.newServiceDescription}" required="true" requiredMessage="Please enter the description of the new service"/>
+                                    <br/>
+                                    <h:message for="newServiceDescription" styleClass="loginError" errorStyle="color :red" infoStyle="color : green"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>&emsp;</td>
+                                <td>
+                                    <h:commandButton class="btn btn-primary btn-gray" value="#{txt['create_service']}" action="#{servicesController.createNewService()}" />
+                                </td>
+                            </tr>
+                        </table>
+                    </h:panelGroup>
+                </p:dialog>
+            </h:form>
+
+            <!--            <h:form>
+                            <p:remoteCommand name="post_service_dialog_open" actionListener="#{servicesController.prepareNewService()}" update=":newServiceForm:newServiceGroup" />
+                        </h:form>-->
+        </div>
+    </div>
+</ui:component>

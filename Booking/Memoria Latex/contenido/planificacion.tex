@@ -40,7 +40,7 @@ Es la parte más compleja e interesante del producto, ya que cumple el principal
 
 \subsection{Cuarto Ciclo}
 
-En este último ciclo se han añadido las funcionalidades restantes para la finalización del producto, como notificaciones, contacto o contenido de la página de inicio, por ejemplo. 
+En este último ciclo de implementación se han añadido las funcionalidades restantes para la finalización del producto, como notificaciones, contacto o contenido de la página de inicio, por ejemplo. 
 
 
 \subsection{Quinto Ciclo: Pruebas}
@@ -49,9 +49,11 @@ Finalmente, se han realizado las pruebas pertinentes del software y se ha proced
 
 
 \section{Planificación del proyecto}
-EstimaciÃ³n temporal y definiciÃ³n del calendario bÃ¡sico (hitos principales e iteraciones). Desarrollo de la planificaciÃ³n detallada, utilizando un diagrama de Gantt. Los diagramas de Gantt que se vean correctamente (girados y divididos si hace falta).\\
 
-Se debe incluir una comparaciÃ³n cuantitativa del tiempo y el esfuerzo realmente invertido frente al estimado y planificado. Estos datos pueden recogerse del sistema de gestiÃ³n de tareas empleado para el seguimiento del proyecto.
+\textit{Estimación temporal y definición del calendario básico (hitos principales e iteraciones). Desarrollo de la planificación detallada, utilizando un diagrama de Gantt. Los diagramas de Gantt que se vean correctamente (girados y divididos si hace falta).}\\
+
+\textit{Se debe incluir una comparación cuantitativa del tiempo y el esfuerzo realmente invertido frente al estimado y planificado. Estos datos pueden recogerse del sistema de gestión de tareas empleado para el seguimiento del proyecto.}
+
 
 \section{Organización}
 
@@ -71,7 +73,7 @@ El hardware utilizado para el desarrollo ha sido el propio ordenador portátil d
 \item \textbf{Glassfish} como servidor de aplicaciones local.
 \item \textbf{NetBeans} 8.0.2 como entorno de desarrollo.
 \item \textbf{pgAdmin3} como gestor y administrador de bases de datos, usando \textbf{PostgreSQL} como sistema de gestión.
-\item \textbf{Git} como sistema de control de versiones.
+\item \textbf{Subversion} como sistema de control de versiones.
 \item \textbf{TeXShop} como editor de textos para la documentación en \textbf{LaTeX}.
 \end{itemize}
 
@@ -85,18 +87,23 @@ El hardware utilizado para el desarrollo ha sido el propio ordenador portátil d
 
 \textit{Para el cálculo de costes de personal pueden consultarse las tablas salariales de la UCA para el personal técnico de apoyo contratado laboral \cite{paslaboral}, o bien otras más ajustadas a la realidad. El cálculo del coste del personal del proyecto debe hacerse en personas-mes, y luego hacer la correspondencia al coste monetario.}
 
+
 \section{Riesgos}
 
-Primeramente, tendremos en cuenta el riesgo del hardware. No sabemos cuál va a ser la vida de nuestro equipo en el que estamos desarrollando una aplicación, por lo que siempre debemos tener una copia de nuestro código para evitar posibles pérdidas de datos, ya sea por avería o rotura. Para ello, se ha utilizado \textit{Git}, un sistema de control de versiones que puede ser usado desde nuestro entorno de programación \textit{Netbeans}, brindando una herramienta esencial y sencilla de usar. Tendremos así nuestra implementación en un lugar seguro, además de beneficiarnos de las opciones que un control de versiones ofrece.
+Primeramente, tendremos en cuenta el riesgo del hardware. No sabemos cuál va a ser la vida de nuestro equipo en el que estamos desarrollando una aplicación, por lo que siempre debemos tener una copia de nuestro código para evitar posibles pérdidas de datos, ya sea por avería o rotura. Para ello, se ha utilizado \textit{Subversion}, un sistema de control de versiones que puede ser usado desde nuestro entorno de programación \textit{Netbeans}, brindando una herramienta esencial y sencilla de usar. Tendremos así nuestra implementación en un lugar seguro, además de beneficiarnos de las opciones que un control de versiones ofrece.
 \\
 
-\textbf{TODO: Riesgos del software, riesgos durante el desarrollo.}
+Uno de los posibles riesgos que no podremos controlar es el cambio de requisitos durante el desarrollo del proyecto. Es común que los clientes cambien o añadan funcionalidades al sistema cuando van viendo algunos resultados, probando prototipos o simplemente puntos que se les haya pasado anteriormente. \\
+Estos cambios conllevarán un tiempo extra en el desarrollo del producto. De aquí la importancia de la fase de elicitación de requisitos y la comunicación con el cliente, para tratar de obtener unos requisitos bien definidos desde el principio y evitar así posibles cambios o nuevas funciones a añadir.
+\\
+
+Otro riesgo potencial en la implementación del software es la actualización de las versiones de la tecnología que estemos usando. Es decir, cuando usamos librerías, frameworks, APIs, etc., estamos expuestos a que estos se actualicen, o incluso dejen de tener soporte. Al ser, de nuevo, un factor externo al desarrollo, no se podrán tomar grandes medidas de prevención, pero sí se puede mejorar con una buena decisión respecto qué tecnologías usar en nuestro desarrollo. \\
+En el desarrollo del software, la inmensa mayoría de las veces existirán diversas formas de conseguir un objetivo. De aquí que tengamos la opción de decidir qué lenguaje de programación, librerías, frameworks, APIs... usar. Aún así, si nos vemos en el hecho de tener que realizar cambios en alguna de ellos durante o después del desarrollo, el impacto no debería ser muy grande con una implementación limpia y bien construida. 
+\\
+
+Un ejemplo clásico de riesgo podría ser la estimación del tiempo de desarrollo del proyecto. Es común que este sea menor al tiempo real de desarrollo y, como consecuencia, existe un incremento de recursos: el tiempo de entrega del proyecto, gastos extras -ya sea para el cliente o el equipo de desarrollo- o pérdida de beneficios para negocios que no obtienen su software a tiempo. En este caso, un retraso en la estimación del tiempo no traería grandes consecuencias, los usuarios y administradores del centro seguirán llevando la misma rutina de gestión hasta que el producto esté listo para pasar a fase de producción.
 \\
 
 Una vez el producto esté en producción, su rendimiento dependerá de un servidor contratado, por lo que es un riesgo externo a tener en cuenta. Si el servidor bajo el que la aplicación esté funcionando falla, no se tendrá acceso a la misma. Este es un riesgo que no podemos controlar, y se confía en que la empresa encargada del mismo tome medidas de seguridad suficientes para que, en el caso de fallo, el servicio no sufra caída alguna. 
 
 
-\section{Aseguramiento de calidad}
-En esta secciÃ³n se incluirÃ¡n las actividades y tareas relacionadas con el aseguramiento de calidad a realizar durante el desarrollo del software. Se incluirÃ¡n los estÃ¡ndares, prÃ¡cticas y normas aplicables durante el desarrollo del software.\\
-
-TambiÃ©n, deberÃ¡n recogerse los diferentes tipos de revisiones, verificaciones y validaciones que se van a llevar a cabo, los criterios para la aceptaciÃ³n o rechazo de cada producto y los procedimientos para implementar acciones correctoras o preventivas.

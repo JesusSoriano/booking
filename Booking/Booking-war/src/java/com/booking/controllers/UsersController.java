@@ -10,6 +10,8 @@ import com.booking.util.Constants;
 import com.booking.util.FacesUtil;
 import java.io.Serializable;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -39,11 +41,6 @@ public class UsersController implements Serializable {
         admins = userFacade.findAllAdminsOfOrganisation(organisation);
     }
 
-    public String viewPayCenterAdminDetails(User user) {
-        FacesUtil.setSessionAttribute("agent", user);
-        return "user-profile.xhtml" + Constants.FACES_REDIRECT;
-    }
-
     public String activateUser(User user, String pageName) {
         userFacade.activateUser(user);
         FacesUtil.addSuccessMessage(pageName + "Form:msg", "El usuario ha sido activado correctamente.");
@@ -53,7 +50,7 @@ public class UsersController implements Serializable {
             String ipAddress = FacesUtil.getRequest().getRemoteAddr();
             auditFacade.createAudit(pageName.equals("admins") ? AuditType.ACTIVATE_ADMIN : AuditType.ACTIVATE_USER, loggedUser, ipAddress, user.getId(), organisation);
         } catch (Exception e) {
-            e.printStackTrace();
+            Logger.getLogger(UsersController.class.getName()).log(Level.SEVERE, null, e);
         }
 
         return pageName + ".xhtml" + Constants.FACES_REDIRECT;
@@ -68,7 +65,7 @@ public class UsersController implements Serializable {
             String ipAddress = FacesUtil.getRequest().getRemoteAddr();
             auditFacade.createAudit(pageName.equals("admins") ? AuditType.SUSPEND_ADMIN : AuditType.SUSPEND_USER, loggedUser, ipAddress, user.getId(), organisation);
         } catch (Exception e) {
-            e.printStackTrace();
+            Logger.getLogger(UsersController.class.getName()).log(Level.SEVERE, null, e);
         }
 
         return pageName + ".xhtml" + Constants.FACES_REDIRECT;

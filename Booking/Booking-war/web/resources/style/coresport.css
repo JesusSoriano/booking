@@ -395,6 +395,15 @@ hr {
 }
 
 
+.dialogTable {
+    padding: 15px;
+    text-align: left;
+}
+.dialogTable>tbody>tr>td {
+    padding: 5px 0px;
+}
+
+
 table {
     text-align: center;
 }

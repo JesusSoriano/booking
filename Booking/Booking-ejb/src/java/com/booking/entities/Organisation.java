@@ -38,7 +38,7 @@ public class Organisation implements Serializable {
     @Column(name = "icon")
     private String icon;
     @Column(name = "created_date")
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date createdDate;
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
@@ -53,10 +53,6 @@ public class Organisation implements Serializable {
 
     public long getId() {
         return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getName() {

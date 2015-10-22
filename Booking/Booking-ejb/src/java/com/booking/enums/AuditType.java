@@ -14,6 +14,9 @@ public enum AuditType {
     LOGGED_OUT("ha salido del sistema"),
     SIGN_UP("se ha registrado"),
     ACCOUNT_CANCELLED("se ha dado de baja"),
+    CREATE_SERVICE("ha creado un servicio"),
+    SUSPEND_SERVICE("ha suspendido un servicio"),
+    ACTIVATE_SERVICE("ha activado un servicio"),
     SUSPEND_USER("ha suspendido un usuario"),
     ACTIVATE_USER("ha activado un usuario"),
     SUSPEND_ADMIN("ha suspendido un administrador"),
@@ -43,6 +46,9 @@ public enum AuditType {
         audits.add(ACTIVATE_ADMIN);
         audits.add(SUSPEND_ORGANISATION);
         audits.add(ACTIVATE_ORGANISATION);
+        audits.add(CREATE_SERVICE);
+        audits.add(ACTIVATE_SERVICE);
+        audits.add(SUSPEND_SERVICE);
         return audits;
     }
 
@@ -54,6 +60,9 @@ public enum AuditType {
         audits.add(ACCOUNT_CANCELLED);
         audits.add(SUSPEND_USER);
         audits.add(ACTIVATE_USER);
+        audits.add(CREATE_SERVICE);
+        audits.add(ACTIVATE_SERVICE);
+        audits.add(SUSPEND_SERVICE);
         return audits;
     }
     

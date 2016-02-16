@@ -16,7 +16,7 @@
                         <h3 class="page-title">#{txt['services']} (#{servicesController.services.size()})</h3> 
                     </div>
                     <div class="col-sm-offset-3 col-md-offset-3 col-xs-6 col-sm-3 col-md-3 text-right">
-                        <p:commandLink oncomplete="PF('newServiceDialog').show()" >
+                        <p:commandLink action="#{servicesController.prepareNewService()}" update=":newServiceForm:newServiceGroup" oncomplete="PF('newServiceDialog').show()" >
                             <span class="btn btn-primary btn-block btn-main">#{txt['b_new_service']}</span>
                         </p:commandLink>
                     </div>
@@ -55,12 +55,13 @@
                             <h:outputText value="#{service.organisation.name}" rendered="#{service.status eq 'SUSPENDED'}" style="color:lightgray" /> 
                         </p:column> 
                         <p:column headerText="#{txt['options']}"> 
-                            <p:commandLink onclick="#{servicesController.prepareService(service)}" oncomplete="PF('newServiceDialog').show()" >
+<!--                            <p:commandLink onclick="#{servicesController.prepareService(service)}" oncomplete="PF('newServiceDialog').show()" >
                                 <h:graphicImage title="#{txt['cap_view']}" value="../resources/images/view.png" class="table-action" /> 
                             </p:commandLink>
-                            <h:link outcome="edit-service.xhtml?faces-redirect=true&amp;service=#{service.id}"> 
+                            -->                            
+                            <p:commandLink action="#{servicesController.prepareService(service)}" update=":newServiceForm:newServiceGroup" oncomplete="PF('newServiceDialog').show()" >
                                 <h:graphicImage title="#{txt['cap_edit']}" value="../resources/images/edit_user.png" class="table-action" /> 
-                            </h:link> 
+                            </p:commandLink> 
                             <h:commandLink action="#{servicesController.activateService(service)}" rendered="#{service.status eq 'SUSPENDED'}"> 
                                 <h:graphicImage title="#{txt['cap_activate']}" value="../resources/images/activate_user.png" class="table-action" /> 
                             </h:commandLink> 
@@ -76,7 +77,7 @@
             <h:form enctype="multipart/form-data" id="newServiceForm">
                 <p:dialog id="newServiceDialog" widgetVar="newServiceDialog" header="#{txt['create_new_service']}" resizable="false"
                           closable="true">
-                    <h:panelGroup id="newServiceGroup" >
+                    <h:panelGroup id="newServiceGroup">
                         <table border="0" cellspacing="10" class="dialogTable">
                             <tr>
                                 <td>#{txt['name']}:</td>
@@ -97,7 +98,13 @@
                             <tr>
                                 <td>&emsp;</td>
                                 <td>
-                                    <h:commandButton class="btn btn-primary btn-gray" value="#{txt['create_service']}" action="#{servicesController.createNewService()}" />
+                                    <h:commandButton class="btn btn-primary btn-gray" value="#{txt['b_create_service']}" action="#{servicesController.createNewService()}" rendered="#{servicesController.newGroup}"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>&emsp;</td>
+                                <td>
+                                    <h:commandButton class="btn btn-primary btn-gray" value="#{txt['b_save_changes']}" action="#{servicesController.updateService()}" rendered="#{!servicesController.newGroup}"/>
                                 </td>
                             </tr>
                         </table>
@@ -105,9 +112,9 @@
                 </p:dialog>
             </h:form>
 
-            <!--            <h:form>
-                            <p:remoteCommand name="post_service_dialog_open" actionListener="#{servicesController.prepareNewService()}" update=":newServiceForm:newServiceGroup" />
-                        </h:form>-->
+            <h:form>
+                <p:remoteCommand name="post_service_dialog_open" actionListener="#{servicesController.prepareNewService()}" update=":newServiceForm:newServiceGroup" />
+            </h:form>
         </div>
     </div>
 </ui:component>

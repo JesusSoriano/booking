@@ -11,7 +11,6 @@ import com.booking.util.DateService;
 import com.booking.util.FacesUtil;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;

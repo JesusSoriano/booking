@@ -5,6 +5,7 @@ import com.booking.entities.Organisation;
 import com.booking.entities.User;
 import com.booking.enums.AuditType;
 import com.booking.enums.Role;
+import com.booking.exceptions.ServiceAlreadyExistsException;
 import com.booking.facades.AuditFacade;
 import com.booking.facades.ServiceFacade;
 import com.booking.util.Constants;
@@ -30,7 +31,9 @@ public class ServicesController implements Serializable {
     private User loggedUser;
     private Organisation organisation;
     private String newServiceName;
+    private String oldServiceName;
     private String newServiceDescription;
+    private boolean newGroup;
 
     public ServicesController() {
     }
@@ -40,6 +43,7 @@ public class ServicesController implements Serializable {
         loggedUser = FacesUtil.getCurrentUser();
         organisation = FacesUtil.getCurrentOrganisation();
 
+        newGroup = true;
         services = serviceFacade.findAllServicesOfOrganisation(organisation);
     }
 
@@ -74,6 +78,7 @@ public class ServicesController implements Serializable {
     }
 
     public String createNewService() {
+            System.out.println("-------- CREATE CONTROLLER");
         RequestContext context = RequestContext.getCurrentInstance();
         try {
             Service newService = serviceFacade.createNewService(newServiceName, newServiceDescription, organisation);
@@ -93,12 +98,41 @@ public class ServicesController implements Serializable {
         return "services.xhtml" + Constants.FACES_REDIRECT;
     }
 
+    public String updateService() {
+            System.out.println("-------- UPDATE CONTROLLER");
+        RequestContext context = RequestContext.getCurrentInstance();
+        try {
+            Service updatedService = serviceFacade.updateService(oldServiceName, newServiceName, newServiceDescription, organisation);
+            context.execute("PF('newServiceDialog').hide();");
+            if (updatedService != null) {
+                FacesUtil.addSuccessMessage("servicesForm:msg", "El servicio ha sido actualizado correctamente.");
+            } else {
+                FacesUtil.addErrorMessage("servicesForm:msg", "Lo sentimos, no ha sido posible editar el servicio.");
+            }
+        } catch (Exception e) {
+            FacesUtil.addErrorMessage("servicesForm:msg", "Lo sentimos, no ha sido posible editar el servicio.");
+            Logger.getLogger(ServicesController.class.getName()).log(Level.SEVERE, null, e);
+            return "";
+        } 
+
+        newServiceName = "";
+        newServiceDescription = "";
+        return "services.xhtml" + Constants.FACES_REDIRECT;
+    }
+
     public void prepareService(Service service) {
-        newServiceName = service.getName();
+            System.out.println("-------- PREPARE EDIT");
+        oldServiceName = service.getName();
+        newServiceName = oldServiceName;
         newServiceDescription = service.getDescription();
+        newGroup = false;
     }
 
     public void prepareNewService() {
+            System.out.println("-------- PREPARE NEW");
+        newServiceName = "";
+        newServiceDescription = "";
+        newGroup = true;
     }
 
     public List<Service> getServices() {
@@ -123,5 +157,9 @@ public class ServicesController implements Serializable {
 
     public void setNewServiceDescription(String newServiceDescription) {
         this.newServiceDescription = newServiceDescription;
+    }
+
+    public boolean isNewGroup() {
+        return newGroup;
     }
 }

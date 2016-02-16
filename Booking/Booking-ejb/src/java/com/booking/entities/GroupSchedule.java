@@ -4,10 +4,13 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -25,8 +28,10 @@ public class GroupSchedule implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private long id;
-    @JoinColumn(name = "group", referencedColumnName = "id")
-    private Group group;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "activity_group", referencedColumnName = "id")
+    private ActivityGroup activityGroup;
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "schedule", referencedColumnName = "id")
     private Schedule schedule;
 
@@ -37,12 +42,12 @@ public class GroupSchedule implements Serializable {
         return id;
     }
 
-    public Group getGroup() {
-        return group;
+    public ActivityGroup getActivityGroup() {
+        return activityGroup;
     }
 
-    public void setGroup(Group group) {
-        this.group = group;
+    public void setActivityGroup(ActivityGroup activityGroup) {
+        this.activityGroup = activityGroup;
     }
 
     public Schedule getSchedule() {

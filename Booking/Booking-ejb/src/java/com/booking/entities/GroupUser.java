@@ -32,8 +32,8 @@ public class GroupUser implements Serializable {
     @Column(name = "id")
     private long id;
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REMOVE, CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinColumn(name = "service_group", referencedColumnName = "id")
-    private Group serviceGroup;
+    @JoinColumn(name = "activity_group", referencedColumnName = "id")
+    private ActivityGroup activityGroup;
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REMOVE, CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "group_user", referencedColumnName = "id")
     private User groupUser;
@@ -48,12 +48,12 @@ public class GroupUser implements Serializable {
         return id;
     }
 
-    public Group getServiceGroup() {
-        return serviceGroup;
+    public ActivityGroup getActivityGroup() {
+        return activityGroup;
     }
 
-    public void setServiceGroup(Group serviceGroup) {
-        this.serviceGroup = serviceGroup;
+    public void setActivityGroup(ActivityGroup activityGroup) {
+        this.activityGroup = activityGroup;
     }
 
     public User getGroupUser() {

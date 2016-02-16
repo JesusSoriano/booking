@@ -1,11 +1,15 @@
 package com.booking.entities;
 
+import com.booking.enums.Status;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,6 +18,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -21,7 +27,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "groups")
-public class Group implements Serializable {
+public class ActivityGroup implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -35,23 +41,29 @@ public class Group implements Serializable {
     @Column(name = "description")
     private String description;
     @Column(name = "maximum_users")
-    private String maximumUsers;
+    private int maximumUsers;
     @Column(name = "booked_places")
-    private String bookedPlaces;
+    private int bookedPlaces;
     @Column(name = "free_places")
-    private String freePlaces;
+    private int freePlaces;
     @Column(name = "days_a_week")
     private int daysAWeek;
+    @Column(name = "created_date")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createdDate;
+    @Column(name = "status")
+    @Enumerated(EnumType.STRING)
+    private Status status;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "organisation", referencedColumnName = "id")
     private Organisation organisation;
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "group", cascade = {CascadeType.REMOVE, CascadeType.PERSIST, CascadeType.MERGE})
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "activityGroup", cascade = {CascadeType.REMOVE, CascadeType.PERSIST, CascadeType.MERGE})
     private List<GroupSchedule> groupSchedules;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "service", referencedColumnName = "id")
     private Service service;
 
-    public Group() {
+    public ActivityGroup() {
     }
 
     public long getId() {
@@ -74,27 +86,27 @@ public class Group implements Serializable {
         this.description = description;
     }
 
-    public String getMaximumUsers() {
+    public int getMaximumUsers() {
         return maximumUsers;
     }
 
-    public void setMaximumUsers(String maximumUsers) {
+    public void setMaximumUsers(int maximumUsers) {
         this.maximumUsers = maximumUsers;
     }
 
-    public String getBookedPlaces() {
+    public int getBookedPlaces() {
         return bookedPlaces;
     }
 
-    public void setBookedPlaces(String bookedPlaces) {
+    public void setBookedPlaces(int bookedPlaces) {
         this.bookedPlaces = bookedPlaces;
     }
 
-    public String getFreePlaces() {
+    public int getFreePlaces() {
         return freePlaces;
     }
 
-    public void setFreePlaces(String freePlaces) {
+    public void setFreePlaces(int freePlaces) {
         this.freePlaces = freePlaces;
     }
 
@@ -128,5 +140,21 @@ public class Group implements Serializable {
 
     public void setService(Service service) {
         this.service = service;
+    }
+
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 }

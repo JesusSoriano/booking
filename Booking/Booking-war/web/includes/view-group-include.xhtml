@@ -1,0 +1,102 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+              xmlns:h="http://java.sun.com/jsf/html"
+              xmlns:ui="http://java.sun.com/jsf/facelets"
+              xmlns:f="http://java.sun.com/jsf/core"
+              xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="editGroupForm">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12">
+
+                <div class="main-content">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6 col-md-6">
+                            <div class="row"> 
+                                <div class="col-xs-4">
+                                    <h:outputText value="#{txt['service']}" />
+                                </div> 
+                                <div class="col-xs-8">
+                                    <h:outputText id="messageReceiverSelect" styleClass="form-control" value="#{editGroupController.currentGroup.service.name}" />
+                                </div> 
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-4">
+                                    <p>#{txt['name']}</p>
+                                </div>
+                                <div class="col-xs-8">
+                                    <h:outputText id="name" styleClass="form-control" value="#{editGroupController.currentGroup.name}" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-4">
+                                    <p>#{txt['description']}</p>
+                                </div>
+                                <div class="col-xs-8">
+                                    <h:outputText id="description" styleClass="form-control" value="#{editGroupController.currentGroup.description}" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-4">
+                                    <p>#{txt['maximum_users']}</p>
+                                </div>
+                                <div class="col-xs-8">
+                                    <h:outputText id="maximumUsers" styleClass="form-control" value="#{editGroupController.currentGroup.maximumUsers}" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-6">
+                            <div class="row">
+                                <div class="col-xs-4">
+                                    <p>#{txt['days_per_week']}</p>
+                                </div>
+                                <div class="col-xs-8">
+                                    <h:outputText id="daysPerWeek" styleClass="form-control" value="#{editGroupController.currentGroup.daysPerWeek}"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-4">
+                                    <p>#{txt['days_of_week']}</p>
+                                </div>
+                                <div class="col-xs-8">
+                                    <h:outputText id="daysOfWeek" styleClass="form-control" value="#{editGroupController.currentGroup.daysOfWeek}" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-4">
+                                    <p>#{txt['starting_time']}</p>
+                                </div>
+                                <div class="col-xs-8">
+                                    <h:outputText id="startTime" styleClass="form-control" value="#{editGroupController.currentGroup.startTime}" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-4">
+                                    <p>#{txt['ending_time']}</p>
+                                </div>
+                                <div class="col-xs-8">
+                                    <h:outputText id="endTime" styleClass="form-control" value="#{editGroupController.currentGroup.endTime}" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-4">
+                                    <p>#{txt['group_frecuency']}</p>
+                                </div>
+                                <div class="col-xs-8">
+                                    <h:outputText styleClass="form-control" value="#{txt['repeat_weekly']}" rendered="#{editGroupController.currentGroup.weekly}" />
+                                    <h:outputText styleClass="form-control" value="#{txt['one_day_group']}" rendered="#{!editGroupController.currentGroup.weekly}" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <br/>
+                        <h:messages for="msg" id="msg"  styleClass="text-left" style="margin-top: 20px" errorClass="msgError" infoClass="msgInfo"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </h:form>
+</ui:component>

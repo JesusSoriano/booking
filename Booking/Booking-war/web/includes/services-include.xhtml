@@ -99,11 +99,6 @@
                                 <td>&emsp;</td>
                                 <td>
                                     <h:commandButton class="btn btn-primary btn-gray" value="#{txt['b_create_service']}" action="#{servicesController.createNewService()}" rendered="#{servicesController.newGroup}"/>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>&emsp;</td>
-                                <td>
                                     <h:commandButton class="btn btn-primary btn-gray" value="#{txt['b_save_changes']}" action="#{servicesController.updateService()}" rendered="#{!servicesController.newGroup}"/>
                                 </td>
                             </tr>

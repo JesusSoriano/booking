@@ -45,12 +45,12 @@ public class UserProfileController implements Serializable {
 
         Organisation organisation = FacesUtil.getCurrentOrganisation();
 
-        User logedUser = FacesUtil.getCurrentUser();
+        User loggedUser = FacesUtil.getCurrentUser();
         String userId = FacesUtil.getParameter("user");
-        if (userId != null && (logedUser.getUserRole().getRole() == Role.ADMIN || logedUser.getUserRole().getRole() == Role.SUPER_ADMIN)) {
+        if (userId != null && (loggedUser.getUserRole().getRole() == Role.ADMIN || loggedUser.getUserRole().getRole() == Role.SUPER_ADMIN)) {
             profileUser = userFacade.findUserOfOrganisation(Integer.valueOf(userId), organisation);
         } else {
-            profileUser = logedUser;
+            profileUser = loggedUser;
         }
 
         if (profileUser != null) {

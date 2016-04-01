@@ -29,11 +29,11 @@ public class ServiceFacade extends AbstractFacade<Service> {
         super(Service.class);
     }
 
-    public Service createNewService(String name, String description, Organisation organisation) {
+    public Service createNewService(String name, String description, Organisation organisation) throws ServiceAlreadyExistsException {
 
-//        if (findServiceByName(name, organisation) != null) {
-//            throw new ServiceAlreadyExistsException("Lo sentimos, no ha sido posible crear el nuevo servicio: Nombre existente.");
-//        }
+        if (findServiceByName(name, organisation) != null) {
+            throw new ServiceAlreadyExistsException("Lo sentimos, no ha sido posible crear el nuevo servicio: El nombre ya existe.");
+        }
 
         Service service = new Service();
         service.setName(name);
@@ -46,15 +46,15 @@ public class ServiceFacade extends AbstractFacade<Service> {
         return service;
     }
 
-    public Service updateService(String oldName, String newName, String description, Organisation organisation) {
-        System.out.println("----- UPDATE");
+    public Service updateService(String oldName, String newName, String description, Organisation organisation) throws ServiceAlreadyExistsException {
+
+        if (!oldName.equals(newName) && findServiceByName(newName, organisation) != null) {
+            throw new ServiceAlreadyExistsException("Lo sentimos, no ha sido posible editar el servicio: El nuevo nombre ya existe.");
+        }
         
         Service service = findServiceByName(oldName, organisation);
-        System.out.println("----- service: " + service);
         if (service != null) {
-        System.out.println("----- service name: " + service.getName());
             service.setName(newName);
-        System.out.println("----- service new name: " + service.getName());
             service.setDescription(description);
             em.merge(service);
         }

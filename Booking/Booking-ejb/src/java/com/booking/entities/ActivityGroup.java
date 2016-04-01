@@ -44,13 +44,24 @@ public class ActivityGroup implements Serializable {
     private int maximumUsers;
     @Column(name = "booked_places")
     private int bookedPlaces;
-    @Column(name = "free_places")
-    private int freePlaces;
-    @Column(name = "days_a_week")
-    private int daysAWeek;
+    // Number of days per week
+    @Column(name = "days_per_week")
+    private int daysPerWeek;
+    // Espedific days of the week. Ex: 1,3,5 = Monday, Wednesaday and Friday
+    @Column(name = "days_of_week")
+    private String daysOfWeek;
     @Column(name = "created_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdDate;
+    @Column(name = "start_time")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date startTime;
+    @Column(name = "end_time")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date endTime;
+    // Repeat group every week?
+    @Column(name = "weekly")
+    private boolean weekly;
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
     private Status status;
@@ -102,14 +113,6 @@ public class ActivityGroup implements Serializable {
         this.bookedPlaces = bookedPlaces;
     }
 
-    public int getFreePlaces() {
-        return freePlaces;
-    }
-
-    public void setFreePlaces(int freePlaces) {
-        this.freePlaces = freePlaces;
-    }
-
     public Organisation getOrganisation() {
         return organisation;
     }
@@ -126,12 +129,12 @@ public class ActivityGroup implements Serializable {
         this.groupSchedules = groupSchedules;
     }
 
-    public void setDaysAWeek(int daysAWeek) {
-        this.daysAWeek = daysAWeek;
+    public void setDaysPerWeek(int daysPerWeek) {
+        this.daysPerWeek = daysPerWeek;
     }
 
-    public int getDaysAWeek() {
-        return daysAWeek;
+    public int getDaysPerWeek() {
+        return daysPerWeek;
     }
 
     public Service getService() {
@@ -156,5 +159,37 @@ public class ActivityGroup implements Serializable {
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    public String getDaysOfWeek() {
+        return daysOfWeek;
+    }
+
+    public void setDaysOfWeek(String daysOfWeek) {
+        this.daysOfWeek = daysOfWeek;
+    }
+
+    public Date getStartTime() {
+        return startTime;
+    }
+
+    public Date getEndTime() {
+        return endTime;
+    }
+
+    public void setStartTime(Date startTime) {
+        this.startTime = startTime;
+    }
+
+    public void setEndTime(Date endTime) {
+        this.endTime = endTime;
+    }
+
+    public boolean isWeekly() {
+        return weekly;
+    }
+
+    public void setWeekly(boolean weekly) {
+        this.weekly = weekly;
     }
 }

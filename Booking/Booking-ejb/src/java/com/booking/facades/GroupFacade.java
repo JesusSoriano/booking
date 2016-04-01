@@ -2,6 +2,7 @@ package com.booking.facades;
 
 import com.booking.entities.ActivityGroup;
 import com.booking.entities.Organisation;
+import com.booking.entities.Service;
 import com.booking.enums.Status;
 import java.util.Date;
 import java.util.List;
@@ -29,18 +30,38 @@ public class GroupFacade extends AbstractFacade<ActivityGroup> {
     }
 
     
-    public ActivityGroup createNewGroup(String name, String description, int maximumUsers, int daysPerWeek, Organisation organisation) {
+    public ActivityGroup createNewGroup(Service service, String name, String description, int maximumUsers, int daysPerWeek, String daysOfTheWeek, Date startTime, Date EndTime, boolean weekly, Organisation organisation) {
         
         ActivityGroup group = new ActivityGroup();
+        group.setService(service);
         group.setName(name);
         group.setDescription(description);
         group.setMaximumUsers(maximumUsers);
-        group.setDaysAWeek(daysPerWeek);
-        group.setFreePlaces(maximumUsers);
+        group.setDaysPerWeek(daysPerWeek);
+        group.setDaysOfWeek(daysOfTheWeek);
+        group.setStartTime(startTime);
+        group.setEndTime(EndTime);
+        group.setWeekly(weekly);
         group.setOrganisation(organisation);
         group.setCreatedDate(new Date());
         group.setStatus(Status.ACTIVATED);
         create(group);
+        
+        return group;
+    }
+    
+    public ActivityGroup updateGroup(ActivityGroup group, Service service, String name, String description, int maximumUsers, int daysPerWeek, String daysOfTheWeek, Date startTime, Date EndTime, boolean weekly) {
+        
+        group.setService(service);
+        group.setName(name);
+        group.setDescription(description);
+        group.setMaximumUsers(maximumUsers);
+        group.setDaysPerWeek(daysPerWeek);
+        group.setDaysOfWeek(daysOfTheWeek);
+        group.setStartTime(startTime);
+        group.setEndTime(EndTime);
+        group.setWeekly(weekly);
+        edit(group);
         
         return group;
     }
@@ -59,4 +80,10 @@ public class GroupFacade extends AbstractFacade<ActivityGroup> {
         return em.createQuery("SELECT a FROM ActivityGroup a WHERE a.organisation = :organisation ORDER BY a.name ASC").
                 setParameter("organisation", organisation).getResultList();
     }
+
+    public ActivityGroup findGroupOfOrganisation(long groupId, Organisation organisation) {
+        return findUniqueResult(em.createQuery("SELECT g FROM ActivityGroup g WHERE g.id = :groupId AND g.organisation = :organisation ORDER BY g.name ASC").
+                setParameter("groupId", groupId).
+                setParameter("organisation", organisation).getResultList());
+    } 
 }

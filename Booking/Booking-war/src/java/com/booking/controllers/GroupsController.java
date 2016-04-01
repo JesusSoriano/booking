@@ -16,7 +16,6 @@ import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import org.primefaces.context.RequestContext;
 
 @ManagedBean
 public class GroupsController implements Serializable {
@@ -29,10 +28,6 @@ public class GroupsController implements Serializable {
     private List<ActivityGroup> groups;
     private User loggedUser;
     private Organisation organisation;
-    private String newGroupName;
-    private String newGroupDescription;
-    private int newGroupMaxUsers;
-    private int newGroupDaysPerWeek;
 
     public GroupsController() {
     }
@@ -47,7 +42,7 @@ public class GroupsController implements Serializable {
 
     public String activateGroup(ActivityGroup group) {
         groupFacade.activateGroup(group);
-        FacesUtil.addSuccessMessage("groupsForm:msg", "El servicio ha sido activada correctamente.");
+        FacesUtil.addSuccessMessage("groupsForm:msg", "El servicio ha sido activado correctamente.");
 
         try {
             // Audit group activation
@@ -75,31 +70,6 @@ public class GroupsController implements Serializable {
         return "groups.xhtml" + Constants.FACES_REDIRECT;
     }
 
-    public String createNewGroup() {
-        RequestContext context = RequestContext.getCurrentInstance();
-        try {
-            ActivityGroup newGroup = groupFacade.createNewGroup(newGroupName, newGroupDescription, newGroupMaxUsers, newGroupDaysPerWeek, organisation);
-            context.execute("PF('newGroupDialog').hide();");
-            FacesUtil.addSuccessMessage("groupsForm:msg", "El nuevo servicio ha sido creado correctamente.");
-            // Audit group creation
-            String ipAddress = FacesUtil.getRequest().getRemoteAddr();
-            auditFacade.createAudit(AuditType.CREATE_SERVICE, loggedUser, ipAddress, newGroup.getId(), organisation);
-        } catch (Exception e) {
-            FacesUtil.addErrorMessage("groupsForm:msg", "Lo sentimos, no ha sido posible crear el nuevo servicio.");
-            Logger.getLogger(GroupsController.class.getName()).log(Level.SEVERE, null, e);
-            return "";
-        }
-
-        newGroupName = "";
-        newGroupDescription = "";
-        return "groups.xhtml" + Constants.FACES_REDIRECT;
-    }
-
-    public void prepareGroup(ActivityGroup group) {
-        newGroupName = group.getName();
-        newGroupDescription = group.getDescription();
-    }
-
     public void prepareNewGroup() {
     }
 
@@ -109,37 +79,5 @@ public class GroupsController implements Serializable {
 
     public Role getUserRole() {
         return loggedUser.getUserRole().getRole();
-    }
-
-    public String getNewGroupName() {
-        return newGroupName;
-    }
-
-    public void setNewGroupName(String newGroupName) {
-        this.newGroupName = newGroupName;
-    }
-
-    public String getNewGroupDescription() {
-        return newGroupDescription;
-    }
-
-    public void setNewGroupDescription(String newGroupDescription) {
-        this.newGroupDescription = newGroupDescription;
-    }
-
-    public int getNewGroupMaxUsers() {
-        return newGroupMaxUsers;
-    }
-
-    public int getNewGroupDaysPerWeek() {
-        return newGroupDaysPerWeek;
-    }
-
-    public void setNewGroupMaxUsers(int newGroupMaxUsers) {
-        this.newGroupMaxUsers = newGroupMaxUsers;
-    }
-
-    public void setNewGroupDaysPerWeek(int newGroupDaysPerWeek) {
-        this.newGroupDaysPerWeek = newGroupDaysPerWeek;
     }
 }

@@ -16,9 +16,9 @@
                         <h3 class="page-title">#{txt['groups']} (#{groupsController.groups.size()})</h3> 
                     </div>
                     <div class="col-sm-offset-3 col-md-offset-3 col-xs-6 col-sm-3 col-md-3 text-right">
-                        <p:commandLink oncomplete="PF('newGroupDialog').show()" >
+                        <h:link outcome="new-group.xhtml?faces-redirect=true" >
                             <span class="btn btn-primary btn-block btn-main">#{txt['b_new_group']}</span>
-                        </p:commandLink>
+                        </h:link>
                     </div>
                 </div>
 
@@ -46,22 +46,18 @@
                             <h:outputText value="#{group.maximumUsers}" rendered="#{group.status ne 'SUSPENDED'}" /> 
                             <h:outputText value="#{group.maximumUsers}" rendered="#{group.status eq 'SUSPENDED'}" style="color:lightgray" /> 
                         </p:column> 
-                        <p:column headerText="#{txt['booked_places']}" sortBy="#{group.bookedPlaces}"> 
-                            <h:outputText value="#{group.bookedPlaces}" rendered="#{group.status ne 'SUSPENDED'}" /> 
-                            <h:outputText value="#{group.bookedPlaces}" rendered="#{group.status eq 'SUSPENDED'}" style="color:lightgray" /> 
-                        </p:column> 
-                        <p:column headerText="#{txt['free_places']}" sortBy="#{group.freePlaces}"> 
-                            <h:outputText value="#{group.freePlaces}" rendered="#{group.status ne 'SUSPENDED'}" /> 
-                            <h:outputText value="#{group.freePlaces}" rendered="#{group.status eq 'SUSPENDED'}" style="color:lightgray" /> 
+                        <p:column headerText="#{txt['free_places']}" sortBy="#{group.maximumUsers - group.bookedPlaces}"> 
+                            <h:outputText value="#{group.maximumUsers - group.bookedPlaces}" rendered="#{group.status ne 'SUSPENDED'}" /> 
+                            <h:outputText value="#{group.maximumUsers - group.bookedPlaces}" rendered="#{group.status eq 'SUSPENDED'}" style="color:lightgray" /> 
                         </p:column> 
                         <p:column headerText="#{txt['organisation']}" sortBy="#{group.organisation.name}" rendered="#{groupsController.userRole eq 'SUPER_ADMIN'}"> 
                             <h:outputText value="#{group.organisation.name}" rendered="#{group.status ne 'SUSPENDED'}" /> 
                             <h:outputText value="#{group.organisation.name}" rendered="#{group.status eq 'SUSPENDED'}" style="color:lightgray" /> 
                         </p:column> 
                         <p:column headerText="#{txt['options']}"> 
-                            <p:commandLink onclick="#{groupsController.prepareGroup(group)}" oncomplete="PF('newGroupDialog').show()" >
+                            <h:link outcome="view-group.xhtml?faces-redirect=true&amp;group=#{group.id}" >
                                 <h:graphicImage title="#{txt['cap_view']}" value="../resources/images/view.png" class="table-action" /> 
-                            </p:commandLink>
+                            </h:link>
                             <h:link outcome="edit-group.xhtml?faces-redirect=true&amp;group=#{group.id}"> 
                                 <h:graphicImage title="#{txt['cap_edit']}" value="../resources/images/edit_user.png" class="table-action" /> 
                             </h:link> 
@@ -75,59 +71,6 @@
                     </p:dataTable>
                 </h:panelGroup> 
             </h:form>
-
-
-            <h:form enctype="multipart/form-data" id="newGroupForm">
-                <p:dialog id="newGroupDialog" widgetVar="newGroupDialog" header="#{txt['create_new_group']}" resizable="false"
-                          closable="true">
-                    <h:panelGroup id="newGroupGroup" >
-                        <table border="0" cellspacing="10" class="dialogTable">
-                            <tr>
-                                <td>#{txt['name']}:</td>
-                                <td>
-                                    <h:inputText id="newGroupName" value="#{groupsController.newGroupName}" required="true" requiredMessage="Please enter the name of the new group"/>
-                                    <br/>
-                                    <h:message for="newGroupName" styleClass="loginError" errorStyle="color :red" infoStyle="color : green"/>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>#{txt['description']}:</td>
-                                <td>
-                                    <h:inputTextarea id="newGroupDescription" value="#{groupsController.newGroupDescription}" required="true" requiredMessage="Please enter the description of the new group"/>
-                                    <br/>
-                                    <h:message for="newGroupDescription" styleClass="loginError" errorStyle="color :red" infoStyle="color : green"/>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>#{txt['maximum_users']}:</td>
-                                <td>
-                                    <h:inputTextarea id="newGroupMaxUsers" value="#{groupsController.newGroupMaxUsers}" required="true" requiredMessage="Please enter maximum number of users of the new group"/>
-                                    <br/>
-                                    <h:message for="newGroupDescription" styleClass="loginError" errorStyle="color :red" infoStyle="color : green"/>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>#{txt['days_a_week']}:</td>
-                                <td>
-                                    <h:inputTextarea id="newGroupDaysAWeek" value="#{groupsController.newGroupDaysPerWeek}" required="true" requiredMessage="Please enter days per week of the new group"/>
-                                    <br/>
-                                    <h:message for="newGroupDescription" styleClass="loginError" errorStyle="color :red" infoStyle="color : green"/>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>&emsp;</td>
-                                <td>
-                                    <h:commandButton class="btn btn-primary btn-gray" value="#{txt['b_create_group']}" action="#{groupsController.createNewGroup()}" />
-                                </td>
-                            </tr>
-                        </table>
-                    </h:panelGroup>
-                </p:dialog>
-            </h:form>
-
-            <!--            <h:form>
-                            <p:remoteCommand name="post_group_dialog_open" actionListener="#{groupsController.prepareNewGroup()}" update=":newGroupForm:newGroupGroup" />
-                        </h:form>-->
         </div>
     </div>
 </ui:component>

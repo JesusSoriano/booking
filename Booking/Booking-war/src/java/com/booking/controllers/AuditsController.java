@@ -34,7 +34,7 @@ public class AuditsController implements Serializable {
     private Role userRole;
     private Organisation organisation;
     private List<SelectItem> users;
-    long selectedUserId;
+    private long selectedUserId;
     private List<SelectItem> auditTypes;
     AuditType selectedAuditType;
     private Date fromDate;

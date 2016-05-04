@@ -76,6 +76,12 @@ public class GroupFacade extends AbstractFacade<ActivityGroup> {
         edit(group);
     }
 
+    public List<ActivityGroup> findAllGroupsOfService(Service service, Organisation organisation) {
+        return em.createQuery("SELECT a FROM ActivityGroup a WHERE a.service = :service AND a.organisation = :organisation ORDER BY a.name ASC").
+                setParameter("service", service).
+                setParameter("organisation", organisation).getResultList();
+    }
+
     public List<ActivityGroup> findAllGroupsOfOrganisation(Organisation organisation) {
         return em.createQuery("SELECT a FROM ActivityGroup a WHERE a.organisation = :organisation ORDER BY a.name ASC").
                 setParameter("organisation", organisation).getResultList();

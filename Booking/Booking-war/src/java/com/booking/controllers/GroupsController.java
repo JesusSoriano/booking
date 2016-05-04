@@ -2,11 +2,13 @@ package com.booking.controllers;
 
 import com.booking.entities.ActivityGroup;
 import com.booking.entities.Organisation;
+import com.booking.entities.Service;
 import com.booking.entities.User;
 import com.booking.enums.AuditType;
 import com.booking.enums.Role;
 import com.booking.facades.AuditFacade;
 import com.booking.facades.GroupFacade;
+import com.booking.facades.ServiceFacade;
 import com.booking.util.Constants;
 import com.booking.util.FacesUtil;
 import java.io.Serializable;
@@ -23,6 +25,8 @@ public class GroupsController implements Serializable {
     @EJB
     private GroupFacade groupFacade;
     @EJB
+    private ServiceFacade serviceFacade;
+    @EJB
     private AuditFacade auditFacade;
 
     private List<ActivityGroup> groups;
@@ -37,7 +41,17 @@ public class GroupsController implements Serializable {
         loggedUser = FacesUtil.getCurrentUser();
         organisation = FacesUtil.getCurrentOrganisation();
 
-        groups = groupFacade.findAllGroupsOfOrganisation(organisation);
+        String serviceId = FacesUtil.getParameter("service");
+        if (serviceId != null && (loggedUser.getUserRole().getRole() == Role.ADMIN || loggedUser.getUserRole().getRole() == Role.SUPER_ADMIN)) {
+            Service currentService = serviceFacade.findServiceOfOrganisation(Integer.valueOf(serviceId), organisation);
+            if (currentService != null) {
+                groups = groupFacade.findAllGroupsOfService(currentService, organisation);
+            } else {
+                groups = groupFacade.findAllGroupsOfOrganisation(organisation);
+            }
+        } else {
+            groups = groupFacade.findAllGroupsOfOrganisation(organisation);
+        }
     }
 
     public String activateGroup(ActivityGroup group) {

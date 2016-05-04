@@ -11,9 +11,9 @@ import com.booking.facades.GroupFacade;
 import com.booking.facades.ServiceFacade;
 import com.booking.util.Constants;
 import com.booking.util.FacesUtil;
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -51,6 +51,7 @@ public class EditGroupController implements Serializable {
     private boolean weekly;
     private boolean newGroup;
     private ActivityGroup currentGroup;
+    private List<Integer> weekDays;
 
     public EditGroupController() {
     }
@@ -64,7 +65,7 @@ public class EditGroupController implements Serializable {
         for (Service s : serviceFacade.findAllServicesOfOrganisation(organisation)) {
             services.add(new SelectItem(s.getId(), s.getName()));
         }
-
+        weekDays = Arrays.asList(1, 2, 3, 4, 5, 6, 7);
         weekly = true;
 
         String groupId = FacesUtil.getParameter("group");
@@ -72,6 +73,7 @@ public class EditGroupController implements Serializable {
             currentGroup = groupFacade.findGroupOfOrganisation(Integer.valueOf(groupId), organisation);
 
             if (currentGroup != null) {
+                selectedServiceId = currentGroup.getService().getId();
                 groupName = currentGroup.getName();
                 groupDescription = currentGroup.getDescription();
                 maximumUsers = currentGroup.getMaximumUsers();
@@ -82,6 +84,8 @@ public class EditGroupController implements Serializable {
                 endingTime = currentGroup.getEndTime();
                 weekly = currentGroup.isWeekly();
             }
+        } else {
+            newGroup = true;
         }
     }
 
@@ -150,16 +154,8 @@ public class EditGroupController implements Serializable {
             FacesUtil.addErrorMessage("groupsForm:msg", "Lo sentimos, no ha sido posible editar el servicio.");
             Logger.getLogger(EditGroupController.class.getName()).log(Level.SEVERE, null, e);
         }
-        
+
         return "groups.xhtml" + Constants.FACES_REDIRECT;
-    }
-
-    public void prepareGroup(ActivityGroup group) {
-        newGroup = false;
-    }
-
-    public void prepareNewGroup() {
-        newGroup = true;
     }
 
     public List<SelectItem> getServices() {
@@ -252,5 +248,9 @@ public class EditGroupController implements Serializable {
 
     public ActivityGroup getCurrentGroup() {
         return currentGroup;
+    }
+
+    public List<Integer> getWeekDays() {
+        return weekDays;
     }
 }

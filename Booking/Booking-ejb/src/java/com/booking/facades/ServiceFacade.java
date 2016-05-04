@@ -77,6 +77,12 @@ public class ServiceFacade extends AbstractFacade<Service> {
                 setParameter("organisation", organisation).getResultList();
     }
 
+    public Service findServiceOfOrganisation(long serviceId, Organisation organisation) {
+        return findUniqueResult(em.createQuery("SELECT s FROM Service s WHERE s.id = :serviceId AND s.organisation = :organisation ORDER BY s.name ASC").
+                setParameter("serviceId", serviceId).
+                setParameter("organisation", organisation).getResultList());
+    }
+
     public Service findServiceByName(String serviceName, Organisation organisation) {
         return findUniqueResult(em.createQuery("SELECT s FROM Service s WHERE s.organisation = :organisation AND s.name = :serviceName ORDER BY s.name ASC").
                 setParameter("organisation", organisation).

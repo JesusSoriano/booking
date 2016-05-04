@@ -36,23 +36,43 @@
                                  rowsPerPageTemplate="10, 20, #{groupsController.groups.size()}" emptyMessage="#{txt['empty_records']}"> 
                         <p:column headerText="#{txt['name']}" sortBy="#{group.name}"> 
                             <h:outputText value="#{group.name}" rendered="#{group.status ne 'SUSPENDED'}" /> 
-                            <h:outputText value="#{group.name}" rendered="#{group.status eq 'SUSPENDED'}" style="color:lightgray" /> 
+                            <h:outputText value="#{group.name}" rendered="#{group.status eq 'SUSPENDED'}" class="lightgray-color" /> 
+                        </p:column> 
+                        <p:column headerText="#{txt['service']}" sortBy="#{group.service.name}"> 
+                            <h:outputText value="#{group.service.name}" rendered="#{group.status ne 'SUSPENDED'}" /> 
+                            <h:outputText value="#{group.service.name}" rendered="#{group.status eq 'SUSPENDED'}" class="lightgray-color" /> 
                         </p:column> 
                         <p:column headerText="#{txt['description']}" sortBy="#{group.description}"> 
                             <h:outputText value="#{group.description}" rendered="#{group.status ne 'SUSPENDED'}" /> 
-                            <h:outputText value="#{group.description}" rendered="#{group.status eq 'SUSPENDED'}" style="color:lightgray" /> 
+                            <h:outputText value="#{group.description}" rendered="#{group.status eq 'SUSPENDED'}" class="lightgray-color" /> 
+                        </p:column> 
+                        <p:column headerText="#{txt['timetable']}" sortBy="#{group.description}"> 
+                            <h:outputText value="#{group.startTime}" rendered="#{group.status ne 'SUSPENDED'}" >
+                                <f:convertDateTime pattern="HH:mm" /> 
+                            </h:outputText>
+                            <h:outputText value=" - " rendered="#{group.status ne 'SUSPENDED'}" />
+                            <h:outputText value="#{group.endTime}" rendered="#{group.status ne 'SUSPENDED'}" >
+                                <f:convertDateTime pattern="HH:mm" /> 
+                            </h:outputText>
+                            <h:outputText value="#{group.startTime} to #{group.endTime}" rendered="#{group.status eq 'SUSPENDED'}" class="lightgray-color" /> 
                         </p:column> 
                         <p:column headerText="#{txt['maximum_users']}" sortBy="#{group.maximumUsers}"> 
                             <h:outputText value="#{group.maximumUsers}" rendered="#{group.status ne 'SUSPENDED'}" /> 
-                            <h:outputText value="#{group.maximumUsers}" rendered="#{group.status eq 'SUSPENDED'}" style="color:lightgray" /> 
+                            <h:outputText value="#{group.maximumUsers}" rendered="#{group.status eq 'SUSPENDED'}" class="lightgray-color" /> 
                         </p:column> 
                         <p:column headerText="#{txt['free_places']}" sortBy="#{group.maximumUsers - group.bookedPlaces}"> 
                             <h:outputText value="#{group.maximumUsers - group.bookedPlaces}" rendered="#{group.status ne 'SUSPENDED'}" /> 
-                            <h:outputText value="#{group.maximumUsers - group.bookedPlaces}" rendered="#{group.status eq 'SUSPENDED'}" style="color:lightgray" /> 
+                            <h:outputText value="#{group.maximumUsers - group.bookedPlaces}" rendered="#{group.status eq 'SUSPENDED'}" class="lightgray-color" /> 
+                        </p:column> 
+                        <p:column headerText="#{txt['group_frecuency']}" sortBy="#{group.weekly}"> 
+                            <h:outputText value="#{txt['repeat_weekly']}" rendered="#{group.weekly and group.status ne 'SUSPENDED'}" />
+                            <h:outputText value="#{txt['repeat_weekly']}" rendered="#{group.weekly and group.status eq 'SUSPENDED'}" class="lightgray-color" />
+                            <h:outputText value="#{txt['one_day_group']}" rendered="#{!group.weekly and group.status ne 'SUSPENDED'}" />
+                            <h:outputText value="#{txt['one_day_group']}" rendered="#{!group.weekly and group.status eq 'SUSPENDED'}" class="lightgray-color" />
                         </p:column> 
                         <p:column headerText="#{txt['organisation']}" sortBy="#{group.organisation.name}" rendered="#{groupsController.userRole eq 'SUPER_ADMIN'}"> 
                             <h:outputText value="#{group.organisation.name}" rendered="#{group.status ne 'SUSPENDED'}" /> 
-                            <h:outputText value="#{group.organisation.name}" rendered="#{group.status eq 'SUSPENDED'}" style="color:lightgray" /> 
+                            <h:outputText value="#{group.organisation.name}" rendered="#{group.status eq 'SUSPENDED'}" class="lightgray-color" /> 
                         </p:column> 
                         <p:column headerText="#{txt['options']}"> 
                             <h:link outcome="view-group.xhtml?faces-redirect=true&amp;group=#{group.id}" >

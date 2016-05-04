@@ -55,10 +55,9 @@
                             <h:outputText value="#{service.organisation.name}" rendered="#{service.status eq 'SUSPENDED'}" style="color:lightgray" /> 
                         </p:column> 
                         <p:column headerText="#{txt['options']}"> 
-<!--                            <p:commandLink onclick="#{servicesController.prepareService(service)}" oncomplete="PF('newServiceDialog').show()" >
+                            <h:link outcome="groups.xhtml?faces-redirect=true&amp;service=#{service.id}" >
                                 <h:graphicImage title="#{txt['cap_view']}" value="../resources/images/view.png" class="table-action" /> 
-                            </p:commandLink>
-                            -->                            
+                            </h:link>
                             <p:commandLink action="#{servicesController.prepareService(service)}" update=":newServiceForm:newServiceGroup" oncomplete="PF('newServiceDialog').show()" >
                                 <h:graphicImage title="#{txt['cap_edit']}" value="../resources/images/edit_user.png" class="table-action" /> 
                             </p:commandLink> 

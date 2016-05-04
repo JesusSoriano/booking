@@ -367,6 +367,20 @@ hr {
     background: #e1e000;
 }
 
+.btn.btn-general {
+    background: transparent;
+    border: solid 1px #049CC2;
+    color: #049CC2 !important;
+    font-weight: 600;
+    padding: 6px 15px;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.29);
+    -webkit-font-smoothing: antialiased;
+    margin-bottom: 5px;
+}
+.btn.btn-general:hover {
+    background-color: #f8f8f8;
+}
+
 
 .btn.disabled_button {
     background: #C9C9C9; /* Old browsers */
@@ -545,6 +559,10 @@ input[type='text'], input[type='password'] {
 }
 .text-right {
     text-align: right;
+}
+
+.lightgray-color {
+    color:lightgray;
 }
 
 .padding-right-30 {

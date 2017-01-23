@@ -1,5 +1,6 @@
 package com.booking.facades;
 
+import com.booking.entities.ActivityGroup;
 import com.booking.entities.Organisation;
 import com.booking.entities.Service;
 import com.booking.enums.Status;
@@ -46,18 +47,15 @@ public class ServiceFacade extends AbstractFacade<Service> {
         return service;
     }
 
-    public Service updateService(String oldName, String newName, String description, Organisation organisation) throws ServiceAlreadyExistsException {
+    public Service updateService(Service service, String newName, String description, Organisation organisation) throws ServiceAlreadyExistsException {
 
-        if (!oldName.equals(newName) && findServiceByName(newName, organisation) != null) {
+        if (!service.getName().equals(newName) && findServiceByName(newName, organisation) != null) {
             throw new ServiceAlreadyExistsException("Lo sentimos, no ha sido posible editar el servicio: El nuevo nombre ya existe.");
         }
-        
-        Service service = findServiceByName(oldName, organisation);
-        if (service != null) {
-            service.setName(newName);
-            service.setDescription(description);
-            em.merge(service);
-        }
+
+        service.setName(newName);
+        service.setDescription(description);
+        em.merge(service);
 
         return service;
     }
@@ -74,6 +72,12 @@ public class ServiceFacade extends AbstractFacade<Service> {
 
     public List<Service> findAllServicesOfOrganisation(Organisation organisation) {
         return em.createQuery("SELECT s FROM Service s WHERE s.organisation = :organisation ORDER BY s.name ASC").
+                setParameter("organisation", organisation).getResultList();
+    }
+
+    public List<Service> findAllActiveServicesOfOrganisation(Organisation organisation) {
+        return em.createQuery("SELECT s FROM Service s WHERE s.organisation = :organisation AND s.status = :statusActive ORDER BY s.name ASC").
+                setParameter("statusActive", Status.ACTIVATED).
                 setParameter("organisation", organisation).getResultList();
     }
 

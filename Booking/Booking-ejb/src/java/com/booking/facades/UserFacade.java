@@ -158,4 +158,16 @@ public class UserFacade extends AbstractFacade<User> {
                     }
                 }).getResultList();
     }
+
+    public List<User> findAllActiveAdminsAndClientsOfOrganisation(Organisation organisation) {
+        return em.createQuery("SELECT u FROM User u WHERE u.organisation = :organisation AND u.userRole.role IN :users AND u.status = :activated ORDER BY u.firstName ASC, u.firstLastName ASC").
+                setParameter("organisation", organisation).
+                setParameter("users", new ArrayList<Role>() {
+                    {
+                        add(Role.ADMIN);
+                        add(Role.USER);
+                    }
+                }).
+                setParameter("activated", Status.ACTIVATED).getResultList();
+    }
 }

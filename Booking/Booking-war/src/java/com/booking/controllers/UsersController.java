@@ -48,7 +48,7 @@ public class UsersController implements Serializable {
         try {
             // Registrar activación de usuario
             String ipAddress = FacesUtil.getRequest().getRemoteAddr();
-            auditFacade.createAudit(pageName.equals("admins") ? AuditType.ACTIVATE_ADMIN : AuditType.ACTIVATE_USER, loggedUser, ipAddress, user.getId(), organisation);
+            auditFacade.createAudit(pageName.equals("admins") ? AuditType.ACTIVAR_ADMIN : AuditType.ACTIVAR_USUARIO, loggedUser, ipAddress, user.getId(), organisation);
         } catch (Exception e) {
             Logger.getLogger(UsersController.class.getName()).log(Level.SEVERE, null, e);
         }
@@ -63,7 +63,7 @@ public class UsersController implements Serializable {
         try {
             // Registrar suspensión de usuario
             String ipAddress = FacesUtil.getRequest().getRemoteAddr();
-            auditFacade.createAudit(pageName.equals("admins") ? AuditType.SUSPEND_ADMIN : AuditType.SUSPEND_USER, loggedUser, ipAddress, user.getId(), organisation);
+            auditFacade.createAudit(pageName.equals("admins") ? AuditType.SUSPENDER_ADMIN : AuditType.SUSPENDER_USUARIO, loggedUser, ipAddress, user.getId(), organisation);
         } catch (Exception e) {
             Logger.getLogger(UsersController.class.getName()).log(Level.SEVERE, null, e);
         }

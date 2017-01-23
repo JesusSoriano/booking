@@ -15,11 +15,13 @@
                     <div class="col-xs-6 col-sm-6 col-md-6">
                         <h3 class="page-title">#{txt['services']} (#{servicesController.services.size()})</h3> 
                     </div>
-                    <div class="col-sm-offset-3 col-md-offset-3 col-xs-6 col-sm-3 col-md-3 text-right">
-                        <p:commandLink action="#{servicesController.prepareNewService()}" update=":newServiceForm:newServiceGroup" oncomplete="PF('newServiceDialog').show()" >
-                            <span class="btn btn-primary btn-block btn-main">#{txt['b_new_service']}</span>
-                        </p:commandLink>
-                    </div>
+                    <h:panelGroup rendered="#{servicesController.userRole eq 'ADMIN' or servicesController.userRole eq 'SUPER_ADMIN'}">
+                        <div class="col-sm-offset-3 col-md-offset-3 col-xs-6 col-sm-3 col-md-3 text-right">
+                            <p:commandLink action="#{servicesController.prepareNewService()}" update=":newServiceForm:newServiceGroup" oncomplete="PF('newServiceDialog').show()" >
+                                <span class="btn btn-primary btn-block btn-main">#{txt['b_new_service']}</span>
+                            </p:commandLink>
+                        </div>
+                    </h:panelGroup>
                 </div>
 
                 <h:panelGroup id="rows"> 
@@ -35,38 +37,39 @@
                     <p:dataTable id="servicesTable" value="#{servicesController.services}" var="service" styleClass="common-table text-center" paginator="true" rows="20" paginatorPosition="bottom" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" 
                                  rowsPerPageTemplate="10, 20, #{servicesController.services.size()}" emptyMessage="#{txt['empty_records']}"> 
                         <p:column headerText="#{txt['name']}" sortBy="#{service.name}"> 
-                            <h:outputText value="#{service.name}" rendered="#{service.status ne 'SUSPENDED'}" /> 
-                            <h:outputText value="#{service.name}" rendered="#{service.status eq 'SUSPENDED'}" style="color:lightgray" /> 
+                            <h:outputText value="#{service.name}" class="#{service.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" /> 
                         </p:column> 
                         <p:column headerText="#{txt['description']}" sortBy="#{service.description}"> 
-                            <h:outputText value="#{service.description}" rendered="#{service.status ne 'SUSPENDED'}" /> 
-                            <h:outputText value="#{service.description}" rendered="#{service.status eq 'SUSPENDED'}" style="color:lightgray" /> 
+                            <h:outputText value="#{service.description}" class="#{service.status eq 'SUSPENDED' ? 'lightgray-color' : ''}"  /> 
+                        </p:column> 
+                        <p:column headerText="#{txt['number_of_groups']}" sortBy="#{servicesController.getNumberOfGroups(service)}"> 
+                            <h:link outcome="groups.xhtml?faces-redirect=true&amp;service=#{service.id}" >
+                                <h:outputText value="#{servicesController.getNumberOfGroups(service)}" class="#{service.status eq 'SUSPENDED' ? 'lightgray-color' : 'blue-link'}" /> 
+                            </h:link>
                         </p:column> 
                         <p:column headerText="#{txt['created_date']}" sortBy="#{service.createdDate}"> 
-                            <h:outputText value="#{service.createdDate}" rendered="#{service.status ne 'SUSPENDED'}">
-                                <f:convertDateTime pattern="#{dateFormatController.dateWithTimeFormatString}" />
-                            </h:outputText>
-                            <h:outputText value="#{service.createdDate}" rendered="#{service.status eq 'SUSPENDED'}" style="color:lightgray" >
+                            <h:outputText value="#{service.createdDate}" class="#{service.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" >
                                 <f:convertDateTime pattern="#{dateFormatController.dateWithTimeFormatString}" />
                             </h:outputText>
                         </p:column> 
                         <p:column headerText="#{txt['organisation']}" sortBy="#{service.organisation.name}" rendered="#{servicesController.userRole eq 'SUPER_ADMIN'}"> 
-                            <h:outputText value="#{service.organisation.name}" rendered="#{service.status ne 'SUSPENDED'}" /> 
-                            <h:outputText value="#{service.organisation.name}" rendered="#{service.status eq 'SUSPENDED'}" style="color:lightgray" /> 
+                            <h:outputText value="#{service.organisation.name}" class="#{service.status eq 'SUSPENDED' ? 'lightgray-color' : ''}"  /> 
                         </p:column> 
-                        <p:column headerText="#{txt['options']}"> 
+                        <p:column headerText="#{txt['options']}" rendered="#{servicesController.userRole eq 'ADMIN' or servicesController.userRole eq 'SUPER_ADMIN'}"> 
                             <h:link outcome="groups.xhtml?faces-redirect=true&amp;service=#{service.id}" >
-                                <h:graphicImage title="#{txt['cap_view']}" value="../resources/images/view.png" class="table-action" /> 
+                                <h:graphicImage title="#{txt['cap_view_groups']}" value="../resources/images/view.png" class="table-action" /> 
                             </h:link>
-                            <p:commandLink action="#{servicesController.prepareService(service)}" update=":newServiceForm:newServiceGroup" oncomplete="PF('newServiceDialog').show()" >
-                                <h:graphicImage title="#{txt['cap_edit']}" value="../resources/images/edit_user.png" class="table-action" /> 
-                            </p:commandLink> 
-                            <h:commandLink action="#{servicesController.activateService(service)}" rendered="#{service.status eq 'SUSPENDED'}"> 
-                                <h:graphicImage title="#{txt['cap_activate']}" value="../resources/images/activate_user.png" class="table-action" /> 
-                            </h:commandLink> 
-                            <h:commandLink action="#{servicesController.deactivateService(service)}" rendered="#{service.status eq 'ACTIVATED'}"> 
-                                <h:graphicImage title="#{txt['cap_suspend']}" value="../resources/images/suspend_user.png" class="table-action" /> 
-                            </h:commandLink> 
+                            <h:panelGroup rendered="#{servicesController.userRole eq 'ADMIN' or servicesController.userRole eq 'SUPER_ADMIN'}">
+                                <p:commandLink action="#{servicesController.prepareService(service)}" update=":newServiceForm:newServiceGroup" oncomplete="PF('newServiceDialog').show()" >
+                                    <h:graphicImage title="#{txt['cap_edit']}" value="../resources/images/edit_user.png" class="table-action" /> 
+                                </p:commandLink> 
+                                <h:commandLink action="#{servicesController.activateService(service)}" rendered="#{service.status eq 'SUSPENDED'}"> 
+                                    <h:graphicImage title="#{txt['cap_activate']}" value="../resources/images/activate_user.png" class="table-action" /> 
+                                </h:commandLink> 
+                                <h:commandLink action="#{servicesController.deactivateService(service)}" rendered="#{service.status eq 'ACTIVATED'}"> 
+                                    <h:graphicImage title="#{txt['cap_suspend']}" value="../resources/images/suspend_user.png" class="table-action" /> 
+                                </h:commandLink> 
+                            </h:panelGroup>
                         </p:column> 
                     </p:dataTable>
                 </h:panelGroup> 
@@ -79,9 +82,9 @@
                     <h:panelGroup id="newServiceGroup">
                         <table border="0" cellspacing="10" class="dialogTable">
                             <tr>
-                                <td>#{txt['name']}:</td>
+                                <td>#{txt['name']}<span class="mandatoryField">*</span>:</td>
                                 <td>
-                                    <h:inputText id="newServiceName" value="#{servicesController.newServiceName}" required="true" requiredMessage="Please enter the name of the new service"/>
+                                    <h:inputText id="newServiceName" value="#{servicesController.newServiceName}"/>
                                     <br/>
                                     <h:message for="newServiceName" styleClass="loginError" errorStyle="color :red" infoStyle="color : green"/>
                                 </td>
@@ -89,7 +92,7 @@
                             <tr>
                                 <td>#{txt['description']}:</td>
                                 <td>
-                                    <h:inputTextarea id="newServiceDescription" value="#{servicesController.newServiceDescription}" required="true" requiredMessage="Please enter the description of the new service"/>
+                                    <h:inputTextarea id="newServiceDescription" value="#{servicesController.newServiceDescription}"/>
                                     <br/>
                                     <h:message for="newServiceDescription" styleClass="loginError" errorStyle="color :red" infoStyle="color : green"/>
                                 </td>
@@ -97,8 +100,8 @@
                             <tr>
                                 <td>&emsp;</td>
                                 <td>
-                                    <h:commandButton class="btn btn-primary btn-gray" value="#{txt['b_create_service']}" action="#{servicesController.createNewService()}" rendered="#{servicesController.newGroup}"/>
-                                    <h:commandButton class="btn btn-primary btn-gray" value="#{txt['b_save_changes']}" action="#{servicesController.updateService()}" rendered="#{!servicesController.newGroup}"/>
+                                    <h:commandButton class="btn btn-primary btn-gray" value="#{txt['b_save_changes']}" action="#{servicesController.updateService()}" rendered="#{!servicesController.isNewService}"/>
+                                    <h:commandButton class="btn btn-primary btn-gray" value="#{txt['b_create_service']}" action="#{servicesController.createNewService()}" rendered="#{servicesController.isNewService}"/>
                                 </td>
                             </tr>
                         </table>

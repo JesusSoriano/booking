@@ -16,7 +16,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -44,35 +44,25 @@ public class ActivityGroup implements Serializable {
     private int maximumUsers;
     @Column(name = "booked_places")
     private int bookedPlaces;
-    // Number of days per week
-    @Column(name = "days_per_week")
-    private int daysPerWeek;
-    // Espedific days of the week. Ex: 1,3,5 = Monday, Wednesaday and Friday
-    @Column(name = "days_of_week")
-    private String daysOfWeek;
+    @Column(name="price")
+    private float price;
     @Column(name = "created_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdDate;
-    @Column(name = "start_time")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date startTime;
-    @Column(name = "end_time")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date endTime;
-    // Repeat group every week?
-    @Column(name = "weekly")
-    private boolean weekly;
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
     private Status status;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "organisation", referencedColumnName = "id")
     private Organisation organisation;
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "activityGroup", cascade = {CascadeType.REMOVE, CascadeType.PERSIST, CascadeType.MERGE})
-    private List<GroupSchedule> groupSchedules;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "service", referencedColumnName = "id")
     private Service service;
+    // Activity of multiple days?
+    @Column(name = "number_of_days")
+    private int numberOfDays;
+    @OneToMany(mappedBy = "activityGroup", cascade = CascadeType.REMOVE)
+    private List<ActivityDay> activityDays;
 
     public ActivityGroup() {
     }
@@ -121,22 +111,6 @@ public class ActivityGroup implements Serializable {
         this.organisation = organisation;
     }
 
-    public List<GroupSchedule> getGroupSchedules() {
-        return groupSchedules;
-    }
-
-    public void setGroupSchedules(List<GroupSchedule> groupSchedules) {
-        this.groupSchedules = groupSchedules;
-    }
-
-    public void setDaysPerWeek(int daysPerWeek) {
-        this.daysPerWeek = daysPerWeek;
-    }
-
-    public int getDaysPerWeek() {
-        return daysPerWeek;
-    }
-
     public Service getService() {
         return service;
     }
@@ -161,35 +135,28 @@ public class ActivityGroup implements Serializable {
         this.status = status;
     }
 
-    public String getDaysOfWeek() {
-        return daysOfWeek;
+    public int getNumberOfDays() {
+        return numberOfDays;
     }
 
-    public void setDaysOfWeek(String daysOfWeek) {
-        this.daysOfWeek = daysOfWeek;
+    public void setNumberOfDays(int numberOfDays) {
+        this.numberOfDays = numberOfDays;
     }
 
-    public Date getStartTime() {
-        return startTime;
+    public float getPrice() {
+        return price;
     }
 
-    public Date getEndTime() {
-        return endTime;
+    public void setPrice(float price) {
+        this.price = price;
     }
 
-    public void setStartTime(Date startTime) {
-        this.startTime = startTime;
+    public List<ActivityDay> getActivityDays() {
+        return activityDays;
     }
 
-    public void setEndTime(Date endTime) {
-        this.endTime = endTime;
+    public void setActivityDays(List<ActivityDay> activityDays) {
+        this.activityDays = activityDays;
     }
 
-    public boolean isWeekly() {
-        return weekly;
-    }
-
-    public void setWeekly(boolean weekly) {
-        this.weekly = weekly;
-    }
 }

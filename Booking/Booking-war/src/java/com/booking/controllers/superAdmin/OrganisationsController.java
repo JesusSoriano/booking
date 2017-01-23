@@ -41,7 +41,7 @@ public class OrganisationsController implements Serializable {
         try {
             // Registrar activación de la organización
             String ipAddress = FacesUtil.getRequest().getRemoteAddr();
-            auditFacade.createAudit(AuditType.ACTIVATE_ORGANISATION, logedUser, ipAddress, organisation.getId(), organisation);
+            auditFacade.createAudit(AuditType.ACTIVAR_ORGANIZACION, logedUser, ipAddress, organisation.getId(), organisation);
         } catch (Exception e) {
             Logger.getLogger(OrganisationsController.class.getName()).log(Level.SEVERE, null, e);
         }
@@ -56,7 +56,7 @@ public class OrganisationsController implements Serializable {
         try {
             // Registrar suspensión de la organización
             String ipAddress = FacesUtil.getRequest().getRemoteAddr();
-            auditFacade.createAudit(AuditType.SUSPEND_ORGANISATION, logedUser, ipAddress, organisation.getId(), organisation);
+            auditFacade.createAudit(AuditType.SUSPENDER_ORGANIZACION, logedUser, ipAddress, organisation.getId(), organisation);
         } catch (Exception e) {
             Logger.getLogger(OrganisationsController.class.getName()).log(Level.SEVERE, null, e);
         }

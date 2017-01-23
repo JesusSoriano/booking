@@ -21,8 +21,8 @@ import javax.persistence.TemporalType;
  * @author Jesús Soriano
  */
 @Entity
-@Table(name = "group_users")
-public class GroupUser implements Serializable {
+@Table(name = "bookings")
+public class Booking implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -31,17 +31,17 @@ public class GroupUser implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private long id;
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REMOVE, CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE})
     @JoinColumn(name = "activity_group", referencedColumnName = "id")
     private ActivityGroup activityGroup;
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REMOVE, CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE})
     @JoinColumn(name = "group_user", referencedColumnName = "id")
     private User groupUser;
     @Column(name = "created_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdDate;
 
-    public GroupUser() {
+    public Booking() {
     }
 
     public long getId() {

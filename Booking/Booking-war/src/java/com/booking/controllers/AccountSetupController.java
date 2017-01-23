@@ -19,7 +19,6 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.servlet.http.HttpServletRequest;
 
 /**
  *
@@ -128,7 +127,7 @@ public class AccountSetupController implements Serializable {
             try {
                 // Audit user registration
                 String ipAddress = FacesUtil.getCurrentIPAddress();
-                auditFacade.createAudit(AuditType.SIGN_UP, newUser, ipAddress, newUser.getId(), organisation);
+                auditFacade.createAudit(AuditType.REGISTRO, newUser, ipAddress, newUser.getId(), organisation);
             } catch (Exception e) {
                 Logger.getLogger(AccountSetupController.class.getName()).log(Level.SEVERE, null, e);
             }

@@ -10,22 +10,24 @@ import java.util.ArrayList;
  */
 public enum AuditType {
 
-    LOGGED_IN("ha entrado en el sistema"),
-    LOGGED_OUT("ha salido del sistema"),
-    SIGN_UP("se ha registrado"),
-    ACCOUNT_CANCELLED("se ha dado de baja"),
-    CREATE_SERVICE("ha creado un servicio"),
-    SUSPEND_SERVICE("ha suspendido un servicio"),
-    ACTIVATE_SERVICE("ha activado un servicio"),
-    CREATE_GROUP("ha creado un grupo"),
-    SUSPEND_GROUP("ha suspendido un grupo"),
-    ACTIVATE_GROUP("ha activado un grupo"),
-    SUSPEND_USER("ha suspendido un usuario"),
-    ACTIVATE_USER("ha activado un usuario"),
-    SUSPEND_ADMIN("ha suspendido un administrador"),
-    ACTIVATE_ADMIN("ha activado un administrador"),
-    SUSPEND_ORGANISATION("ha suspendido una organización"),
-    ACTIVATE_ORGANISATION("ha activado una organización");
+    INICIO_SESION("ha entrado en el sistema"),
+    CERRAR_SESION("ha salido del sistema"),
+    REGISTRO("se ha registrado"),
+    CANCELAR_CUENTA("se ha dado de baja"),
+    CREAR_SERVICIO("ha creado un servicio"),
+    SUSPENDER_SERVICIO("ha suspendido un servicio"),
+    ACTIVAR_SERVICIO("ha activado un servicio"),
+    CREAR_CLASE("ha creado una clase"),
+    SUSPENDER_CLASE("ha suspendido una clase"),
+    ACTIVAR_CLASE("ha activado una clase"),
+    RESERVAR_CLASE("ha reservado una clase"),
+    CANCELAR_RESERVA("ha cancelado la reserva de una clase"),
+    SUSPENDER_USUARIO("ha suspendido un usuario"),
+    ACTIVAR_USUARIO("ha activado un usuario"),
+    SUSPENDER_ADMIN("ha suspendido un administrador"),
+    ACTIVAR_ADMIN("ha activado un administrador"),
+    SUSPENDER_ORGANIZACION("ha suspendido una organización"),
+    ACTIVAR_ORGANIZACION("ha activado una organización");
     
     private final String label;
 
@@ -39,43 +41,57 @@ public enum AuditType {
 
     public static List<AuditType> getAllAuditTypes() {
         List<AuditType> audits = new ArrayList<>();
-        audits.add(LOGGED_IN);
-        audits.add(LOGGED_OUT);
-        audits.add(SIGN_UP);
-        audits.add(ACCOUNT_CANCELLED);
-        audits.add(SUSPEND_USER);
-        audits.add(ACTIVATE_USER);
-        audits.add(SUSPEND_ADMIN);
-        audits.add(ACTIVATE_ADMIN);
-        audits.add(SUSPEND_ORGANISATION);
-        audits.add(ACTIVATE_ORGANISATION);
-        audits.add(CREATE_SERVICE);
-        audits.add(ACTIVATE_SERVICE);
-        audits.add(SUSPEND_SERVICE);
+        audits.add(INICIO_SESION);
+        audits.add(CERRAR_SESION);
+        audits.add(REGISTRO);
+        audits.add(CANCELAR_CUENTA);
+        audits.add(CREAR_SERVICIO);
+        audits.add(ACTIVAR_SERVICIO);
+        audits.add(SUSPENDER_SERVICIO);
+        audits.add(CREAR_CLASE);
+        audits.add(SUSPENDER_CLASE);
+        audits.add(ACTIVAR_CLASE);
+        audits.add(RESERVAR_CLASE);
+        audits.add(CANCELAR_RESERVA);
+        audits.add(SUSPENDER_USUARIO);
+        audits.add(ACTIVAR_USUARIO);
+        audits.add(SUSPENDER_ADMIN);
+        audits.add(ACTIVAR_ADMIN);
+        audits.add(SUSPENDER_ORGANIZACION);
+        audits.add(ACTIVAR_ORGANIZACION);
         return audits;
     }
 
     public static List<AuditType> getAuditTypesForAdmin() {
         List<AuditType> audits = new ArrayList<>();
-        audits.add(LOGGED_IN);
-        audits.add(LOGGED_OUT);
-        audits.add(SIGN_UP);
-        audits.add(ACCOUNT_CANCELLED);
-        audits.add(SUSPEND_USER);
-        audits.add(ACTIVATE_USER);
-        audits.add(CREATE_SERVICE);
-        audits.add(ACTIVATE_SERVICE);
-        audits.add(SUSPEND_SERVICE);
+        audits.add(INICIO_SESION);
+        audits.add(CERRAR_SESION);
+        audits.add(REGISTRO);
+        audits.add(CANCELAR_CUENTA);
+        audits.add(CREAR_SERVICIO);
+        audits.add(ACTIVAR_SERVICIO);
+        audits.add(SUSPENDER_SERVICIO);
+        audits.add(CREAR_CLASE);
+        audits.add(SUSPENDER_CLASE);
+        audits.add(ACTIVAR_CLASE);
+        audits.add(RESERVAR_CLASE);
+        audits.add(CANCELAR_RESERVA);
+        audits.add(SUSPENDER_USUARIO);
+        audits.add(ACTIVAR_USUARIO);
+        audits.add(SUSPENDER_ADMIN);
+        audits.add(ACTIVAR_ADMIN);
         return audits;
     }
     
 
     public static List<AuditType> getAuditTypesForClient() {
         List<AuditType> audits = new ArrayList<>();
-        audits.add(LOGGED_IN);
-        audits.add(LOGGED_OUT);
-        audits.add(SIGN_UP);
-        audits.add(ACCOUNT_CANCELLED);
+        audits.add(INICIO_SESION);
+        audits.add(CERRAR_SESION);
+        audits.add(REGISTRO);
+        audits.add(CANCELAR_CUENTA);
+        audits.add(RESERVAR_CLASE);
+        audits.add(CANCELAR_RESERVA);
         return audits;
     }
     

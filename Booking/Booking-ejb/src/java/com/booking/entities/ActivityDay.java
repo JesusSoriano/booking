@@ -1,17 +1,19 @@
 package com.booking.entities;
 
+import com.booking.enums.Status;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -21,8 +23,8 @@ import javax.persistence.TemporalType;
  * @author Jesús Soriano
  */
 @Entity
-@Table(name = "appointments")
-public class Appointment implements Serializable {
+@Table(name = "group_days")
+public class ActivityDay implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -33,28 +35,20 @@ public class Appointment implements Serializable {
     private long id;
     @Column(name = "description")
     private String description;
+    @Column(name = "status")
+    @Enumerated(EnumType.STRING)
+    private Status status;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "service", referencedColumnName = "id")
-    private Service service;
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "appointment_user", referencedColumnName = "id")
-    private User appointmentUser;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "organisation", referencedColumnName = "id")
-    private Organisation organisation;
-    @Column(name = "created_date")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date createdDate;
+    @JoinColumn(name = "activityGroup", referencedColumnName = "id")
+    private ActivityGroup activityGroup;
     @Column(name = "start_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date startDate;
     @Column(name = "end_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date endDate;
-    @Column(name = "available")
-    private boolean available;
 
-    public Appointment() {
+    public ActivityDay() {
     }
 
     public long getId() {
@@ -69,36 +63,12 @@ public class Appointment implements Serializable {
         this.description = description;
     }
 
-    public Organisation getOrganisation() {
-        return organisation;
+    public Status getStatus() {
+        return status;
     }
 
-    public void setOrganisation(Organisation organisation) {
-        this.organisation = organisation;
-    }
-
-    public User getAppointmentUser() {
-        return appointmentUser;
-    }
-
-    public void setAppointmentUser(User appointmentUser) {
-        this.appointmentUser = appointmentUser;
-    }
-
-    public Service getService() {
-        return service;
-    }
-
-    public void setService(Service service) {
-        this.service = service;
-    }
-
-    public Date getCreatedDate() {
-        return createdDate;
-    }
-
-    public void setCreatedDate(Date createdDate) {
-        this.createdDate = createdDate;
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
     public Date getStartDate() {
@@ -117,11 +87,12 @@ public class Appointment implements Serializable {
         this.endDate = endDate;
     }
 
-    public void setAvailable(boolean available) {
-        this.available = available;
+    public ActivityGroup getActivityGroup() {
+        return activityGroup;
     }
 
-    public boolean isAvailable() {
-        return available;
+    public void setActivityGroup(ActivityGroup activityGroup) {
+        this.activityGroup = activityGroup;
     }
+
 }

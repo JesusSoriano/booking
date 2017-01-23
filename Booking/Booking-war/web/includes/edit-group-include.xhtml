@@ -13,17 +13,6 @@
                 <div class="main-content">
                     <div class="row">
                         <div class="col-xs-12 col-sm-6 col-md-6">
-                            <div class="row">
-                                <div class="col-xs-4">
-                                    <p>#{txt['group_frecuency']}</p>
-                                </div>
-                                <div class="col-xs-8">
-                                    <h:selectOneRadio value="#{editGroupController.weekly}">
-                                        <f:selectItem itemValue="True" itemLabel="&ensp;#{txt['repeat_weekly']}&emsp;" />
-                                        <f:selectItem itemValue="False" itemLabel="&ensp;#{txt['one_day_group']}&emsp;" />	   			
-                                    </h:selectOneRadio>
-                                </div>
-                            </div>
                             <div class="row"> 
                                 <div class="col-xs-4">
                                     <h:outputText value="#{txt['service']}" /><sup class="mandatoryField">*</sup>
@@ -48,10 +37,12 @@
                                     <p>#{txt['description']}</p>
                                 </div>
                                 <div class="col-xs-8">
-                                    <h:inputText id="description" styleClass="form-control" value="#{editGroupController.groupDescription}" />
+                                    <h:inputTextarea id="description" styleClass="form-control" value="#{editGroupController.groupDescription}" />
                                     <h:message for="description"  styleClass="loginError" errorClass="msgError" infoClass="msgInfo"/>
                                 </div>
                             </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-6">
                             <div class="row">
                                 <div class="col-xs-4">
                                     <p>#{txt['maximum_users']}<sup class="mandatoryField">*</sup></p>
@@ -61,43 +52,22 @@
                                     <h:message for="maximumUsers"  styleClass="loginError" errorClass="msgError" infoClass="msgInfo"/>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-xs-12 col-sm-6 col-md-6">
                             <div class="row">
                                 <div class="col-xs-4">
-                                    <p>#{txt['days_per_week']}<sup class="mandatoryField">*</sup></p>
+                                    <p>#{txt['number_of_days']}<sup class="mandatoryField">*</sup></p>
                                 </div>
                                 <div class="col-xs-8">
-                                    <h:selectOneMenu id="daysPerWeek" styleClass="form-control" value="#{editGroupController.daysPerWeek}" >
-                                        <f:selectItems value="#{editGroupController.weekDays}" />
-                                    </h:selectOneMenu>
+                                    <h:inputText id="numberOfDays" styleClass="form-control" value="#{editGroupController.numberOfDays}" required="true" requiredMessage="Introduce el número de días de la actividad"/>
+                                    <h:message for="numberOfDays"  styleClass="loginError" errorClass="msgError" infoClass="msgInfo"/>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-xs-4">
-                                    <p>#{txt['days_of_week']}<sup class="mandatoryField">*</sup></p>
+                                    <p>#{txt['price']}<sup class="mandatoryField">*</sup></p>
                                 </div>
                                 <div class="col-xs-8">
-                                    <h:inputText id="daysOfWeek" styleClass="form-control" value="#{editGroupController.daysOfWeek}" />
-                                    <h:message for="daysOfWeek"  styleClass="loginError" errorClass="msgError" infoClass="msgInfo"/>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-xs-4">
-                                    <p>#{txt['starting_time']}</p>
-                                </div>
-                                <div class="col-xs-8">
-                                    <p:calendar id="startTime" value="#{editGroupController.startingTime}" pattern="HH:mm" timeOnly="true" required="true" requiredMessage="Introduce la hora de inicio"/>
-                                    <h:message for="startTime"  styleClass="loginError" errorClass="msgError" infoClass="msgInfo"/>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-xs-4">
-                                    <p>#{txt['ending_time']}</p>
-                                </div>
-                                <div class="col-xs-8">
-                                    <p:calendar id="endTime" value="#{editGroupController.endingTime}" pattern="HH:mm" timeOnly="true" required="true" requiredMessage="Introduce la hora de finalización" />
-                                    <h:message for="endTime"  styleClass="loginError" errorClass="msgError" infoClass="msgInfo"/>
+                                    <h:inputText id="price" styleClass="form-control" value="#{editGroupController.price}" required="true" requiredMessage="Introduce el precio de la actividad"/>
+                                    <h:message for="price"  styleClass="loginError" errorClass="msgError" infoClass="msgInfo"/>
                                 </div>
                             </div>
                         </div>

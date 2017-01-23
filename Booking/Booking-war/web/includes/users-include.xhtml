@@ -26,32 +26,25 @@
                     <p:dataTable id="usersTable" value="#{usersController.users}" var="user" styleClass="common-table text-center" paginator="true" rows="20" paginatorPosition="bottom" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" 
                                  rowsPerPageTemplate="10, 20, 50, #{usersController.users.size()}" emptyMessage="#{txt['empty_records']}"> 
                         <p:column headerText="#{txt['name']}" sortBy="#{user.firstName}"> 
-                            <h:outputText value="#{user.firstName}" rendered="#{user.status ne 'SUSPENDED'}" /> 
-                            <h:outputText value="#{user.firstName}" rendered="#{user.status eq 'SUSPENDED'}" style="color:lightgray" /> 
+                            <h:outputText value="#{user.firstName}" class="#{user.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" /> 
                         </p:column> 
                         <p:column headerText="#{txt['surname']}" sortBy="#{user.firstLastName}"> 
-                            <h:outputText value="#{user.firstLastName} #{user.secondLastName}" rendered="#{user.status ne 'SUSPENDED'}" /> 
-                            <h:outputText value="#{user.firstLastName} #{user.secondLastName}" rendered="#{user.status eq 'SUSPENDED'}" style="color:lightgray" /> 
+                            <h:outputText value="#{user.firstLastName} #{user.secondLastName}" class="#{user.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" /> 
                         </p:column> 
                         <p:column headerText="#{txt['email']}" sortBy="#{user.email}"> 
-                            <h:outputText value="#{user.email}" rendered="#{user.status ne 'SUSPENDED'}" /> 
+                            <h:outputText value="#{user.email}" class="#{user.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" /> 
                             <h:outputText value="#{user.email}" rendered="#{user.status eq 'SUSPENDED'}" style="color:lightgray" /> 
                         </p:column> 
                         <p:column headerText="#{txt['address']}" sortBy="#{user.address.city}"> 
-                            <h:outputText value="#{user.address.addressLine}" rendered="#{user.status ne 'SUSPENDED'}" style="display: block" /> 
-                            <h:outputText value="#{user.address.addressLine2}" rendered="#{user.status ne 'SUSPENDED'}" style="display: block" /> 
-                            <h:outputText value="#{user.address.city}" rendered="#{user.status ne 'SUSPENDED'}" />
-                            <h:outputText value="#{user.address.addressLine}" rendered="#{user.status eq 'SUSPENDED'}" style="display: block; color:lightgray" /> 
-                            <h:outputText value="#{user.address.addressLine2}" rendered="#{user.status eq 'SUSPENDED'}" style="display: block; color:lightgray" /> 
-                            <h:outputText value="#{user.address.city}" rendered="#{user.status eq 'SUSPENDED'}" style="color:lightgray" /> 
+                            <h:outputText value="#{user.address.addressLine}" class="#{user.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" style="display: block" /> 
+                            <h:outputText value="#{user.address.addressLine2}" class="#{user.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" style="display: block" /> 
+                            <h:outputText value="#{user.address.city}" class="#{user.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" />
                         </p:column> 
                         <p:column headerText="#{txt['phone']}" sortBy="#{user.phone}"> 
-                            <h:outputText value="#{user.phone}" rendered="#{user.status ne 'SUSPENDED'}" /> 
-                            <h:outputText value="#{user.phone}" rendered="#{user.status eq 'SUSPENDED'}" style="color:lightgray" /> 
+                            <h:outputText value="#{user.phone}" class="#{user.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" /> 
                         </p:column> 
                         <p:column headerText="#{txt['organisation']}" sortBy="#{user.organisation.name}" rendered="#{usersController.userRole eq 'SUPER_ADMIN'}"> 
-                            <h:outputText value="#{user.organisation.name}" rendered="#{user.status ne 'SUSPENDED'}" /> 
-                            <h:outputText value="#{user.organisation.name}" rendered="#{user.status eq 'SUSPENDED'}" style="color:lightgray" /> 
+                            <h:outputText value="#{user.organisation.name}" class="#{user.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" /> 
                         </p:column> 
                         <p:column headerText="#{txt['options']}"> 
                             <h:link outcome="user-profile.xhtml?faces-redirect=true&amp;user=#{user.id}"> 

@@ -7,6 +7,7 @@ import com.booking.enums.AuditType;
 import com.booking.enums.Role;
 import com.booking.exceptions.ServiceAlreadyExistsException;
 import com.booking.facades.AuditFacade;
+import com.booking.facades.GroupFacade;
 import com.booking.facades.ServiceFacade;
 import com.booking.util.Constants;
 import com.booking.util.FacesUtil;
@@ -27,15 +28,17 @@ public class ServicesController implements Serializable {
     @EJB
     private ServiceFacade serviceFacade;
     @EJB
+    private GroupFacade groupFacade;
+    @EJB
     private AuditFacade auditFacade;
 
     private List<Service> services;
     private User loggedUser;
     private Organisation organisation;
+    private Service selectedService;
     private String newServiceName;
-    private String oldServiceName;
     private String newServiceDescription;
-    private boolean newGroup;
+    private boolean isNewService;
 
     public ServicesController() {
     }
@@ -45,18 +48,18 @@ public class ServicesController implements Serializable {
         loggedUser = FacesUtil.getCurrentUser();
         organisation = FacesUtil.getCurrentOrganisation();
 
-        newGroup = true;
+        isNewService = true;
         services = serviceFacade.findAllServicesOfOrganisation(organisation);
     }
 
     public String activateService(Service service) {
         serviceFacade.activateService(service);
-        FacesUtil.addSuccessMessage("servicesForm:msg", "El servicio ha sido activada correctamente.");
+        FacesUtil.addSuccessMessage("servicesForm:msg", "El servicio ha sido activado correctamente.");
 
         try {
             // Audit service activation
             String ipAddress = FacesUtil.getRequest().getRemoteAddr();
-            auditFacade.createAudit(AuditType.ACTIVATE_SERVICE, loggedUser, ipAddress, service.getId(), organisation);
+            auditFacade.createAudit(AuditType.ACTIVAR_SERVICIO, loggedUser, ipAddress, service.getId(), organisation);
         } catch (Exception e) {
             Logger.getLogger(ServicesController.class.getName()).log(Level.SEVERE, null, e);
         }
@@ -71,7 +74,7 @@ public class ServicesController implements Serializable {
         try {
             // Audit service suspention
             String ipAddress = FacesUtil.getRequest().getRemoteAddr();
-            auditFacade.createAudit(AuditType.SUSPEND_SERVICE, loggedUser, ipAddress, service.getId(), organisation);
+            auditFacade.createAudit(AuditType.SUSPENDER_SERVICIO, loggedUser, ipAddress, service.getId(), organisation);
         } catch (Exception e) {
             Logger.getLogger(ServicesController.class.getName()).log(Level.SEVERE, null, e);
         }
@@ -80,6 +83,10 @@ public class ServicesController implements Serializable {
     }
 
     public String createNewService() {
+        if (newServiceName.trim().isEmpty()) {
+            FacesUtil.addErrorMessage("servicesForm:msg", "Lo sentimos, no ha sido posible crear el nuevo servicio: Introduzca un nombre.");
+            return "";
+        }
         RequestContext context = RequestContext.getCurrentInstance();
         try {
             Service newService = serviceFacade.createNewService(newServiceName, newServiceDescription, organisation);
@@ -87,7 +94,7 @@ public class ServicesController implements Serializable {
             FacesUtil.addSuccessMessage("servicesForm:msg", "El nuevo servicio ha sido creado correctamente.");
             // Audit service creation
             String ipAddress = FacesUtil.getRequest().getRemoteAddr();
-            auditFacade.createAudit(AuditType.CREATE_SERVICE, loggedUser, ipAddress, newService.getId(), organisation);
+            auditFacade.createAudit(AuditType.CREAR_SERVICIO, loggedUser, ipAddress, newService.getId(), organisation);
         } catch (ServiceAlreadyExistsException e) {
             FacesUtil.addErrorMessage("servicesForm:msg", e.getMessage());
             Logger.getLogger(ServicesController.class.getName()).log(Level.SEVERE, null, e);
@@ -104,41 +111,46 @@ public class ServicesController implements Serializable {
     }
 
     public String updateService() {
-        RequestContext context = RequestContext.getCurrentInstance();
-        try {
-            Service updatedService = serviceFacade.updateService(oldServiceName, newServiceName, newServiceDescription, organisation);
-            context.execute("PF('newServiceDialog').hide();");
-            if (updatedService != null) {
-                FacesUtil.addSuccessMessage("servicesForm:msg", "El servicio ha sido actualizado correctamente.");
-            } else {
+        System.out.println("-------- UPDATE SERVICE");
+        if (selectedService != null) {
+            RequestContext context = RequestContext.getCurrentInstance();
+            try {
+                Service updatedService = serviceFacade.updateService(selectedService, newServiceName, newServiceDescription, organisation);
+                context.execute("PF('newServiceDialog').hide();");
+                if (updatedService != null) {
+                    FacesUtil.addSuccessMessage("servicesForm:msg", "El servicio ha sido actualizado correctamente.");
+                } else {
+                    FacesUtil.addErrorMessage("servicesForm:msg", "Lo sentimos, no ha sido posible editar el servicio.");
+                }
+            } catch (ServiceAlreadyExistsException e) {
+                FacesUtil.addErrorMessage("servicesForm:msg", e.getMessage());
+                Logger.getLogger(ServicesController.class.getName()).log(Level.SEVERE, null, e);
+                return "";
+            } catch (Exception e) {
                 FacesUtil.addErrorMessage("servicesForm:msg", "Lo sentimos, no ha sido posible editar el servicio.");
+                Logger.getLogger(ServicesController.class.getName()).log(Level.SEVERE, null, e);
+                return "";
             }
-        } catch (ServiceAlreadyExistsException e) {
-            FacesUtil.addErrorMessage("servicesForm:msg", e.getMessage());
-            Logger.getLogger(ServicesController.class.getName()).log(Level.SEVERE, null, e);
-            return "";
-        } catch (Exception e) {
-            FacesUtil.addErrorMessage("servicesForm:msg", "Lo sentimos, no ha sido posible editar el servicio.");
-            Logger.getLogger(ServicesController.class.getName()).log(Level.SEVERE, null, e);
-            return "";
         }
 
+        selectedService = null;
         newServiceName = "";
         newServiceDescription = "";
         return "services.xhtml" + Constants.FACES_REDIRECT;
     }
 
     public void prepareService(Service service) {
-        oldServiceName = service.getName();
-        newServiceName = oldServiceName;
+        selectedService = service;
+        newServiceName = service.getName();
         newServiceDescription = service.getDescription();
-        newGroup = false;
+        isNewService = false;
     }
 
     public void prepareNewService() {
+        selectedService = null;
         newServiceName = "";
         newServiceDescription = "";
-        newGroup = true;
+        isNewService = true;
     }
 
     public List<Service> getServices() {
@@ -165,7 +177,10 @@ public class ServicesController implements Serializable {
         this.newServiceDescription = newServiceDescription;
     }
 
-    public boolean isNewGroup() {
-        return newGroup;
+    public boolean isIsNewService() {
+        return isNewService;
+    }
+    public int getNumberOfGroups(Service service){
+        return groupFacade.findNumberOfActiveGroupsOfService(service, organisation);
     }
 }

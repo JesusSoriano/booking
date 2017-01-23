@@ -76,6 +76,7 @@ h3 {
     min-height: 300px;
 }
 
+/* Header bar */
 .header-top {
     background-color: #000;
     height: 100px;
@@ -93,6 +94,7 @@ h3 {
 a {
     color:#2B5498;
 }
+
 
 .user-details {
     position: absolute;
@@ -128,6 +130,7 @@ a {
     margin-top:20px;
 }
 
+/* Language selector */
 .language-selector-before {
     position: absolute;
     top: 15px;
@@ -139,8 +142,10 @@ a {
     right: 0px;
 }
 .language-selector select,
-.language-selector-before select{
-    width: 80px;
+.language-selector-before select {
+    width: 90px;
+    background-color: #000;
+    color: #0386A6;
 }
 
 
@@ -167,14 +172,6 @@ a {
 
 #navigation {
     background-color: #f8f8f8;
-    /*    background: rgb(240,245,245);  //Old browsers 
-        background: -moz-linear-gradient(top,  rgb(249,252,252) 0%, rgb(240,245,245) 100%);  //FF3.6+ 
-        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgb(249,252,252)), color-stop(100%, rgb(240,245,245)));  //Chrome,Safari4+ 
-        background: -webkit-linear-gradient(top,  rgb(249,252,252) 0%, rgb(240,245,245) 100%); // Chrome10+,Safari5.1+ 
-        background: -o-linear-gradient(top,  rgb(249,252,252) 0%, rgb(240,245,245) 100%); // Opera 11.10+ 
-        background: -ms-linear-gradient(top,  rgb(249,252,252) 0%, rgb(240,245,245) 100%); // IE10+ 
-        background: linear-gradient(to bottom,  rgb(249,252,252) 0%, rgb(240,245,245) 100%); // W3C 
-        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='rgb(249,252,252)', endColorstr='rgb(240,245,245)',GradientType=0 ); // IE6-9 */
 }
 
 ul#nav {
@@ -536,14 +533,47 @@ input[type='text'], input[type='password'] {
 }
 
 
+.form-control {
+    height: auto;
+}
+
+select[multiple], select[size] {
+    width: 100%;
+}
+
 .page-title {
     margin-bottom: 40px;
+}
+.page-subtitle {
+}
+.page-subtitle h2 {
+    color: #888;
+    font-size: 25px;
+    margin: 0px 0px 15px;
+}
+.page-subtitle-no-spacing h4 {
+    margin-top: -10px;
+    color: #999;
+    font-size: 14px;
+}
+.page-subtitle h4 {
+    margin-top: -10px;
+    color: #999;
+    font-size: 14px;
+}
+.page-subtitle h4:last-child {
+    margin-bottom: 50px;
+}
+.suspended {
+    color: #f92600;
+    font-style: italic;
 }
 .common-table {
 }
 .table-action {
     height: 20px;
     margin-right: 10px;
+    cursor: pointer;
 }
 .table-action-width {
     width: 21px;
@@ -564,6 +594,9 @@ input[type='text'], input[type='password'] {
 .lightgray-color {
     color:lightgray;
 }
+.blue-link {
+    color: #428bca;
+}
 
 .padding-right-30 {
     padding-right: 30px;
@@ -578,8 +611,16 @@ input[type='text'], input[type='password'] {
     padding: 10px 20px;
 }
 
-.marging-bottom-10 {
+.margin-bottom-10 {
     margin-bottom: 10px;
+}
+
+.margin-bottom-40 {
+    margin-bottom: 40px;
+}
+
+.margin-bottom-70 {
+    margin-bottom: 70px;
 }
 
 .widht-100 {

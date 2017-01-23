@@ -1,5 +1,6 @@
 package com.booking.controllers;
 
+import com.booking.entities.ActivityDay;
 import com.booking.entities.ActivityGroup;
 import com.booking.entities.Organisation;
 import com.booking.entities.Service;
@@ -7,14 +8,14 @@ import com.booking.entities.User;
 import com.booking.enums.AuditType;
 import com.booking.enums.Role;
 import com.booking.facades.AuditFacade;
+import com.booking.facades.BookingFacade;
 import com.booking.facades.GroupFacade;
 import com.booking.facades.ServiceFacade;
+import com.booking.facades.UserFacade;
 import com.booking.util.Constants;
 import com.booking.util.FacesUtil;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -32,26 +33,32 @@ public class EditGroupController implements Serializable {
     @EJB
     private GroupFacade groupFacade;
     @EJB
+    private BookingFacade bookingFacade;
+    @EJB
     private ServiceFacade serviceFacade;
     @EJB
     private AuditFacade auditFacade;
+    @EJB
+    private UserFacade userFacade;
 
     private List<SelectItem> services;
     private long selectedServiceId;
+    private List<SelectItem> allUsers;
+    private long selectedUserId;
     private User loggedUser;
     private Organisation organisation;
     private String groupName;
     private String groupDescription;
     private int maximumUsers;
     private int bookedPlaces;
-    private int daysPerWeek;
-    private String daysOfWeek;
-    private Date startingTime;
-    private Date endingTime;
-    private boolean weekly;
+    private int numberOfDays;
+    private float price;
     private boolean newGroup;
     private ActivityGroup currentGroup;
-    private List<Integer> weekDays;
+    private List<ActivityDay> activityDays; // días de cada actividad. TODO: nueva pantalla para crear los días
+    // dependiendo del número?
+    private List<User> groupUsers;
+    private String groupId;
 
     public EditGroupController() {
     }
@@ -62,14 +69,17 @@ public class EditGroupController implements Serializable {
         organisation = FacesUtil.getCurrentOrganisation();
 
         services = new ArrayList<>();
-        for (Service s : serviceFacade.findAllServicesOfOrganisation(organisation)) {
+        for (Service s : serviceFacade.findAllActiveServicesOfOrganisation(organisation)) {
             services.add(new SelectItem(s.getId(), s.getName()));
         }
-        weekDays = Arrays.asList(1, 2, 3, 4, 5, 6, 7);
-        weekly = true;
+        allUsers = new ArrayList<>();
+        for (User u : userFacade.findAllActiveAdminsAndClientsOfOrganisation(organisation)) {
+            allUsers.add(new SelectItem(u.getId(), u.getFullName()));
+        }
+        selectedUserId = (long) allUsers.get(0).getValue();
 
-        String groupId = FacesUtil.getParameter("group");
-        if (groupId != null && (loggedUser.getUserRole().getRole() == Role.ADMIN || loggedUser.getUserRole().getRole() == Role.SUPER_ADMIN)) {
+        groupId = FacesUtil.getParameter("group");
+        if (groupId != null) {
             currentGroup = groupFacade.findGroupOfOrganisation(Integer.valueOf(groupId), organisation);
 
             if (currentGroup != null) {
@@ -78,15 +88,15 @@ public class EditGroupController implements Serializable {
                 groupDescription = currentGroup.getDescription();
                 maximumUsers = currentGroup.getMaximumUsers();
                 bookedPlaces = currentGroup.getBookedPlaces();
-                daysPerWeek = currentGroup.getDaysPerWeek();
-                daysOfWeek = currentGroup.getDaysOfWeek();
-                startingTime = currentGroup.getStartTime();
-                endingTime = currentGroup.getEndTime();
-                weekly = currentGroup.isWeekly();
+//                startingTime = currentGroup.getStartTime();
+//                endingTime = currentGroup.getEndTime();
+                numberOfDays = currentGroup.getNumberOfDays();
             }
         } else {
             newGroup = true;
         }
+
+        groupUsers = bookingFacade.findAllBookedUsersOfGroup(currentGroup);
     }
 
     public String activateGroup(ActivityGroup group) {
@@ -96,7 +106,7 @@ public class EditGroupController implements Serializable {
         try {
             // Audit group activation
             String ipAddress = FacesUtil.getRequest().getRemoteAddr();
-            auditFacade.createAudit(AuditType.ACTIVATE_SERVICE, loggedUser, ipAddress, group.getId(), organisation);
+            auditFacade.createAudit(AuditType.ACTIVAR_SERVICIO, loggedUser, ipAddress, group.getId(), organisation);
         } catch (Exception e) {
             Logger.getLogger(EditGroupController.class.getName()).log(Level.SEVERE, null, e);
         }
@@ -111,7 +121,7 @@ public class EditGroupController implements Serializable {
         try {
             // Audit group suspention
             String ipAddress = FacesUtil.getRequest().getRemoteAddr();
-            auditFacade.createAudit(AuditType.SUSPEND_SERVICE, loggedUser, ipAddress, group.getId(), organisation);
+            auditFacade.createAudit(AuditType.SUSPENDER_SERVICIO, loggedUser, ipAddress, group.getId(), organisation);
         } catch (Exception e) {
             Logger.getLogger(EditGroupController.class.getName()).log(Level.SEVERE, null, e);
         }
@@ -123,12 +133,12 @@ public class EditGroupController implements Serializable {
         RequestContext context = RequestContext.getCurrentInstance();
         try {
             Service selectedService = serviceFacade.find(selectedServiceId);
-            ActivityGroup newActivityGroup = groupFacade.createNewGroup(selectedService, groupName, groupDescription, maximumUsers, daysPerWeek, daysOfWeek, startingTime, endingTime, weekly, organisation);
+            ActivityGroup newActivityGroup = groupFacade.createNewGroup(selectedService, groupName, groupDescription, maximumUsers, numberOfDays, price, organisation);
             context.execute("PF('newGroupDialog').hide();");
             FacesUtil.addSuccessMessage("groupsForm:msg", "El nuevo servicio ha sido creado correctamente.");
             // Audit group creation
             String ipAddress = FacesUtil.getRequest().getRemoteAddr();
-            auditFacade.createAudit(AuditType.CREATE_SERVICE, loggedUser, ipAddress, newActivityGroup.getId(), organisation);
+            auditFacade.createAudit(AuditType.CREAR_SERVICIO, loggedUser, ipAddress, newActivityGroup.getId(), organisation);
             return "view-group.xhtml" + Constants.FACES_REDIRECT + "&amp;group=" + newActivityGroup.getId();
         } catch (Exception e) {
             FacesUtil.addErrorMessage("groupsForm:msg", "Lo sentimos, no ha sido posible crear el nuevo servicio.");
@@ -139,11 +149,9 @@ public class EditGroupController implements Serializable {
     }
 
     public String updateGroup() {
-        RequestContext context = RequestContext.getCurrentInstance();
         try {
             Service selectedService = serviceFacade.find(selectedServiceId);
-            ActivityGroup updatedGroup = groupFacade.updateGroup(currentGroup, selectedService, groupName, groupDescription, maximumUsers, daysPerWeek, daysOfWeek, startingTime, endingTime, weekly);
-            context.execute("PF('newGroupDialog').hide();");
+            ActivityGroup updatedGroup = groupFacade.updateGroup(currentGroup, selectedService, groupName, groupDescription, maximumUsers, numberOfDays, price);
             if (updatedGroup != null) {
 //                FacesUtil.addSuccessMessage("groupsForm:msg", "El servicio ha sido actualizado correctamente.");
                 return "view-group.xhtml" + Constants.FACES_REDIRECT + "&amp;group=" + updatedGroup.getId();
@@ -158,8 +166,62 @@ public class EditGroupController implements Serializable {
         return "groups.xhtml" + Constants.FACES_REDIRECT;
     }
 
+    public String bookGroup() {
+        try {
+            User selectedUser = userFacade.find(selectedUserId);
+            if (selectedUser != null) {
+                // Create the class user
+                bookingFacade.createNewBooking(selectedUser, currentGroup);
+                // Add a booked place in the class
+                groupFacade.addGroupBooking(currentGroup);
+
+                FacesUtil.addSuccessMessage("viewGroupForm:msg", "La plaza ha sido reservada correctamente.");
+
+                // Audit new booking
+                String ipAddress = FacesUtil.getRequest().getRemoteAddr();
+                auditFacade.createAudit(AuditType.RESERVAR_CLASE, selectedUser, ipAddress, currentGroup.getId(), organisation);
+
+            } else {
+                FacesUtil.addErrorMessage("viewGroupForm:msg", "Error, el usuario no existe.");
+            }
+        } catch (Exception e) {
+            Logger.getLogger(GroupsController.class.getName()).log(Level.SEVERE, null, e);
+            FacesUtil.addErrorMessage("viewGroupForm:msg", "Lo sentimos, ha habido un problema al reservar la plaza.");
+        }
+
+        String groupParam = (groupId != null) ? ("group=" + groupId) : "";
+        return "view-group.xhtml" + Constants.FACES_REDIRECT + groupParam;
+    }
+
+    public String cancelGroupBooking(User user) {
+        try {
+            // Create the class user
+            if (bookingFacade.removeBooking(user, currentGroup)) {
+                // Add a booked place in the class
+                groupFacade.removeGroupBooking(currentGroup);
+                FacesUtil.addSuccessMessage("viewGroupForm:msg", "La plaza ha sido cancelada correctamente.");
+
+                // Audit booking cancalation
+                String ipAddress = FacesUtil.getRequest().getRemoteAddr();
+                auditFacade.createAudit(AuditType.CANCELAR_RESERVA, user, ipAddress, currentGroup.getId(), organisation);
+            } else {
+                FacesUtil.addErrorMessage("viewGroupForm:msg", "Error, la reserva no existe.");
+            }
+        } catch (Exception e) {
+            Logger.getLogger(EditGroupController.class.getName()).log(Level.SEVERE, null, e);
+            FacesUtil.addErrorMessage("viewGroupForm:msg", "Lo sentimos, ha habido un problema al cancelar la reserva.");
+        }
+
+        String groupParam = (groupId != null) ? ("group=" + groupId) : "";
+        return "view-group.xhtml" + Constants.FACES_REDIRECT + groupParam;
+    }
+
     public List<SelectItem> getServices() {
         return services;
+    }
+
+    public List<SelectItem> getAllUsers() {
+        return allUsers;
     }
 
     public Role getUserRole() {
@@ -198,46 +260,6 @@ public class EditGroupController implements Serializable {
         return bookedPlaces;
     }
 
-    public String getDaysOfWeek() {
-        return daysOfWeek;
-    }
-
-    public void setDaysOfWeek(String daysOfWeek) {
-        this.daysOfWeek = daysOfWeek;
-    }
-
-    public int getDaysPerWeek() {
-        return daysPerWeek;
-    }
-
-    public void setDaysPerWeek(int daysPerWeek) {
-        this.daysPerWeek = daysPerWeek;
-    }
-
-    public boolean isWeekly() {
-        return weekly;
-    }
-
-    public void setWeekly(boolean weekly) {
-        this.weekly = weekly;
-    }
-
-    public Date getEndingTime() {
-        return endingTime;
-    }
-
-    public void setEndingTime(Date endingTime) {
-        this.endingTime = endingTime;
-    }
-
-    public Date getStartingTime() {
-        return startingTime;
-    }
-
-    public void setStartingTime(Date startingTime) {
-        this.startingTime = startingTime;
-    }
-
     public long getSelectedServiceId() {
         return selectedServiceId;
     }
@@ -246,11 +268,35 @@ public class EditGroupController implements Serializable {
         this.selectedServiceId = selectedServiceId;
     }
 
+    public long getSelectedUserId() {
+        return selectedUserId;
+    }
+
+    public void setSelectedUserId(long selectedUserId) {
+        this.selectedUserId = selectedUserId;
+    }
+
     public ActivityGroup getCurrentGroup() {
         return currentGroup;
     }
 
-    public List<Integer> getWeekDays() {
-        return weekDays;
+    public int getNumberOfDays() {
+        return numberOfDays;
+    }
+
+    public void setNumberOfDays(int numberOfDays) {
+        this.numberOfDays = numberOfDays;
+    }
+
+    public float getPrice() {
+        return price;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
+    }
+
+    public List<User> getGroupUsers() {
+        return groupUsers;
     }
 }

@@ -30,18 +30,15 @@ public class GroupFacade extends AbstractFacade<ActivityGroup> {
     }
 
     
-    public ActivityGroup createNewGroup(Service service, String name, String description, int maximumUsers, int daysPerWeek, String daysOfTheWeek, Date startTime, Date EndTime, boolean weekly, Organisation organisation) {
+    public ActivityGroup createNewGroup(Service service, String name, String description, int maximumUsers, int numberOfDays, float price, Organisation organisation) {
         
         ActivityGroup group = new ActivityGroup();
         group.setService(service);
         group.setName(name);
         group.setDescription(description);
         group.setMaximumUsers(maximumUsers);
-        group.setDaysPerWeek(daysPerWeek);
-        group.setDaysOfWeek(daysOfTheWeek);
-        group.setStartTime(startTime);
-        group.setEndTime(EndTime);
-        group.setWeekly(weekly);
+        group.setNumberOfDays(numberOfDays);
+        group.setPrice(price);
         group.setOrganisation(organisation);
         group.setCreatedDate(new Date());
         group.setStatus(Status.ACTIVATED);
@@ -50,17 +47,14 @@ public class GroupFacade extends AbstractFacade<ActivityGroup> {
         return group;
     }
     
-    public ActivityGroup updateGroup(ActivityGroup group, Service service, String name, String description, int maximumUsers, int daysPerWeek, String daysOfTheWeek, Date startTime, Date EndTime, boolean weekly) {
+    public ActivityGroup updateGroup(ActivityGroup group, Service service, String name, String description, int maximumUsers, int numberOfDays, float price) {
         
         group.setService(service);
         group.setName(name);
         group.setDescription(description);
         group.setMaximumUsers(maximumUsers);
-        group.setDaysPerWeek(daysPerWeek);
-        group.setDaysOfWeek(daysOfTheWeek);
-        group.setStartTime(startTime);
-        group.setEndTime(EndTime);
-        group.setWeekly(weekly);
+        group.setNumberOfDays(numberOfDays);
+        group.setPrice(price);
         edit(group);
         
         return group;
@@ -76,14 +70,41 @@ public class GroupFacade extends AbstractFacade<ActivityGroup> {
         edit(group);
     }
 
+    public void addGroupBooking(ActivityGroup group) {
+        group.setBookedPlaces(group.getBookedPlaces() + 1);
+        edit(group);
+    }
+    
+    public void removeGroupBooking(ActivityGroup group) {
+        group.setBookedPlaces(group.getBookedPlaces() - 1);
+        edit(group);
+    }
+
     public List<ActivityGroup> findAllGroupsOfService(Service service, Organisation organisation) {
         return em.createQuery("SELECT a FROM ActivityGroup a WHERE a.service = :service AND a.organisation = :organisation ORDER BY a.name ASC").
                 setParameter("service", service).
                 setParameter("organisation", organisation).getResultList();
     }
 
+    public List<ActivityGroup> findAllActiveGroupsOfService(Service service, Organisation organisation) {
+        return em.createQuery("SELECT a FROM ActivityGroup a WHERE a.service = :service AND a.status = :activeStatus AND a.organisation = :organisation ORDER BY a.name ASC").
+                setParameter("service", service).
+                setParameter("activeStatus", Status.ACTIVATED).
+                setParameter("organisation", organisation).getResultList();
+    }
+
+    public int findNumberOfActiveGroupsOfService(Service service, Organisation organisation) {
+        return findAllActiveGroupsOfService(service, organisation).size();
+    }
+    
     public List<ActivityGroup> findAllGroupsOfOrganisation(Organisation organisation) {
         return em.createQuery("SELECT a FROM ActivityGroup a WHERE a.organisation = :organisation ORDER BY a.name ASC").
+                setParameter("organisation", organisation).getResultList();
+    }
+
+    public List<ActivityGroup> findAllActiveGroupsOfOrganisation(Organisation organisation) {
+        return em.createQuery("SELECT a FROM ActivityGroup a WHERE a.status = :activeStatus AND a.organisation = :organisation ORDER BY a.name ASC").
+                setParameter("activeStatus", Status.ACTIVATED).
                 setParameter("organisation", organisation).getResultList();
     }
 

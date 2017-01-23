@@ -125,7 +125,7 @@ public class LoginController implements Serializable {
 
             try {
                 String ipAddress = FacesUtil.getCurrentIPAddress();
-                auditFacade.createAudit(AuditType.LOGGED_IN, currentUser, ipAddress, currentUser.getId(), organisation);
+                auditFacade.createAudit(AuditType.INICIO_SESION, currentUser, ipAddress, currentUser.getId(), organisation);
             } catch (Exception e) {
                 Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, e);
             }
@@ -178,7 +178,7 @@ public class LoginController implements Serializable {
         try {
             String ipAddress = FacesUtil.getCurrentIPAddress();
             User loggedUser = FacesUtil.getCurrentUser();
-            auditFacade.createAudit(AuditType.LOGGED_OUT, loggedUser, ipAddress, loggedUser.getId(), organisation);
+            auditFacade.createAudit(AuditType.CERRAR_SESION, loggedUser, ipAddress, loggedUser.getId(), organisation);
         } catch (Exception e) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, e);
         }

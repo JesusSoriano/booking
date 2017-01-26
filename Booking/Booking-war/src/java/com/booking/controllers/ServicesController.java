@@ -7,7 +7,7 @@ import com.booking.enums.AuditType;
 import com.booking.enums.Role;
 import com.booking.exceptions.ServiceAlreadyExistsException;
 import com.booking.facades.AuditFacade;
-import com.booking.facades.GroupFacade;
+import com.booking.facades.ClassFacade;
 import com.booking.facades.ServiceFacade;
 import com.booking.util.Constants;
 import com.booking.util.FacesUtil;
@@ -28,7 +28,7 @@ public class ServicesController implements Serializable {
     @EJB
     private ServiceFacade serviceFacade;
     @EJB
-    private GroupFacade groupFacade;
+    private ClassFacade classFacade;
     @EJB
     private AuditFacade auditFacade;
 
@@ -180,7 +180,7 @@ public class ServicesController implements Serializable {
     public boolean isIsNewService() {
         return isNewService;
     }
-    public int getNumberOfGroups(Service service){
-        return groupFacade.findNumberOfActiveGroupsOfService(service, organisation);
+    public int getNumberOfClasses(Service service){
+        return classFacade.findNumberOfActiveClassesOfService(service, organisation);
     }
 }

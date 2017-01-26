@@ -6,11 +6,24 @@
               xmlns:f="http://java.sun.com/jsf/core"
               xmlns:p="http://primefaces.org/ui">
 
-    <h:form id="viewGroupForm">
+    <h:form id="viewClassForm">
 
         <div class="row">
             <br/>
             <h:messages for="msg" id="msg"  styleClass="text-left" style="margin-top: 20px" errorClass="msgError" infoClass="msgInfo"/>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-offset-6 col-sm-offset-9 col-md-offset-9 col-xs-6 col-sm-3 col-md-3 text-right">
+                <h:commandLink action="#{editClassController.bookClassForUser()}" rendered="#{editClassController.existsBooking() eq false}"> 
+                    <span class="btn btn-primary btn-block btn-green">#{txt['b_book_place']}</span>
+                </h:commandLink>
+            </div>
+            <div class="col-xs-offset-6 col-sm-offset-9 col-md-offset-9 col-xs-6 col-sm-3 col-md-3 text-right">
+                <h:commandLink action="#{editClassController.cancelBookingForUser()}" rendered="#{editClassController.existsBooking() eq true}"> 
+                    <span class="btn btn-primary btn-block btn-red">#{txt['b_cancel_booking']}</span>
+                </h:commandLink>
+            </div>
         </div>
 
         <div class="row">
@@ -23,7 +36,7 @@
                                     <h:outputText value="#{txt['service']}" />
                                 </div> 
                                 <div class="col-xs-8">
-                                    <h:outputText id="messageReceiverSelect" styleClass="form-control" value="#{editGroupController.currentGroup.service.name}" />
+                                    <h:outputText id="messageReceiverSelect" styleClass="form-control" value="#{editClassController.currentClass.service.name}" />
                                 </div> 
                             </div>
                             <div class="row">
@@ -31,7 +44,7 @@
                                     <p>#{txt['name']}</p>
                                 </div>
                                 <div class="col-xs-8">
-                                    <h:outputText id="name" styleClass="form-control" value="#{editGroupController.currentGroup.name}" />
+                                    <h:outputText id="name" styleClass="form-control" value="#{editClassController.currentClass.name}" />
                                 </div>
                             </div>
                             <div class="row">
@@ -39,7 +52,7 @@
                                     <p>#{txt['description']}</p>
                                 </div>
                                 <div class="col-xs-8">
-                                    <h:outputText id="description" styleClass="form-control" value="#{editGroupController.currentGroup.description}" />
+                                    <h:outputText id="description" styleClass="form-control" value="#{editClassController.currentClass.description}" />
                                 </div>
                             </div>
                             <div class="row">
@@ -47,8 +60,8 @@
                                     <p>#{txt['price']}</p>
                                 </div>
                                 <div class="col-xs-8">
-                                    <h:outputText styleClass="form-control" value="#{txt['free']}" rendered="#{editGroupController.currentGroup.price eq 0}" />
-                                    <h:outputText styleClass="form-control" value="#{editGroupController.currentGroup.price}" rendered="#{editGroupController.currentGroup.price ne 0}" >
+                                    <h:outputText styleClass="form-control" value="#{txt['free']}" rendered="#{editClassController.currentClass.price eq 0}" />
+                                    <h:outputText styleClass="form-control" value="#{editClassController.currentClass.price}" rendered="#{editClassController.currentClass.price ne 0}" >
                                         <f:convertNumber type="currency" currencySymbol="€" locale="es_ES" />
                                     </h:outputText>
                                 </div>
@@ -62,7 +75,7 @@
                                     <p>#{txt['maximum_users']}</p>
                                 </div>
                                 <div class="col-xs-8">
-                                    <h:outputText id="maximumUsers" styleClass="form-control" value="#{editGroupController.currentGroup.maximumUsers}" />
+                                    <h:outputText id="maximumUsers" styleClass="form-control" value="#{editClassController.currentClass.maximumUsers}" />
                                 </div>
                             </div>
                             <div class="row">
@@ -70,16 +83,16 @@
                                     <p>#{txt['booked_places']}</p>
                                 </div>
                                 <div class="col-xs-8">
-                                    <h:outputText id="bookedPlaces" styleClass="form-control" value="#{editGroupController.currentGroup.bookedPlaces}" />
+                                    <h:outputText id="bookedPlaces" styleClass="form-control" value="#{editClassController.currentClass.bookedPlaces}" />
                                 </div>
                             </div>
-                            <h:panelGroup rendered="#{editGroupController.userRole eq 'ADMIN' or editGroupController.userRole eq 'SUPER_ADMIN'}">
+                            <h:panelGroup rendered="#{editClassController.userRole eq 'ADMIN' or editClassController.userRole eq 'SUPER_ADMIN'}">
                                 <div class="row">
                                     <div class="col-xs-4">
                                         <p>#{txt['created_date']}</p>
                                     </div>
                                     <div class="col-xs-8">
-                                        <h:outputText id="createdDate" styleClass="form-control" value="#{editGroupController.currentGroup.createdDate}" >
+                                        <h:outputText id="createdDate" styleClass="form-control" value="#{editClassController.currentClass.createdDate}" >
                                             <f:convertDateTime pattern="dd MMM yyyy - HH:mm" /> 
                                         </h:outputText>
                                     </div>
@@ -89,7 +102,7 @@
                                         <p>#{txt['status']}</p>
                                     </div>
                                     <div class="col-xs-8">
-                                        <h:outputText id="status" styleClass="form-control" value="#{editGroupController.currentGroup.status}" />
+                                        <h:outputText id="status" styleClass="form-control" value="#{editClassController.currentClass.status}" />
                                     </div>
                                 </div>
                             </h:panelGroup>
@@ -98,7 +111,7 @@
                                     <p>#{txt['no_of_days']}</p>
                                 </div>
                                 <div class="col-xs-8">
-                                    <h:outputText id="noOfDays" styleClass="form-control" value="#{editGroupController.currentGroup.numberOfDays}" />
+                                    <h:outputText id="noOfDays" styleClass="form-control" value="#{editClassController.currentClass.numberOfDays}" />
                                 </div>
                             </div>
 
@@ -108,7 +121,7 @@
                                         <p>#{txt['date']}</p>
                                     </div>
                                     <div class="col-xs-8">
-                                        <h:outputText id="date" styleClass="form-control" value="#{editGroupController.currentGroup.startDate}" >
+                                        <h:outputText id="date" styleClass="form-control" value="#{editClassController.currentClass.startDate}" >
                                             <f:convertDateTime pattern="dd/MM/yyyy" /> 
                                         </h:outputText>
                                     </div>
@@ -118,7 +131,7 @@
                                         <p>#{txt['starting_time']}</p>
                                     </div>
                                     <div class="col-xs-8">
-                                        <h:outputText id="startTime" styleClass="form-control" value="#{editGroupController.currentGroup.startDate}" >
+                                        <h:outputText id="startTime" styleClass="form-control" value="#{editClassController.currentClass.startDate}" >
                                             <f:convertDateTime pattern="HH:mm" /> 
                                         </h:outputText>
                                     </div>
@@ -128,7 +141,7 @@
                                         <p>#{txt['ending_time']}</p>
                                     </div>
                                     <div class="col-xs-8">
-                                        <h:outputText id="endTime" styleClass="form-control" value="#{editGroupController.currentGroup.endDate}" >
+                                        <h:outputText id="endTime" styleClass="form-control" value="#{editClassController.currentClass.endDate}" >
                                             <f:convertDateTime pattern="HH:mm" /> 
                                         </h:outputText>
                                     </div>
@@ -137,14 +150,24 @@
                         </div>
                     </div>
 
+
                     <div class="row">
-                        <div class="row page-subtitle-no-spacing">
-                            <h4>#{txt['class_user_list']}:</h4>
+                        <div class="row page-subtitle-no-spacing margin-bottom-10">
+                            <h4>#{txt['class_users_list']}:</h4>
                         </div>
 
+                        <script type="text/javascript">
+                            $(document).ready(function () {
+                                $('#viewClassForm\\:classUsers .ui-paginator-rpp-options.ui-widget.ui-state-default.ui-corner-left')
+                                        .each(function () {
+                                            $(this).children().last().html('#{txt['all']}');
+                                        });
+                            });
+                        </script>
+
                         <div class="row">
-                            <p:dataTable id="groupUsers" value="#{editGroupController.groupUsers}" var="user" styleClass="common-table text-center" paginator="true" rows="20" paginatorPosition="bottom" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" 
-                                         rowsPerPageTemplate="10, 20, #{editGroupController.groupUsers.size()}" emptyMessage="#{txt['empty_records']}"> 
+                            <p:dataTable id="classUsers" value="#{editClassController.classUsers}" var="user" styleClass="common-table text-center" paginator="true" rows="20" paginatorPosition="bottom" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" 
+                                         rowsPerPageTemplate="10, 20, #{editClassController.classUsers.size()}" emptyMessage="#{txt['empty_records']}"> 
                                 <p:column headerText="#{txt['name']}" sortBy="#{user.fullName}"> 
                                     <h:outputText value="#{user.fullName}" class="#{user.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" /> 
                                 </p:column> 
@@ -162,7 +185,7 @@
                                     <h:link outcome="compose-mail.xhtml?faces-redirect=true&amp;user=#{user.id}"> 
                                         <h:graphicImage title="#{txt['cap_send_email']}" value="../resources/images/send_email.png" class="table-action-width" /> 
                                     </h:link> 
-                                    <h:commandLink action="#{editGroupController.cancelGroupBooking(user)}" > 
+                                    <h:commandLink action="#{editClassController.cancelClassBooking(user)}" > 
                                         <h:graphicImage title="#{txt['cap_cancel_user_booking']}" value="../resources/images/cancel-booking-icon.png" class="table-action" /> 
                                     </h:commandLink> 
                                 </p:column> 
@@ -172,12 +195,12 @@
                         <h:panelGroup rendered="#{servicesController.userRole eq 'ADMIN' or servicesController.userRole eq 'SUPER_ADMIN'}">
                             <div class="row">
                                 <div class="col-xs-6 col-sm-3 margin-bottom-40">
-                                    <h:selectOneMenu id="selectedUser" value="#{editGroupController.selectedUserId}" >
-                                        <f:selectItems value="#{editGroupController.allUsers}" />
+                                    <h:selectOneMenu id="selectedUser" value="#{editClassController.selectedUserId}" >
+                                        <f:selectItems value="#{editClassController.allUsers}" />
                                     </h:selectOneMenu>
                                 </div>
                                 <div class="col-xs-6 col-sm-3">
-                                    <h:commandLink action="#{editGroupController.bookGroup()}" > 
+                                    <h:commandLink action="#{editClassController.addParticipant()}" > 
                                         <h:outputText value="+ #{txt['b_add_participant']}" class="blue-link"/>
                                     </h:commandLink>
                                 </div> 

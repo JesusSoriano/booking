@@ -1,6 +1,6 @@
 package com.booking.facades;
 
-import com.booking.entities.ActivityGroup;
+import com.booking.entities.ActivityClass;
 import com.booking.entities.Organisation;
 import com.booking.entities.Service;
 import com.booking.enums.Status;

@@ -23,8 +23,8 @@ import javax.persistence.TemporalType;
  * @author Jesús Soriano
  */
 @Entity
-@Table(name = "group_days")
-public class ActivityDay implements Serializable {
+@Table(name = "class_days")
+public class ClassDay implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -39,8 +39,8 @@ public class ActivityDay implements Serializable {
     @Enumerated(EnumType.STRING)
     private Status status;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "activityGroup", referencedColumnName = "id")
-    private ActivityGroup activityGroup;
+    @JoinColumn(name = "activityClass", referencedColumnName = "id")
+    private ActivityClass activityClass;
     @Column(name = "start_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date startDate;
@@ -48,7 +48,7 @@ public class ActivityDay implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date endDate;
 
-    public ActivityDay() {
+    public ClassDay() {
     }
 
     public long getId() {
@@ -87,12 +87,12 @@ public class ActivityDay implements Serializable {
         this.endDate = endDate;
     }
 
-    public ActivityGroup getActivityGroup() {
-        return activityGroup;
+    public ActivityClass getActivityClass() {
+        return activityClass;
     }
 
-    public void setActivityGroup(ActivityGroup activityGroup) {
-        this.activityGroup = activityGroup;
+    public void setActivityClass(ActivityClass activityClass) {
+        this.activityClass = activityClass;
     }
 
 }

@@ -26,8 +26,8 @@ import javax.persistence.TemporalType;
  * @author Jesús Soriano
  */
 @Entity
-@Table(name = "groups")
-public class ActivityGroup implements Serializable {
+@Table(name = "classes")
+public class ActivityClass implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -61,10 +61,10 @@ public class ActivityGroup implements Serializable {
     // Activity of multiple days?
     @Column(name = "number_of_days")
     private int numberOfDays;
-    @OneToMany(mappedBy = "activityGroup", cascade = CascadeType.REMOVE)
-    private List<ActivityDay> activityDays;
+    @OneToMany(mappedBy = "activityClass", cascade = CascadeType.REMOVE)
+    private List<ClassDay> activityDays;
 
-    public ActivityGroup() {
+    public ActivityClass() {
     }
 
     public long getId() {
@@ -151,11 +151,11 @@ public class ActivityGroup implements Serializable {
         this.price = price;
     }
 
-    public List<ActivityDay> getActivityDays() {
+    public List<ClassDay> getActivityDays() {
         return activityDays;
     }
 
-    public void setActivityDays(List<ActivityDay> activityDays) {
+    public void setActivityDays(List<ClassDay> activityDays) {
         this.activityDays = activityDays;
     }
 

@@ -9,22 +9,22 @@
 
             <div class="row">
                 <div class="col-xs-offset-6 col-sm-offset-9 col-md-offset-9 col-xs-6 col-sm-3 col-md-3 text-right">
-                    <h:link outcome="groups.xhtml?faces-redirect=true" >
-                        <span class="btn btn-primary btn-block btn-general">#{txt['b_all_groups']}</span>
+                    <h:link outcome="classes.xhtml?faces-redirect=true" >
+                        <span class="btn btn-primary btn-block btn-general">#{txt['b_all_classes']}</span>
                     </h:link>
                 </div>
             </div>
             
             <div class="row">
                 <div class="col-xs-6 col-sm-6 col-md-6">
-                    <h3>#{editGroupController.currentGroup.name}</h3> 
+                    <h3>#{editClassController.currentClass.name}</h3> 
                 </div>
                 <div class="col-xs-12 page-subtitle-no-spacing">
-                    <h4>#{editGroupController.currentGroup.description}</h4>
+                    <h4>#{editClassController.currentClass.description}</h4>
                 </div>
             </div>
 
-            <ui:include src="../includes/view-group-include.xhtml" />
+            <ui:include src="../includes/view-class-include.xhtml" />
 
         </ui:define>
     </ui:composition>

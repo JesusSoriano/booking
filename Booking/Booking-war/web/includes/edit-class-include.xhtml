@@ -6,7 +6,7 @@
               xmlns:f="http://java.sun.com/jsf/core"
               xmlns:p="http://primefaces.org/ui">
 
-    <h:form id="editGroupForm">
+    <h:form id="editClassForm">
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12">
 
@@ -18,8 +18,8 @@
                                     <h:outputText value="#{txt['service']}" /><sup class="mandatoryField">*</sup>
                                 </div> 
                                 <div class="col-xs-8">
-                                    <h:selectOneMenu id="selectedService" value="#{editGroupController.selectedServiceId}" >
-                                        <f:selectItems value="#{editGroupController.services}" />
+                                    <h:selectOneMenu id="selectedService" value="#{editClassController.selectedServiceId}" >
+                                        <f:selectItems value="#{editClassController.services}" />
                                     </h:selectOneMenu>
                                 </div> 
                             </div>
@@ -28,7 +28,7 @@
                                     <p>#{txt['name']}<sup class="mandatoryField">*</sup></p>
                                 </div>
                                 <div class="col-xs-8">
-                                    <h:inputText id="name" styleClass="form-control" value="#{editGroupController.groupName}" required="true" requiredMessage="Introduce nombre para el grupo"/>
+                                    <h:inputText id="name" styleClass="form-control" value="#{editClassController.className}" required="true" requiredMessage="Introduce nombre para el grupo"/>
                                     <h:message for="name"  styleClass="loginError" errorClass="msgError" infoClass="msgInfo"/>
                                 </div>
                             </div>
@@ -37,7 +37,7 @@
                                     <p>#{txt['description']}</p>
                                 </div>
                                 <div class="col-xs-8">
-                                    <h:inputTextarea id="description" styleClass="form-control" value="#{editGroupController.groupDescription}" />
+                                    <h:inputTextarea id="description" styleClass="form-control" value="#{editClassController.classDescription}" />
                                     <h:message for="description"  styleClass="loginError" errorClass="msgError" infoClass="msgInfo"/>
                                 </div>
                             </div>
@@ -48,7 +48,7 @@
                                     <p>#{txt['maximum_users']}<sup class="mandatoryField">*</sup></p>
                                 </div>
                                 <div class="col-xs-8">
-                                    <h:inputText id="maximumUsers" styleClass="form-control" value="#{editGroupController.maximumUsers}" required="true" requiredMessage="Introduce el número máximo de plazas"/>
+                                    <h:inputText id="maximumUsers" styleClass="form-control" value="#{editClassController.maximumUsers}" required="true" requiredMessage="Introduce el número máximo de plazas"/>
                                     <h:message for="maximumUsers"  styleClass="loginError" errorClass="msgError" infoClass="msgInfo"/>
                                 </div>
                             </div>
@@ -57,7 +57,7 @@
                                     <p>#{txt['number_of_days']}<sup class="mandatoryField">*</sup></p>
                                 </div>
                                 <div class="col-xs-8">
-                                    <h:inputText id="numberOfDays" styleClass="form-control" value="#{editGroupController.numberOfDays}" required="true" requiredMessage="Introduce el número de días de la actividad"/>
+                                    <h:inputText id="numberOfDays" styleClass="form-control" value="#{editClassController.numberOfDays}" required="true" requiredMessage="Introduce el número de días de la actividad"/>
                                     <h:message for="numberOfDays"  styleClass="loginError" errorClass="msgError" infoClass="msgInfo"/>
                                 </div>
                             </div>
@@ -66,7 +66,7 @@
                                     <p>#{txt['price']}<sup class="mandatoryField">*</sup></p>
                                 </div>
                                 <div class="col-xs-8">
-                                    <h:inputText id="price" styleClass="form-control" value="#{editGroupController.price}" required="true" requiredMessage="Introduce el precio de la actividad"/>
+                                    <h:inputText id="price" styleClass="form-control" value="#{editClassController.price}" required="true" requiredMessage="Introduce el precio de la actividad"/>
                                     <h:message for="price"  styleClass="loginError" errorClass="msgError" infoClass="msgInfo"/>
                                 </div>
                             </div>
@@ -81,11 +81,11 @@
 
                 <div class="row">
                     <div class="col-sm-offset-8 col-md-offset-8 col-xs-6 col-sm-2 col-md-2 text-right">
-                        <h:commandButton value="#{txt['b_create_group']}" class="btn btn-primary btn-block btn-main" action="#{editGroupController.createNewGroup()}" rendered="#{editGroupController.newGroup}"/>
-                        <h:commandButton value="#{txt['b_save_changes']}" class="btn btn-primary btn-block btn-main" action="#{editGroupController.updateGroup()}" rendered="#{!editGroupController.newGroup}"/>
+                        <h:commandButton value="#{txt['b_create_class']}" class="btn btn-primary btn-block btn-main" action="#{editClassController.createNewClass()}" rendered="#{editClassController.newClass}"/>
+                        <h:commandButton value="#{txt['b_save_changes']}" class="btn btn-primary btn-block btn-main" action="#{editClassController.updateClass()}" rendered="#{!editClassController.newClass}"/>
                     </div>
                     <div class="col-xs-6 col-sm-2 col-md-2 text-right">
-                        <h:link outcome="groups.xhtml?faces-redirect=true" >
+                        <h:link outcome="classes.xhtml?faces-redirect=true" >
                             <span class="btn btn-primary btn-block btn-cancel">#{txt['b_cancel']}</span>
                         </h:link>
                     </div>

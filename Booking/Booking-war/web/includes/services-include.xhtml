@@ -17,7 +17,7 @@
                     </div>
                     <h:panelGroup rendered="#{servicesController.userRole eq 'ADMIN' or servicesController.userRole eq 'SUPER_ADMIN'}">
                         <div class="col-sm-offset-3 col-md-offset-3 col-xs-6 col-sm-3 col-md-3 text-right">
-                            <p:commandLink action="#{servicesController.prepareNewService()}" update=":newServiceForm:newServiceGroup" oncomplete="PF('newServiceDialog').show()" >
+                            <p:commandLink action="#{servicesController.prepareNewService()}" update=":newServiceForm:newServiceClass" oncomplete="PF('newServiceDialog').show()" >
                                 <span class="btn btn-primary btn-block btn-main">#{txt['b_new_service']}</span>
                             </p:commandLink>
                         </div>
@@ -42,9 +42,9 @@
                         <p:column headerText="#{txt['description']}" sortBy="#{service.description}"> 
                             <h:outputText value="#{service.description}" class="#{service.status eq 'SUSPENDED' ? 'lightgray-color' : ''}"  /> 
                         </p:column> 
-                        <p:column headerText="#{txt['number_of_groups']}" sortBy="#{servicesController.getNumberOfGroups(service)}"> 
-                            <h:link outcome="groups.xhtml?faces-redirect=true&amp;service=#{service.id}" >
-                                <h:outputText value="#{servicesController.getNumberOfGroups(service)}" class="#{service.status eq 'SUSPENDED' ? 'lightgray-color' : 'blue-link'}" /> 
+                        <p:column headerText="#{txt['number_of_classes']}" sortBy="#{servicesController.getNumberOfClasses(service)}"> 
+                            <h:link outcome="classes.xhtml?faces-redirect=true&amp;service=#{service.id}" >
+                                <h:outputText value="#{servicesController.getNumberOfClasses(service)}" class="#{service.status eq 'SUSPENDED' ? 'lightgray-color' : 'blue-link'}" /> 
                             </h:link>
                         </p:column> 
                         <p:column headerText="#{txt['created_date']}" sortBy="#{service.createdDate}"> 
@@ -56,11 +56,11 @@
                             <h:outputText value="#{service.organisation.name}" class="#{service.status eq 'SUSPENDED' ? 'lightgray-color' : ''}"  /> 
                         </p:column> 
                         <p:column headerText="#{txt['options']}" rendered="#{servicesController.userRole eq 'ADMIN' or servicesController.userRole eq 'SUPER_ADMIN'}"> 
-                            <h:link outcome="groups.xhtml?faces-redirect=true&amp;service=#{service.id}" >
-                                <h:graphicImage title="#{txt['cap_view_groups']}" value="../resources/images/view.png" class="table-action" /> 
+                            <h:link outcome="classes.xhtml?faces-redirect=true&amp;service=#{service.id}" >
+                                <h:graphicImage title="#{txt['cap_view_classes']}" value="../resources/images/view.png" class="table-action" /> 
                             </h:link>
                             <h:panelGroup rendered="#{servicesController.userRole eq 'ADMIN' or servicesController.userRole eq 'SUPER_ADMIN'}">
-                                <p:commandLink action="#{servicesController.prepareService(service)}" update=":newServiceForm:newServiceGroup" oncomplete="PF('newServiceDialog').show()" >
+                                <p:commandLink action="#{servicesController.prepareService(service)}" update=":newServiceForm:newServiceClass" oncomplete="PF('newServiceDialog').show()" >
                                     <h:graphicImage title="#{txt['cap_edit']}" value="../resources/images/edit_user.png" class="table-action" /> 
                                 </p:commandLink> 
                                 <h:commandLink action="#{servicesController.activateService(service)}" rendered="#{service.status eq 'SUSPENDED'}"> 
@@ -79,7 +79,7 @@
             <h:form enctype="multipart/form-data" id="newServiceForm">
                 <p:dialog id="newServiceDialog" widgetVar="newServiceDialog" header="#{txt['create_new_service']}" resizable="false"
                           closable="true">
-                    <h:panelGroup id="newServiceGroup">
+                    <h:panelGroup id="newServiceClass">
                         <table border="0" cellspacing="10" class="dialogTable">
                             <tr>
                                 <td>#{txt['name']}<span class="mandatoryField">*</span>:</td>
@@ -110,7 +110,7 @@
             </h:form>
 
             <h:form>
-                <p:remoteCommand name="post_service_dialog_open" actionListener="#{servicesController.prepareNewService()}" update=":newServiceForm:newServiceGroup" />
+                <p:remoteCommand name="post_service_dialog_open" actionListener="#{servicesController.prepareNewService()}" update=":newServiceForm:newServiceClass" />
             </h:form>
         </div>
     </div>

@@ -1,6 +1,6 @@
 package com.booking.facades;
 
-import com.booking.entities.ActivityGroup;
+import com.booking.entities.ActivityClass;
 import com.booking.entities.Booking;
 import com.booking.entities.User;
 import java.util.Date;
@@ -28,37 +28,42 @@ public class BookingFacade extends AbstractFacade<Booking> {
         super(Booking.class);
     }
 
-    public Booking createNewBooking(User user, ActivityGroup group) {
+    public Booking createNewBooking(User user, ActivityClass activityClass) {
         Booking booking = new Booking();
-        booking.setGroupUser(user);
-        booking.setActivityGroup(group);
+        booking.setClassUser(user);
+        booking.setActivityClass(activityClass);
         booking.setCreatedDate(new Date());
         create(booking);
 
         return booking;
     }
 
-    public boolean removeBooking(User user, ActivityGroup group) {
-        Booking groupUser = findUniqueResult(em.createQuery("SELECT b FROM Booking b WHERE b.groupUser = :user AND b.activityGroup = :group").
+    public boolean removeBooking(User user, ActivityClass activityClass) {
+        Booking classUser = findUniqueResult(em.createQuery("SELECT b FROM Booking b WHERE b.classUser = :user AND b.activityClass = :activityClass").
                 setParameter("user", user).
-                setParameter("group", group).getResultList());
+                setParameter("activityClass", activityClass).getResultList());
 
-        if (groupUser != null) {
-            remove(groupUser);
+        if (classUser != null) {
+            remove(classUser);
             return true;
         }
         return false;
     }
     
-    public boolean existsBooking(User user, ActivityGroup group) {
-        Booking booking = findUniqueResult(em.createQuery("SELECT b FROM Booking b WHERE b.groupUser = :user AND b.activityGroup = :group").
+    public boolean existsBooking(User user, ActivityClass activityClass) {
+        Booking booking = findUniqueResult(em.createQuery("SELECT b FROM Booking b WHERE b.classUser = :user AND b.activityClass = :activityClass").
                 setParameter("user", user).
-                setParameter("group", group).getResultList());
+                setParameter("activityClass", activityClass).getResultList());
         return (booking != null);
     }
     
-    public List<User> findAllBookedUsersOfGroup(ActivityGroup group) {
-        return em.createQuery("SELECT b.groupUser FROM Booking b WHERE b.activityGroup = :group").
-                setParameter("group", group).getResultList();
+    public List<User> findAllBookedUsersOfClass(ActivityClass activityClass) {
+        return em.createQuery("SELECT b.classUser FROM Booking b WHERE b.activityClass = :activityClass").
+                setParameter("activityClass", activityClass).getResultList();
+    }
+    
+    public List<ActivityClass> findAllClassesOfUser(User user) {
+        return em.createQuery("SELECT b.activityClass FROM Booking b WHERE b.classUser = :user").
+                setParameter("user", user).getResultList();
     }
 }

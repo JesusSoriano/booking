@@ -374,10 +374,32 @@ hr {
     -webkit-font-smoothing: antialiased;
     margin-bottom: 5px;
 }
-.btn.btn-general:hover {
-    background-color: #f8f8f8;
+
+.btn.btn-green {
+    background: transparent;
+    border: solid 1px green;
+    color: green !important;
+    font-weight: 600;
+    padding: 6px 15px;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.29);
+    -webkit-font-smoothing: antialiased;
+    margin-bottom: 5px;
 }
 
+.btn.btn-red {
+    background: transparent;
+    border: solid 1px red;
+    color: red !important;
+    font-weight: 600;
+    padding: 6px 15px;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.29);
+    -webkit-font-smoothing: antialiased;
+    margin-bottom: 5px;
+}
+
+.btn.btn-general:hover, .btn.btn-green:hover, .btn.btn-red:hover {
+    background-color: #f8f8f8;
+}
 
 .btn.disabled_button {
     background: #C9C9C9; /* Old browsers */

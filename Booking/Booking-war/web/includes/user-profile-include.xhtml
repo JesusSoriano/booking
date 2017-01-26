@@ -7,7 +7,13 @@
               xmlns:p="http://primefaces.org/ui">
 
     <h:form id="profileForm">
-        <div class="row">
+        <div class="row margin-bottom-70">
+
+            <div class="row">
+                <br/>
+                <h:messages for="msg" id="msg" styleClass="text-left" style="margin-top: 20px" errorClass="msgError" infoClass="msgInfo"/>
+            </div>
+
             <div class="col-xs-12 col-sm-12 col-md-12">
 
                 <div class="row">
@@ -106,13 +112,60 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="row">
-                        <br/>
-                        <h:messages for="msg" id="msg"  styleClass="text-left" style="margin-top: 20px" errorClass="msgError" infoClass="msgInfo"/>
-                    </div>
                 </div>
             </div>
         </div>
+
+
+        <div class="row">
+            <div class="row page-subtitle-no-spacing margin-bottom-10">
+                <h4>#{txt['user_classes_list']}:</h4>
+            </div>
+            
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    $('#profileForm\\:classesTable .ui-paginator-rpp-options.ui-widget.ui-state-default.ui-corner-left')
+                            .each(function () {
+                                $(this).children().last().html('#{txt['all']}');
+                            });
+                });
+            </script>
+
+            <p:dataTable id="classesTable" value="#{userProfileController.classes}" var="class" styleClass="common-table text-center" paginator="true" rows="20" paginatorPosition="bottom" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" 
+                         rowsPerPageTemplate="10, 20, #{userProfileController.classes.size()}" emptyMessage="#{txt['empty_records']}"> 
+                <p:column headerText="#{txt['name']}" sortBy="#{class.name}"> 
+                    <h:outputText value="#{class.name}" class="#{class.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" /> 
+                </p:column> 
+                <p:column headerText="#{txt['service']}" sortBy="#{class.service.name}"> 
+                    <h:link outcome="classes.xhtml?faces-redirect=true&amp;service=#{class.service.id}"> 
+                        <h:outputText value="#{class.service.name}" class="#{class.status eq 'SUSPENDED' ? 'lightgray-color' : 'blue-link'}" /> 
+                    </h:link> 
+                </p:column> 
+                <p:column headerText="#{txt['description']}" sortBy="#{class.description}"> 
+                    <h:outputText value="#{class.description}" class="#{class.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" /> 
+                </p:column> 
+                <p:column headerText="#{txt['free_places']}" sortBy="#{class.maximumUsers - class.bookedPlaces}"> 
+                    <h:outputText value="#{class.maximumUsers - class.bookedPlaces} #{txt['of']} #{class.maximumUsers}" class="#{class.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" /> 
+                </p:column> 
+                <p:column headerText="#{txt['number_of_days']}" sortBy="#{class.numberOfDays}"> 
+                    <h:outputText value="#{class.numberOfDays}" class="#{class.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" />
+                </p:column> 
+                <p:column headerText="#{txt['price']}" sortBy="#{class.price}"> 
+                    <h:outputText value="#{txt['free']}" rendered="#{class.price eq 0}" class="#{class.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" />
+                    <h:outputText value="#{class.price}" rendered="#{class.price ne 0}" class="#{class.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" >
+                        <f:convertNumber type="currency" currencySymbol="€" locale="es_ES" />
+                    </h:outputText>
+                </p:column> 
+                <p:column headerText="#{txt['options']}"> 
+                    <h:link outcome="view-class.xhtml?faces-redirect=true&amp;class=#{class.id}" >
+                        <h:graphicImage title="#{txt['cap_view']}" value="../resources/images/view.png" class="table-action" /> 
+                    </h:link>  
+                    <h:commandLink action="#{userProfileController.cancelClassBooking(class)}" > 
+                        <h:graphicImage title="#{txt['cap_cancel_booking']}" value="../resources/images/cancel-booking-icon.png" class="table-action" /> 
+                    </h:commandLink> 
+                </p:column> 
+            </p:dataTable>
+        </div> 
+
     </h:form>
 </ui:component>

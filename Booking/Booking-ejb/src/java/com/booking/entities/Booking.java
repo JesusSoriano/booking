@@ -32,11 +32,11 @@ public class Booking implements Serializable {
     @Column(name = "id")
     private long id;
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE})
-    @JoinColumn(name = "activity_group", referencedColumnName = "id")
-    private ActivityGroup activityGroup;
+    @JoinColumn(name = "activity_class", referencedColumnName = "id")
+    private ActivityClass activityClass;
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE})
-    @JoinColumn(name = "group_user", referencedColumnName = "id")
-    private User groupUser;
+    @JoinColumn(name = "class_user", referencedColumnName = "id")
+    private User classUser;
     @Column(name = "created_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdDate;
@@ -48,20 +48,20 @@ public class Booking implements Serializable {
         return id;
     }
 
-    public ActivityGroup getActivityGroup() {
-        return activityGroup;
+    public ActivityClass getActivityClass() {
+        return activityClass;
     }
 
-    public void setActivityGroup(ActivityGroup activityGroup) {
-        this.activityGroup = activityGroup;
+    public void setActivityClass(ActivityClass activityClass) {
+        this.activityClass = activityClass;
     }
 
-    public User getGroupUser() {
-        return groupUser;
+    public User getClassUser() {
+        return classUser;
     }
 
-    public void setGroupUser(User groupUser) {
-        this.groupUser = groupUser;
+    public void setClassUser(User classUser) {
+        this.classUser = classUser;
     }
 
     public Date getCreatedDate() {

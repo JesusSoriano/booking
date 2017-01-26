@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+              xmlns:h="http://java.sun.com/jsf/html"
+              xmlns:ui="http://java.sun.com/jsf/facelets"
+              xmlns:f="http://java.sun.com/jsf/core"
+              xmlns:p="http://primefaces.org/ui">
+
+
+    <div class="row col-xs-12 col-md-12">
+        <h:form>
+            <p:growl id="messages" showDetail="true" />
+
+            <h:panelGrid>
+                <h3 style="margin-top: 0">#{txt['bookings_calendar']}</h3>
+                <p:schedule id="schedule" value="#{bookingsController.eventModel}" locale="es" widgetVar="myschedule" timeZone="GMT+1" class="booking-schedule">
+
+                    <p:ajax event="dateSelect" listener="#{scheduleController.onDateSelect}" update="eventDetails" oncomplete="PF('eventDialog').show();" />
+                    <p:ajax event="eventSelect" listener="#{scheduleController.onEventSelect}" update="eventDetails" oncomplete="PF('eventDialog').show();" />
+                    <p:ajax event="eventMove" listener="#{scheduleController.onEventMove}" update="messages" />
+                    <p:ajax event="eventResize" listener="#{scheduleController.onEventResize}" update="messages" />
+
+                </p:schedule>
+
+                <!--                                                                    <h3>Lazy Schedule</h3>
+                                                            <p:schedule value="#{scheduleController.lazyEventModel}" />-->
+            </h:panelGrid>
+
+            <p:dialog widgetVar="eventDialog" header="Detalles" showEffect="clip" hideEffect="clip">
+                <h:panelGrid id="eventDetails" columns="2" class="dialogTable">
+                    <h:outputLabel for="title" value="Evento:" />
+                    <p:inputText id="title" value="#{scheduleController.event.title}" required="true" />
+
+                    <h:outputLabel for="from" value="Empieza:" />
+                    <h:inputText id="from" value="#{scheduleController.event.startDate}">   
+                        <f:convertDateTime pattern="#{dateFormatController.dateWithTimeFormatString}" timeZone="GMT+2"/> 
+                    </h:inputText>
+
+                    <h:outputLabel for="to" value="Acaba:" />
+                    <h:inputText id="to" value="#{scheduleController.event.endDate}">   
+                        <f:convertDateTime pattern="#{dateFormatController.dateWithTimeFormatString}" timeZone="GMT+2"/> 
+                    </h:inputText>
+
+                    <h:outputLabel for="allDay" value="Todo el día:" />
+                    <h:selectBooleanCheckbox id="allDay" value="#{scheduleController.event.allDay}" />
+
+                    <p:commandButton id="cancelButton" value="Cancelar" styleClass="btn btn-primary btn-cancel" style='margin-left: 6px; margin-top: 8px;'
+                                     onclick="PF('eventDialog').hide();"/>
+                    <p:commandButton id="addButton" value="Guardar" actionListener="#{scheduleController.addEvent}" style='margin-left: 6px; margin-top: 8px;'
+                                     oncomplete="PF('myschedule').update();PF('eventDialog').hide();" styleClass="btn btn-primary btn-main" 
+                                     rendered="#{scheduleController.event.id eq null}"/>
+                    <p:commandButton id="deleteButton" value="Eliminar Reserva" actionListener="#{scheduleController.deleteEvent}" style='margin-left: 6px; margin-top: 8px;'
+                                     oncomplete="PF('myschedule').update();PF('eventDialog').hide();" styleClass="btn btn-primary btn-main" 
+                                     rendered="#{scheduleController.event.id ne null}"/>
+                </h:panelGrid>
+            </p:dialog>    
+        </h:form>
+    </div>
+</ui:component>

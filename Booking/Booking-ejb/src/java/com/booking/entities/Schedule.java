@@ -32,7 +32,7 @@ public class Schedule implements Serializable {
     private long id;
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "activity_group", referencedColumnName = "id")
-    private ActivityGroup activityGroup;
+    private ActivityClass activityGroup;
 
     public Schedule() {
     }
@@ -41,11 +41,11 @@ public class Schedule implements Serializable {
         return id;
     }
 
-    public ActivityGroup getActivityGroup() {
+    public ActivityClass getActivityGroup() {
         return activityGroup;
     }
 
-    public void setActivityGroup(ActivityGroup activityGroup) {
+    public void setActivityGroup(ActivityClass activityGroup) {
         this.activityGroup = activityGroup;
     }
 }

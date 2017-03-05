@@ -54,11 +54,10 @@
                             </div>
                             <div class="row">
                                 <div class="col-xs-4">
-                                    <p>#{txt['number_of_days']}<sup class="mandatoryField">*</sup></p>
+                                    <p>#{txt['number_of_days']}</p>
                                 </div>
                                 <div class="col-xs-8">
-                                    <h:inputText id="numberOfDays" styleClass="form-control" value="#{editClassController.numberOfDays}" required="true" requiredMessage="Introduce el número de días de la actividad"/>
-                                    <h:message for="numberOfDays"  styleClass="loginError" errorClass="msgError" infoClass="msgInfo"/>
+                                    <h:outputText id="numberOfDays" styleClass="form-control" style="background-color: #e5e5e5" value="#{editClassController.numberOfDays}" />
                                 </div>
                             </div>
                             <div class="row">
@@ -73,32 +72,86 @@
                         </div>
                     </div>
 
-                    <div class="row">
-                        <p:dataTable id="classUsers" value="#{editClassController.classUsers}" var="user" styleClass="common-table text-center" paginator="true" rows="20" paginatorPosition="bottom" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" 
-                                     rowsPerPageTemplate="10, 20, #{editClassController.classUsers.size()}" emptyMessage="#{txt['empty_records']}"> 
-                            <p:column headerText="#{txt['name']}" sortBy="#{user.fullName}"> 
-                                <h:outputText value="#{user.fullName}" class="#{user.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" /> 
-                            </p:column> 
-                            <p:column headerText="#{txt['email']}" sortBy="#{user.email}"> 
-                                <h:outputText value="#{user.email}" class="#{user.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" /> 
-                            </p:column>  
-                            <p:column headerText="#{txt['phone']}" sortBy="#{user.phone}"> 
-                                <h:outputText value="#{user.phone}" class="#{user.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" /> 
-                            </p:column> 
-                            <p:column headerText="#{txt['options']}"> 
-                                <h:link outcome="user-profile.xhtml?faces-redirect=true&amp;user=#{user.id}"> 
-                                    <h:graphicImage title="#{txt['cap_view']}" value="../resources/images/view.png" class="table-action" /> 
-                                </h:link> 
-                                <h:link outcome="compose-mail.xhtml?faces-redirect=true&amp;user=#{user.id}"> 
-                                    <h:graphicImage title="#{txt['cap_send_email']}" value="../resources/images/send_email.png" class="table-action-width" /> 
-                                </h:link> 
-                                <h:commandLink action="#{editClassController.cancelClassBooking(user)}" > 
-                                    <h:graphicImage title="#{txt['cap_cancel_user_booking']}" value="../resources/images/cancel-booking-icon.png" class="table-action" /> 
-                                </h:commandLink> 
-                            </p:column> 
-                        </p:dataTable>
-                    </div>
-                    
+
+
+                    <h:panelGroup rendered="#{!editClassController.newClass}">
+                        <div class="row" style="margin-top: 50px;">
+                            <div class="row page-subtitle-no-spacing margin-bottom-10">
+                                <h4>#{txt['class_timetable']}:</h4>
+                            </div>
+
+                            <script type="text/javascript">
+                                $(document).ready(function () {
+                                    $('#editClassForm\\classDays .ui-paginator-rpp-options.ui-widget.ui-state-default.ui-corner-left')
+                                            .each(function () {
+                                                $(this).children().last().html('#{txt['all']}');
+                                            });
+                                });
+                            </script>
+
+                            <div class="row">
+                                <p:dataTable id="classDays" value="#{editClassController.classDays}" var="classDay" styleClass="common-table text-center" paginator="true" rows="20" paginatorPosition="bottom" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" 
+                                             rowsPerPageTemplate="10, 20, #{editClassController.classDays.size()}" emptyMessage="#{txt['empty_records']}"> 
+                                    <p:column headerText="#{txt['description']}" sortBy="#{classDay.description}"> 
+                                        <h:outputText value="#{classDay.description}" class="#{classDay.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" /> 
+                                    </p:column>  
+                                    <p:column headerText="#{txt['date']}" sortBy="#{classDay.startDate}"> 
+                                        <h:outputText value="#{classDay.startDate}" class="#{classDay.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" >
+                                            <f:convertDateTime pattern="dd/MM/yyyy" /> 
+                                        </h:outputText> 
+                                    </p:column> 
+                                    <p:column headerText="#{txt['starting_time']}" sortBy="#{classDay.startDate}"> 
+                                        <h:outputText value="#{classDay.startDate}" class="#{classDay.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" >
+                                            <f:convertDateTime pattern="HH:mm" /> 
+                                        </h:outputText> 
+                                    </p:column> 
+                                    <p:column headerText="#{txt['ending_time']}" sortBy="#{classDay.endDate}"> 
+                                        <h:outputText value="#{classDay.endDate}" class="#{classDay.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" >
+                                            <f:convertDateTime pattern="HH:mm" /> 
+                                        </h:outputText> 
+                                    </p:column> 
+                                </p:dataTable>
+                            </div>
+                        </div>
+
+
+                        <div class="row" style="margin-top: 50px;">
+                            <div class="row page-subtitle-no-spacing margin-bottom-10">
+                                <h4>#{txt['class_users_list']}:</h4>
+                            </div>
+
+                            <script type="text/javascript">
+                                $(document).ready(function () {
+                                    $('#editClassForm\\:classUsers .ui-paginator-rpp-options.ui-widget.ui-state-default.ui-corner-left')
+                                            .each(function () {
+                                                $(this).children().last().html('#{txt['all']}');
+                                            });
+                                });
+                            </script>
+
+                            <p:dataTable id="classUsers" value="#{editClassController.classUsers}" var="user" styleClass="common-table text-center" paginator="true" rows="20" paginatorPosition="bottom" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" 
+                                         rowsPerPageTemplate="10, 20, #{editClassController.classUsers.size()}" emptyMessage="#{txt['empty_records']}"> 
+                                <p:column headerText="#{txt['name']}" sortBy="#{user.fullName}"> 
+                                    <h:outputText value="#{user.fullName}" class="#{user.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" /> 
+                                </p:column> 
+                                <p:column headerText="#{txt['email']}" sortBy="#{user.email}"> 
+                                    <h:outputText value="#{user.email}" class="#{user.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" /> 
+                                </p:column>  
+                                <p:column headerText="#{txt['phone']}" sortBy="#{user.phone}"> 
+                                    <h:outputText value="#{user.phone}" class="#{user.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" /> 
+                                </p:column> 
+                                <p:column headerText="#{txt['options']}"> 
+                                    <h:link outcome="user-profile.xhtml?faces-redirect=true&amp;user=#{user.id}"> 
+                                        <h:graphicImage title="#{txt['cap_view']}" value="../resources/images/view.png" class="table-action" /> 
+                                    </h:link> 
+                                    <h:link outcome="compose-mail.xhtml?faces-redirect=true&amp;user=#{user.id}"> 
+                                        <h:graphicImage title="#{txt['cap_send_email']}" value="../resources/images/send_email.png" class="table-action-width" /> 
+                                    </h:link> 
+                                </p:column> 
+                            </p:dataTable>
+                        </div>
+                    </h:panelGroup>
+
                     <div class="row">
                         <br/>
                         <h:messages for="msg" id="msg"  styleClass="text-left" style="margin-top: 20px" errorClass="msgError" infoClass="msgInfo"/>
@@ -111,7 +164,7 @@
                         <h:commandButton value="#{txt['b_save_changes']}" class="btn btn-primary btn-block btn-main" action="#{editClassController.updateClass()}" rendered="#{!editClassController.newClass}"/>
                     </div>
                     <div class="col-xs-6 col-sm-2 col-md-2 text-right">
-                        <h:link outcome="#{editClassController.viewClassWithParam()}" >
+                        <h:link outcome="#{editClassController.cancelEditClass()}" >
                             <span class="btn btn-primary btn-block btn-cancel">#{txt['b_cancel']}</span>
                         </h:link>
                     </div>

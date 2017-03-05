@@ -29,9 +29,8 @@ public class ClassFacade extends AbstractFacade<ActivityClass> {
         super(ActivityClass.class);
     }
 
-    
     public ActivityClass createNewClass(Service service, String name, String description, int maximumUsers, int numberOfDays, float price, Organisation organisation) {
-        
+
         ActivityClass activityClass = new ActivityClass();
         activityClass.setService(service);
         activityClass.setName(name);
@@ -43,23 +42,35 @@ public class ClassFacade extends AbstractFacade<ActivityClass> {
         activityClass.setCreatedDate(new Date());
         activityClass.setStatus(Status.ACTIVATED);
         create(activityClass);
-        
+
         return activityClass;
     }
-    
-    public ActivityClass updateClass(ActivityClass activityClass, Service service, String name, String description, int maximumUsers, int numberOfDays, float price) {
-        
+
+    public ActivityClass updateClass(ActivityClass activityClass, Service service, String name, String description, int maximumUsers, float price) {
+
         activityClass.setService(service);
         activityClass.setName(name);
         activityClass.setDescription(description);
         activityClass.setMaximumUsers(maximumUsers);
-        activityClass.setNumberOfDays(numberOfDays);
         activityClass.setPrice(price);
         edit(activityClass);
-        
+
         return activityClass;
     }
-    
+
+    public void addNumberOfDays(ActivityClass activityClass) {
+        activityClass.setNumberOfDays(activityClass.getNumberOfDays() + 1);
+        edit(activityClass);
+    }
+
+    public void removeNumberOfDays(ActivityClass activityClass) {
+        int numberOfDays = activityClass.getNumberOfDays();
+        if (numberOfDays > 0) {
+            activityClass.setNumberOfDays(numberOfDays-1);
+            edit(activityClass);
+        }
+    }
+
     public void activateClass(ActivityClass activityClass) {
         activityClass.setStatus(Status.ACTIVATED);
         edit(activityClass);
@@ -74,7 +85,7 @@ public class ClassFacade extends AbstractFacade<ActivityClass> {
         activityClass.setBookedPlaces(activityClass.getBookedPlaces() + 1);
         edit(activityClass);
     }
-    
+
     public void removeClassBooking(ActivityClass activityClass) {
         activityClass.setBookedPlaces(activityClass.getBookedPlaces() - 1);
         edit(activityClass);
@@ -96,7 +107,7 @@ public class ClassFacade extends AbstractFacade<ActivityClass> {
     public int findNumberOfActiveClassesOfService(Service service, Organisation organisation) {
         return findAllActiveClassesOfService(service, organisation).size();
     }
-    
+
     public List<ActivityClass> findAllClassesOfOrganisation(Organisation organisation) {
         return em.createQuery("SELECT a FROM ActivityClass a WHERE a.organisation = :organisation ORDER BY a.name ASC").
                 setParameter("organisation", organisation).getResultList();
@@ -112,5 +123,5 @@ public class ClassFacade extends AbstractFacade<ActivityClass> {
         return findUniqueResult(em.createQuery("SELECT g FROM ActivityClass g WHERE g.id = :classId AND g.organisation = :organisation ORDER BY g.name ASC").
                 setParameter("classId", classId).
                 setParameter("organisation", organisation).getResultList());
-    } 
+    }
 }

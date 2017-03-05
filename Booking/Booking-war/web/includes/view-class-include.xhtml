@@ -156,7 +156,7 @@
 
                                 <p:column headerText="#{txt['options']}"> 
                                     <h:panelGroup rendered="#{editClassController.userRole eq 'ADMIN' or editClassController.userRole eq 'SUPER_ADMIN'}">
-                                        <p:commandLink action="#{editClassController.prepareClassDay(classDay)}" update=":newClassDayForm:newClassDay" oncomplete="PF('newDayClassDialog').show()" >
+                                        <p:commandLink action="#{editClassController.prepareClassDay(classDay)}" update=":newClassDayForm:newClassDay" oncomplete="PF('newClassDayDialog').show()" >
                                             <h:graphicImage title="#{txt['cap_edit']}" value="../resources/images/edit_user.png" class="table-action" /> 
                                         </p:commandLink> 
                                         <h:commandLink action="#{editClassController.activateClassDay(classDay)}" rendered="#{classDay.status eq 'SUSPENDED'}"> 

@@ -113,7 +113,7 @@ public class EditClassController implements Serializable {
     public String createNewClass() {
         try {
             Service selectedService = serviceFacade.find(selectedServiceId);
-            ActivityClass newActivityClass = classFacade.createNewClass(selectedService, className, classDescription, maximumUsers, numberOfDays, price, organisation);
+            ActivityClass newActivityClass = classFacade.createNewClass(selectedService, className, classDescription, maximumUsers, 0, price, organisation);
             FacesUtil.addSuccessMessage("classesForm:msg", "El nuevo servicio ha sido creado correctamente.");
             // Audit class creation
             String ipAddress = FacesUtil.getRequest().getRemoteAddr();
@@ -129,7 +129,7 @@ public class EditClassController implements Serializable {
     public String updateClass() {
         try {
             Service selectedService = serviceFacade.find(selectedServiceId);
-            ActivityClass updatedClass = classFacade.updateClass(currentClass, selectedService, className, classDescription, maximumUsers, numberOfDays, price);
+            ActivityClass updatedClass = classFacade.updateClass(currentClass, selectedService, className, classDescription, maximumUsers, price);
             if (updatedClass != null) {
 //                FacesUtil.addSuccessMessage("classesForm:msg", "El servicio ha sido actualizado correctamente.");
                 return "view-class.xhtml" + Constants.FACES_REDIRECT + "&amp;class=" + updatedClass.getId();
@@ -219,17 +219,27 @@ public class EditClassController implements Serializable {
 
     public String activateClassDay(ClassDay classDay) {
         classDayFacade.activateClass(classDay);
+        classFacade.addNumberOfDays(currentClass);
         return viewClassWithParam();
     }
 
     public String deactivateClassDay(ClassDay classDay) {
         classDayFacade.deactivateClass(classDay);
+        classFacade.removeNumberOfDays(currentClass);
         return viewClassWithParam();
     }
 
     public String viewClassWithParam() {
         String classParam = (classId != null) ? ("class=" + classId) : "";
         return "view-class.xhtml" + Constants.FACES_REDIRECT + classParam;
+    }
+    
+    public String cancelEditClass() {
+        if (newClass) {
+            return "classes.xhtml" + Constants.FACES_REDIRECT;
+        } else {
+            return viewClassWithParam();
+        }
     }
 
     public void prepareClassDay(ClassDay classDay) {
@@ -254,6 +264,8 @@ public class EditClassController implements Serializable {
             ClassDay newClassDay = classDayFacade.createNewClassDay(currentClass, newDayDescription, newDayStartDate, newDayEndDate);
             context.execute("PF('newClassDayDialog').hide();");
             FacesUtil.addSuccessMessage("viewClassForm:msg", "El nuevo día ha sido añadido correctamente.");
+
+            classFacade.addNumberOfDays(currentClass);
         } catch (Exception e) {
             FacesUtil.addErrorMessage("viewClassForm:msg", "Lo sentimos, no ha sido posible añadir el día.");
             Logger.getLogger(ServicesController.class.getName()).log(Level.SEVERE, null, e);

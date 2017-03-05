@@ -55,7 +55,7 @@ public class ServiceFacade extends AbstractFacade<Service> {
 
         service.setName(newName);
         service.setDescription(description);
-        em.merge(service);
+        edit(service);
 
         return service;
     }

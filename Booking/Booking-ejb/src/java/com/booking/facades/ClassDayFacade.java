@@ -49,7 +49,7 @@ public class ClassDayFacade extends AbstractFacade<ClassDay> {
         classDay.setDescription(description);
         classDay.setStartDate(startDate);
         classDay.setEndDate(endDate);
-        create(classDay);
+        edit(classDay);
         
         return classDay;
     }

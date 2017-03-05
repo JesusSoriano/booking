@@ -9,6 +9,7 @@ import com.booking.enums.AuditType;
 import com.booking.enums.Role;
 import com.booking.facades.AuditFacade;
 import com.booking.facades.BookingFacade;
+import com.booking.facades.ClassDayFacade;
 import com.booking.facades.ClassFacade;
 import com.booking.facades.ServiceFacade;
 import com.booking.facades.UserFacade;
@@ -16,6 +17,7 @@ import com.booking.util.Constants;
 import com.booking.util.FacesUtil;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -40,6 +42,8 @@ public class EditClassController implements Serializable {
     private AuditFacade auditFacade;
     @EJB
     private UserFacade userFacade;
+    @EJB
+    private ClassDayFacade classDayFacade;
 
     private List<SelectItem> services;
     private long selectedServiceId;
@@ -55,10 +59,15 @@ public class EditClassController implements Serializable {
     private float price;
     private boolean newClass;
     private ActivityClass currentClass;
-    private List<ClassDay> activityDays; // días de cada actividad. TODO: nueva pantalla para crear los días
-    // dependiendo del número?
+    private List<ClassDay> classDays;
     private List<User> classUsers;
     private String classId;
+
+    private Date newDayStartDate;
+    private Date newDayEndDate;
+    private String newDayDescription;
+    private boolean isNewDay;
+    private ClassDay selectedClassDay;
 
     public EditClassController() {
     }
@@ -88,53 +97,23 @@ public class EditClassController implements Serializable {
                 classDescription = currentClass.getDescription();
                 maximumUsers = currentClass.getMaximumUsers();
                 bookedPlaces = currentClass.getBookedPlaces();
-//                startingTime = currentClass.getStartTime();
-//                endingTime = currentClass.getEndTime();
                 numberOfDays = currentClass.getNumberOfDays();
+                price = currentClass.getPrice();
+
+                classUsers = bookingFacade.findAllBookedUsersOfClass(currentClass);
+                classDays = classDayFacade.findAllDaysOfClass(currentClass);
             }
         } else {
             newClass = true;
         }
 
-        classUsers = bookingFacade.findAllBookedUsersOfClass(currentClass);
-    }
-
-    public String activateClass(ActivityClass activityClass) {
-        classFacade.activateClass(activityClass);
-        FacesUtil.addSuccessMessage("classesForm:msg", "El grupo ha sido activada correctamente.");
-
-        try {
-            // Audit class activation
-            String ipAddress = FacesUtil.getRequest().getRemoteAddr();
-            auditFacade.createAudit(AuditType.ACTIVAR_SERVICIO, loggedUser, ipAddress, activityClass.getId(), organisation);
-        } catch (Exception e) {
-            Logger.getLogger(EditClassController.class.getName()).log(Level.SEVERE, null, e);
-        }
-
-        return "classes.xhtml" + Constants.FACES_REDIRECT;
-    }
-
-    public String deactivateClass(ActivityClass activityClass) {
-        classFacade.deactivateClass(activityClass);
-        FacesUtil.addSuccessMessage("classesForm:msg", "El grupo ha sido suspendido correctamente.");
-
-        try {
-            // Audit class suspention
-            String ipAddress = FacesUtil.getRequest().getRemoteAddr();
-            auditFacade.createAudit(AuditType.SUSPENDER_SERVICIO, loggedUser, ipAddress, activityClass.getId(), organisation);
-        } catch (Exception e) {
-            Logger.getLogger(EditClassController.class.getName()).log(Level.SEVERE, null, e);
-        }
-
-        return "classes.xhtml" + Constants.FACES_REDIRECT;
+        isNewDay = true;
     }
 
     public String createNewClass() {
-        RequestContext context = RequestContext.getCurrentInstance();
         try {
             Service selectedService = serviceFacade.find(selectedServiceId);
             ActivityClass newActivityClass = classFacade.createNewClass(selectedService, className, classDescription, maximumUsers, numberOfDays, price, organisation);
-            context.execute("PF('newClassDialog').hide();");
             FacesUtil.addSuccessMessage("classesForm:msg", "El nuevo servicio ha sido creado correctamente.");
             // Audit class creation
             String ipAddress = FacesUtil.getRequest().getRemoteAddr();
@@ -145,7 +124,6 @@ public class EditClassController implements Serializable {
             Logger.getLogger(EditClassController.class.getName()).log(Level.SEVERE, null, e);
             return "classes.xhtml" + Constants.FACES_REDIRECT;
         }
-
     }
 
     public String updateClass() {
@@ -163,7 +141,7 @@ public class EditClassController implements Serializable {
             Logger.getLogger(EditClassController.class.getName()).log(Level.SEVERE, null, e);
         }
 
-        return "classes.xhtml" + Constants.FACES_REDIRECT;
+        return viewClassWithParam();
     }
 
     public void addParticipant() {
@@ -174,42 +152,49 @@ public class EditClassController implements Serializable {
             FacesUtil.addErrorMessage("viewClassForm:msg", "Error, el usuario no existe.");
         }
     }
-    
+
     public String bookClassForUser() {
         return bookClass(loggedUser);
     }
 
     public String bookClass(User user) {
         try {
-            // Create the class user
-            bookingFacade.createNewBooking(user, currentClass);
-            // Add a booked place in the class
-            classFacade.addClassBooking(currentClass);
+            // Check if the booking already exists
+            if (bookingFacade.existsBooking(user, currentClass)) {
+                FacesUtil.addErrorMessage("viewClassForm:msg", "Esta clase ya ha sido resarvada previamente.");
+                // Check if there are free places
+            } else if (currentClass.getBookedPlaces() == currentClass.getMaximumUsers()) {
+                FacesUtil.addErrorMessage("viewClassForm:msg", "No quedan plazas para esta clase. Puedes revisar periódicamente si queda alguna libre.");
+            } else {
+                // Create the class user
+                bookingFacade.createNewBooking(user, currentClass);
+                // Add a booked place in the class
+                classFacade.addClassBooking(currentClass);
 
-            FacesUtil.addSuccessMessage("viewClassForm:msg", "La plaza ha sido reservada correctamente.");
+                FacesUtil.addSuccessMessage("viewClassForm:msg", "La plaza ha sido reservada correctamente.");
+
+                try {
+                    // Audit new booking
+                    String ipAddress = FacesUtil.getRequest().getRemoteAddr();
+                    auditFacade.createAudit(AuditType.RESERVAR_CLASE, user, ipAddress, currentClass.getId(), organisation);
+
+                } catch (Exception e) {
+                    Logger.getLogger(ClassesController.class.getName()).log(Level.SEVERE, null, e);
+                    FacesUtil.addErrorMessage("viewClassForm:msg", "La plaza ha sido reservada, pero ha habido un problema auditando la reserva. Por favor informa a algún administrador del problema.");
+                }
+            }
         } catch (Exception e) {
             Logger.getLogger(ClassesController.class.getName()).log(Level.SEVERE, null, e);
             FacesUtil.addErrorMessage("viewClassForm:msg", "Lo sentimos, ha habido un problema al reservar la plaza.");
         }
-        
-        try {
-            // Audit new booking
-            String ipAddress = FacesUtil.getRequest().getRemoteAddr();
-            auditFacade.createAudit(AuditType.RESERVAR_CLASE, user, ipAddress, currentClass.getId(), organisation);
 
-        } catch (Exception e) {
-            Logger.getLogger(ClassesController.class.getName()).log(Level.SEVERE, null, e);
-            FacesUtil.addErrorMessage("viewClassForm:msg", "La plaza ha sido reservada, pero ha habido un problema auditando la reserva. Por favor informa a algún administrador del problema.");
-        }
-
-        String classParam = (classId != null) ? ("class=" + classId) : "";
-        return "view-class.xhtml" + Constants.FACES_REDIRECT + classParam;
+        return viewClassWithParam();
     }
 
     public String cancelBookingForUser() {
         return cancelClassBooking(loggedUser);
     }
-    
+
     public String cancelClassBooking(User user) {
         try {
             // Create the class user
@@ -229,10 +214,72 @@ public class EditClassController implements Serializable {
             FacesUtil.addErrorMessage("viewClassForm:msg", "Lo sentimos, ha habido un problema al cancelar la reserva.");
         }
 
+        return viewClassWithParam();
+    }
+
+    public String activateClassDay(ClassDay classDay) {
+        classDayFacade.activateClass(classDay);
+        return viewClassWithParam();
+    }
+
+    public String deactivateClassDay(ClassDay classDay) {
+        classDayFacade.deactivateClass(classDay);
+        return viewClassWithParam();
+    }
+
+    public String viewClassWithParam() {
         String classParam = (classId != null) ? ("class=" + classId) : "";
         return "view-class.xhtml" + Constants.FACES_REDIRECT + classParam;
     }
-    
+
+    public void prepareClassDay(ClassDay classDay) {
+        selectedClassDay = classDay;
+        newDayDescription = classDay.getDescription();
+        newDayStartDate = classDay.getStartDate();
+        newDayEndDate = classDay.getEndDate();
+        isNewDay = false;
+    }
+
+    public void prepareNewClassDay() {
+        selectedClassDay = null;
+        newDayDescription = "";
+        newDayStartDate = null;
+        newDayEndDate = null;
+        isNewDay = true;
+    }
+
+    public String addClassDay() {
+        RequestContext context = RequestContext.getCurrentInstance();
+        try {
+            ClassDay newClassDay = classDayFacade.createNewClassDay(currentClass, newDayDescription, newDayStartDate, newDayEndDate);
+            context.execute("PF('newClassDayDialog').hide();");
+            FacesUtil.addSuccessMessage("viewClassForm:msg", "El nuevo día ha sido añadido correctamente.");
+        } catch (Exception e) {
+            FacesUtil.addErrorMessage("viewClassForm:msg", "Lo sentimos, no ha sido posible añadir el día.");
+            Logger.getLogger(ServicesController.class.getName()).log(Level.SEVERE, null, e);
+        }
+
+        return viewClassWithParam();
+    }
+
+    public String updateClassDay() {
+        if (selectedClassDay != null) {
+            RequestContext context = RequestContext.getCurrentInstance();
+            try {
+                classDayFacade.updateClassDay(selectedClassDay, currentClass, newDayDescription, newDayStartDate, newDayEndDate);
+                context.execute("PF('newClassDayDialog').hide();");
+                FacesUtil.addSuccessMessage("viewClassForm:msg", "El día ha sido actualizado correctamente.");
+            } catch (Exception e) {
+                FacesUtil.addErrorMessage("viewClassForm:msg", "Lo sentimos, no ha sido posible actualizar el día.");
+                Logger.getLogger(ServicesController.class.getName()).log(Level.SEVERE, null, e);
+            }
+        } else {
+            FacesUtil.addErrorMessage("viewClassForm:msg", "Lo sentimos, no ha sido posible actualizar el día.");
+        }
+
+        return viewClassWithParam();
+    }
+
     public boolean existsBooking() {
         return bookingFacade.existsBooking(loggedUser, currentClass);
     }
@@ -319,5 +366,37 @@ public class EditClassController implements Serializable {
 
     public List<User> getClassUsers() {
         return classUsers;
+    }
+
+    public List<ClassDay> getClassDays() {
+        return classDays;
+    }
+
+    public void setNewDayStartDate(Date newDayStartDate) {
+        this.newDayStartDate = newDayStartDate;
+    }
+
+    public Date getNewDayStartDate() {
+        return newDayStartDate;
+    }
+
+    public void setNewDayEndDate(Date newDayEndDate) {
+        this.newDayEndDate = newDayEndDate;
+    }
+
+    public Date getNewDayEndDate() {
+        return newDayEndDate;
+    }
+
+    public void setNewDayDescription(String newDayDescription) {
+        this.newDayDescription = newDayDescription;
+    }
+
+    public String getNewDayDescription() {
+        return newDayDescription;
+    }
+
+    public boolean isIsNewDay() {
+        return isNewDay;
     }
 }

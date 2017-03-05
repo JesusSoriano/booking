@@ -111,17 +111,13 @@ public class ServicesController implements Serializable {
     }
 
     public String updateService() {
-        System.out.println("-------- UPDATE SERVICE");
         if (selectedService != null) {
             RequestContext context = RequestContext.getCurrentInstance();
             try {
-                Service updatedService = serviceFacade.updateService(selectedService, newServiceName, newServiceDescription, organisation);
+                serviceFacade.updateService(selectedService, newServiceName, newServiceDescription, organisation);
                 context.execute("PF('newServiceDialog').hide();");
-                if (updatedService != null) {
-                    FacesUtil.addSuccessMessage("servicesForm:msg", "El servicio ha sido actualizado correctamente.");
-                } else {
-                    FacesUtil.addErrorMessage("servicesForm:msg", "Lo sentimos, no ha sido posible editar el servicio.");
-                }
+
+                FacesUtil.addSuccessMessage("servicesForm:msg", "El servicio ha sido actualizado correctamente.");
             } catch (ServiceAlreadyExistsException e) {
                 FacesUtil.addErrorMessage("servicesForm:msg", e.getMessage());
                 Logger.getLogger(ServicesController.class.getName()).log(Level.SEVERE, null, e);
@@ -131,6 +127,8 @@ public class ServicesController implements Serializable {
                 Logger.getLogger(ServicesController.class.getName()).log(Level.SEVERE, null, e);
                 return "";
             }
+        } else {
+            FacesUtil.addErrorMessage("servicesForm:msg", "Lo sentimos, no ha sido posible editar el servicio.");
         }
 
         selectedService = null;
@@ -180,7 +178,8 @@ public class ServicesController implements Serializable {
     public boolean isIsNewService() {
         return isNewService;
     }
-    public int getNumberOfClasses(Service service){
+
+    public int getNumberOfClasses(Service service) {
         return classFacade.findNumberOfActiveClassesOfService(service, organisation);
     }
 }

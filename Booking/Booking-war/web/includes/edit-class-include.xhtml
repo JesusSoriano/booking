@@ -74,6 +74,32 @@
                     </div>
 
                     <div class="row">
+                        <p:dataTable id="classUsers" value="#{editClassController.classUsers}" var="user" styleClass="common-table text-center" paginator="true" rows="20" paginatorPosition="bottom" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" 
+                                     rowsPerPageTemplate="10, 20, #{editClassController.classUsers.size()}" emptyMessage="#{txt['empty_records']}"> 
+                            <p:column headerText="#{txt['name']}" sortBy="#{user.fullName}"> 
+                                <h:outputText value="#{user.fullName}" class="#{user.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" /> 
+                            </p:column> 
+                            <p:column headerText="#{txt['email']}" sortBy="#{user.email}"> 
+                                <h:outputText value="#{user.email}" class="#{user.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" /> 
+                            </p:column>  
+                            <p:column headerText="#{txt['phone']}" sortBy="#{user.phone}"> 
+                                <h:outputText value="#{user.phone}" class="#{user.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" /> 
+                            </p:column> 
+                            <p:column headerText="#{txt['options']}"> 
+                                <h:link outcome="user-profile.xhtml?faces-redirect=true&amp;user=#{user.id}"> 
+                                    <h:graphicImage title="#{txt['cap_view']}" value="../resources/images/view.png" class="table-action" /> 
+                                </h:link> 
+                                <h:link outcome="compose-mail.xhtml?faces-redirect=true&amp;user=#{user.id}"> 
+                                    <h:graphicImage title="#{txt['cap_send_email']}" value="../resources/images/send_email.png" class="table-action-width" /> 
+                                </h:link> 
+                                <h:commandLink action="#{editClassController.cancelClassBooking(user)}" > 
+                                    <h:graphicImage title="#{txt['cap_cancel_user_booking']}" value="../resources/images/cancel-booking-icon.png" class="table-action" /> 
+                                </h:commandLink> 
+                            </p:column> 
+                        </p:dataTable>
+                    </div>
+                    
+                    <div class="row">
                         <br/>
                         <h:messages for="msg" id="msg"  styleClass="text-left" style="margin-top: 20px" errorClass="msgError" infoClass="msgInfo"/>
                     </div>
@@ -85,7 +111,7 @@
                         <h:commandButton value="#{txt['b_save_changes']}" class="btn btn-primary btn-block btn-main" action="#{editClassController.updateClass()}" rendered="#{!editClassController.newClass}"/>
                     </div>
                     <div class="col-xs-6 col-sm-2 col-md-2 text-right">
-                        <h:link outcome="classes.xhtml?faces-redirect=true" >
+                        <h:link outcome="#{editClassController.viewClassWithParam()}" >
                             <span class="btn btn-primary btn-block btn-cancel">#{txt['b_cancel']}</span>
                         </h:link>
                     </div>

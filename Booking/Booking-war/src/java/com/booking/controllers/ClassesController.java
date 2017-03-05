@@ -73,8 +73,7 @@ public class ClassesController implements Serializable {
             Logger.getLogger(ClassesController.class.getName()).log(Level.SEVERE, null, e);
         }
 
-        String serviceParam = (serviceId != null) ? ("service=" + serviceId) : "";
-        return "classes.xhtml" + Constants.FACES_REDIRECT + serviceParam;
+        return classesWithParam();
     }
 
     public String deactivateClass(ActivityClass activityClass) {
@@ -89,33 +88,39 @@ public class ClassesController implements Serializable {
             Logger.getLogger(ClassesController.class.getName()).log(Level.SEVERE, null, e);
         }
 
-        String serviceParam = (serviceId != null) ? ("service=" + serviceId) : "";
-        return "classes.xhtml" + Constants.FACES_REDIRECT + serviceParam;
+        return classesWithParam();
     }
 
     public String bookClass(ActivityClass activityClass) {
         try {
-            // Create the class user
-            bookingFacade.createNewBooking(loggedUser, activityClass);
-            // Add a booked place in the class
-            classFacade.addClassBooking(activityClass);
+            // Check if the booking already exists
+            if (bookingFacade.existsBooking(loggedUser, activityClass)) {
+                FacesUtil.addErrorMessage("classesForm:msg", "Esta clase ya ha sido resarvada previamente.");
+                // Check if there are free places
+            } else if (activityClass.getBookedPlaces() == activityClass.getMaximumUsers()) {
+                FacesUtil.addErrorMessage("classesForm:msg", "No quedan plazas para esta clase. Puedes revisar periódicamente si queda alguna libre.");
+            } else {
+                // Create the class user
+                bookingFacade.createNewBooking(loggedUser, activityClass);
+                // Add a booked place in the class
+                classFacade.addClassBooking(activityClass);
 
-            FacesUtil.addSuccessMessage("classesForm:msg", "La plaza ha sido reservada correctamente.");
+                FacesUtil.addSuccessMessage("classesForm:msg", "La plaza ha sido reservada correctamente.");
+
+                try {
+                    // Audit class suspention
+                    String ipAddress = FacesUtil.getRequest().getRemoteAddr();
+                    auditFacade.createAudit(AuditType.RESERVAR_CLASE, loggedUser, ipAddress, activityClass.getId(), organisation);
+                } catch (Exception e) {
+                    Logger.getLogger(ClassesController.class.getName()).log(Level.SEVERE, null, e);
+                }
+            }
         } catch (Exception e) {
             Logger.getLogger(ClassesController.class.getName()).log(Level.SEVERE, null, e);
             FacesUtil.addErrorMessage("classesForm:msg", "Lo sentimos, ha habido un problema al reservar la plaza.");
         }
 
-        try {
-            // Audit class suspention
-            String ipAddress = FacesUtil.getRequest().getRemoteAddr();
-            auditFacade.createAudit(AuditType.RESERVAR_CLASE, loggedUser, ipAddress, activityClass.getId(), organisation);
-        } catch (Exception e) {
-            Logger.getLogger(ClassesController.class.getName()).log(Level.SEVERE, null, e);
-        }
-
-        String serviceParam = (serviceId != null) ? ("service=" + serviceId) : "";
-        return "classes.xhtml" + Constants.FACES_REDIRECT + serviceParam;
+        return classesWithParam();
     }
 
     public String cancelClassBooking(ActivityClass activityClass) {
@@ -140,7 +145,11 @@ public class ClassesController implements Serializable {
         } catch (Exception e) {
             Logger.getLogger(ClassesController.class.getName()).log(Level.SEVERE, null, e);
         }
-
+        
+        return classesWithParam();
+    }
+    
+    private String classesWithParam () {
         String serviceParam = (serviceId != null) ? ("service=" + serviceId) : "";
         return "classes.xhtml" + Constants.FACES_REDIRECT + serviceParam;
     }

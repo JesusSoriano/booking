@@ -39,7 +39,7 @@ public class ClassDay implements Serializable {
     @Enumerated(EnumType.STRING)
     private Status status;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "activityClass", referencedColumnName = "id")
+    @JoinColumn(name = "activity_class", referencedColumnName = "id")
     private ActivityClass activityClass;
     @Column(name = "start_date")
     @Temporal(TemporalType.TIMESTAMP)

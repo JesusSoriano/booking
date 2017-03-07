@@ -39,7 +39,8 @@
                     </h:panelGroup>
                 </div>
 
-                <h:panelGroup id="rows"> 
+
+                <div class="row"> 
                     <script type="text/javascript">
                         $(document).ready(function () {
                             $('#classesForm\\:classesTable .ui-paginator-rpp-options.ui-widget.ui-state-default.ui-corner-left')
@@ -67,6 +68,11 @@
                         </p:column> 
                         <p:column headerText="#{txt['number_of_days']}" sortBy="#{class.numberOfDays}"> 
                             <h:outputText value="#{class.numberOfDays}" class="#{class.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" />
+                        </p:column> 
+                        <p:column headerText="#{txt['end_date']}" sortBy="#{class.endDate}"> 
+                            <h:outputText value="#{class.endDate}" class="#{class.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" >
+                                <f:convertDateTime pattern="#{dateFormatController.dateFormatString}" />
+                            </h:outputText>
                         </p:column> 
                         <p:column headerText="#{txt['price']}" sortBy="#{class.price}"> 
                             <h:outputText value="#{txt['free']}" rendered="#{class.price eq 0}" class="#{class.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" />
@@ -100,7 +106,77 @@
                             </h:panelGroup> 
                         </p:column> 
                     </p:dataTable>
-                </h:panelGroup> 
+                </div> 
+
+
+                <div class="row" style="margin-top: 100px"> 
+                    <div class="row page-subtitle-no-spacing margin-bottom-10">
+                        <h4>#{txt['past_classes']}:</h4>
+                    </div>
+
+                    <script type="text/javascript">
+                        $(document).ready(function () {
+                            $('#classesForm\\:pastClassesTable .ui-paginator-rpp-options.ui-widget.ui-state-default.ui-corner-left')
+                                    .each(function () {
+                                        $(this).children().last().html('#{txt['all']}');
+                                    });
+                        });
+                    </script>
+
+                    <p:dataTable id="pastClassesTable" value="#{classesController.pastClasses}" var="class" styleClass="common-table text-center" paginator="true" rows="20" paginatorPosition="bottom" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" 
+                                 rowsPerPageTemplate="10, 20, #{classesController.pastClasses.size()}" emptyMessage="#{txt['empty_records']}"> 
+                        <p:column headerText="#{txt['name']}" sortBy="#{class.name}"> 
+                            <h:outputText value="#{class.name}" class="#{class.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" /> 
+                        </p:column> 
+                        <p:column headerText="#{txt['service']}" sortBy="#{class.service.name}"> 
+                            <h:link outcome="classes.xhtml?faces-redirect=true&amp;service=#{class.service.id}"> 
+                                <h:outputText value="#{class.service.name}" class="#{class.status eq 'SUSPENDED' ? 'lightgray-color' : 'blue-link'}" /> 
+                            </h:link> 
+                        </p:column> 
+                        <p:column headerText="#{txt['description']}" sortBy="#{class.description}"> 
+                            <h:outputText value="#{class.description}" class="#{class.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" /> 
+                        </p:column> 
+                        <p:column headerText="#{txt['free_places']}" sortBy="#{class.maximumUsers - class.bookedPlaces}"> 
+                            <h:outputText value="#{class.maximumUsers - class.bookedPlaces} #{txt['of']} #{class.maximumUsers}" class="#{class.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" /> 
+                        </p:column> 
+                        <p:column headerText="#{txt['end_date']}" sortBy="#{class.endDate}"> 
+                            <h:outputText value="#{class.endDate}" class="#{class.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" >
+                                <f:convertDateTime pattern="#{dateFormatController.dateFormatString}" />
+                            </h:outputText>
+                        </p:column> 
+                        <p:column headerText="#{txt['price']}" sortBy="#{class.price}"> 
+                            <h:outputText value="#{txt['free']}" rendered="#{class.price eq 0}" class="#{class.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" />
+                            <h:outputText value="#{class.price}" rendered="#{class.price ne 0}" class="#{class.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" >
+                                <f:convertNumber type="currency" currencySymbol="€" locale="es_ES" />
+                            </h:outputText>
+                        </p:column> 
+                        <p:column headerText="#{txt['organisation']}" sortBy="#{class.organisation.name}" rendered="#{classesController.userRole eq 'SUPER_ADMIN'}"> 
+                            <h:outputText value="#{class.organisation.name}" class="#{class.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" /> 
+                        </p:column> 
+                        <p:column headerText="#{txt['options']}"> 
+                            <h:link outcome="view-class.xhtml?faces-redirect=true&amp;class=#{class.id}" >
+                                <h:graphicImage title="#{txt['cap_view']}" value="../resources/images/view.png" class="table-action" /> 
+                            </h:link>  
+                            <h:commandLink action="#{classesController.bookClass(class)}" rendered="#{classesController.existsBooking(class) eq false}"> 
+                                <h:graphicImage title="#{txt['cap_booking']}" value="../resources/images/booking-icon.png" class="table-action" /> 
+                            </h:commandLink> 
+                            <h:commandLink action="#{classesController.cancelClassBooking(class)}" rendered="#{classesController.existsBooking(class) eq true}"> 
+                                <h:graphicImage title="#{txt['cap_cancel_booking']}" value="../resources/images/cancel-booking-icon.png" class="table-action" /> 
+                            </h:commandLink> 
+                            <h:panelGroup rendered="#{classesController.userRole eq 'ADMIN' or classesController.userRole eq 'SUPER_ADMIN'}">
+                                <h:link outcome="edit-class.xhtml?faces-redirect=true&amp;class=#{class.id}"> 
+                                    <h:graphicImage title="#{txt['cap_edit']}" value="../resources/images/edit_user.png" class="table-action" /> 
+                                </h:link> 
+                                <h:commandLink action="#{classesController.activateClass(class)}" rendered="#{class.status eq 'SUSPENDED'}"> 
+                                    <h:graphicImage title="#{txt['cap_activate']}" value="../resources/images/activate_user.png" class="table-action" /> 
+                                </h:commandLink> 
+                                <h:commandLink action="#{classesController.deactivateClass(class)}" rendered="#{class.status eq 'ACTIVATED'}"> 
+                                    <h:graphicImage title="#{txt['cap_suspend']}" value="../resources/images/suspend_user.png" class="table-action" /> 
+                                </h:commandLink> 
+                            </h:panelGroup> 
+                        </p:column> 
+                    </p:dataTable>
+                </div> 
             </h:form>
         </div>
     </div>

@@ -58,12 +58,19 @@ public class BookingFacade extends AbstractFacade<Booking> {
     }
     
     public List<User> findAllBookedUsersOfClass(ActivityClass activityClass) {
-        return em.createQuery("SELECT b.classUser FROM Booking b WHERE b.activityClass = :activityClass").
+        return em.createQuery("SELECT b.classUser FROM Booking b WHERE b.activityClass = :activityClass ORDER BY b.classUser.firstName, b.classUser.firstLastName ASC").
                 setParameter("activityClass", activityClass).getResultList();
     }
     
-    public List<ActivityClass> findAllClassesOfUser(User user) {
-        return em.createQuery("SELECT b.activityClass FROM Booking b WHERE b.classUser = :user").
+    public List<ActivityClass> findAllCurrentClassesOfUser(User user) {
+        return em.createQuery("SELECT b.activityClass FROM Booking b WHERE b.classUser = :user AND b.activityClass.endDate > :today ORDER BY b.activityClass.endDate ASC").
+                setParameter("today", new Date()).
+                setParameter("user", user).getResultList();
+    }
+    
+    public List<ActivityClass> findAllPastClassesOfUser(User user) {
+        return em.createQuery("SELECT b.activityClass FROM Booking b WHERE b.classUser = :user AND b.activityClass.endDate < :today ORDER BY b.activityClass.endDate ASC").
+                setParameter("today", new Date()).
                 setParameter("user", user).getResultList();
     }
 }

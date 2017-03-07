@@ -35,6 +35,7 @@ public class ClassesController implements Serializable {
     private AuditFacade auditFacade;
 
     private List<ActivityClass> classes;
+    private List<ActivityClass> pastClasses;
     private User loggedUser;
     private Organisation organisation;
     private Service currentService;
@@ -52,12 +53,15 @@ public class ClassesController implements Serializable {
         if (serviceId != null) {
             currentService = serviceFacade.findServiceOfOrganisation(Integer.valueOf(serviceId), organisation);
             if (currentService != null) {
-                classes = classFacade.findAllClassesOfService(currentService, organisation);
+                classes = classFacade.findAllCurrentClassesOfService(currentService, organisation);
+                pastClasses = classFacade.findAllPastActiveClassesOfService(currentService, organisation);
             } else {
-                classes = classFacade.findAllClassesOfOrganisation(organisation);
+                classes = classFacade.findAllCurrentClassesOfOrganisation(organisation);
+                pastClasses = classFacade.findAllPastClassesOfOrganisation(organisation);
             }
         } else {
-            classes = classFacade.findAllClassesOfOrganisation(organisation);
+            classes = classFacade.findAllCurrentClassesOfOrganisation(organisation);
+            pastClasses = classFacade.findAllPastClassesOfOrganisation(organisation);
         }
     }
 
@@ -168,5 +172,9 @@ public class ClassesController implements Serializable {
 
     public Service getCurrentService() {
         return currentService;
+    }
+
+    public List<ActivityClass> getPastClasses() {
+        return pastClasses;
     }
 }

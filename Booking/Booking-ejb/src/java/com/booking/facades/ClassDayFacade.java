@@ -70,4 +70,9 @@ public class ClassDayFacade extends AbstractFacade<ClassDay> {
                 setParameter("activityClass", activityClass).getResultList();
     }
     
+    public List<ClassDay> findAllActiveDaysOfClass(ActivityClass activityClass) {
+        return em.createQuery("SELECT d FROM ClassDay d WHERE d.activityClass = :activityClass AND d.status = :activeStatus ORDER BY d.startDate ASC").
+                setParameter("activityClass", activityClass).
+                setParameter("activeStatus", Status.ACTIVATED).getResultList();
+    }
 }

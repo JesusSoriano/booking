@@ -633,6 +633,10 @@ select[multiple], select[size] {
     padding: 10px 20px;
 }
 
+.margin-top-50 {
+    margin-top: 50px;
+}
+
 .margin-bottom-10 {
     margin-bottom: 10px;
 }
@@ -660,6 +664,10 @@ a:hover {
 
 .clear {
     clear: both;
+}
+
+.italics {
+    font-style: italic;
 }
 
 

@@ -48,6 +48,7 @@ public class UserProfileController implements Serializable {
     private String postcode;
     private String userId;
     private List<ActivityClass> classes;
+    private List<ActivityClass> pastClasses;
 
     /**
      * Creates a new instance of UserProfileController
@@ -80,7 +81,8 @@ public class UserProfileController implements Serializable {
             country = profileUser.getAddress().getCountry();
             postcode = profileUser.getAddress().getPostcode();
 
-            classes = bookingFacade.findAllClassesOfUser(profileUser);
+            classes = bookingFacade.findAllCurrentClassesOfUser(profileUser);
+            pastClasses = bookingFacade.findAllPastClassesOfUser(profileUser);
         }
     }
 
@@ -233,5 +235,9 @@ public class UserProfileController implements Serializable {
 
     public List<ActivityClass> getClasses() {
         return classes;
+    }
+
+    public List<ActivityClass> getPastClasses() {
+        return pastClasses;
     }
 }

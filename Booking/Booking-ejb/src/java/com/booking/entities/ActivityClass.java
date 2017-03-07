@@ -63,6 +63,9 @@ public class ActivityClass implements Serializable {
     private int numberOfDays;
     @OneToMany(mappedBy = "activityClass", cascade = CascadeType.REMOVE)
     private List<ClassDay> activityDays;
+    @Column(name = "end_date")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date endDate;
 
     public ActivityClass() {
     }
@@ -159,4 +162,11 @@ public class ActivityClass implements Serializable {
         this.activityDays = activityDays;
     }
 
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
 }

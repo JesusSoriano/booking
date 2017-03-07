@@ -81,7 +81,7 @@
                      rowsPerPageTemplate="10, 20, 50, #{auditsController.auditList.size()}" rendered="#{auditsController.auditList ne null and auditsController.auditList.size() gt 0}" emptyMessage="#{txt['empty_records']}"> 
             <p:column headerText="#{txt['date']}" sortBy="#{audit.createdDate}"> 
                 <h:outputText value="#{audit.createdDate}"> 
-                    <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" /> 
+                    <f:convertDateTime pattern="#{dateFormatController.dateWithTimeFormatString}" />
                 </h:outputText> 
             </p:column> 
             <p:column headerText="#{txt['role']}" sortBy="#{audit.user.userRole.role}"> 

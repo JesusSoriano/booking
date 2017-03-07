@@ -73,9 +73,9 @@ public class BookingsController implements Serializable {
         }
 
         if (bookingsUser != null) {
-            classes = bookingFacade.findAllClassesOfUser(bookingsUser);
+            classes = bookingFacade.findAllCurrentClassesOfUser(bookingsUser);
         } else {
-            classes = bookingFacade.findAllClassesOfUser(loggedUser);
+            classes = bookingFacade.findAllCurrentClassesOfUser(loggedUser);
         }
         
         // Load schedule

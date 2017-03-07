@@ -220,20 +220,46 @@ public class EditClassController implements Serializable {
     public String activateClassDay(ClassDay classDay) {
         classDayFacade.activateClass(classDay);
         classFacade.addNumberOfDays(currentClass);
+        classFacade.updateEndDate(currentClass, classDay.getEndDate());
         return viewClassWithParam();
     }
 
     public String deactivateClassDay(ClassDay classDay) {
         classDayFacade.deactivateClass(classDay);
         classFacade.removeNumberOfDays(currentClass);
+        checkEndDateOfClass(classDay.getEndDate());
         return viewClassWithParam();
+    }
+
+    /**
+     * Check if the endDate of the Class is the one we just deactivated and
+     * assign a new endDate, depending of the rest of classDays.
+     *
+     * @param endDate The endDate of the deactivated classDay
+     */
+    private void checkEndDateOfClass(Date endDate) {
+        if (endDate.equals(currentClass.getEndDate()) || endDate.after(currentClass.getEndDate())) {
+            List<ClassDay> currentClassDays = classDayFacade.findAllActiveDaysOfClass(currentClass);
+            int classDaysSize = currentClassDays.size();
+            if (classDaysSize > 0) {
+                Date lastDate = currentClassDays.get(0).getEndDate();
+                for (ClassDay classDay : currentClassDays.subList(1, classDaysSize)) {
+                    if (classDay.getEndDate().after(lastDate)) {
+                        lastDate = classDay.getEndDate();
+                    }
+                }
+                classFacade.setEndDate(currentClass, lastDate);
+            } else {
+                classFacade.setEndDate(currentClass, null);
+            }
+        }
     }
 
     public String viewClassWithParam() {
         String classParam = (classId != null) ? ("class=" + classId) : "";
         return "view-class.xhtml" + Constants.FACES_REDIRECT + classParam;
     }
-    
+
     public String cancelEditClass() {
         if (newClass) {
             return "classes.xhtml" + Constants.FACES_REDIRECT;
@@ -261,14 +287,17 @@ public class EditClassController implements Serializable {
     public String addClassDay() {
         RequestContext context = RequestContext.getCurrentInstance();
         try {
-            ClassDay newClassDay = classDayFacade.createNewClassDay(currentClass, newDayDescription, newDayStartDate, newDayEndDate);
+            classDayFacade.createNewClassDay(currentClass, newDayDescription, newDayStartDate, newDayEndDate);
             context.execute("PF('newClassDayDialog').hide();");
+            classFacade.updateEndDate(currentClass, newDayEndDate);
             FacesUtil.addSuccessMessage("viewClassForm:msg", "El nuevo día ha sido añadido correctamente.");
 
             classFacade.addNumberOfDays(currentClass);
         } catch (Exception e) {
             FacesUtil.addErrorMessage("viewClassForm:msg", "Lo sentimos, no ha sido posible añadir el día.");
-            Logger.getLogger(ServicesController.class.getName()).log(Level.SEVERE, null, e);
+            Logger
+                    .getLogger(ServicesController.class
+                            .getName()).log(Level.SEVERE, null, e);
         }
 
         return viewClassWithParam();
@@ -276,14 +305,22 @@ public class EditClassController implements Serializable {
 
     public String updateClassDay() {
         if (selectedClassDay != null) {
+            // Save the last date to compare with the class date.
+            Date lastEndDate = selectedClassDay.getEndDate();
+            if (newDayEndDate.after(lastEndDate)) {
+                lastEndDate = newDayEndDate;
+            }
             RequestContext context = RequestContext.getCurrentInstance();
             try {
                 classDayFacade.updateClassDay(selectedClassDay, currentClass, newDayDescription, newDayStartDate, newDayEndDate);
                 context.execute("PF('newClassDayDialog').hide();");
+                checkEndDateOfClass(lastEndDate);
                 FacesUtil.addSuccessMessage("viewClassForm:msg", "El día ha sido actualizado correctamente.");
             } catch (Exception e) {
                 FacesUtil.addErrorMessage("viewClassForm:msg", "Lo sentimos, no ha sido posible actualizar el día.");
-                Logger.getLogger(ServicesController.class.getName()).log(Level.SEVERE, null, e);
+                Logger
+                        .getLogger(ServicesController.class
+                                .getName()).log(Level.SEVERE, null, e);
             }
         } else {
             FacesUtil.addErrorMessage("viewClassForm:msg", "Lo sentimos, no ha sido posible actualizar el día.");

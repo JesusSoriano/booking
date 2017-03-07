@@ -86,26 +86,6 @@
                                     <h:outputText id="bookedPlaces" styleClass="form-control" value="#{editClassController.currentClass.bookedPlaces}" />
                                 </div>
                             </div>
-                            <h:panelGroup rendered="#{editClassController.userRole eq 'ADMIN' or editClassController.userRole eq 'SUPER_ADMIN'}">
-                                <div class="row">
-                                    <div class="col-xs-4">
-                                        <p>#{txt['created_date']}</p>
-                                    </div>
-                                    <div class="col-xs-8">
-                                        <h:outputText id="createdDate" styleClass="form-control" value="#{editClassController.currentClass.createdDate}" >
-                                            <f:convertDateTime pattern="dd MMM yyyy - HH:mm" /> 
-                                        </h:outputText>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-xs-4">
-                                        <p>#{txt['status']}</p>
-                                    </div>
-                                    <div class="col-xs-8">
-                                        <h:outputText id="status" styleClass="form-control" value="#{editClassController.currentClass.status}" />
-                                    </div>
-                                </div>
-                            </h:panelGroup>
                             <div class="row">
                                 <div class="col-xs-4">
                                     <p>#{txt['no_of_days']}</p>
@@ -114,6 +94,36 @@
                                     <h:outputText id="noOfDays" styleClass="form-control" value="#{editClassController.currentClass.numberOfDays}" />
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-xs-4">
+                                    <p>#{txt['end_date']}</p>
+                                </div>
+                                <div class="col-xs-8">
+                                    <h:outputText id="endDate" styleClass="form-control" value="#{editClassController.currentClass.endDate}" >
+                                        <f:convertDateTime pattern="#{dateFormatController.dateFormatString}" />
+                                    </h:outputText>
+                                </div>
+                            </div>
+                            <h:panelGroup rendered="#{editClassController.userRole eq 'ADMIN' or editClassController.userRole eq 'SUPER_ADMIN'}">
+                                <div class="row">
+                                    <div class="col-xs-4">
+                                        <p class="italics">#{txt['created_date']}</p>
+                                    </div>
+                                    <div class="col-xs-8">
+                                        <h:outputText id="createdDate" styleClass="form-control" value="#{editClassController.currentClass.createdDate}" >
+                                            <f:convertDateTime pattern="#{dateFormatController.dateWithTimeFormatString}" />
+                                        </h:outputText>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-4">
+                                        <p class="italics">#{txt['status']}</p>
+                                    </div>
+                                    <div class="col-xs-8">
+                                        <h:outputText id="status" styleClass="form-control" value="#{editClassController.currentClass.status}" />
+                                    </div>
+                                </div>
+                            </h:panelGroup>
                         </div>
                     </div>
 
@@ -140,7 +150,7 @@
                                 </p:column>  
                                 <p:column headerText="#{txt['date']}" sortBy="#{classDay.startDate}"> 
                                     <h:outputText value="#{classDay.startDate}" class="#{classDay.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" >
-                                        <f:convertDateTime pattern="dd/MM/yyyy" /> 
+                                        <f:convertDateTime pattern="#{dateFormatController.dateFormatString}" />
                                     </h:outputText> 
                                 </p:column> 
                                 <p:column headerText="#{txt['starting_time']}" sortBy="#{classDay.startDate}"> 
@@ -179,7 +189,7 @@
                         </h:panelGroup>
                     </div>
 
-                    <div class="row" style="margin-top: 50px;">
+                    <div class="row margin-top-50">
                         <div class="row page-subtitle-no-spacing margin-bottom-10">
                             <h4>#{txt['class_users_list']}:</h4>
                         </div>

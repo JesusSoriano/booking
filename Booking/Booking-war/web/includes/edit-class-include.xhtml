@@ -97,7 +97,7 @@
                                     </p:column>  
                                     <p:column headerText="#{txt['date']}" sortBy="#{classDay.startDate}"> 
                                         <h:outputText value="#{classDay.startDate}" class="#{classDay.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" >
-                                            <f:convertDateTime pattern="dd/MM/yyyy" /> 
+                                            <f:convertDateTime pattern="#{dateFormatController.dateFormatString}" />
                                         </h:outputText> 
                                     </p:column> 
                                     <p:column headerText="#{txt['starting_time']}" sortBy="#{classDay.startDate}"> 

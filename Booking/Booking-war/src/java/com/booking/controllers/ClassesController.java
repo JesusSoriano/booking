@@ -153,6 +153,21 @@ public class ClassesController implements Serializable {
         return classesWithParam();
     }
     
+    public String duplicateClass (ActivityClass activityClass) {
+        try {
+            ActivityClass duplicatedActivityClass = classFacade.duplicateClass(activityClass, organisation);
+            FacesUtil.addSuccessMessage("classesForm:msg", "La clase ha sido duplicada correctamente.");
+            // Audit class duplicate
+            String ipAddress = FacesUtil.getRequest().getRemoteAddr();
+            auditFacade.createAudit(AuditType.DUPLICAR_CLASE, loggedUser, ipAddress, duplicatedActivityClass.getId(), organisation);
+        } catch (Exception e) {
+            FacesUtil.addErrorMessage("classesForm:msg", "Lo sentimos, no ha sido posible duplicar la clase.");
+            Logger.getLogger(EditClassController.class.getName()).log(Level.SEVERE, null, e);
+        }
+        
+        return classesWithParam();
+    }
+    
     private String classesWithParam () {
         String serviceParam = (serviceId != null) ? ("service=" + serviceId) : "";
         return "classes.xhtml" + Constants.FACES_REDIRECT + serviceParam;

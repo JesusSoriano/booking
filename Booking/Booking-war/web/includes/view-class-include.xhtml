@@ -13,18 +13,20 @@
             <h:messages for="msg" id="msg"  styleClass="text-left" style="margin-top: 20px" errorClass="msgError" infoClass="msgInfo"/>
         </div>
 
-        <div class="row">
-            <div class="col-xs-offset-6 col-sm-offset-9 col-md-offset-9 col-xs-6 col-sm-3 col-md-3 text-right">
-                <h:commandLink action="#{editClassController.bookClassForUser()}" rendered="#{editClassController.existsBooking() eq false}"> 
-                    <span class="btn btn-primary btn-block btn-green">#{txt['b_book_place']}</span>
-                </h:commandLink>
+        <h:panelGroup rendered="#{!editClassController.isPastClass()}">
+            <div class="row">
+                <div class="col-xs-offset-6 col-sm-offset-9 col-md-offset-9 col-xs-6 col-sm-3 col-md-3 text-right">
+                    <h:commandLink action="#{editClassController.bookClassForUser()}" rendered="#{editClassController.existsBooking() eq false}"> 
+                        <span class="btn btn-primary btn-block btn-green">#{txt['b_book_place']}</span>
+                    </h:commandLink>
+                </div>
+                <div class="col-xs-offset-6 col-sm-offset-9 col-md-offset-9 col-xs-6 col-sm-3 col-md-3 text-right">
+                    <h:commandLink action="#{editClassController.cancelBookingForUser()}" rendered="#{editClassController.existsBooking() eq true}"> 
+                        <span class="btn btn-primary btn-block btn-red">#{txt['b_cancel_booking']}</span>
+                    </h:commandLink>
+                </div>
             </div>
-            <div class="col-xs-offset-6 col-sm-offset-9 col-md-offset-9 col-xs-6 col-sm-3 col-md-3 text-right">
-                <h:commandLink action="#{editClassController.cancelBookingForUser()}" rendered="#{editClassController.existsBooking() eq true}"> 
-                    <span class="btn btn-primary btn-block btn-red">#{txt['b_cancel_booking']}</span>
-                </h:commandLink>
-            </div>
-        </div>
+        </h:panelGroup>
 
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12">
@@ -189,47 +191,47 @@
                         </h:panelGroup>
                     </div>
 
-                    <div class="row margin-top-50">
-                        <div class="row page-subtitle-no-spacing margin-bottom-10">
-                            <h4>#{txt['class_users_list']}:</h4>
-                        </div>
+                    <h:panelGroup rendered="#{editClassController.userRole eq 'ADMIN' or editClassController.userRole eq 'SUPER_ADMIN'}">
+                        <div class="row margin-top-50">
+                            <div class="row page-subtitle-no-spacing margin-bottom-10">
+                                <h4>#{txt['class_users_list']}:</h4>
+                            </div>
 
-                        <script type="text/javascript">
-                            $(document).ready(function () {
-                                $('#viewClassForm\\:classUsers .ui-paginator-rpp-options.ui-widget.ui-state-default.ui-corner-left')
-                                        .each(function () {
-                                            $(this).children().last().html('#{txt['all']}');
-                                        });
-                            });
-                        </script>
+                            <script type="text/javascript">
+                                $(document).ready(function () {
+                                    $('#viewClassForm\\:classUsers .ui-paginator-rpp-options.ui-widget.ui-state-default.ui-corner-left')
+                                            .each(function () {
+                                                $(this).children().last().html('#{txt['all']}');
+                                            });
+                                });
+                            </script>
 
-                        <div class="row">
-                            <p:dataTable id="classUsers" value="#{editClassController.classUsers}" var="user" styleClass="common-table text-center" paginator="true" rows="20" paginatorPosition="bottom" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" 
-                                         rowsPerPageTemplate="10, 20, #{editClassController.classUsers.size()}" emptyMessage="#{txt['empty_records']}"> 
-                                <p:column headerText="#{txt['name']}" sortBy="#{user.fullName}"> 
-                                    <h:outputText value="#{user.fullName}" class="#{user.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" /> 
-                                </p:column> 
-                                <p:column headerText="#{txt['email']}" sortBy="#{user.email}"> 
-                                    <h:outputText value="#{user.email}" class="#{user.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" /> 
-                                </p:column>  
-                                <p:column headerText="#{txt['phone']}" sortBy="#{user.phone}"> 
-                                    <h:outputText value="#{user.phone}" class="#{user.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" /> 
-                                </p:column> 
-                                <p:column headerText="#{txt['options']}"> 
-                                    <h:link outcome="user-profile.xhtml?faces-redirect=true&amp;user=#{user.id}"> 
-                                        <h:graphicImage title="#{txt['cap_view']}" value="../resources/images/view.png" class="table-action" /> 
-                                    </h:link> 
-                                    <h:link outcome="compose-mail.xhtml?faces-redirect=true&amp;user=#{user.id}"> 
-                                        <h:graphicImage title="#{txt['cap_send_email']}" value="../resources/images/send_email.png" class="table-action-width" /> 
-                                    </h:link> 
-                                    <h:commandLink action="#{editClassController.cancelClassBooking(user)}" > 
-                                        <h:graphicImage title="#{txt['cap_cancel_user_booking']}" value="../resources/images/cancel-booking-icon.png" class="table-action" /> 
-                                    </h:commandLink> 
-                                </p:column> 
-                            </p:dataTable>
-                        </div>
+                            <div class="row">
+                                <p:dataTable id="classUsers" value="#{editClassController.classUsers}" var="user" styleClass="common-table text-center" paginator="true" rows="20" paginatorPosition="bottom" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" 
+                                             rowsPerPageTemplate="10, 20, #{editClassController.classUsers.size()}" emptyMessage="#{txt['empty_records']}"> 
+                                    <p:column headerText="#{txt['name']}" sortBy="#{user.fullName}"> 
+                                        <h:outputText value="#{user.fullName}" class="#{user.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" /> 
+                                    </p:column> 
+                                    <p:column headerText="#{txt['email']}" sortBy="#{user.email}"> 
+                                        <h:outputText value="#{user.email}" class="#{user.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" /> 
+                                    </p:column>  
+                                    <p:column headerText="#{txt['phone']}" sortBy="#{user.phone}"> 
+                                        <h:outputText value="#{user.phone}" class="#{user.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" /> 
+                                    </p:column> 
+                                    <p:column headerText="#{txt['options']}"> 
+                                        <h:link outcome="user-profile.xhtml?faces-redirect=true&amp;user=#{user.id}"> 
+                                            <h:graphicImage title="#{txt['cap_view']}" value="../resources/images/view.png" class="table-action" /> 
+                                        </h:link> 
+                                        <h:link outcome="compose-mail.xhtml?faces-redirect=true&amp;user=#{user.id}"> 
+                                            <h:graphicImage title="#{txt['cap_send_email']}" value="../resources/images/send_email.png" class="table-action-width" /> 
+                                        </h:link> 
+                                        <h:commandLink action="#{editClassController.cancelClassBooking(user)}" > 
+                                            <h:graphicImage title="#{txt['cap_cancel_user_booking']}" value="../resources/images/cancel-booking-icon.png" class="table-action" /> 
+                                        </h:commandLink> 
+                                    </p:column> 
+                                </p:dataTable>
+                            </div>
 
-                        <h:panelGroup rendered="#{editClassController.userRole eq 'ADMIN' or editClassController.userRole eq 'SUPER_ADMIN'}">
                             <div class="row">
                                 <div class="col-xs-6 col-sm-3 margin-bottom-40">
                                     <h:selectOneMenu id="selectedUser" value="#{editClassController.selectedUserId}" >
@@ -242,8 +244,9 @@
                                     </h:commandLink>
                                 </div> 
                             </div>
-                        </h:panelGroup>
-                    </div>
+                        </div>
+                    </h:panelGroup>
+                    
                 </div>
             </div>
         </div>

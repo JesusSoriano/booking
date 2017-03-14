@@ -46,6 +46,23 @@ public class ClassFacade extends AbstractFacade<ActivityClass> {
         return activityClass;
     }
 
+    public ActivityClass duplicateClass(ActivityClass activityClass, Organisation organisation) {
+
+        ActivityClass duplicatedClass = new ActivityClass();
+        duplicatedClass.setService(activityClass.getService());
+        duplicatedClass.setName(activityClass.getName() + " copy");
+        duplicatedClass.setDescription(activityClass.getDescription());
+        duplicatedClass.setMaximumUsers(activityClass.getMaximumUsers());
+        duplicatedClass.setNumberOfDays(0);
+        duplicatedClass.setPrice(activityClass.getPrice());
+        duplicatedClass.setOrganisation(organisation);
+        duplicatedClass.setCreatedDate(new Date());
+        duplicatedClass.setStatus(Status.ACTIVATED);
+        create(duplicatedClass);
+
+        return duplicatedClass;
+    }
+
     public ActivityClass updateClass(ActivityClass activityClass, Service service, String name, String description, int maximumUsers, float price) {
 
         activityClass.setService(service);

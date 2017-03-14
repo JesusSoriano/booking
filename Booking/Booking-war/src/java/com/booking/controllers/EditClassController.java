@@ -114,13 +114,13 @@ public class EditClassController implements Serializable {
         try {
             Service selectedService = serviceFacade.find(selectedServiceId);
             ActivityClass newActivityClass = classFacade.createNewClass(selectedService, className, classDescription, maximumUsers, 0, price, organisation);
-            FacesUtil.addSuccessMessage("classesForm:msg", "El nuevo servicio ha sido creado correctamente.");
+            FacesUtil.addSuccessMessage("classesForm:msg", "La clase ha sido creada correctamente.");
             // Audit class creation
             String ipAddress = FacesUtil.getRequest().getRemoteAddr();
-            auditFacade.createAudit(AuditType.CREAR_SERVICIO, loggedUser, ipAddress, newActivityClass.getId(), organisation);
+            auditFacade.createAudit(AuditType.CREAR_CLASE, loggedUser, ipAddress, newActivityClass.getId(), organisation);
             return "view-class.xhtml" + Constants.FACES_REDIRECT + "&amp;class=" + newActivityClass.getId();
         } catch (Exception e) {
-            FacesUtil.addErrorMessage("classesForm:msg", "Lo sentimos, no ha sido posible crear el nuevo servicio.");
+            FacesUtil.addErrorMessage("classesForm:msg", "Lo sentimos, no ha sido posible crear la clase.");
             Logger.getLogger(EditClassController.class.getName()).log(Level.SEVERE, null, e);
             return "classes.xhtml" + Constants.FACES_REDIRECT;
         }
@@ -447,5 +447,12 @@ public class EditClassController implements Serializable {
 
     public boolean isIsNewDay() {
         return isNewDay;
+    }
+    
+    public boolean isPastClass() {
+        if (currentClass != null && currentClass.getEndDate() != null) {
+            return currentClass.getEndDate().before(new Date());
+        }
+        return false;
     }
 }

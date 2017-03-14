@@ -555,6 +555,11 @@ input[type='text'], input[type='password'] {
 }
 
 
+.wide-row {
+    margin-right: -25px;
+    margin-left: -25px;
+}
+
 .form-control {
     height: auto;
 }

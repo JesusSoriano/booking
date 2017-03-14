@@ -18,6 +18,7 @@ public enum AuditType {
     SUSPENDER_SERVICIO("ha suspendido un servicio"),
     ACTIVAR_SERVICIO("ha activado un servicio"),
     CREAR_CLASE("ha creado una clase"),
+    DUPLICAR_CLASE("ha duplicado una clase"),
     SUSPENDER_CLASE("ha suspendido una clase"),
     ACTIVAR_CLASE("ha activado una clase"),
     RESERVAR_CLASE("ha reservado una clase"),
@@ -49,6 +50,7 @@ public enum AuditType {
         audits.add(ACTIVAR_SERVICIO);
         audits.add(SUSPENDER_SERVICIO);
         audits.add(CREAR_CLASE);
+        audits.add(DUPLICAR_CLASE);
         audits.add(SUSPENDER_CLASE);
         audits.add(ACTIVAR_CLASE);
         audits.add(RESERVAR_CLASE);
@@ -72,6 +74,7 @@ public enum AuditType {
         audits.add(ACTIVAR_SERVICIO);
         audits.add(SUSPENDER_SERVICIO);
         audits.add(CREAR_CLASE);
+        audits.add(DUPLICAR_CLASE);
         audits.add(SUSPENDER_CLASE);
         audits.add(ACTIVAR_CLASE);
         audits.add(RESERVAR_CLASE);

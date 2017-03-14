@@ -48,6 +48,7 @@ public class BookingsController implements Serializable {
     private User bookingsUser;
     private String userId;
     private List<ActivityClass> classes;
+    private List<ActivityClass> pastClasses;
 
     // Variables for the Calendar
     private ScheduleModel eventModel;
@@ -74,8 +75,10 @@ public class BookingsController implements Serializable {
 
         if (bookingsUser != null) {
             classes = bookingFacade.findAllCurrentClassesOfUser(bookingsUser);
+            pastClasses = bookingFacade.findAllPastClassesOfUser(bookingsUser);
         } else {
             classes = bookingFacade.findAllCurrentClassesOfUser(loggedUser);
+            pastClasses = bookingFacade.findAllPastClassesOfUser(loggedUser);
         }
         
         // Load schedule
@@ -179,5 +182,9 @@ public class BookingsController implements Serializable {
      
     private void addMessage(FacesMessage message) {
         FacesContext.getCurrentInstance().addMessage(null, message);
+    }
+
+    public List<ActivityClass> getPastClasses() {
+        return pastClasses;
     }
 }

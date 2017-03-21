@@ -29,6 +29,9 @@ public class BookingFacade extends AbstractFacade<Booking> {
     }
 
     public Booking createNewBooking(User user, ActivityClass activityClass) {
+        if (existsBooking(user, activityClass)) {
+            return null;
+        }
         Booking booking = new Booking();
         booking.setClassUser(user);
         booking.setActivityClass(activityClass);
@@ -39,35 +42,35 @@ public class BookingFacade extends AbstractFacade<Booking> {
     }
 
     public boolean removeBooking(User user, ActivityClass activityClass) {
-        Booking classUser = findUniqueResult(em.createQuery("SELECT b FROM Booking b WHERE b.classUser = :user AND b.activityClass = :activityClass").
+        Booking userBooking = findUniqueResult(em.createQuery("SELECT b FROM Booking b WHERE b.classUser = :user AND b.activityClass = :activityClass").
                 setParameter("user", user).
                 setParameter("activityClass", activityClass).getResultList());
 
-        if (classUser != null) {
-            remove(classUser);
+        if (userBooking != null) {
+            remove(userBooking);
             return true;
         }
         return false;
     }
-    
+
     public boolean existsBooking(User user, ActivityClass activityClass) {
         Booking booking = findUniqueResult(em.createQuery("SELECT b FROM Booking b WHERE b.classUser = :user AND b.activityClass = :activityClass").
                 setParameter("user", user).
                 setParameter("activityClass", activityClass).getResultList());
         return (booking != null);
     }
-    
+
     public List<User> findAllBookedUsersOfClass(ActivityClass activityClass) {
         return em.createQuery("SELECT b.classUser FROM Booking b WHERE b.activityClass = :activityClass ORDER BY b.classUser.firstName, b.classUser.firstLastName ASC").
                 setParameter("activityClass", activityClass).getResultList();
     }
-    
+
     public List<ActivityClass> findAllCurrentClassesOfUser(User user) {
         return em.createQuery("SELECT b.activityClass FROM Booking b WHERE b.classUser = :user AND b.activityClass.endDate > :today ORDER BY b.activityClass.endDate ASC").
                 setParameter("today", new Date()).
                 setParameter("user", user).getResultList();
     }
-    
+
     public List<ActivityClass> findAllPastClassesOfUser(User user) {
         return em.createQuery("SELECT b.activityClass FROM Booking b WHERE b.classUser = :user AND b.activityClass.endDate < :today ORDER BY b.activityClass.endDate ASC").
                 setParameter("today", new Date()).

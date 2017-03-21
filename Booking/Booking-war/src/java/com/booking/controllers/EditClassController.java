@@ -144,13 +144,15 @@ public class EditClassController implements Serializable {
         return viewClassWithParam();
     }
 
-    public void addParticipant() {
+    public String addParticipant() {
         User selectedUser = userFacade.find(selectedUserId);
         if (selectedUser != null) {
             bookClass(selectedUser);
         } else {
             FacesUtil.addErrorMessage("viewClassForm:msg", "Error, el usuario no existe.");
         }
+
+        return viewClassWithParam();
     }
 
     public String bookClassForUser() {
@@ -283,16 +285,31 @@ public class EditClassController implements Serializable {
         newDayEndDate = null;
         isNewDay = true;
     }
+    
+    public void onDatesChange () {
+        System.out.println("-------------- ON DATE CHANGE");
+        if (newDayEndDate != null && newDayStartDate != null && newDayEndDate.before(newDayStartDate)) {
+            newDayEndDate = newDayStartDate;
+        }
+    }
 
     public String addClassDay() {
         RequestContext context = RequestContext.getCurrentInstance();
         try {
-            classDayFacade.createNewClassDay(currentClass, newDayDescription, newDayStartDate, newDayEndDate);
-            context.execute("PF('newClassDayDialog').hide();");
-            classFacade.updateEndDate(currentClass, newDayEndDate);
-            FacesUtil.addSuccessMessage("viewClassForm:msg", "El nuevo día ha sido añadido correctamente.");
+            if (newDayStartDate == null || newDayEndDate == null) {
+                context.execute("PF('newClassDayDialog').hide();");
+                FacesUtil.addErrorMessage("viewClassForm:msg", "Introduce las fechas de inicio y fin.");
+            } else if (newDayEndDate.before(newDayStartDate)) {
+                context.execute("PF('newClassDayDialog').hide();");
+                FacesUtil.addErrorMessage("viewClassForm:msg", "La fecha de inicio debe ser anterior a la de fin.");
+            } else {
+                classDayFacade.createNewClassDay(currentClass, newDayDescription, newDayStartDate, newDayEndDate);
+                context.execute("PF('newClassDayDialog').hide();");
+                classFacade.updateEndDate(currentClass, newDayEndDate);
+                FacesUtil.addSuccessMessage("viewClassForm:msg", "El nuevo día ha sido añadido correctamente.");
 
-            classFacade.addNumberOfDays(currentClass);
+                classFacade.addNumberOfDays(currentClass);
+            }
         } catch (Exception e) {
             FacesUtil.addErrorMessage("viewClassForm:msg", "Lo sentimos, no ha sido posible añadir el día.");
             Logger
@@ -304,26 +321,37 @@ public class EditClassController implements Serializable {
     }
 
     public String updateClassDay() {
-        if (selectedClassDay != null) {
-            // Save the last date to compare with the class date.
-            Date lastEndDate = selectedClassDay.getEndDate();
-            if (newDayEndDate.after(lastEndDate)) {
-                lastEndDate = newDayEndDate;
-            }
-            RequestContext context = RequestContext.getCurrentInstance();
-            try {
-                classDayFacade.updateClassDay(selectedClassDay, currentClass, newDayDescription, newDayStartDate, newDayEndDate);
-                context.execute("PF('newClassDayDialog').hide();");
-                checkEndDateOfClass(lastEndDate);
-                FacesUtil.addSuccessMessage("viewClassForm:msg", "El día ha sido actualizado correctamente.");
-            } catch (Exception e) {
+        if (newDayStartDate == null || newDayEndDate == null) {
+            FacesUtil.addErrorMessage("newClassDayForm:newDayStartDate", "Introduce las fechas de inicio y fin de la clase.");
+            return "";
+        }
+        try {
+            if (selectedClassDay != null) {
+                // Save the last date to compare with the class date.
+                Date lastEndDate = selectedClassDay.getEndDate();
+                if (lastEndDate == null || newDayEndDate.after(lastEndDate)) {
+                    lastEndDate = newDayEndDate;
+                }
+                RequestContext context = RequestContext.getCurrentInstance();
+                try {
+                    classDayFacade.updateClassDay(selectedClassDay, currentClass, newDayDescription, newDayStartDate, newDayEndDate);
+                    context.execute("PF('newClassDayDialog').hide();");
+                    checkEndDateOfClass(lastEndDate);
+                    FacesUtil.addSuccessMessage("viewClassForm:msg", "El día ha sido actualizado correctamente.");
+                } catch (Exception e) {
+                    FacesUtil.addErrorMessage("viewClassForm:msg", "Lo sentimos, no ha sido posible actualizar el día.");
+                    Logger
+                            .getLogger(ServicesController.class
+                                    .getName()).log(Level.SEVERE, null, e);
+                }
+            } else {
                 FacesUtil.addErrorMessage("viewClassForm:msg", "Lo sentimos, no ha sido posible actualizar el día.");
-                Logger
-                        .getLogger(ServicesController.class
-                                .getName()).log(Level.SEVERE, null, e);
             }
-        } else {
+        } catch (Exception e) {
             FacesUtil.addErrorMessage("viewClassForm:msg", "Lo sentimos, no ha sido posible actualizar el día.");
+            Logger
+                    .getLogger(ServicesController.class
+                            .getName()).log(Level.SEVERE, null, e);
         }
 
         return viewClassWithParam();
@@ -448,7 +476,7 @@ public class EditClassController implements Serializable {
     public boolean isIsNewDay() {
         return isNewDay;
     }
-    
+
     public boolean isPastClass() {
         if (currentClass != null && currentClass.getEndDate() != null) {
             return currentClass.getEndDate().before(new Date());

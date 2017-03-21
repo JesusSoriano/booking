@@ -1,6 +1,7 @@
 package com.booking.controllers;
 
 import com.booking.entities.ActivityClass;
+import com.booking.entities.Booking;
 import com.booking.entities.Organisation;
 import com.booking.entities.Service;
 import com.booking.entities.User;
@@ -104,19 +105,21 @@ public class ClassesController implements Serializable {
             } else if (activityClass.getBookedPlaces() == activityClass.getMaximumUsers()) {
                 FacesUtil.addErrorMessage("classesForm:msg", "No quedan plazas para esta clase. Puedes revisar periódicamente si queda alguna libre.");
             } else {
-                // Create the class user
-                bookingFacade.createNewBooking(loggedUser, activityClass);
-                // Add a booked place in the class
-                classFacade.addClassBooking(activityClass);
+                // Create the booking
+                Booking booking = bookingFacade.createNewBooking(loggedUser, activityClass);
+                if (booking != null) {
+                    // Add a booked place in the class
+                    classFacade.addClassBooking(activityClass);
 
-                FacesUtil.addSuccessMessage("classesForm:msg", "La plaza ha sido reservada correctamente.");
+                    FacesUtil.addSuccessMessage("classesForm:msg", "La plaza ha sido reservada correctamente.");
 
-                try {
-                    // Audit class suspention
-                    String ipAddress = FacesUtil.getRequest().getRemoteAddr();
-                    auditFacade.createAudit(AuditType.RESERVAR_CLASE, loggedUser, ipAddress, activityClass.getId(), organisation);
-                } catch (Exception e) {
-                    Logger.getLogger(ClassesController.class.getName()).log(Level.SEVERE, null, e);
+                    try {
+                        // Audit class booking
+                        String ipAddress = FacesUtil.getRequest().getRemoteAddr();
+                        auditFacade.createAudit(AuditType.RESERVAR_CLASE, loggedUser, ipAddress, activityClass.getId(), organisation);
+                    } catch (Exception e) {
+                        Logger.getLogger(ClassesController.class.getName()).log(Level.SEVERE, null, e);
+                    }
                 }
             }
         } catch (Exception e) {
@@ -129,9 +132,9 @@ public class ClassesController implements Serializable {
 
     public String cancelClassBooking(ActivityClass activityClass) {
         try {
-            // Create the class user
+            // Remove booking
             if (bookingFacade.removeBooking(loggedUser, activityClass)) {
-                // Add a booked place in the class
+                // Remove a booked place in the class
                 classFacade.removeClassBooking(activityClass);
                 FacesUtil.addSuccessMessage("classesForm:msg", "La reserva ha sido cancelada correctamente.");
             } else {
@@ -149,11 +152,11 @@ public class ClassesController implements Serializable {
         } catch (Exception e) {
             Logger.getLogger(ClassesController.class.getName()).log(Level.SEVERE, null, e);
         }
-        
+
         return classesWithParam();
     }
-    
-    public String duplicateClass (ActivityClass activityClass) {
+
+    public String duplicateClass(ActivityClass activityClass) {
         try {
             ActivityClass duplicatedActivityClass = classFacade.duplicateClass(activityClass, organisation);
             FacesUtil.addSuccessMessage("classesForm:msg", "La clase ha sido duplicada correctamente.");
@@ -164,11 +167,11 @@ public class ClassesController implements Serializable {
             FacesUtil.addErrorMessage("classesForm:msg", "Lo sentimos, no ha sido posible duplicar la clase.");
             Logger.getLogger(EditClassController.class.getName()).log(Level.SEVERE, null, e);
         }
-        
+
         return classesWithParam();
     }
-    
-    private String classesWithParam () {
+
+    private String classesWithParam() {
         String serviceParam = (serviceId != null) ? ("service=" + serviceId) : "";
         return "classes.xhtml" + Constants.FACES_REDIRECT + serviceParam;
     }

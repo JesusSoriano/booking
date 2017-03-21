@@ -3,6 +3,7 @@ package com.booking.facades;
 
 import com.booking.entities.ActivityClass;
 import com.booking.entities.ClassDay;
+import com.booking.entities.Organisation;
 import com.booking.enums.Status;
 import java.util.Date;
 import java.util.List;
@@ -73,6 +74,12 @@ public class ClassDayFacade extends AbstractFacade<ClassDay> {
     public List<ClassDay> findAllActiveDaysOfClass(ActivityClass activityClass) {
         return em.createQuery("SELECT d FROM ClassDay d WHERE d.activityClass = :activityClass AND d.status = :activeStatus ORDER BY d.startDate ASC").
                 setParameter("activityClass", activityClass).
+                setParameter("activeStatus", Status.ACTIVATED).getResultList();
+    }
+    
+    public List<ClassDay> findAllActiveDaysOfOrganisation(Organisation organisation) {
+        return em.createQuery("SELECT d FROM ClassDay d WHERE d.activityClass.organisation = :organisation AND d.status = :activeStatus ORDER BY d.startDate ASC").
+                setParameter("organisation", organisation).
                 setParameter("activeStatus", Status.ACTIVATED).getResultList();
     }
 }

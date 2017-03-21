@@ -427,6 +427,12 @@ hr {
     bottom:10px;
 }
 
+.btn-calendar-details {
+    float: right;
+    margin-top: -30px;
+    margin-bottom: 15px;
+}
+
 
 .dialogTable {
     padding: 15px;
@@ -552,6 +558,56 @@ input[type='text'], input[type='password'] {
 .tabs input[type='button'].active-tab {
     background: #eee;
     font-weight: 600;
+}
+
+
+// Calendar (events)
+.fc-day-grid-event > .fc-content {
+    white-space: normal;
+}
+.fc-day-grid-event .fc-content {
+    white-space: normal;
+}
+.pastEvent {
+    border: 1px solid #BBBBBB !important;
+    background-color: #BBBBBB !important;
+}
+.bookedEvent {
+    border: 1px solid #10B010 !important;
+    background-color: #10B010 !important;
+}
+.allBookedEvent {
+    border: 1px solid #FFAE00 !important;
+    background-color: #FFAE00 !important;
+}
+
+.button-action {
+    height: 15px;
+    margin-right: 5px;
+    margin-left: -3px;
+    cursor: pointer;
+}
+
+div.colors {
+    margin: 20px 0px 0px 20px;
+}
+span.color-explanation {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    margin-right: 5px;
+}
+span.blue-color {
+    background-color: #3a87ad
+}
+span.green-color {
+    background-color: #10B010
+}
+span.orange-color {
+    background-color: #FFAE00
+}
+span.gray-color {
+    background-color: #BBBBBB
 }
 
 

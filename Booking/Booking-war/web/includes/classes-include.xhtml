@@ -87,12 +87,14 @@
                             <h:link outcome="view-class.xhtml?faces-redirect=true&amp;class=#{class.id}" >
                                 <h:graphicImage title="#{txt['cap_view']}" value="../resources/images/view.png" class="table-action" /> 
                             </h:link>  
-                            <h:commandLink action="#{classesController.bookClass(class)}" rendered="#{classesController.existsBooking(class) eq false}"> 
-                                <h:graphicImage title="#{txt['cap_booking']}" value="../resources/images/booking-icon.png" class="table-action" /> 
-                            </h:commandLink> 
-                            <h:commandLink action="#{classesController.cancelClassBooking(class)}" rendered="#{classesController.existsBooking(class) eq true}"> 
-                                <h:graphicImage title="#{txt['cap_cancel_booking']}" value="../resources/images/cancel-booking-icon.png" class="table-action" /> 
-                            </h:commandLink> 
+                            <h:panelGroup rendered="#{class.status eq 'ACTIVATED'}">
+                                <h:commandLink action="#{classesController.bookClass(class)}" rendered="#{classesController.existsBooking(class) eq false}"> 
+                                    <h:graphicImage title="#{txt['cap_booking']}" value="../resources/images/booking-icon.png" class="table-action" /> 
+                                </h:commandLink> 
+                                <h:commandLink action="#{classesController.cancelClassBooking(class)}" rendered="#{classesController.existsBooking(class) eq true}"> 
+                                    <h:graphicImage title="#{txt['cap_cancel_booking']}" value="../resources/images/cancel-booking-icon.png" class="table-action" /> 
+                                </h:commandLink> 
+                            </h:panelGroup>
                             <h:panelGroup rendered="#{classesController.userRole eq 'ADMIN' or classesController.userRole eq 'SUPER_ADMIN'}">
                                 <h:link outcome="edit-class.xhtml?faces-redirect=true&amp;class=#{class.id}"> 
                                     <h:graphicImage title="#{txt['cap_edit']}" value="../resources/images/edit_user.png" class="table-action" /> 
@@ -160,6 +162,9 @@
                             <h:link outcome="view-class.xhtml?faces-redirect=true&amp;class=#{class.id}" >
                                 <h:graphicImage title="#{txt['cap_view']}" value="../resources/images/view.png" class="table-action" /> 
                             </h:link>  
+                            <h:commandLink action="#{classesController.duplicateClass(class)}" > 
+                                <h:graphicImage title="#{txt['cap_duplicate']}" value="../resources/images/duplicate-icon.png" class="table-action" /> 
+                            </h:commandLink> 
                         </p:column> 
                     </p:dataTable>
                 </div> 

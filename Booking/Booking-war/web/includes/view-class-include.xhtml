@@ -13,7 +13,7 @@
             <h:messages for="msg" id="msg"  styleClass="text-left" style="margin-top: 20px" errorClass="msgError" infoClass="msgInfo"/>
         </div>
 
-        <h:panelGroup rendered="#{!editClassController.isPastClass()}">
+        <h:panelGroup rendered="#{!editClassController.isPastClass() and editClassController.currentClass.status eq 'ACTIVATED'}">
             <div class="row">
                 <div class="col-xs-offset-6 col-sm-offset-9 col-md-offset-9 col-xs-6 col-sm-3 col-md-3 text-right">
                     <h:commandLink action="#{editClassController.bookClassForUser()}" rendered="#{editClassController.existsBooking() eq false}"> 
@@ -122,7 +122,7 @@
                                         <p class="italics">#{txt['status']}</p>
                                     </div>
                                     <div class="col-xs-8">
-                                        <h:outputText id="status" styleClass="form-control" value="#{editClassController.currentClass.status}" />
+                                        <h:outputText id="status" styleClass="form-control" value="#{editClassController.currentClass.status}" style="#{editClassController.currentClass.status eq 'SUSPENDED' ? 'color:red' : ''}" />
                                     </div>
                                 </div>
                             </h:panelGroup>
@@ -225,28 +225,30 @@
                                         <h:link outcome="compose-mail.xhtml?faces-redirect=true&amp;user=#{user.id}"> 
                                             <h:graphicImage title="#{txt['cap_send_email']}" value="../resources/images/send_email.png" class="table-action-width" /> 
                                         </h:link> 
-                                        <h:commandLink action="#{editClassController.cancelClassBooking(user)}" > 
+                                        <h:commandLink action="#{editClassController.cancelClassBooking(user)}" rendered="#{!editClassController.isPastClass() and editClassController.currentClass.status eq 'ACTIVATED'}" > 
                                             <h:graphicImage title="#{txt['cap_cancel_user_booking']}" value="../resources/images/cancel-booking-icon.png" class="table-action" /> 
                                         </h:commandLink> 
                                     </p:column> 
                                 </p:dataTable>
                             </div>
 
-                            <div class="row">
-                                <div class="col-xs-6 col-sm-3 margin-bottom-40">
-                                    <h:selectOneMenu id="selectedUser" value="#{editClassController.selectedUserId}" >
-                                        <f:selectItems value="#{editClassController.allUsers}" />
-                                    </h:selectOneMenu>
+                            <h:panelGroup rendered="#{!editClassController.isPastClass() and editClassController.currentClass.status eq 'ACTIVATED'}">
+                                <div class="row">
+                                    <div class="col-xs-6 col-sm-3 margin-bottom-40">
+                                        <h:selectOneMenu id="selectedUser" value="#{editClassController.selectedUserId}" >
+                                            <f:selectItems value="#{editClassController.allUsers}" />
+                                        </h:selectOneMenu>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-3">
+                                        <h:commandLink action="#{editClassController.addParticipant()}" > 
+                                            <h:outputText value="+ #{txt['b_add_participant']}" class="blue-link"/>
+                                        </h:commandLink>
+                                    </div> 
                                 </div>
-                                <div class="col-xs-6 col-sm-3">
-                                    <h:commandLink action="#{editClassController.addParticipant()}" > 
-                                        <h:outputText value="+ #{txt['b_add_participant']}" class="blue-link"/>
-                                    </h:commandLink>
-                                </div> 
-                            </div>
+                            </h:panelGroup>
                         </div>
                     </h:panelGroup>
-                    
+
                 </div>
             </div>
         </div>
@@ -273,7 +275,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>#{txt['ending_time']}:</td>
+                        <td>#{txt['ending_time']}<span class="mandatoryField">*</span>:</td>
                         <td>
                             <p:calendar id="newDayEndDate" value="#{editClassController.newDayEndDate}" pattern="dd/MM/yyyy HH:mm" />
                             <br/>

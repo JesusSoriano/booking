@@ -162,9 +162,11 @@
                             <h:link outcome="view-class.xhtml?faces-redirect=true&amp;class=#{class.id}" >
                                 <h:graphicImage title="#{txt['cap_view']}" value="../resources/images/view.png" class="table-action" /> 
                             </h:link>  
-                            <h:commandLink action="#{classesController.duplicateClass(class)}" > 
-                                <h:graphicImage title="#{txt['cap_duplicate']}" value="../resources/images/duplicate-icon.png" class="table-action" /> 
-                            </h:commandLink> 
+                            <h:panelGroup rendered="#{appointmentsController.userRole eq 'ADMIN' or appointmentsController.userRole eq 'SUPER_ADMIN'}">
+                                <h:commandLink action="#{classesController.duplicateClass(class)}" > 
+                                    <h:graphicImage title="#{txt['cap_duplicate']}" value="../resources/images/duplicate-icon.png" class="table-action" /> 
+                                </h:commandLink> 
+                            </h:panelGroup>
                         </p:column> 
                     </p:dataTable>
                 </div> 

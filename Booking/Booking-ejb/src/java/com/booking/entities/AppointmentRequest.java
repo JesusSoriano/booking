@@ -38,7 +38,7 @@ public class AppointmentRequest implements Serializable {
     @JoinColumn(name = "request_user", referencedColumnName = "id")
     private User requestUser;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "appoinment", referencedColumnName = "id")
+    @JoinColumn(name = "appointment", referencedColumnName = "id")
     private Appointment appointment;
     @Column(name = "created_date")
     @Temporal(TemporalType.TIMESTAMP)
@@ -46,6 +46,10 @@ public class AppointmentRequest implements Serializable {
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
     private RequestStatus status;
+    @Column(name = "comments")
+    private String comments;
+    @Column(name = "status_comment")
+    private String statusComment;
 
     public AppointmentRequest() {
     }
@@ -86,4 +90,19 @@ public class AppointmentRequest implements Serializable {
         this.status = status;
     }
 
+    public String getComments() {
+        return comments;
+    }
+
+    public void setComments(String comments) {
+        this.comments = comments;
+    }
+
+    public String getStatusComment() {
+        return statusComment;
+    }
+
+    public void setStatusComment(String statusComment) {
+        this.statusComment = statusComment;
+    }
 }

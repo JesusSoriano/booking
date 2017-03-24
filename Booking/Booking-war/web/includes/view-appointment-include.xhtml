@@ -1,0 +1,173 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+              xmlns:h="http://java.sun.com/jsf/html"
+              xmlns:ui="http://java.sun.com/jsf/facelets"
+              xmlns:f="http://java.sun.com/jsf/core"
+              xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="viewAppointmentForm">
+
+        <div class="row">
+            <br/>
+            <h:messages for="msg" id="msg"  styleClass="text-left" style="margin-top: 20px" errorClass="msgError" infoClass="msgInfo"/>
+        </div>
+
+        <h:panelGroup rendered="#{!editAppointmentController.isPastAppointment()}">
+            <div class="row">
+                <div class="col-xs-offset-6 col-sm-offset-9 col-md-offset-9 col-xs-6 col-sm-3 col-md-3 text-right">
+                    <h:commandLink action="#{editAppointmentController.bookAppointmentForUser()}" rendered="#{editAppointmentController.currentAppointment.available}"> 
+                        <span class="btn btn-primary btn-block btn-green">#{txt['b_request_appointment']}</span>
+                    </h:commandLink>
+                </div>
+                <div class="col-xs-offset-6 col-sm-offset-9 col-md-offset-9 col-xs-6 col-sm-3 col-md-3 text-right">
+                    <h:commandLink action="#{editAppointmentController.cancelBookingForUser()}" rendered="#{!editAppointmentController.currentAppointment.available}"> 
+                        <span class="btn btn-primary btn-block btn-red">#{txt['b_cancel_booking']}</span>
+                    </h:commandLink>
+                </div>
+            </div>
+        </h:panelGroup>
+
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="main-content">
+                    <div class="row margin-bottom-70">
+                        <div class="col-xs-12 col-sm-6 col-md-6">
+                            <div class="row"> 
+                                <div class="col-xs-4">
+                                    <h:outputText value="#{txt['service']}" />
+                                </div> 
+                                <div class="col-xs-8">
+                                    <h:outputText id="messageReceiverSelect" styleClass="form-control" value="#{editAppointmentController.currentAppointment.service.name}" />
+                                </div> 
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-4">
+                                    <p>#{txt['description']}</p>
+                                </div>
+                                <div class="col-xs-8">
+                                    <h:outputText id="description" styleClass="form-control" value="#{editAppointmentController.currentAppointment.description}" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-4">
+                                    <p>#{txt['price']}</p>
+                                </div>
+                                <div class="col-xs-8">
+                                    <h:outputText styleClass="form-control" value="#{txt['free']}" rendered="#{editAppointmentController.currentAppointment.price eq 0}" />
+                                    <h:outputText styleClass="form-control" value="#{editAppointmentController.currentAppointment.price}" rendered="#{editAppointmentController.currentAppointment.price ne 0}" >
+                                        <f:convertNumber type="currency" currencySymbol="€" locale="es_ES" />
+                                    </h:outputText>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-xs-12 col-sm-6 col-md-6">
+                            <div class="row">
+                                <div class="col-xs-4">
+                                    <p>#{txt['date']}</p>
+                                </div>
+                                <div class="col-xs-8">
+                                    <h:outputText id="endDate" styleClass="form-control" value="#{editAppointmentController.currentAppointment.date}" >
+                                        <f:convertDateTime pattern="#{dateFormatController.dateFormatString}" />
+                                    </h:outputText>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-4">
+                                    <p>#{txt['starting_time']}</p>
+                                </div>
+                                <div class="col-xs-8">
+                                    <h:outputText id="startingTime" styleClass="form-control" value="#{editAppointmentController.currentAppointment.startTime}" >
+                                        <f:convertDateTime pattern="#{dateFormatController.timeFormatString}" />
+                                    </h:outputText>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-4">
+                                    <p>#{txt['ending_time']}</p>
+                                </div>
+                                <div class="col-xs-8">
+                                    <h:outputText id="endingTime" styleClass="form-control" value="#{editAppointmentController.currentAppointment.endTime}" >
+                                        <f:convertDateTime pattern="#{dateFormatController.timeFormatString}" />
+                                    </h:outputText>
+                                </div>
+                            </div>
+                            <h:panelGroup rendered="#{editAppointmentController.userRole eq 'ADMIN' or editAppointmentController.userRole eq 'SUPER_ADMIN'}">
+                                <div class="row">
+                                    <div class="col-xs-4">
+                                        <p class="italics">#{txt['created_date']}</p>
+                                    </div>
+                                    <div class="col-xs-8">
+                                        <h:outputText id="createdDate" styleClass="form-control" value="#{editAppointmentController.currentAppointment.createdDate}" >
+                                            <f:convertDateTime pattern="#{dateFormatController.dateWithTimeFormatString}" />
+                                        </h:outputText>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-4">
+                                        <p class="italics">#{txt['status']}</p>
+                                    </div>
+                                    <div class="col-xs-8">
+                                        <h:outputText id="status" styleClass="form-control" value="#{editAppointmentController.currentAppointment.status.label}" style="#{editAppointmentController.currentAppointment.status eq 'SUSPENDED' ? 'color:red' : ''}" />
+                                    </div>
+                                </div>
+                            </h:panelGroup>
+                        </div>
+                    </div>
+
+
+                    <h:panelGroup rendered="#{editAppointmentController.userRole eq 'ADMIN' or editAppointmentController.userRole eq 'SUPER_ADMIN'}">
+                        <div class="row">
+                            <div class="row page-subtitle-no-spacing margin-bottom-10">
+                                <h4>#{txt['appointment_requests']}:</h4>
+                            </div>
+
+                            <script type="text/javascript">
+                                $(document).ready(function () {
+                                    $('#viewAppointmentForm\\appointmentRequests .ui-paginator-rpp-options.ui-widget.ui-state-default.ui-corner-left')
+                                            .each(function () {
+                                                $(this).children().last().html('#{txt['all']}');
+                                            });
+                                });
+                            </script>
+
+                            <div class="row">
+                                <p:dataTable id="appointmentRequests" value="#{editAppointmentController.appointmentRequests}" var="appointmentRequest" styleClass="common-table text-center" paginator="true" rows="20" paginatorPosition="bottom" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" 
+                                             rowsPerPageTemplate="10, 20, #{editAppointmentController.appointmentRequests.size()}" emptyMessage="#{txt['empty_records']}"> 
+                                    <p:column headerText="#{txt['user']}" sortBy="#{appointmentRequest.requestUser}"> 
+                                        <h:outputText value="#{appointmentRequest.requestUser ne null ? appointmentRequest.requestUser.fullName : ''}" /> 
+                                    </p:column>  
+                                    <p:column headerText="#{txt['comments']}" sortBy="#{appointmentRequest.comments}"> 
+                                        <h:outputText value="#{appointmentRequest.comments}" /> 
+                                    </p:column>  
+                                    <p:column headerText="#{txt['created_date']}" sortBy="#{appointmentRequest.createdDate}"> 
+                                        <h:outputText value="#{appointmentRequest.createdDate}" >
+                                            <f:convertDateTime pattern="#{dateFormatController.dateFormatString}" />
+                                        </h:outputText> 
+                                    </p:column> 
+                                    <p:column headerText="#{txt['status']}" sortBy="#{appointmentRequest.status}"> 
+                                        <h:outputText value="#{appointmentRequest.status}" >
+                                            <f:convertDateTime pattern="#{dateFormatController.timeFormatString}" /> 
+                                        </h:outputText> 
+                                    </p:column> 
+
+                                    <p:column headerText="#{txt['options']}"> 
+                                        <h:link outcome="appointment-request.xhtml?faces-redirect=true&amp;appointment=#{appointmentRequest.id}" >
+                                            <h:graphicImage title="#{txt['cap_view']}" value="../resources/images/view.png" class="table-action" /> 
+                                        </h:link> 
+                                        <h:link outcome="appointment-request.xhtml?faces-redirect=true&amp;appointment=#{appointmentRequest.id}"> 
+                                            <h:graphicImage title="#{txt['cap_edit']}" value="../resources/images/edit_user.png" class="table-action" /> 
+                                        </h:link> 
+                                    </p:column> 
+                                </p:dataTable>
+                            </div>
+                        </div>
+                    </h:panelGroup>
+                </div>
+            </div>
+        </div>
+    </h:form>
+
+</ui:component>

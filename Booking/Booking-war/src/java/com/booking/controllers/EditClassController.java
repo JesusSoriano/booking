@@ -89,7 +89,7 @@ public class EditClassController implements Serializable {
 
         classId = FacesUtil.getParameter("class");
         if (classId != null) {
-            currentClass = classFacade.findClassOfOrganisation(Integer.valueOf(classId), organisation);
+            currentClass = classFacade.findClassOfOrganisation(Long.valueOf(classId), organisation);
 
             if (currentClass != null) {
                 selectedServiceId = currentClass.getService().getId();

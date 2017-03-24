@@ -46,7 +46,7 @@ public class ClassFacade extends AbstractFacade<ActivityClass> {
         return activityClass;
     }
 
-    public ActivityClass duplicateClass(ActivityClass activityClass, Organisation organisation) {
+    public ActivityClass duplicateClass(ActivityClass activityClass) {
 
         ActivityClass duplicatedClass = new ActivityClass();
         duplicatedClass.setService(activityClass.getService());
@@ -55,7 +55,7 @@ public class ClassFacade extends AbstractFacade<ActivityClass> {
         duplicatedClass.setMaximumUsers(activityClass.getMaximumUsers());
         duplicatedClass.setNumberOfDays(0);
         duplicatedClass.setPrice(activityClass.getPrice());
-        duplicatedClass.setOrganisation(organisation);
+        duplicatedClass.setOrganisation(activityClass.getOrganisation());
         duplicatedClass.setCreatedDate(new Date());
         duplicatedClass.setStatus(Status.ACTIVATED);
         create(duplicatedClass);
@@ -121,19 +121,10 @@ public class ClassFacade extends AbstractFacade<ActivityClass> {
     }
 
     public List<ActivityClass> findAllCurrentClassesOfService(Service service, Organisation organisation) {
-        // Take all classes
-        List<ActivityClass> classes = em.createQuery("SELECT a FROM ActivityClass a WHERE a.service = :service AND a.endDate > :today AND a.organisation = :organisation OR a.service = :service AND a.endDate IS NULL AND a.organisation = :organisation ORDER BY a.endDate ASC").
+        return em.createQuery("SELECT a FROM ActivityClass a WHERE a.service = :service AND a.endDate > :today AND a.organisation = :organisation OR a.service = :service AND a.endDate IS NULL AND a.organisation = :organisation ORDER BY a.endDate ASC").
                 setParameter("service", service).
                 setParameter("today", new Date()).
                 setParameter("organisation", organisation).getResultList();
-        // Remove the past ones
-//        Date today = new Date();
-//        for (ActivityClass activityClass : classes) {
-//            if (activityClass.getEndDate() != null && activityClass.getEndDate().before(today)) {
-//                classes.remove(activityClass);
-//            }
-//        }
-        return classes;
     }
 
     public List<ActivityClass> findAllPastActiveClassesOfService(Service service, Organisation organisation) {

@@ -6,6 +6,16 @@ package com.booking.enums;
  */
 public enum Status {
 
-    ACTIVATED,
-    SUSPENDED;
+    ACTIVATED ("Activo/a"),
+    SUSPENDED ("Suspendido/a");
+    
+    private final String label;
+
+    private Status(String label) {
+        this.label = label;
+    }
+
+    public String getLabel() {
+        return label;
+    }
 }

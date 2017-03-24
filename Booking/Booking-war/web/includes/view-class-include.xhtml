@@ -122,7 +122,7 @@
                                         <p class="italics">#{txt['status']}</p>
                                     </div>
                                     <div class="col-xs-8">
-                                        <h:outputText id="status" styleClass="form-control" value="#{editClassController.currentClass.status}" style="#{editClassController.currentClass.status eq 'SUSPENDED' ? 'color:red' : ''}" />
+                                        <h:outputText id="status" styleClass="form-control" value="#{editClassController.currentClass.status.label}" style="#{editClassController.currentClass.status eq 'SUSPENDED' ? 'color:red' : ''}" />
                                     </div>
                                 </div>
                             </h:panelGroup>
@@ -157,12 +157,12 @@
                                 </p:column> 
                                 <p:column headerText="#{txt['starting_time']}" sortBy="#{classDay.startDate}"> 
                                     <h:outputText value="#{classDay.startDate}" class="#{classDay.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" >
-                                        <f:convertDateTime pattern="HH:mm" /> 
+                                        <f:convertDateTime pattern="#{dateFormatController.timeFormatString}" /> 
                                     </h:outputText> 
                                 </p:column> 
                                 <p:column headerText="#{txt['ending_time']}" sortBy="#{classDay.endDate}"> 
                                     <h:outputText value="#{classDay.endDate}" class="#{classDay.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" >
-                                        <f:convertDateTime pattern="HH:mm" /> 
+                                        <f:convertDateTime pattern="#{dateFormatController.timeFormatString}" /> 
                                     </h:outputText> 
                                 </p:column> 
 
@@ -269,7 +269,7 @@
                     <tr>
                         <td>#{txt['starting_time']}<span class="mandatoryField">*</span>:</td>
                         <td>
-                            <p:calendar id="newDayStartDate" value="#{editClassController.newDayStartDate}" pattern="dd/MM/yyyy HH:mm" />
+                            <p:calendar id="newDayStartDate" value="#{editClassController.newDayStartDate}" pattern="#{dateFormatController.dateWithTimeFormatString}" />
                             <br/>
                             <h:message for="newDayStartDate" styleClass="loginError" errorStyle="color :red" infoStyle="color : green"/>
                         </td>
@@ -277,7 +277,7 @@
                     <tr>
                         <td>#{txt['ending_time']}<span class="mandatoryField">*</span>:</td>
                         <td>
-                            <p:calendar id="newDayEndDate" value="#{editClassController.newDayEndDate}" pattern="dd/MM/yyyy HH:mm" />
+                            <p:calendar id="newDayEndDate" value="#{editClassController.newDayEndDate}" pattern="#{dateFormatController.dateWithTimeFormatString}" />
                             <br/>
                             <h:message for="newDayEndDate" styleClass="loginError" errorStyle="color :red" infoStyle="color : green"/>
                         </td>

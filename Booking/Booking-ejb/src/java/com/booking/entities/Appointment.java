@@ -1,10 +1,13 @@
 package com.booking.entities;
 
+import com.booking.enums.Status;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -45,14 +48,22 @@ public class Appointment implements Serializable {
     @Column(name = "created_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdDate;
-    @Column(name = "start_date")
+    @Column(name = "appointment_date")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date startDate;
-    @Column(name = "end_date")
+    private Date date;
+    @Column(name = "start_time")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date endDate;
+    private Date startTime;
+    @Column(name = "end_time")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date endTime;
     @Column(name = "available")
     private boolean available;
+    @Column(name = "price")
+    private float price;
+    @Column(name = "status")
+    @Enumerated(EnumType.STRING)
+    private Status status;
 
     public Appointment() {
     }
@@ -101,20 +112,20 @@ public class Appointment implements Serializable {
         this.createdDate = createdDate;
     }
 
-    public Date getStartDate() {
-        return startDate;
+    public Date getStartTime() {
+        return startTime;
     }
 
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
+    public void setStartTime(Date startTime) {
+        this.startTime = startTime;
     }
 
-    public Date getEndDate() {
-        return endDate;
+    public Date getEndTime() {
+        return endTime;
     }
 
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
+    public void setEndTime(Date endTime) {
+        this.endTime = endTime;
     }
 
     public void setAvailable(boolean available) {
@@ -123,5 +134,29 @@ public class Appointment implements Serializable {
 
     public boolean isAvailable() {
         return available;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
+    }
+
+    public float getPrice() {
+        return price;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 }

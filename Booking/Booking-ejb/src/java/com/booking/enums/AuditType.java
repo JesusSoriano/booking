@@ -23,6 +23,12 @@ public enum AuditType {
     ACTIVAR_CLASE("ha activado una clase"),
     RESERVAR_CLASE("ha reservado una clase"),
     CANCELAR_RESERVA("ha cancelado la reserva de una clase"),
+    CREAR_CITA("ha creado una cita"),
+    DUPLICAR_CITA("ha duplicado una cita"),
+    SUSPENDER_CITA("ha suspendido una cita"),
+    ACTIVAR_CITA("ha activado una cita"),
+    RESERVAR_CITA("ha reservado una cita"),
+    CANCELAR_CITA("ha cancelado la reserva de una cita"),
     SUSPENDER_USUARIO("ha suspendido un usuario"),
     ACTIVAR_USUARIO("ha activado un usuario"),
     SUSPENDER_ADMIN("ha suspendido un administrador"),
@@ -55,6 +61,12 @@ public enum AuditType {
         audits.add(ACTIVAR_CLASE);
         audits.add(RESERVAR_CLASE);
         audits.add(CANCELAR_RESERVA);
+        audits.add(CREAR_CITA);
+        audits.add(DUPLICAR_CITA);
+        audits.add(SUSPENDER_CITA);
+        audits.add(ACTIVAR_CITA);
+        audits.add(RESERVAR_CITA);
+        audits.add(CANCELAR_CITA);
         audits.add(SUSPENDER_USUARIO);
         audits.add(ACTIVAR_USUARIO);
         audits.add(SUSPENDER_ADMIN);
@@ -79,6 +91,12 @@ public enum AuditType {
         audits.add(ACTIVAR_CLASE);
         audits.add(RESERVAR_CLASE);
         audits.add(CANCELAR_RESERVA);
+        audits.add(CREAR_CITA);
+        audits.add(DUPLICAR_CITA);
+        audits.add(SUSPENDER_CITA);
+        audits.add(ACTIVAR_CITA);
+        audits.add(RESERVAR_CITA);
+        audits.add(CANCELAR_CITA);
         audits.add(SUSPENDER_USUARIO);
         audits.add(ACTIVAR_USUARIO);
         audits.add(SUSPENDER_ADMIN);
@@ -95,6 +113,8 @@ public enum AuditType {
         audits.add(CANCELAR_CUENTA);
         audits.add(RESERVAR_CLASE);
         audits.add(CANCELAR_RESERVA);
+        audits.add(RESERVAR_CITA);
+        audits.add(CANCELAR_CITA);
         return audits;
     }
     

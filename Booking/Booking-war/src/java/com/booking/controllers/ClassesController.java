@@ -158,7 +158,7 @@ public class ClassesController implements Serializable {
 
     public String duplicateClass(ActivityClass activityClass) {
         try {
-            ActivityClass duplicatedActivityClass = classFacade.duplicateClass(activityClass, organisation);
+            ActivityClass duplicatedActivityClass = classFacade.duplicateClass(activityClass);
             FacesUtil.addSuccessMessage("classesForm:msg", "La clase ha sido duplicada correctamente.");
             // Audit class duplicate
             String ipAddress = FacesUtil.getRequest().getRemoteAddr();

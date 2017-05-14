@@ -67,8 +67,9 @@ public class AppointmentFacade extends AbstractFacade<Appointment> {
         duplicatedAppointment.setEndTime(appointment.getEndTime());
         duplicatedAppointment.setDescription(appointment.getDescription());
         duplicatedAppointment.setPrice(appointment.getPrice());
-        appointment.setAvailable(true);
-        appointment.setStatus(Status.ACTIVATED);
+        duplicatedAppointment.setAvailable(true);
+        duplicatedAppointment.setStatus(Status.ACTIVATED);
+        duplicatedAppointment.setOrganisation(appointment.getOrganisation());
         create(duplicatedAppointment);
         
         return duplicatedAppointment;
@@ -81,6 +82,16 @@ public class AppointmentFacade extends AbstractFacade<Appointment> {
 
     public void deactivateAppointment(Appointment appointment) {
         appointment.setStatus(Status.SUSPENDED);
+        edit(appointment);
+    }
+
+    public void makeAppointmentAbailable(Appointment appointment) {
+        appointment.setAvailable(true);
+        edit(appointment);
+    }
+
+    public void makeAppointmentUnabailable(Appointment appointment) {
+        appointment.setAvailable(false);
         edit(appointment);
     }
     

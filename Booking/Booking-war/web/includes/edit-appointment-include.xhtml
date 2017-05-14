@@ -36,76 +36,66 @@
                     };
                 </script>
                 <div class="main-content">
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-6 col-md-6">
-                            <div class="row"> 
-                                <div class="col-xs-4">
-                                    <h:outputText value="#{txt['service']}" /><sup class="mandatoryField">*</sup>
-                                </div> 
-                                <div class="col-xs-8">
-                                    <h:selectOneMenu id="selectedService" value="#{editAppointmentController.selectedServiceId}" >
-                                        <f:selectItems value="#{editAppointmentController.services}" />
-                                    </h:selectOneMenu>
-                                </div> 
+                    <div class="col-xs-12 col-sm-6 col-md-6">
+                        <div class="row">
+                            <div class="col-xs-4">
+                                <h:outputText value="#{txt['service']}" /><sup class="mandatoryField">*</sup>
+                            </div> 
+                            <div class="col-xs-8">
+                                <h:selectOneMenu id="selectedService" value="#{editAppointmentController.selectedServiceId}" >
+                                    <f:selectItems value="#{editAppointmentController.services}" />
+                                </h:selectOneMenu>
+                            </div> 
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-4">
+                                <p>#{txt['description']}</p>
+                            </div>
+                            <div class="col-xs-8">
+                                <h:inputText id="description" styleClass="form-control" value="#{editAppointmentController.description}" />
                             </div>
                         </div>
-                        <div class="col-xs-12 col-sm-6 col-md-6">
-                            <div class="row">
-                                <div class="col-xs-4">
-                                    <p>#{txt['description']}</p>
-                                </div>
-                                <div class="col-xs-8">
-                                    <h:inputText id="description" styleClass="form-control" value="#{editAppointmentController.description}" />
-                                </div>
+                        <div class="row">
+                            <div class="col-xs-4">
+                                <p>#{txt['price']}<sup class="mandatoryField">*</sup></p>
+                            </div>
+                            <div class="col-xs-8">
+                                <h:inputText id="price" styleClass="form-control" value="#{editAppointmentController.price}" required="true" requiredMessage="Introduce el precio de la actividad"/>
+                                <h:message for="price"  styleClass="loginError" errorClass="msgError" infoClass="msgInfo"/>
                             </div>
                         </div>
-                        <div class="col-xs-12 col-sm-6 col-md-6">
-                            <div class="row">
-                                <div class="col-xs-4">
-                                    <p>#{txt['date']}<sup class="mandatoryField">*</sup></p>
-                                </div>
-                                <div class="col-xs-8">
-                                    <p:calendar id="date" value="#{editAppointmentController.date}" pattern="#{dateFormatController.dateFormatString}" required="true" requiredMessage="Introduce fecha" mindate="today" />
-                                    <br/>
-                                    <h:message for="date" styleClass="loginError" errorStyle="color :red" infoStyle="color : green"/>
-                                </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-6">
+                        <div class="row">
+                            <div class="col-xs-4">
+                                <p>#{txt['date']}<sup class="mandatoryField">*</sup></p>
+                            </div>
+                            <div class="col-xs-8">
+                                <p:calendar id="date" value="#{editAppointmentController.date}" pattern="#{dateFormatController.dateFormatString}" required="true" requiredMessage="Introduce fecha" mindate="today" />
+                                <br/>
+                                <h:message for="date" styleClass="loginError" errorStyle="color :red" infoStyle="color : green"/>
                             </div>
                         </div>
-                        <div class="col-xs-12 col-sm-6 col-md-6">
-                            <div class="row">
-                                <div class="col-xs-4">
-                                    <p>#{txt['starting_time']}<sup class="mandatoryField">*</sup></p>
-                                </div>
-                                <div class="col-xs-8">
-                                    <p:calendar id="startingTime" value="#{editAppointmentController.startingTime}" pattern="#{dateFormatController.timeFormatString}" 
-                                                required="true" requiredMessage="Introduce hora de inicio" timeOnly="true" />
-                                    <br/>
-                                    <h:message for="startingTime" styleClass="loginError" errorStyle="color :red" infoStyle="color : green"/>
-                                </div>
+                        <div class="row">
+                            <div class="col-xs-4">
+                                <p>#{txt['starting_time']}<sup class="mandatoryField">*</sup></p>
+                            </div>
+                            <div class="col-xs-8">
+                                <p:calendar id="startingTime" value="#{editAppointmentController.startingTime}" pattern="#{dateFormatController.timeFormatString}" 
+                                            required="true" requiredMessage="Introduce hora de inicio" timeOnly="true" />
+                                <br/>
+                                <h:message for="startingTime" styleClass="loginError" errorStyle="color :red" infoStyle="color : green"/>
                             </div>
                         </div>
-                        <div class="col-xs-12 col-sm-6 col-md-6">
-                            <div class="row">
-                                <div class="col-xs-4">
-                                    <p>#{txt['ending_time']}<sup class="mandatoryField">*</sup></p>
-                                </div>
-                                <div class="col-xs-8">
-                                    <p:calendar id="endingTime" value="#{editAppointmentController.endingTime}" pattern="#{dateFormatController.timeFormatString}" 
-                                                required="true" requiredMessage="Introduce hora de fin" timeOnly="true" title="#{txt['choose_time']}" label="#{txt['choose_time']}" locale="es" />
-                                    <br/>
-                                    <h:message for="endingTime" styleClass="loginError" errorStyle="color :red" infoStyle="color : green"/>
-                                </div>
+                        <div class="row">
+                            <div class="col-xs-4">
+                                <p>#{txt['ending_time']}<sup class="mandatoryField">*</sup></p>
                             </div>
-                        </div>
-                        <div class="col-xs-12 col-sm-6 col-md-6">
-                            <div class="row">
-                                <div class="col-xs-4">
-                                    <p>#{txt['price']}<sup class="mandatoryField">*</sup></p>
-                                </div>
-                                <div class="col-xs-8">
-                                    <h:inputText id="price" styleClass="form-control" value="#{editAppointmentController.price}" required="true" requiredMessage="Introduce el precio de la actividad"/>
-                                    <h:message for="price"  styleClass="loginError" errorClass="msgError" infoClass="msgInfo"/>
-                                </div>
+                            <div class="col-xs-8">
+                                <p:calendar id="endingTime" value="#{editAppointmentController.endingTime}" pattern="#{dateFormatController.timeFormatString}" 
+                                            required="true" requiredMessage="Introduce hora de fin" timeOnly="true" title="#{txt['choose_time']}" label="#{txt['choose_time']}" locale="es" />
+                                <br/>
+                                <h:message for="endingTime" styleClass="loginError" errorStyle="color :red" infoStyle="color : green"/>
                             </div>
                         </div>
                     </div>

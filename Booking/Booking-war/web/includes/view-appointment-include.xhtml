@@ -21,8 +21,8 @@
                     </h:commandLink>
                 </div>
                 <div class="col-xs-offset-6 col-sm-offset-9 col-md-offset-9 col-xs-6 col-sm-3 col-md-3 text-right">
-                    <h:commandLink action="#{editAppointmentController.cancelBookingForUser()}" rendered="#{!editAppointmentController.currentAppointment.available}"> 
-                        <span class="btn btn-primary btn-block btn-red">#{txt['b_cancel_booking']}</span>
+                    <h:commandLink action="#{editAppointmentController.cancelBookingForUser()}" rendered="#{editAppointmentController.isMyAppointmentRequest() or editAppointmentController.isMyAppointmentBooking()}"> 
+                        <span class="btn btn-primary btn-block btn-red">#{editAppointmentController.isMyAppointmentRequest() ? txt['b_cancel_request'] : txt['b_cancel_booking']}</span>
                     </h:commandLink>
                 </div>
             </div>
@@ -59,7 +59,18 @@
                                         <f:convertNumber type="currency" currencySymbol="€" locale="es_ES" />
                                     </h:outputText>
                                 </div>
-                            </div>
+                            </div><h:panelGroup rendered="#{editAppointmentController.userRole eq 'ADMIN' or editAppointmentController.userRole eq 'SUPER_ADMIN'}">
+                                <div class="row">
+                                    <div class="col-xs-4">
+                                        <p class="italics">#{txt['created_date']}</p>
+                                    </div>
+                                    <div class="col-xs-8">
+                                        <h:outputText id="createdDate" styleClass="form-control" value="#{editAppointmentController.currentAppointment.createdDate}" >
+                                            <f:convertDateTime pattern="#{dateFormatController.dateWithTimeFormatString}" />
+                                        </h:outputText>
+                                    </div>
+                                </div>
+                            </h:panelGroup>
                         </div>
 
 
@@ -94,17 +105,15 @@
                                     </h:outputText>
                                 </div>
                             </div>
-                            <h:panelGroup rendered="#{editAppointmentController.userRole eq 'ADMIN' or editAppointmentController.userRole eq 'SUPER_ADMIN'}">
-                                <div class="row">
-                                    <div class="col-xs-4">
-                                        <p class="italics">#{txt['created_date']}</p>
-                                    </div>
-                                    <div class="col-xs-8">
-                                        <h:outputText id="createdDate" styleClass="form-control" value="#{editAppointmentController.currentAppointment.createdDate}" >
-                                            <f:convertDateTime pattern="#{dateFormatController.dateWithTimeFormatString}" />
-                                        </h:outputText>
-                                    </div>
+                            <div class="row">
+                                <div class="col-xs-4">
+                                    <p>#{txt['status']}</p>
                                 </div>
+                                <div class="col-xs-8">
+                                    <h:outputText id="availability" styleClass="form-control" value="#{appointment.available ? txt['available'] : (editAppointmentController.isMyAppointmentRequest() ? txt['pending'] : txt['booked'])}" style="#{editAppointmentController.currentAppointment.status eq 'SUSPENDED' ? 'color:red' : ''}" />
+                                </div>
+                            </div>
+                            <h:panelGroup rendered="#{editAppointmentController.userRole eq 'ADMIN' or editAppointmentController.userRole eq 'SUPER_ADMIN'}">
                                 <div class="row">
                                     <div class="col-xs-4">
                                         <p class="italics">#{txt['status']}</p>
@@ -147,8 +156,8 @@
                                             <f:convertDateTime pattern="#{dateFormatController.dateFormatString}" />
                                         </h:outputText> 
                                     </p:column> 
-                                    <p:column headerText="#{txt['status']}" sortBy="#{appointmentRequest.status}"> 
-                                        <h:outputText value="#{appointmentRequest.status}" >
+                                    <p:column headerText="#{txt['status']}" sortBy="#{appointmentRequest.status.label}"> 
+                                        <h:outputText value="#{appointmentRequest.status.label}" >
                                             <f:convertDateTime pattern="#{dateFormatController.timeFormatString}" /> 
                                         </h:outputText> 
                                     </p:column> 

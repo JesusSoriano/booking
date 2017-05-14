@@ -84,8 +84,8 @@
                                 <f:convertNumber type="currency" currencySymbol="€" locale="es_ES" />
                             </h:outputText>
                         </p:column> 
-                        <p:column headerText="#{txt['status']}" sortBy="#{appointment.available}" rendered="#{appointmentsController.userRole eq 'SUPER_ADMIN' or appointmentsController.userRole eq 'ADMIN'}"> 
-                            <h:outputText value="#{appointment.available ? txt['available'] : txt['booked']}" class="#{appointment.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" /> 
+                        <p:column headerText="#{txt['status']}" sortBy="#{appointment.available}"> 
+                            <h:outputText value="#{appointment.available ? txt['available'] : (appointmentsController.isMyAppointmentRequest(appointment) ? txt['pending'] : txt['booked'])}" class="#{appointment.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" /> 
                         </p:column> 
                         <p:column headerText="#{txt['organisation']}" sortBy="#{appointment.organisation.name}" rendered="#{appointmentsController.userRole eq 'SUPER_ADMIN'}"> 
                             <h:outputText value="#{appointment.organisation.name}" class="#{appointment.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" /> 
@@ -95,11 +95,11 @@
                                 <h:graphicImage title="#{txt['cap_view']}" value="../resources/images/view.png" class="table-action" /> 
                             </h:link>  
                             <h:panelGroup rendered="#{appointment.status eq 'ACTIVATED'}">
-                                <h:commandLink action="#{appointmentsController.bookAppointment(appointment)}" rendered="#{!appointmentsController.bookedAppointmentForUser(appointment)}"> 
+                                <h:commandLink action="#{appointmentsController.bookAppointment(appointment)}" rendered="#{appointment.status ne 'SUSPENDED' and appointment.available}">
                                     <h:graphicImage title="#{txt['cap_booking']}" value="../resources/images/booking-icon.png" class="table-action" /> 
                                 </h:commandLink> 
-                                <h:commandLink action="#{appointmentsController.cancelAppointmentBooking(appointment)}" rendered="#{appointmentsController.bookedAppointmentForUser(appointment)}"> 
-                                    <h:graphicImage title="#{txt['cap_cancel_booking']}" value="../resources/images/cancel-booking-icon.png" class="table-action" /> 
+                                <h:commandLink action="#{appointmentsController.cancelAppointmentBooking(appointment)}" rendered="#{appointmentsController.isMyAppointmentRequest(appointment) or appointmentsController.bookedAppointmentForUser(appointment)}"> 
+                                    <h:graphicImage title="#{appointmentsController.isMyAppointmentRequest(appointment) ? txt['cap_cancel_request'] : txt['cap_cancel_booking']}" value="../resources/images/cancel-booking-icon.png" class="table-action" /> 
                                 </h:commandLink> 
                             </h:panelGroup>
                             <h:panelGroup rendered="#{appointmentsController.userRole eq 'ADMIN' or appointmentsController.userRole eq 'SUPER_ADMIN'}">

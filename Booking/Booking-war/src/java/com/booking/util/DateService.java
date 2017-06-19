@@ -23,13 +23,13 @@ public class DateService implements Serializable {
 
     public static Date getMidnightDay(Date date) {
         // getting the time of the end of the day
-        Calendar c1 = Calendar.getInstance();
-        c1.setTime(date);
+        Calendar c = Calendar.getInstance();
+        c.setTime(date);
 
-        c1.set(Calendar.HOUR_OF_DAY, 23);
-        c1.set(Calendar.MINUTE, 59);
-        c1.set(Calendar.SECOND, 59);
-        return c1.getTime();
+        c.set(Calendar.HOUR_OF_DAY, 23);
+        c.set(Calendar.MINUTE, 59);
+        c.set(Calendar.SECOND, 59);
+        return c.getTime();
     }
 
     public static Date getDaysEarlier(Date date, int days) {

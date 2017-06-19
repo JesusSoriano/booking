@@ -108,10 +108,12 @@ public class AppointmentsController implements Serializable {
             } else {
                 // Create the appointment request
                 AppointmentRequest newAppointmentRequest = appointmentRequestFacade.createNewAppointmentRequest(appointment, loggedUser, "");
+                // Set the appointment user, even if the request is pending.
+                appointmentFacade.setAppointmentUser(appointment, loggedUser);
                 appointmentFacade.makeAppointmentUnabailable(appointment);
                 String msg = "La cita ha sido solicitada correctamente";
                 if (loggedUser.getUserRole().getRole().equals(Role.ADMIN) || loggedUser.getUserRole().getRole().equals(Role.SUPER_ADMIN)) {
-                    appointmentRequestFacade.updateRequestStatus(newAppointmentRequest, RequestStatus.ACCEPTED, "");
+                    appointmentRequestFacade.updateRequestStatus(newAppointmentRequest, RequestStatus.ACCEPTED, "Cita reservada por administrador");
                     msg = "La cita ha sido reservada correctamente";
                 }
 
@@ -137,48 +139,63 @@ public class AppointmentsController implements Serializable {
 
     public String cancelAppointmentBooking(Appointment appointment) {
         try {
-            User user;
-            if (appointment.getAppointmentUser() != null) {
-                // It's an accepted booking
-                user = appointment.getAppointmentUser();
-            } else {
-                // It's a request
-                if (loggedUser.getUserRole().getRole() == Role.USER) {
-                    // If it's not an admin, the logged user is the one to cancel
-                    user = loggedUser;
-                } else {
-                    AppointmentRequest appointmentRequest = appointmentRequestFacade.findCurrentRequestOfAppointment(appointment);
-                    if (appointmentRequest != null) {
-                        user = appointmentRequest.getRequestUser();
-                    } else {
-                        FacesUtil.addErrorMessage("appointmentsForm:msg", "Error, la solicitud o cita no existe.");
-                        return appointmentsWithParam();
-                    }
+            // Check if there is a appointment request
+            AppointmentRequest appointmentRequest = appointmentRequestFacade.findCurrentRequestOfAppointment(appointment);
+            if (appointmentRequest == null) {
+                // Find the appointment request
+                appointmentRequest = appointmentRequestFacade.findAcceptedRequestOfAppointmentForUser(appointment, appointment.getAppointmentUser());
+                appointmentRequestFacade.updateRequestStatus(appointmentRequest, RequestStatus.CANCELLED, "Cancelado por " + loggedUser.getFirstName());
+                if (appointmentRequest == null) {
+                    FacesUtil.addErrorMessage("appointmentsForm:msg", "Error, la solicitud o cita no existe.");
+                    return appointmentsWithParam();
                 }
             }
-            // Find the appointment request
-            AppointmentRequest currentAppointmentRequest = appointmentRequestFacade.findCurrentRequestOfAppointmentForUser(appointment, user);
-            if (currentAppointmentRequest != null) {
-                // Make the request status as CANCELLED
-                appointmentRequestFacade.updateRequestStatus(currentAppointmentRequest, RequestStatus.CANCELLED, "");
-                appointmentFacade.makeAppointmentAbailable(appointment);
-                FacesUtil.addSuccessMessage("appointmentsForm:msg", "La solicitud o cita ha sido cancelada correctamente.");
+            // Make the request status as CANCELLED
+            appointmentRequestFacade.updateRequestStatus(appointmentRequest, RequestStatus.CANCELLED, "");
 
-                try {
-                    // Audit request cancalation
-                    String ipAddress = FacesUtil.getRequest().getRemoteAddr();
-                    auditFacade.createAudit(AuditType.CANCELAR_CITA, user, ipAddress, currentAppointmentRequest.getId(), organisation);
+            appointmentFacade.makeAppointmentAbailable(appointment);
+            appointmentFacade.deleteAppointmentUser(appointment);
+            FacesUtil.addSuccessMessage("appointmentsForm:msg", "La solicitud o cita ha sido cancelada correctamente.");
 
-                } catch (Exception e) {
-                    Logger.getLogger(AppointmentsController.class.getName()).log(Level.SEVERE, null, e);
-                    FacesUtil.addErrorMessage("appointmentsForm:msg", "La solicitud o cita ha sido cancelada correctamente, pero ha habido un problema auditando la cancelación. Por favor informa a algún administrador del problema.");
-                }
-            } else {
-                FacesUtil.addErrorMessage("appointmentsForm:msg", "Error, la solicitud o cita no existe.");
+            try {
+                // Audit appointment cancalation
+                String ipAddress = FacesUtil.getRequest().getRemoteAddr();
+                auditFacade.createAudit(AuditType.CANCELAR_CITA, appointment.getAppointmentUser(), ipAddress, appointment.getId(), organisation);
+            } catch (Exception e) {
+                Logger.getLogger(AppointmentsController.class.getName()).log(Level.SEVERE, null, e);
+                FacesUtil.addErrorMessage("appointmentsForm:msg", "La solicitud o cita ha sido cancelada correctamente, pero ha habido un problema auditando la cancelación. Por favor informa a algún administrador del problema.");
             }
         } catch (Exception e) {
             Logger.getLogger(AppointmentsController.class.getName()).log(Level.SEVERE, null, e);
             FacesUtil.addErrorMessage("appointmentsForm:msg", "Lo sentimos, ha habido un problema al cancelar la reserva.");
+        }
+
+        return appointmentsWithParam();
+    }
+
+    public String acceptAppointmentBooking(Appointment appointment) {
+        try {
+            // Check if there is a appointment request
+            AppointmentRequest appointmentRequest = appointmentRequestFacade.findCurrentRequestOfAppointment(appointment);
+            if (appointmentRequest == null) {
+                FacesUtil.addErrorMessage("appointmentsForm:msg", "Error, la solicitud o cita no existe.");
+                return appointmentsWithParam();
+            }
+            // Make the request status as ACCEPTED
+            appointmentRequestFacade.updateRequestStatus(appointmentRequest, RequestStatus.ACCEPTED, "Aceptado por " + loggedUser.getFirstName());
+            FacesUtil.addSuccessMessage("appointmentsForm:msg", "La solicitud de cita ha sido aceptada correctamente.");
+
+            try {
+                // Audit appointment acceptance
+                String ipAddress = FacesUtil.getRequest().getRemoteAddr();
+                auditFacade.createAudit(AuditType.ACEPTAR_CITA, appointment.getAppointmentUser(), ipAddress, appointment.getId(), organisation);
+            } catch (Exception e) {
+                Logger.getLogger(AppointmentsController.class.getName()).log(Level.SEVERE, null, e);
+                FacesUtil.addErrorMessage("appointmentsForm:msg", "La solicitud de cita ha sido aceptada correctamente, pero ha habido un problema auditando la cancelación. Por favor informa a algún administrador del problema.");
+            }
+        } catch (Exception e) {
+            Logger.getLogger(AppointmentsController.class.getName()).log(Level.SEVERE, null, e);
+            FacesUtil.addErrorMessage("appointmentsForm:msg", "Lo sentimos, ha habido un problema al aceptar la reserva.");
         }
 
         return appointmentsWithParam();
@@ -195,7 +212,7 @@ public class AppointmentsController implements Serializable {
             FacesUtil.addSuccessMessage("appointmentsForm:msg", "La clase ha sido duplicada correctamente.");
             // Audit appointment duplicate
             String ipAddress = FacesUtil.getRequest().getRemoteAddr();
-            auditFacade.createAudit(AuditType.DUPLICAR_CLASE, loggedUser, ipAddress, duplicatedAppointment.getId(), organisation);
+            auditFacade.createAudit(AuditType.DUPLICAR_CITA, loggedUser, ipAddress, duplicatedAppointment.getId(), organisation);
         } catch (Exception e) {
             FacesUtil.addErrorMessage("appointmentsForm:msg", "Lo sentimos, no ha sido posible duplicar la clase.");
             Logger.getLogger(AppointmentsController.class.getName()).log(Level.SEVERE, null, e);
@@ -213,9 +230,15 @@ public class AppointmentsController implements Serializable {
         return appointment.getAppointmentUser() != null && appointment.getAppointmentUser() == loggedUser;
     }
 
+    /**
+     * Check if the user have an appointment request or, 
+     * if the user is an ADMIN, check if there is any.
+     * @param appointment the Appointment to check if there is any request
+     * @return boolean
+     */
     public boolean isMyAppointmentRequest(Appointment appointment) {
         AppointmentRequest currentAppointmentRequest;
-        if (loggedUser.getUserRole().getRole() == Role.ADMIN || loggedUser.getUserRole().getRole() == Role.ADMIN) {
+        if (loggedUserIsAdmin()) {
             // Find if there is a current request of the appointment
             currentAppointmentRequest = appointmentRequestFacade.findCurrentRequestOfAppointment(appointment);
         } else {
@@ -231,6 +254,11 @@ public class AppointmentsController implements Serializable {
 
     public Role getUserRole() {
         return loggedUser.getUserRole().getRole();
+    }
+
+    public boolean loggedUserIsAdmin() {
+        Role userRole = loggedUser.getUserRole().getRole();
+        return userRole == Role.ADMIN || userRole == Role.SUPER_ADMIN;
     }
 
     public Service getCurrentService() {

@@ -29,6 +29,7 @@ public enum AuditType {
     ACTIVAR_CITA("ha activado una cita"),
     RESERVAR_CITA("ha reservado una cita"),
     CANCELAR_CITA("ha cancelado la reserva de una cita"),
+    ACEPTAR_CITA("ha aceptado la reserva de una cita"),
     SUSPENDER_USUARIO("ha suspendido un usuario"),
     ACTIVAR_USUARIO("ha activado un usuario"),
     SUSPENDER_ADMIN("ha suspendido un administrador"),

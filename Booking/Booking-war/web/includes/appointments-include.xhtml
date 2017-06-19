@@ -15,7 +15,7 @@
                     <div class="row page-subtitle">
                         <h2>#{appointmentsController.currentService.name}</h2> 
                         <h4>#{appointmentsController.currentService.description}</h4> 
-                        <h:panelGroup rendered="#{appointmentsController.userRole eq 'ADMIN' or appointmentsController.userRole eq 'SUPER_ADMIN'}">
+                        <h:panelGroup rendered="#{appointmentsController.loggedUserIsAdmin()}">
                             <h4>#{txt['created']}:
                                 <h:outputText value="#{appointmentsController.currentService.createdDate}">
                                     <f:convertDateTime pattern="#{dateFormatController.dateWithTimeFormatString}" />
@@ -30,7 +30,7 @@
                     <div class="col-xs-6 col-sm-6 col-md-6">
                         <h3 class="page-title">#{txt['appointments']} (#{appointmentsController.appointments.size()})</h3> 
                     </div>
-                    <h:panelGroup rendered="#{appointmentsController.userRole eq 'ADMIN' or appointmentsController.userRole eq 'SUPER_ADMIN'}">
+                    <h:panelGroup rendered="#{appointmentsController.loggedUserIsAdmin()}">
                         <div class="col-sm-offset-3 col-md-offset-3 col-xs-6 col-sm-3 col-md-3 text-right">
                             <h:link outcome="new-appointment.xhtml?faces-redirect=true">
                                 <span class="btn btn-primary btn-block btn-main">#{txt['b_new_appointment']}</span>
@@ -75,8 +75,8 @@
                                 <f:convertDateTime pattern="#{dateFormatController.timeFormatString}" />
                             </h:outputText>
                         </p:column> 
-                        <p:column headerText="#{txt['user']}" sortBy="#{appointment.appointmentUser}" rendered="#{appointmentsController.userRole eq 'ADMIN' or appointmentsController.userRole eq 'SUPER_ADMIN'}"> 
-                            <h:outputText value="#{appointment.appointmentUser}" class="#{appointment.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" /> 
+                        <p:column headerText="#{txt['user']}" sortBy="#{appointment.appointmentUser.fullName}" rendered="#{appointmentsController.loggedUserIsAdmin()}"> 
+                            <h:outputText value="#{appointment.appointmentUser.fullName}" class="#{appointment.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" /> 
                         </p:column>
                         <p:column headerText="#{txt['price']}" sortBy="#{appointment.price}"> 
                             <h:outputText value="#{txt['free']}" rendered="#{appointment.price eq 0}" class="#{appointment.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" />
@@ -85,12 +85,13 @@
                             </h:outputText>
                         </p:column> 
                         <p:column headerText="#{txt['status']}" sortBy="#{appointment.available}"> 
-                            <h:outputText value="#{appointment.available ? txt['available'] : (appointmentsController.isMyAppointmentRequest(appointment) ? txt['pending'] : txt['booked'])}" class="#{appointment.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" /> 
+                            <h:outputText value="#{appointment.status eq 'SUSPENDED' ? txt['suspended'] : (appointment.available ? txt['available'] : (appointmentsController.isMyAppointmentRequest(appointment) ? txt['pending'] : txt['booked']))}" class="#{appointment.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" /> 
+                            <h:graphicImage rendered="#{appointment.status ne 'SUSPENDED' and !appointment.available and appointmentsController.isMyAppointmentRequest(appointment)}" title="#{txt['cap_pending']}" value="../resources/images/pending-booking-icon.png" class="table-action" style="margin-left: 10px; margin-right: 0px;"/>
                         </p:column> 
                         <p:column headerText="#{txt['organisation']}" sortBy="#{appointment.organisation.name}" rendered="#{appointmentsController.userRole eq 'SUPER_ADMIN'}"> 
                             <h:outputText value="#{appointment.organisation.name}" class="#{appointment.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" /> 
                         </p:column> 
-                        <p:column headerText="#{txt['options']}" style="width: 170px;"> 
+                        <p:column headerText="#{txt['options']}" style="width: 170px; padding: 4px 5px;"> 
                             <h:link outcome="view-appointment.xhtml?faces-redirect=true&amp;appointment=#{appointment.id}" >
                                 <h:graphicImage title="#{txt['cap_view']}" value="../resources/images/view.png" class="table-action" /> 
                             </h:link>  
@@ -98,11 +99,14 @@
                                 <h:commandLink action="#{appointmentsController.bookAppointment(appointment)}" rendered="#{appointment.status ne 'SUSPENDED' and appointment.available}">
                                     <h:graphicImage title="#{txt['cap_booking']}" value="../resources/images/booking-icon.png" class="table-action" /> 
                                 </h:commandLink> 
-                                <h:commandLink action="#{appointmentsController.cancelAppointmentBooking(appointment)}" rendered="#{appointmentsController.isMyAppointmentRequest(appointment) or appointmentsController.bookedAppointmentForUser(appointment)}"> 
+                                <h:commandLink action="#{appointmentsController.acceptAppointmentBooking(appointment)}" rendered="#{!appointment.available and (appointmentsController.isMyAppointmentRequest(appointment) and appointmentsController.loggedUserIsAdmin())}"> 
+                                    <h:graphicImage title="#{txt['cap_accept_request']}" value="../resources/images/accept-booking-icon.png" class="table-action" /> 
+                                </h:commandLink> 
+                                <h:commandLink action="#{appointmentsController.cancelAppointmentBooking(appointment)}" rendered="#{!appointment.available and (appointmentsController.isMyAppointmentRequest(appointment) or (appointmentsController.loggedUserIsAdmin() or appointmentsController.bookedAppointmentForUser(appointment)))}"> 
                                     <h:graphicImage title="#{appointmentsController.isMyAppointmentRequest(appointment) ? txt['cap_cancel_request'] : txt['cap_cancel_booking']}" value="../resources/images/cancel-booking-icon.png" class="table-action" /> 
                                 </h:commandLink> 
                             </h:panelGroup>
-                            <h:panelGroup rendered="#{appointmentsController.userRole eq 'ADMIN' or appointmentsController.userRole eq 'SUPER_ADMIN'}">
+                            <h:panelGroup rendered="#{appointmentsController.loggedUserIsAdmin()}">
                                 <h:link outcome="edit-appointment.xhtml?faces-redirect=true&amp;appointment=#{appointment.id}"> 
                                     <h:graphicImage title="#{txt['cap_edit']}" value="../resources/images/edit_user.png" class="table-action" /> 
                                 </h:link> 
@@ -121,72 +125,72 @@
                 </div> 
 
 
-                <div class="row" style="margin-top: 100px"> 
-                    <div class="row page-subtitle-no-spacing margin-bottom-10">
-                        <h4>#{txt['past_appointments']}:</h4>
-                    </div>
+                <h:panelGroup rendered="#{appointmentsController.loggedUserIsAdmin()}">
+                    <div class="row" style="margin-top: 100px"> 
+                        <div class="row page-subtitle-no-spacing margin-bottom-10">
+                            <h4>#{txt['past_appointments']}:</h4>
+                        </div>
 
-                    <script type="text/javascript">
-                        $(document).ready(function () {
-                            $('#appointmentsForm\\:pastAppointmentsTable .ui-paginator-rpp-options.ui-widget.ui-state-default.ui-corner-left')
-                                    .each(function () {
-                                        $(this).children().last().html('#{txt['all']}');
-                                    });
-                        });
-                    </script>
+                        <script type="text/javascript">
+                            $(document).ready(function () {
+                                $('#appointmentsForm\\:pastAppointmentsTable .ui-paginator-rpp-options.ui-widget.ui-state-default.ui-corner-left')
+                                        .each(function () {
+                                            $(this).children().last().html('#{txt['all']}');
+                                        });
+                            });
+                        </script>
 
-                    <p:dataTable id="pastAppointmentsTable" value="#{appointmentsController.pastAppointments}" var="appointment" styleClass="common-table text-center" paginator="true" rows="20" paginatorPosition="bottom" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" 
-                                 rowsPerPageTemplate="10, 20, #{appointmentsController.pastAppointments.size()}" emptyMessage="#{txt['empty_records']}"> 
-                        <p:column headerText="#{txt['service']}" sortBy="#{appointment.service.name}"> 
-                            <h:link outcome="appointments.xhtml?faces-redirect=true&amp;service=#{appointment.service.id}"> 
-                                <h:outputText value="#{appointment.service.name}" class="#{appointment.status eq 'SUSPENDED' ? 'lightgray-color' : 'blue-link'}" /> 
-                            </h:link> 
-                        </p:column> 
-                        <p:column headerText="#{txt['description']}" sortBy="#{appointment.description}" style="width: 170px;"> 
-                            <h:outputText value="#{appointment.description}" class="#{appointment.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" /> 
-                        </p:column> 
-                        <p:column headerText="#{txt['date']}" sortBy="#{appointment.date}"> 
-                            <h:outputText value="#{appointment.date}" class="#{appointment.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" >
-                                <f:convertDateTime pattern="#{dateFormatController.dateFormatString}" />
-                            </h:outputText>
-                        </p:column> 
-                        <p:column headerText="#{txt['starting_time']}" sortBy="#{appointment.startTime}"> 
-                            <h:outputText value="#{appointment.startTime}" class="#{appointment.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" >
-                                <f:convertDateTime pattern="#{dateFormatController.timeFormatString}" />
-                            </h:outputText>
-                        </p:column> 
-                        <p:column headerText="#{txt['ending_time']}" sortBy="#{appointment.endTime}"> 
-                            <h:outputText value="#{appointment.endTime}" class="#{appointment.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" >
-                                <f:convertDateTime pattern="#{dateFormatController.timeFormatString}" />
-                            </h:outputText>
-                        </p:column> 
-                        <p:column headerText="#{txt['user']}" sortBy="#{appointment.appointmentUser}" rendered="#{appointmentsController.userRole eq 'ADMIN' or appointmentsController.userRole eq 'SUPER_ADMIN'}" > 
-                            <h:outputText value="#{appointment.appointmentUser}" class="#{appointment.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" /> 
-                        </p:column>
-                        <p:column headerText="#{txt['price']}" sortBy="#{appointment.price}"> 
-                            <h:outputText value="#{txt['free']}" rendered="#{appointment.price eq 0}" class="#{appointment.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" />
-                            <h:outputText value="#{appointment.price}" rendered="#{appointment.price ne 0}" class="#{appointment.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" >
-                                <f:convertNumber type="currency" currencySymbol="€" locale="es_ES" />
-                            </h:outputText>
-                        </p:column> 
-                        <p:column headerText="#{txt['status']}" sortBy="#{appointmentsController.checkStatus(appointment)}" rendered="#{appointmentsController.userRole eq 'SUPER_ADMIN' or appointmentsController.userRole eq 'ADMIN'}"> 
-                            <h:outputText value="#{appointmentsController.checkStatus(appointment)}" class="#{appointment.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" /> 
-                        </p:column> 
-                        <p:column headerText="#{txt['organisation']}" sortBy="#{appointment.organisation.name}" rendered="#{appointmentsController.userRole eq 'SUPER_ADMIN'}"> 
-                            <h:outputText value="#{appointment.organisation.name}" class="#{appointment.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" /> 
-                        </p:column> 
-                        <p:column headerText="#{txt['options']}"> 
-                            <h:link outcome="view-appointment.xhtml?faces-redirect=true&amp;appointment=#{appointment.id}" >
-                                <h:graphicImage title="#{txt['cap_view']}" value="../resources/images/view.png" class="table-action" /> 
-                            </h:link>  
-                            <h:panelGroup rendered="#{appointmentsController.userRole eq 'ADMIN' or appointmentsController.userRole eq 'SUPER_ADMIN'}">
-                                <h:commandLink action="#{appointmentsController.duplicateAppointment(appointment)}" > 
-                                    <h:graphicImage title="#{txt['cap_duplicate']}" value="../resources/images/duplicate-icon.png" class="table-action" /> 
-                                </h:commandLink> 
-                            </h:panelGroup>
-                        </p:column> 
-                    </p:dataTable>
-                </div> 
+                        <p:dataTable id="pastAppointmentsTable" value="#{appointmentsController.pastAppointments}" var="appointment" styleClass="common-table text-center" paginator="true" rows="20" paginatorPosition="bottom" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" 
+                                     rowsPerPageTemplate="10, 20, #{appointmentsController.pastAppointments.size()}" emptyMessage="#{txt['empty_records']}"> 
+                            <p:column headerText="#{txt['service']}" sortBy="#{appointment.service.name}"> 
+                                <h:link outcome="appointments.xhtml?faces-redirect=true&amp;service=#{appointment.service.id}"> 
+                                    <h:outputText value="#{appointment.service.name}" class="#{appointment.status eq 'SUSPENDED' ? 'lightgray-color' : 'blue-link'}" /> 
+                                </h:link> 
+                            </p:column> 
+                            <p:column headerText="#{txt['description']}" sortBy="#{appointment.description}" style="width: 170px;"> 
+                                <h:outputText value="#{appointment.description}" class="#{appointment.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" /> 
+                            </p:column> 
+                            <p:column headerText="#{txt['date']}" sortBy="#{appointment.date}"> 
+                                <h:outputText value="#{appointment.date}" class="#{appointment.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" >
+                                    <f:convertDateTime pattern="#{dateFormatController.dateFormatString}" />
+                                </h:outputText>
+                            </p:column> 
+                            <p:column headerText="#{txt['starting_time']}" sortBy="#{appointment.startTime}"> 
+                                <h:outputText value="#{appointment.startTime}" class="#{appointment.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" >
+                                    <f:convertDateTime pattern="#{dateFormatController.timeFormatString}" />
+                                </h:outputText>
+                            </p:column> 
+                            <p:column headerText="#{txt['ending_time']}" sortBy="#{appointment.endTime}"> 
+                                <h:outputText value="#{appointment.endTime}" class="#{appointment.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" >
+                                    <f:convertDateTime pattern="#{dateFormatController.timeFormatString}" />
+                                </h:outputText>
+                            </p:column> 
+                            <p:column headerText="#{txt['user']}" sortBy="#{appointment.appointmentUser.fullName}" rendered="#{appointmentsController.loggedUserIsAdmin()}" > 
+                                <h:outputText value="#{appointment.appointmentUser.fullName}" class="#{appointment.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" /> 
+                            </p:column>
+                            <p:column headerText="#{txt['price']}" sortBy="#{appointment.price}"> 
+                                <h:outputText value="#{txt['free']}" rendered="#{appointment.price eq 0}" class="#{appointment.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" />
+                                <h:outputText value="#{appointment.price}" rendered="#{appointment.price ne 0}" class="#{appointment.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" >
+                                    <f:convertNumber type="currency" currencySymbol="€" locale="es_ES" />
+                                </h:outputText>
+                            </p:column> 
+                            <p:column headerText="#{txt['organisation']}" sortBy="#{appointment.organisation.name}" rendered="#{appointmentsController.userRole eq 'SUPER_ADMIN'}"> 
+                                <h:outputText value="#{appointment.organisation.name}" class="#{appointment.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" /> 
+                            </p:column> 
+                            <p:column headerText="#{txt['options']}"> 
+                                <h:link outcome="view-appointment.xhtml?faces-redirect=true&amp;appointment=#{appointment.id}" >
+                                    <h:graphicImage title="#{txt['cap_view']}" value="../resources/images/view.png" class="table-action" /> 
+                                </h:link>  
+                                <h:panelGroup rendered="#{appointmentsController.loggedUserIsAdmin()}">
+                                    <h:commandLink action="#{appointmentsController.duplicateAppointment(appointment)}" > 
+                                        <h:graphicImage title="#{txt['cap_duplicate']}" value="../resources/images/duplicate-icon.png" class="table-action" /> 
+                                    </h:commandLink> 
+                                </h:panelGroup>
+                            </p:column> 
+                        </p:dataTable>
+                    </div> 
+                </h:panelGroup>
+
             </h:form>
         </div>
     </div>

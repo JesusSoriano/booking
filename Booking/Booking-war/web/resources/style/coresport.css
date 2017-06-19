@@ -655,13 +655,13 @@ select[multiple], select[size] {
 }
 .table-action {
     height: 20px;
-    margin-right: 10px;
+    margin-right: 7px;
     cursor: pointer;
 }
 .table-action-width {
     width: 21px;
     height: 15px;
-    margin-right: 10px;
+    margin-right: 7px;
 }
 
 .text-center {

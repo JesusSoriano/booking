@@ -67,30 +67,29 @@ public class AppointmentRequestFacade extends AbstractFacade<AppointmentRequest>
                 setParameter("user", user).getResultList());
     }
 
-    public AppointmentRequest findAcceptedRequestOfAppointmentForUser(Appointment appointment, User user) {
-        return findUniqueResult(em.createQuery("SELECT a FROM AppointmentRequest a WHERE a.appointment = :appointment AND a.status = :accepted AND a.requestUser = :user ORDER BY a.createdDate ASC").
+    public AppointmentRequest findAcceptedRequestOfAppointment(Appointment appointment) {
+        return findUniqueResult(em.createQuery("SELECT a FROM AppointmentRequest a WHERE a.appointment = :appointment AND a.status = :accepted ORDER BY a.createdDate ASC").
                 setParameter("accepted", RequestStatus.ACCEPTED).
-                setParameter("appointment", appointment).
-                setParameter("user", user).getResultList());
-    }
-
-    public boolean existsRequest(User user, Appointment appointment) {
-        List<AppointmentRequest> appointmentRequests = em.createQuery("SELECT a FROM AppointmentRequest a WHERE a.requestUser = :user AND a.appointment = :appointment").
-                setParameter("user", user).
-                setParameter("appointment", appointment).getResultList();
-        for (AppointmentRequest ar : appointmentRequests) {
-            if (ar.getStatus().equals(RequestStatus.ACCEPTED) || ar.getStatus().equals(RequestStatus.PENDING)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public boolean isRequestAvailable(Appointment appointment) {
-        AppointmentRequest appointmentRequest = findUniqueResult(em.createQuery("SELECT a FROM AppointmentRequest a WHERE a.appointment = :appointment AND a.status = :pending ORDER BY a.createdDate ASC").
-                setParameter("pending", RequestStatus.PENDING).
                 setParameter("appointment", appointment).getResultList());
-        
-        return appointmentRequest == null;
     }
+
+//    public boolean existsRequest(User user, Appointment appointment) {
+//        List<AppointmentRequest> appointmentRequests = em.createQuery("SELECT a FROM AppointmentRequest a WHERE a.requestUser = :user AND a.appointment = :appointment").
+//                setParameter("user", user).
+//                setParameter("appointment", appointment).getResultList();
+//        for (AppointmentRequest ar : appointmentRequests) {
+//            if (ar.getStatus().equals(RequestStatus.ACCEPTED) || ar.getStatus().equals(RequestStatus.PENDING)) {
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
+//
+//    public boolean isRequestAvailable(Appointment appointment) {
+//        AppointmentRequest appointmentRequest = findUniqueResult(em.createQuery("SELECT a FROM AppointmentRequest a WHERE a.appointment = :appointment AND a.status = :pending ORDER BY a.createdDate ASC").
+//                setParameter("pending", RequestStatus.PENDING).
+//                setParameter("appointment", appointment).getResultList());
+//        
+//        return appointmentRequest == null;
+//    }
 }

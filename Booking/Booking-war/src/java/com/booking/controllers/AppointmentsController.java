@@ -99,12 +99,9 @@ public class AppointmentsController implements Serializable {
 
     public String bookAppointment(Appointment appointment) {
         try {
-            // Check the status of the appointment (and requests)
-            if (!appointmentRequestFacade.isRequestAvailable(appointment)) {
-                FacesUtil.addErrorMessage("appointmentsForm:msg", "Lo sentimos, no se puede solicitar esta cita. Está pendiente de respuesta de los administradores.");
-            } // Check if the request already exists
-            else if (appointmentRequestFacade.existsRequest(loggedUser, appointment)) {
-                FacesUtil.addErrorMessage("appointmentsForm:msg", "Esta cita ya ha sido solicitada previamente.");
+            // Check if the appointment is available
+            if (!appointment.isAvailable()) {
+                FacesUtil.addErrorMessage("appointmentsForm:msg", "Lo sentimos, esta cita no está disponible para solicitud. Por favor, informa a algún administrador del problema.");
             } else {
                 // Create the appointment request
                 AppointmentRequest newAppointmentRequest = appointmentRequestFacade.createNewAppointmentRequest(appointment, loggedUser, "");
@@ -112,8 +109,8 @@ public class AppointmentsController implements Serializable {
                 appointmentFacade.setAppointmentUser(appointment, loggedUser);
                 appointmentFacade.makeAppointmentUnabailable(appointment);
                 String msg = "La cita ha sido solicitada correctamente";
-                if (loggedUser.getUserRole().getRole().equals(Role.ADMIN) || loggedUser.getUserRole().getRole().equals(Role.SUPER_ADMIN)) {
-                    appointmentRequestFacade.updateRequestStatus(newAppointmentRequest, RequestStatus.ACCEPTED, "Cita reservada por administrador");
+                if (loggedUserIsAdmin()) {
+                    appointmentRequestFacade.updateRequestStatus(newAppointmentRequest, RequestStatus.ACCEPTED, "Cita reservada por " + loggedUser.getFirstName());
                     msg = "La cita ha sido reservada correctamente";
                 }
 
@@ -143,16 +140,14 @@ public class AppointmentsController implements Serializable {
             AppointmentRequest appointmentRequest = appointmentRequestFacade.findCurrentRequestOfAppointment(appointment);
             if (appointmentRequest == null) {
                 // Find the appointment request
-                appointmentRequest = appointmentRequestFacade.findAcceptedRequestOfAppointmentForUser(appointment, appointment.getAppointmentUser());
-                appointmentRequestFacade.updateRequestStatus(appointmentRequest, RequestStatus.CANCELLED, "Cancelado por " + loggedUser.getFirstName());
+                appointmentRequest = appointmentRequestFacade.findAcceptedRequestOfAppointment(appointment);
                 if (appointmentRequest == null) {
                     FacesUtil.addErrorMessage("appointmentsForm:msg", "Error, la solicitud o cita no existe.");
                     return appointmentsWithParam();
                 }
             }
             // Make the request status as CANCELLED
-            appointmentRequestFacade.updateRequestStatus(appointmentRequest, RequestStatus.CANCELLED, "");
-
+            appointmentRequestFacade.updateRequestStatus(appointmentRequest, RequestStatus.CANCELLED, "Cancelado por " + loggedUser.getFirstName());
             appointmentFacade.makeAppointmentAbailable(appointment);
             appointmentFacade.deleteAppointmentUser(appointment);
             FacesUtil.addSuccessMessage("appointmentsForm:msg", "La solicitud o cita ha sido cancelada correctamente.");
@@ -226,17 +221,19 @@ public class AppointmentsController implements Serializable {
         return "appointments.xhtml" + Constants.FACES_REDIRECT + serviceParam;
     }
 
-    public boolean bookedAppointmentForUser(Appointment appointment) {
-        return appointment.getAppointmentUser() != null && appointment.getAppointmentUser() == loggedUser;
+    public boolean isMyAppointmentBooking(Appointment appointment) {
+        AppointmentRequest acceptedAppointmentRequest = appointmentRequestFacade.findAcceptedRequestOfAppointment(appointment);
+        return acceptedAppointmentRequest != null && acceptedAppointmentRequest.getRequestUser().equals(loggedUser);
     }
 
     /**
-     * Check if the user have an appointment request or, 
-     * if the user is an ADMIN, check if there is any.
+     * Check if the user have an appointment request or, if the user is an
+     * ADMIN, check if there is any.
+     *
      * @param appointment the Appointment to check if there is any request
      * @return boolean
      */
-    public boolean isMyAppointmentRequest(Appointment appointment) {
+    public boolean isUserAppointmentRequestOrAdminCanSeeRequest(Appointment appointment) {
         AppointmentRequest currentAppointmentRequest;
         if (loggedUserIsAdmin()) {
             // Find if there is a current request of the appointment

@@ -21,8 +21,13 @@
                     </h:commandLink>
                 </div>
                 <div class="col-xs-offset-6 col-sm-offset-9 col-md-offset-9 col-xs-6 col-sm-3 col-md-3 text-right">
-                    <h:commandLink action="#{editAppointmentController.cancelAppointmentBooking()}" rendered="#{editAppointmentController.isMyAppointmentRequest() or editAppointmentController.isMyAppointmentBooking()}"> 
-                        <span class="btn btn-primary btn-block btn-red">#{editAppointmentController.isMyAppointmentRequest() ? txt['b_cancel_request'] : txt['b_cancel_booking']}</span>
+                    <h:commandLink action="#{editAppointmentController.acceptCurrentAppointmentRequest()}" rendered="#{editAppointmentController.loggedUserIsAdmin() and editAppointmentController.isUserAppointmentRequestOrAdminCanSeeRequest()}"> 
+                        <span class="btn btn-primary btn-block btn-green">#{txt['b_accept_request']}</span>
+                    </h:commandLink>
+                </div>
+                <div class="col-xs-offset-6 col-sm-offset-9 col-md-offset-9 col-xs-6 col-sm-3 col-md-3 text-right">
+                    <h:commandLink action="#{editAppointmentController.cancelAppointmentBooking()}" rendered="#{!editAppointmentController.currentAppointment.available and (editAppointmentController.loggedUserIsAdmin() or editAppointmentController.isUserAppointmentRequestOrAdminCanSeeRequest() or editAppointmentController.isMyAppointmentBooking())}"> 
+                        <span class="btn btn-primary btn-block btn-red">#{editAppointmentController.isUserAppointmentRequestOrAdminCanSeeRequest() ? txt['b_cancel_request'] : txt['b_cancel_booking']}</span>
                     </h:commandLink>
                 </div>
                 <div class="col-xs-offset-6 col-sm-offset-9 col-md-offset-9 col-xs-6 col-sm-3 col-md-3 text-right">
@@ -120,7 +125,8 @@
                                     <p>#{txt['status']}</p>
                                 </div>
                                 <div class="col-xs-8">
-                                    <h:outputText id="availability" styleClass="form-control" value="#{appointment.available ? txt['available'] : (editAppointmentController.isMyAppointmentRequest() ? txt['pending'] : txt['booked'])}" style="#{editAppointmentController.currentAppointment.status eq 'SUSPENDED' ? 'color:red' : ''}" />
+                                    <h:outputText id="availability" styleClass="form-control" value="#{editAppointmentController.currentAppointment.available ? txt['available'] : (editAppointmentController.isUserAppointmentRequestOrAdminCanSeeRequest() ? txt['pending'] : txt['booked'])}" 
+                                                  style="#{editAppointmentController.currentAppointment.status eq 'SUSPENDED' ? 'color:red' : (editAppointmentController.currentAppointment.available ? '' : (editAppointmentController.isUserAppointmentRequestOrAdminCanSeeRequest() ? 'color:orange' : (editAppointmentController.isMyAppointmentBooking() ? 'color:green' : '')))}" />
                                 </div>
                             </div>
                             <h:panelGroup rendered="#{editAppointmentController.loggedUserIsAdmin()}">

@@ -52,47 +52,91 @@
                                                             <p:schedule value="#{scheduleController.lazyEventModel}" />-->
             </h:panelGrid>
 
-            <div class="row colors">
-                <span class="color-explanation gray-color" /> #{txt['calendar_gray_explanation']} <br/>
-                <span class="color-explanation blue-color" /> #{txt['calendar_blue_explanation']} <br/>
-                <span class="color-explanation orange-color" /> #{txt['calendar_orange_explanation']} <br/>
-                <span class="color-explanation green-color" /> #{txt['calendar_green_explanation']}
+            <div class="row">
+                <div class="colors">
+                    <span class="color-explanation gray-color" /> #{txt['calendar_gray_explanation']} <br/>
+                    <span class="color-explanation blue-color" /> #{txt['calendar_blue_explanation']} <br/>
+                    <span class="color-explanation orange-color" /> #{txt['calendar_orange_explanation']} <br/>
+                    <span class="color-explanation green-color" /> #{txt['calendar_green_explanation']}
+                </div>
+                <div class="colors">
+                    <span class="color-explanation gray-border" /> #{txt['calendar_gray_appointment_explanation']} <br/>
+                    <span class="color-explanation blue-border" /> #{txt['calendar_blue_appointment_explanation']} <br/>
+                    <span class="color-explanation orange-border" /> #{txt['calendar_orange_appointment_explanation']} <br/>
+                    <span class="color-explanation green-border" /> #{txt['calendar_green_appointment_explanation']}
+                </div>
             </div>
 
             <p:dialog widgetVar="eventDialog" header="#{txt['details']}" showEffect="clip" hideEffect="clip">
+
                 <h:panelGrid id="eventDetails" columns="2" class="dialogTable">
-                    <span/>
-                    <h:link outcome="view-class.xhtml?faces-redirect=true&amp;class=#{scheduleController.event.data.activityClass.id}"> 
-                        <span class="btn btn-primary btn-general btn-calendar-details"><h:graphicImage title="#{txt['cap_view']}" value="../resources/images/view.png" class="button-action" /> #{txt['b_view_class']}</span>
-                    </h:link> 
-                    <h:outputLabel for="service" value="#{txt['service']}" />
-                    <h:outputText id="service" value="#{scheduleController.event.data.activityClass.service.name}" />
+                    <h:panelGrid rendered="#{!scheduleController.event.data.isDataAsAppointment()}" columns="2" class="dialogTable">
+                        <span/>
+                        <h:link outcome="view-class.xhtml?faces-redirect=true&amp;class=#{scheduleController.event.data.classDay.activityClass.id}"> 
+                            <span class="btn btn-primary btn-general btn-calendar-details"><h:graphicImage title="#{txt['cap_view']}" value="../resources/images/view.png" class="button-action" /> #{txt['b_view_class']}</span>
+                        </h:link> 
 
-                    <h:outputLabel for="class" value="#{txt['class']}" />
-                    <h:outputText id="class" value="#{scheduleController.event.title}" />
+                        <h:outputLabel for="class" value="Evento" />
+                        <h:outputText id="class" value="#{scheduleController.event.title}" />
 
-                    <h:outputLabel for="from" value="#{txt['starting_time']}" />
-                    <h:outputText id="from" value="#{scheduleController.event.startDate}">   
-                        <f:convertDateTime pattern="#{dateFormatController.timeFormatString}" timeZone="GMT+1"/> 
-                    </h:outputText>
+                        <h:outputLabel for="from" value="#{txt['starting_time']}" />
+                        <h:outputText id="from" value="#{scheduleController.event.startDate}">   
+                            <f:convertDateTime pattern="#{dateFormatController.timeFormatString}" timeZone="GMT+1"/> 
+                        </h:outputText>
 
-                    <h:outputLabel for="to" value="#{txt['ending_time']}" />
-                    <h:outputText id="to" value="#{scheduleController.event.endDate}">   
-                        <f:convertDateTime pattern="#{dateFormatController.timeFormatString}" timeZone="GMT+1"/> 
-                    </h:outputText>
+                        <h:outputLabel for="to" value="#{txt['ending_time']}" />
+                        <h:outputText id="to" value="#{scheduleController.event.endDate}">   
+                            <f:convertDateTime pattern="#{dateFormatController.timeFormatString}" timeZone="GMT+1"/> 
+                        </h:outputText>
 
-                    <h:outputLabel for="places" value="#{txt['free_places']}" />
-                    <h:outputText id="places" value="#{scheduleController.event.data.activityClass.maximumUsers-scheduleController.event.data.activityClass.bookedPlaces} #{txt['of']} #{scheduleController.event.data.activityClass.maximumUsers}" />
+                        <h:outputLabel for="places" value="#{txt['free_places']}" />
+                        <h:outputText id="places" value="#{scheduleController.event.data.classDay.activityClass.maximumUsers-scheduleController.event.data.classDay.activityClass.bookedPlaces} #{txt['of']} #{scheduleController.event.data.classDay.activityClass.maximumUsers}" />
 
-                    <p:commandButton id="bookButton" value="#{txt['b_book_place']}" actionListener="#{scheduleController.bookClass(scheduleController.event.data.activityClass)}" style='margin-left: 6px; margin-top: 8px;'
-                                     oncomplete="PF('myschedule').update();PF('eventDialog').hide();" styleClass="btn btn-primary btn-main" 
-                                     rendered="#{!scheduleController.existsBooking(scheduleController.event.data.activityClass)}"/>
-                    <p:commandButton id="cancelBookButton" value="#{txt['b_cancel_booking']}" actionListener="#{scheduleController.cancelClassBooking(scheduleController.event.data.activityClass)}" style='margin-left: 6px; margin-top: 8px;'
-                                     oncomplete="PF('myschedule').update();PF('eventDialog').hide();" styleClass="btn btn-primary btn-main" 
-                                     rendered="#{scheduleController.existsBooking(scheduleController.event.data.activityClass)}"/>
-                    <p:commandButton id="cancelButton" value="#{txt['b_close']}" styleClass="btn btn-primary btn-cancel" style='margin-left: 6px; margin-top: 8px;'
-                                     onclick="PF('eventDialog').hide();"/>
+                        <p:commandButton value="#{txt['b_book_place']}" actionListener="#{scheduleController.bookClass(scheduleController.event.data.classDay.activityClass)}" style='margin-left: 6px; margin-top: 8px;'
+                                         oncomplete="PF('myschedule').update();PF('eventDialog').hide();" styleClass="btn btn-primary btn-main" 
+                                         rendered="#{!scheduleController.existsBooking(scheduleController.event.data.classDay.activityClass) and (scheduleController.event.data.classDay.activityClass.maximumUsers gt scheduleController.event.data.classDay.activityClass.bookedPlaces)}"/>
+                        <p:commandButton value="#{txt['b_cancel_booking']}" actionListener="#{scheduleController.cancelClassBooking(scheduleController.event.data.classDay.activityClass)}" style='margin-left: 6px; margin-top: 8px;'
+                                         oncomplete="PF('myschedule').update();PF('eventDialog').hide();" styleClass="btn btn-primary btn-main" 
+                                         rendered="#{scheduleController.existsBooking(scheduleController.event.data.classDay.activityClass)}"/>
+                        <p:commandButton value="#{txt['b_close']}" styleClass="btn btn-primary btn-cancel" style='margin-left: 6px; margin-top: 8px;'
+                                         onclick="PF('eventDialog').hide();"/>
+                    </h:panelGrid>
+
+
+                    <h:panelGrid rendered="#{scheduleController.event.data.isDataAsAppointment()}" columns="2" class="dialogTable">
+                        <span/>
+                        <h:link outcome="view-appointment.xhtml?faces-redirect=true&amp;appointment=#{scheduleController.event.data.appointment.id}"> 
+                            <span class="btn btn-primary btn-general btn-calendar-details"><h:graphicImage title="#{txt['cap_view']}" value="../resources/images/view.png" class="button-action" /> #{txt['b_view_appointment']}</span>
+                        </h:link> 
+
+                        <h:outputLabel for="appointment" value="#{txt['appointment']}" />
+                        <h:outputText id="appointment" value="#{scheduleController.event.title}" />
+
+                        <h:outputLabel for="appFrom" value="#{txt['starting_time']}" />
+                        <h:outputText id="appFrom" value="#{scheduleController.event.startDate}">   
+                            <f:convertDateTime pattern="#{dateFormatController.timeFormatString}" timeZone="GMT+1"/> 
+                        </h:outputText>
+
+                        <h:outputLabel for="appTo" value="#{txt['ending_time']}" />
+                        <h:outputText id="appTo" value="#{scheduleController.event.endDate}">   
+                            <f:convertDateTime pattern="#{dateFormatController.timeFormatString}" timeZone="GMT+1"/> 
+                        </h:outputText>
+
+                        <h:outputLabel for="status" value="#{txt['status']}"/>
+                        <h:outputText id="status" value="#{scheduleController.event.data.appointment.status eq 'SUSPENDED' ? txt['suspended'] : (scheduleController.event.data.appointment.available ? txt['available'] : (scheduleController.isUserAppointmentRequest(scheduleController.event.data.appointment) ? txt['pending'] : txt['booked']))}" 
+                                      style="#{scheduleController.event.data.appointment.status eq 'SUSPENDED' ? 'color:lightgray' : (scheduleController.event.data.appointment.available ? '' : (scheduleController.isUserAppointmentRequest(scheduleController.event.data.appointment) ? 'color:orange' : (scheduleController.isMyAppointmentBooking(scheduleController.event.data.appointment) ? 'color: #06C200' : '')))}" />
+
+                        <p:commandButton value="#{txt['b_request_appointment']}" actionListener="#{scheduleController.bookAppointment(scheduleController.event.data.appointment)}" style='margin-left: 6px; margin-top: 8px;'
+                                         oncomplete="PF('myschedule').update();PF('eventDialog').hide();" styleClass="btn btn-primary btn-main" 
+                                         rendered="#{scheduleController.event.data.appointment.available}"/>
+                        <p:commandButton value="#{txt['b_cancel_booking']}" actionListener="#{scheduleController.cancelAppointmentBooking(scheduleController.event.data.appointment)}" style='margin-left: 6px; margin-top: 8px;'
+                                         oncomplete="PF('myschedule').update();PF('eventDialog').hide();" styleClass="btn btn-primary btn-main" 
+                                         rendered="#{scheduleController.isMyAppointmentBooking(scheduleController.event.data.appointment)}"/>
+                        <p:commandButton value="#{txt['b_close']}" styleClass="btn btn-primary btn-cancel" style='margin-left: 6px; margin-top: 8px;'
+                                         onclick="PF('eventDialog').hide();"/>
+                    </h:panelGrid>
                 </h:panelGrid>
+
             </p:dialog>    
         </h:form>
     </div>

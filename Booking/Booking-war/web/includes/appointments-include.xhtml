@@ -86,7 +86,7 @@
                         </p:column> 
                         <p:column headerText="#{txt['status']}" sortBy="#{appointment.available}"> 
                             <h:outputText value="#{appointment.status eq 'SUSPENDED' ? txt['suspended'] : (appointment.available ? txt['available'] : (appointmentsController.isUserAppointmentRequestOrAdminCanSeeRequest(appointment) ? txt['pending'] : txt['booked']))}" 
-                                                  style="#{appointment.status eq 'SUSPENDED' ? 'color:lightgray' : (appointment.available ? '' : (appointmentsController.isUserAppointmentRequestOrAdminCanSeeRequest(appointment) ? 'color:orange' : (appointmentsController.isMyAppointmentBooking(appointment) ? 'color:green' : '')))}" />
+                                                  style="#{appointment.status eq 'SUSPENDED' ? 'color:lightgray' : (appointment.available ? '' : (appointmentsController.isUserAppointmentRequestOrAdminCanSeeRequest(appointment) ? 'color:orange' : (appointmentsController.isMyAppointmentBooking(appointment) ? 'color: #06C200' : '')))}" />
                         </p:column> 
                         <p:column headerText="#{txt['organisation']}" sortBy="#{appointment.organisation.name}" rendered="#{appointmentsController.userRole eq 'SUPER_ADMIN'}"> 
                             <h:outputText value="#{appointment.organisation.name}" class="#{appointment.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" /> 

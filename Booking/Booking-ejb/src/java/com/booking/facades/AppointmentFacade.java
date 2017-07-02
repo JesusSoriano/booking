@@ -1,4 +1,3 @@
-
 package com.booking.facades;
 
 import com.booking.entities.Appointment;
@@ -19,6 +18,7 @@ import javax.persistence.PersistenceContext;
  */
 @Stateless
 public class AppointmentFacade extends AbstractFacade<Appointment> {
+
     @PersistenceContext(unitName = "Booking-ejbPU")
     private EntityManager em;
 
@@ -30,7 +30,7 @@ public class AppointmentFacade extends AbstractFacade<Appointment> {
     public AppointmentFacade() {
         super(Appointment.class);
     }
-    
+
     public Appointment createNewAppointment(Service service, String description, Date date, Date startingTime, Date endingTime, float price, Organisation organisation) {
         Appointment appointment = new Appointment();
         appointment.setCreatedDate(new Date());
@@ -44,10 +44,10 @@ public class AppointmentFacade extends AbstractFacade<Appointment> {
         appointment.setOrganisation(organisation);
         appointment.setStatus(Status.ACTIVATED);
         create(appointment);
-        
+
         return appointment;
     }
-    
+
     public Appointment updateAppointment(Appointment appointment, Service service, String description, Date date, Date startingTime, Date endingTime, float price) {
         appointment.setService(service);
         appointment.setDate(date);
@@ -56,10 +56,10 @@ public class AppointmentFacade extends AbstractFacade<Appointment> {
         appointment.setDescription(description);
         appointment.setPrice(price);
         edit(appointment);
-        
+
         return appointment;
     }
-    
+
     public Appointment duplicateAppointment(Appointment appointment) {
         Appointment duplicatedAppointment = new Appointment();
         duplicatedAppointment.setService(appointment.getService());
@@ -73,7 +73,7 @@ public class AppointmentFacade extends AbstractFacade<Appointment> {
         duplicatedAppointment.setStatus(Status.ACTIVATED);
         duplicatedAppointment.setOrganisation(appointment.getOrganisation());
         create(duplicatedAppointment);
-        
+
         return duplicatedAppointment;
     }
 
@@ -94,45 +94,46 @@ public class AppointmentFacade extends AbstractFacade<Appointment> {
         edit(appointment);
     }
 
-    public void makeAppointmentAbailable(Appointment appointment) {
+    public void makeAppointmentAvailable(Appointment appointment) {
         appointment.setAvailable(true);
         edit(appointment);
     }
 
-    public void makeAppointmentUnabailable(Appointment appointment) {
+    public void makeAppointmentUnavailable(Appointment appointment) {
         appointment.setAvailable(false);
         edit(appointment);
     }
-    
-    public void setAppointmentUser (Appointment appointment, User appointmentUser) {
+
+    public void setAppointmentUser(Appointment appointment, User appointmentUser) {
         appointment.setAppointmentUser(appointmentUser);
         edit(appointment);
     }
-    public void deleteAppointmentUser (Appointment appointment) {
+
+    public void deleteAppointmentUser(Appointment appointment) {
         appointment.setAppointmentUser(null);
         edit(appointment);
     }
-    
+
     public Appointment findAppointmentOfOrganisation(long appointmentId, Organisation organisation) {
         return findUniqueResult(em.createQuery("SELECT a FROM Appointment a WHERE a.id = :appointmentId AND a.organisation = :organisation ORDER BY a.date ASC").
                 setParameter("appointmentId", appointmentId).
                 setParameter("organisation", organisation).getResultList());
     }
-    
+
     public List<Appointment> findAllCurrentAppointmentsOfOrganisation(Organisation organisation) {
         return em.createQuery("SELECT a FROM Appointment a WHERE a.date > :today AND a.organisation = :organisation OR a.date = :today AND a.endTime > :now AND a.organisation = :organisation ORDER BY a.date ASC").
                 setParameter("today", new Date()).
                 setParameter("now", new Date()).
                 setParameter("organisation", organisation).getResultList();
     }
-    
+
     public List<Appointment> findAllPastAppointmentsOfOrganisation(Organisation organisation) {
         return em.createQuery("SELECT a FROM Appointment a WHERE a.date < :today AND a.organisation = :organisation OR a.date = :today AND a.endTime < :now AND a.organisation = :organisation ORDER BY a.date DESC").
                 setParameter("today", new Date()).
                 setParameter("now", new Date()).
                 setParameter("organisation", organisation).getResultList();
     }
-    
+
     public List<Appointment> findAllCurrentAppointmentsOfService(Service service, Organisation organisation) {
         return em.createQuery("SELECT a FROM Appointment a WHERE a.service = :service AND a.date > :today AND a.organisation = :organisation OR a.service = :service AND a.date = :today AND a.endTime > :now AND a.organisation = :organisation ORDER BY a.date ASC").
                 setParameter("service", service).
@@ -140,12 +141,47 @@ public class AppointmentFacade extends AbstractFacade<Appointment> {
                 setParameter("now", new Date()).
                 setParameter("organisation", organisation).getResultList();
     }
-    
+
     public List<Appointment> findAllPastAppointmentsOfService(Service service, Organisation organisation) {
         return em.createQuery("SELECT a FROM Appointment a WHERE a.service = :service AND a.date < :today AND a.organisation = :organisation OR a.service = :service AND a.date = :today AND a.endTime < :now AND a.organisation = :organisation ORDER BY a.date DESC").
                 setParameter("service", service).
                 setParameter("today", new Date()).
                 setParameter("now", new Date()).
                 setParameter("organisation", organisation).getResultList();
+    }
+
+    public List<Appointment> findAllCurrentAppointmentsOfUser(User user, Organisation organisation) {
+        return em.createQuery("SELECT a FROM Appointment a WHERE a.appointmentUser = :user AND a.date > :today AND a.organisation = :organisation OR a.appointmentUser = :user AND a.date = :today AND a.endTime > :now AND a.organisation = :organisation ORDER BY a.date ASC").
+                setParameter("user", user).
+                setParameter("today", new Date()).
+                setParameter("now", new Date()).
+                setParameter("organisation", organisation).getResultList();
+    }
+
+    public List<Appointment> findAllPastAppointmentsOfUser(User user, Organisation organisation) {
+        return em.createQuery("SELECT a FROM Appointment a WHERE a.appointmentUser = :user AND a.date < :today AND a.organisation = :organisation OR a.appointmentUser = :user AND a.date = :today AND a.endTime < :now AND a.organisation = :organisation ORDER BY a.date DESC").
+                setParameter("user", user).
+                setParameter("today", new Date()).
+                setParameter("now", new Date()).
+                setParameter("organisation", organisation).getResultList();
+    }
+
+    public List<Appointment> findAllActiveCurrentAppointmentsOfService(Service service, Organisation organisation) {
+        return em.createQuery("SELECT a FROM Appointment a WHERE a.service = :service AND a.status = :activeStatus AND a.date > :today AND a.organisation = :organisation OR a.service = :service AND a.status = :activeStatus AND a.date = :today AND a.endTime > :now AND a.organisation = :organisation ORDER BY a.date ASC").
+                setParameter("service", service).
+                setParameter("today", new Date()).
+                setParameter("now", new Date()).
+                setParameter("activeStatus", Status.ACTIVATED).
+                setParameter("organisation", organisation).getResultList();
+    }
+
+    public List<Appointment> findAllActiveAppointmentsOfOrganisation(Organisation organisation) {
+        return em.createQuery("SELECT a FROM Appointment a WHERE a.status = :activeStatus AND a.organisation = :organisation ORDER BY a.date ASC").
+                setParameter("activeStatus", Status.ACTIVATED).
+                setParameter("organisation", organisation).getResultList();
+    }
+
+    public int findNumberOfActiveCurrentAppointmentsOfService(Service service, Organisation organisation) {
+        return findAllActiveCurrentAppointmentsOfService(service, organisation).size();
     }
 }

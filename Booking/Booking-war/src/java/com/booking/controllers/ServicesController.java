@@ -6,6 +6,7 @@ import com.booking.entities.User;
 import com.booking.enums.AuditType;
 import com.booking.enums.Role;
 import com.booking.exceptions.ServiceAlreadyExistsException;
+import com.booking.facades.AppointmentFacade;
 import com.booking.facades.AuditFacade;
 import com.booking.facades.ClassFacade;
 import com.booking.facades.ServiceFacade;
@@ -31,6 +32,8 @@ public class ServicesController implements Serializable {
     private ClassFacade classFacade;
     @EJB
     private AuditFacade auditFacade;
+    @EJB
+    private AppointmentFacade appointmentsFacade;
 
     private List<Service> services;
     private User loggedUser;
@@ -180,6 +183,9 @@ public class ServicesController implements Serializable {
     }
 
     public int getNumberOfClasses(Service service) {
-        return classFacade.findNumberOfActiveClassesOfService(service, organisation);
+        return classFacade.findNumberOfActiveCurrentClassesOfService(service, organisation);
+    }
+    public int getNumberOfAppointments(Service service) {
+        return appointmentsFacade.findNumberOfActiveCurrentAppointmentsOfService(service, organisation);
     }
 }

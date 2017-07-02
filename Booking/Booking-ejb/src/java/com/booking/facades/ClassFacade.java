@@ -136,15 +136,16 @@ public class ClassFacade extends AbstractFacade<ActivityClass> {
                 setParameter("organisation", organisation).getResultList();
     }
 
-    public List<ActivityClass> findAllActiveClassesOfService(Service service, Organisation organisation) {
-        return em.createQuery("SELECT a FROM ActivityClass a WHERE a.service = :service AND a.status = :activeStatus AND a.organisation = :organisation ORDER BY a.endDate ASC").
+    public List<ActivityClass> findAllActiveCurrentClassesOfService(Service service, Organisation organisation) {
+        return em.createQuery("SELECT a FROM ActivityClass a WHERE a.service = :service AND a.status = :activeStatus AND a.endDate > :today AND a.organisation = :organisation ORDER BY a.endDate ASC").
                 setParameter("service", service).
                 setParameter("activeStatus", Status.ACTIVATED).
+                setParameter("today", new Date()).
                 setParameter("organisation", organisation).getResultList();
     }
 
-    public int findNumberOfActiveClassesOfService(Service service, Organisation organisation) {
-        return findAllActiveClassesOfService(service, organisation).size();
+    public int findNumberOfActiveCurrentClassesOfService(Service service, Organisation organisation) {
+        return findAllActiveCurrentClassesOfService(service, organisation).size();
     }
 
     public List<ActivityClass> findAllCurrentClassesOfOrganisation(Organisation organisation) {

@@ -150,7 +150,7 @@ public class EditAppointmentController implements Serializable {
                 AppointmentRequest newAppointmentRequest = appointmentRequestFacade.createNewAppointmentRequest(currentAppointment, user, "");
                 // Set the appointment user, even if the request is pending.
                 appointmentFacade.setAppointmentUser(currentAppointment, user);
-                appointmentFacade.makeAppointmentUnabailable(currentAppointment);
+                appointmentFacade.makeAppointmentUnavailable(currentAppointment);
                 String msg = "La cita ha sido solicitada correctamente";
                 if (loggedUserIsAdmin()) {
                     acceptAppointmentRequest(newAppointmentRequest);
@@ -216,7 +216,7 @@ public class EditAppointmentController implements Serializable {
             }
             // Make the request status as CANCELLED
             appointmentRequestFacade.updateRequestStatus(appointmentRequest, RequestStatus.CANCELLED, "Cancelado por " + loggedUser.getFirstName());
-            appointmentFacade.makeAppointmentAbailable(currentAppointment);
+            appointmentFacade.makeAppointmentAvailable(currentAppointment);
             appointmentFacade.setAppointmentUser(currentAppointment, null);
             FacesUtil.addSuccessMessage("viewAppointmentForm:msg", "La solicitud o cita ha sido cancelada correctamente.");
 

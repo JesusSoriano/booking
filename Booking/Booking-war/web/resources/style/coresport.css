@@ -562,15 +562,19 @@ input[type='text'], input[type='password'] {
 
 
 // Calendar (events)
-.fc-day-grid-event > .fc-content {
+.fc-day-grid-event .fc-content {
     white-space: normal;
 }
 .fc-day-grid-event .fc-content {
     white-space: normal;
 }
+.classEvent {  
+    padding: 5px !important;
+}
 .pastEvent {
     border: 1px solid #BBBBBB !important;
-    background-color: #BBBBBB !important;
+    background-color: #BBBBBB !important;    
+    padding: 5px;
 }
 .bookedEvent {
     border: 1px solid #10B010 !important;
@@ -579,6 +583,22 @@ input[type='text'], input[type='password'] {
 .allBookedEvent {
     border: 1px solid #FFAE00 !important;
     background-color: #FFAE00 !important;
+}
+.appointmentEvent {  
+    padding: 5px !important;
+    color: black !important;
+}
+.pastAppointment {
+    border: 2px solid #BBBBBB !important;
+    background-color: transparent !important;
+}
+.bookedAppointment {
+    border: 2px solid #10B010 !important;
+    background-color: transparent !important;
+}
+.allBookedAppointment {
+    border: 2px solid #FFAE00 !important;
+    background-color: transparent !important;
 }
 
 .button-action {
@@ -590,6 +610,7 @@ input[type='text'], input[type='password'] {
 
 div.colors {
     margin: 20px 0px 0px 20px;
+    display: inline-block;
 }
 span.color-explanation {
     display: inline-block;
@@ -608,6 +629,18 @@ span.orange-color {
 }
 span.gray-color {
     background-color: #BBBBBB
+}
+span.blue-border {
+    border: 2px solid #3a87ad
+}
+span.green-border {
+    border: 2px solid #10B010
+}
+span.orange-border {
+    border: 2px solid #FFAE00
+}
+span.gray-border {
+    border: 2px solid #BBBBBB
 }
 
 
@@ -646,6 +679,10 @@ select[multiple], select[size] {
 }
 .page-subtitle h4:last-child {
     margin-bottom: 50px;
+}
+.blue-subtitle h4 {
+    font-weight: bold;
+    color: #049CC2;
 }
 .suspended {
     color: #f92600;

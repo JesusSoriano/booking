@@ -6,11 +6,17 @@
 package com.booking.controllers;
 
 import com.booking.entities.ActivityClass;
+import com.booking.entities.Appointment;
+import com.booking.entities.AppointmentRequest;
 import com.booking.entities.Booking;
 import com.booking.entities.ClassDay;
 import com.booking.entities.Organisation;
 import com.booking.entities.User;
 import com.booking.enums.AuditType;
+import com.booking.enums.RequestStatus;
+import com.booking.enums.Role;
+import com.booking.facades.AppointmentFacade;
+import com.booking.facades.AppointmentRequestFacade;
 import com.booking.facades.AuditFacade;
 import com.booking.facades.BookingFacade;
 import com.booking.facades.ClassDayFacade;
@@ -52,14 +58,47 @@ public class ScheduleController implements Serializable {
     private ClassFacade classFacade;
     @EJB
     private AuditFacade auditFacade;
+    @EJB
+    private AppointmentRequestFacade appointmentRequestFacade;
+    @EJB
+    private AppointmentFacade appointmentFacade;
 
     private Organisation organisation;
     private User loggedUser;
-    
+
     // Variables for the schedule
     private ScheduleModel eventModel;
     private ScheduleModel lazyEventModel;
     private ScheduleEvent event = new DefaultScheduleEvent();
+
+    public static class ScheduleElement {
+
+        private ClassDay classDay;
+        private Appointment appointment;
+        private final boolean dataAsAppointment;
+
+        public ScheduleElement(ClassDay classDay) {
+            this.classDay = classDay;
+            this.dataAsAppointment = false;
+        }
+
+        public ScheduleElement(Appointment appointment) {
+            this.appointment = appointment;
+            this.dataAsAppointment = true;
+        }
+
+        public ClassDay getClassDay() {
+            return classDay;
+        }
+
+        public Appointment getAppointment() {
+            return appointment;
+        }
+
+        public boolean isDataAsAppointment() {
+            return dataAsAppointment;
+        }
+    }
 
     @PostConstruct
     public void init() {
@@ -70,7 +109,8 @@ public class ScheduleController implements Serializable {
         eventModel = new DefaultScheduleModel();
         List<ClassDay> classDays = classDayFacade.findAllActiveDaysOfOrganisation(organisation);
         for (ClassDay day : classDays) {
-            DefaultScheduleEvent eventDay = new DefaultScheduleEvent(day.getActivityClass().getName(), day.getStartDate(), day.getEndDate(), day);
+            ScheduleElement scheduleElement = new ScheduleElement(day);
+            DefaultScheduleEvent eventDay = new DefaultScheduleEvent(day.getActivityClass().getService().getName() + ": " + day.getActivityClass().getName(), day.getStartDate(), day.getEndDate(), scheduleElement);
             String eventClass = "";
             if (day.getEndDate().before(new Date())) {
                 eventClass = "pastEvent";
@@ -79,12 +119,35 @@ public class ScheduleController implements Serializable {
             } else if (day.getActivityClass().getBookedPlaces() == day.getActivityClass().getMaximumUsers()) {
                 eventClass = "allBookedEvent";
             }
-            eventDay.setStyleClass(eventClass);
+            eventDay.setStyleClass(eventClass + " classEvent");
             eventModel.addEvent(eventDay);
+        }
+        
+        List<Appointment> appointments = appointmentFacade.findAllActiveAppointmentsOfOrganisation(organisation);
+        for (Appointment appointment : appointments) {
+            ScheduleElement scheduleElement = new ScheduleElement(appointment);
+            DefaultScheduleEvent eventAppointment = new DefaultScheduleEvent(appointment.getDescription().isEmpty() ? ("Cita " + appointment.getService().getName()) : (appointment.getService().getName() + ": " + appointment.getDescription()), getStartingDateOfAppointment(appointment), getEndingDateOfAppointment(appointment), scheduleElement);
+            String eventClass = "";
+            if (getEndingDateOfAppointment(appointment).before(new Date())) {
+                eventClass = "pastAppointment";
+            } else if (isMyAppointmentBooking(appointment)) {
+                eventClass = "bookedAppointment";
+            } else if (!appointment.isAvailable()) {
+                eventClass = "allBookedAppointment";
+            }
+            eventAppointment.setStyleClass(eventClass + " appointmentEvent");
+            eventModel.addEvent(eventAppointment);
         }
     }
     
+    private Date getStartingDateOfAppointment (Appointment appointment) {
+        return new Date(appointment.getDate().getTime() + appointment.getStartTime().getTime());
+    }
     
+    private Date getEndingDateOfAppointment (Appointment appointment) {
+        return new Date(appointment.getDate().getTime() + appointment.getEndTime().getTime());
+    }
+
     public String bookClass(ActivityClass activityClass) {
         try {
             // Check if the booking already exists
@@ -115,7 +178,7 @@ public class ScheduleController implements Serializable {
             Logger.getLogger(ClassesController.class.getName()).log(Level.SEVERE, null, e);
             FacesUtil.addErrorMessage("scheduleForm:msg", "Lo sentimos, ha habido un problema al reservar la plaza.");
         }
-        
+
         return "calendar.xhtml";
     }
 
@@ -141,11 +204,96 @@ public class ScheduleController implements Serializable {
         } catch (Exception e) {
             Logger.getLogger(ClassesController.class.getName()).log(Level.SEVERE, null, e);
         }
-        
+
         return "calendar.xhtml";
     }
-    
-    public boolean existsBooking (ActivityClass activityClass) {
+
+    public String bookAppointment(Appointment appointment) {
+        try {
+            // Check if the appointment is available
+            if (!appointment.isAvailable()) {
+                FacesUtil.addErrorMessage("scheduleForm:msg", "Lo sentimos, esta cita no está disponible para solicitud. Por favor, informa a algún administrador del problema.");
+            } else {
+                // Create the appointment request
+                AppointmentRequest newAppointmentRequest = appointmentRequestFacade.createNewAppointmentRequest(appointment, loggedUser, "");
+                // Set the appointment user, even if the request is pending.
+                appointmentFacade.setAppointmentUser(appointment, loggedUser);
+                appointmentFacade.makeAppointmentUnavailable(appointment);
+                String msg = "La cita ha sido solicitada correctamente";
+                if (loggedUserIsAdmin()) {
+                    appointmentRequestFacade.updateRequestStatus(newAppointmentRequest, RequestStatus.ACCEPTED, "");
+                    msg = "La cita ha sido reservada correctamente";
+                }
+
+                FacesUtil.addSuccessMessage("scheduleForm:msg", msg);
+
+                try {
+                    // Audit new appointment request
+                    String ipAddress = FacesUtil.getRequest().getRemoteAddr();
+                    auditFacade.createAudit(AuditType.RESERVAR_CITA, loggedUser, ipAddress, newAppointmentRequest.getId(), organisation);
+
+                } catch (Exception e) {
+                    Logger.getLogger(ScheduleController.class.getName()).log(Level.SEVERE, null, e);
+                    FacesUtil.addErrorMessage("scheduleForm:msg", msg + ", pero ha habido un problema auditando la solicitud. Por favor informa a algún administrador del problema.");
+                }
+            }
+        } catch (Exception e) {
+            Logger.getLogger(ScheduleController.class.getName()).log(Level.SEVERE, null, e);
+            FacesUtil.addErrorMessage("scheduleForm:msg", "Lo sentimos, ha habido un problema al solicitar la cita.");
+        }
+
+        return "calendar.xhtml";
+    }
+
+    public String cancelAppointmentBooking(Appointment appointment) {
+        try {
+            // Check if there is a appointment request
+            AppointmentRequest appointmentRequest = appointmentRequestFacade.findCurrentRequestOfAppointment(appointment);
+            if (appointmentRequest == null) {
+                // Find the appointment request
+                appointmentRequest = appointmentRequestFacade.findAcceptedRequestOfAppointment(appointment);
+                if (appointmentRequest == null) {
+                    FacesUtil.addErrorMessage("scheduleForm:msg", "Error, la solicitud o cita no existe.");
+                    return "calendar.xhtml";
+                }
+            }
+            // Make the request status as CANCELLED
+            appointmentRequestFacade.updateRequestStatus(appointmentRequest, RequestStatus.CANCELLED, "Cancelado por " + loggedUser.getFirstName());
+            appointmentFacade.makeAppointmentAvailable(appointment);
+            appointmentFacade.deleteAppointmentUser(appointment);
+            FacesUtil.addSuccessMessage("scheduleForm:msg", "La solicitud o cita ha sido cancelada correctamente.");
+
+            try {
+                // Audit appointment cancalation
+                String ipAddress = FacesUtil.getRequest().getRemoteAddr();
+                auditFacade.createAudit(AuditType.CANCELAR_CITA, appointment.getAppointmentUser(), ipAddress, appointment.getId(), organisation);
+            } catch (Exception e) {
+                Logger.getLogger(ScheduleController.class.getName()).log(Level.SEVERE, null, e);
+                FacesUtil.addErrorMessage("scheduleForm:msg", "La solicitud o cita ha sido cancelada correctamente, pero ha habido un problema auditando la cancelación. Por favor informa a algún administrador del problema.");
+            }
+        } catch (Exception e) {
+            Logger.getLogger(ScheduleController.class.getName()).log(Level.SEVERE, null, e);
+            FacesUtil.addErrorMessage("scheduleForm:msg", "Lo sentimos, ha habido un problema al cancelar la reserva.");
+        }
+
+        return "calendar.xhtml";
+    }
+
+    public boolean isMyAppointmentBooking(Appointment appointment) {
+        AppointmentRequest acceptedAppointmentRequest = appointmentRequestFacade.findAcceptedRequestOfAppointment(appointment);
+        return acceptedAppointmentRequest != null && acceptedAppointmentRequest.getRequestUser().equals(loggedUser);
+    }
+
+    public boolean isUserAppointmentRequest(Appointment appointment) {
+        return appointmentRequestFacade.findCurrentRequestOfAppointmentForUser(appointment, loggedUser) != null;
+    }
+
+    public boolean loggedUserIsAdmin() {
+        Role userRole = loggedUser.getUserRole().getRole();
+        return userRole == Role.ADMIN || userRole == Role.SUPER_ADMIN;
+    }
+
+    public boolean existsBooking(ActivityClass activityClass) {
         return bookingFacade.existsBooking(loggedUser, activityClass);
     }
 

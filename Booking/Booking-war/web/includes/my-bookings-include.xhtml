@@ -21,9 +21,9 @@
             </div>
 
 
-            <div class="row">
-                <div class="row page-subtitle-no-spacing margin-bottom-10">
-                    <h4>#{txt['user_classes_list']}:</h4>
+            <div class="row wide-row">
+                <div class="row page-subtitle-no-spacing blue-subtitle margin-bottom-10">
+                    <h4>#{txt['cap_booked_classes']}</h4>
                 </div>
 
                 <script type="text/javascript">
@@ -72,8 +72,81 @@
             </div>
 
 
+            <div class="row wide-row"> 
+                <div class="row page-subtitle-no-spacing blue-subtitle margin-bottom-10">
+                    <h4 style="margin-top: 35px;">#{txt['cap_booked_appointments']}</h4>
+                </div>
 
-            <div class="row" style="margin-top: 100px"> 
+                <script type="text/javascript">
+                    $(document).ready(function () {
+                        $('#appointmentsForm\\:appointmentsTable .ui-paginator-rpp-options.ui-widget.ui-state-default.ui-corner-left')
+                                .each(function () {
+                                    $(this).children().last().html('#{txt['all']}');
+                                });
+                    });
+                </script>
+
+                <p:dataTable id="appointmentsTable" value="#{bookingsController.appointments}" var="appointment" styleClass="common-table text-center" paginator="true" rows="20" paginatorPosition="bottom" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" 
+                             rowsPerPageTemplate="10, 20, #{bookingsController.appointments.size()}" emptyMessage="#{txt['empty_records']}"> 
+                    <p:column headerText="#{txt['service']}" sortBy="#{appointment.service.name}"> 
+                        <h:link outcome="appointments.xhtml?faces-redirect=true&amp;service=#{appointment.service.id}"> 
+                            <h:outputText value="#{appointment.service.name}" class="#{appointment.status eq 'SUSPENDED' ? 'lightgray-color' : 'blue-link'}" /> 
+                        </h:link> 
+                    </p:column> 
+                    <p:column headerText="#{txt['description']}" sortBy="#{appointment.description}" style="width: 170px;"> 
+                        <h:outputText value="#{appointment.description}" class="#{appointment.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" /> 
+                    </p:column> 
+                    <p:column headerText="#{txt['date']}" sortBy="#{appointment.date}"> 
+                        <h:outputText value="#{appointment.date}" class="#{appointment.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" >
+                            <f:convertDateTime pattern="#{dateFormatController.dateFormatString}" />
+                        </h:outputText>
+                    </p:column> 
+                    <p:column headerText="#{txt['starting_time']}" sortBy="#{appointment.startTime}"> 
+                        <h:outputText value="#{appointment.startTime}" class="#{appointment.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" >
+                            <f:convertDateTime pattern="#{dateFormatController.timeFormatString}" />
+                        </h:outputText>
+                    </p:column> 
+                    <p:column headerText="#{txt['ending_time']}" sortBy="#{appointment.endTime}"> 
+                        <h:outputText value="#{appointment.endTime}" class="#{appointment.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" >
+                            <f:convertDateTime pattern="#{dateFormatController.timeFormatString}" />
+                        </h:outputText>
+                    </p:column> 
+                    <p:column headerText="#{txt['price']}" sortBy="#{appointment.price}"> 
+                        <h:outputText value="#{txt['free']}" rendered="#{appointment.price eq 0}" class="#{appointment.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" />
+                        <h:outputText value="#{appointment.price}" rendered="#{appointment.price ne 0}" class="#{appointment.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" >
+                            <f:convertNumber type="currency" currencySymbol="€" locale="es_ES" />
+                        </h:outputText>
+                    </p:column> 
+                    <p:column headerText="#{txt['status']}" sortBy="#{appointment.available}"> 
+                        <h:outputText value="#{appointment.status eq 'SUSPENDED' ? txt['suspended'] : (bookingsController.isMyAppointmentBooking(appointment) ? txt['booked'] : txt['pending'])}" 
+                                      style="#{appointment.status eq 'SUSPENDED' ? 'color:lightgray' : (bookingsController.isMyAppointmentBooking(appointment) ? '' : 'color:orange')}" />
+                    </p:column> 
+                    <p:column headerText="#{txt['options']}" style="width: 170px; padding: 4px 5px;"> 
+                        <h:link outcome="view-appointment.xhtml?faces-redirect=true&amp;appointment=#{appointment.id}" >
+                            <h:graphicImage title="#{txt['cap_view']}" value="../resources/images/view.png" class="table-action" /> 
+                        </h:link>  
+                        <h:panelGroup rendered="#{appointment.status eq 'ACTIVATED'}">
+                            <h:commandLink action="#{bookingsController.cancelAppointmentBooking(appointment)}" > 
+                                <h:graphicImage title="#{bookingsController.isMyAppointmentBooking(appointment) ? txt['cap_cancel_booking'] : txt['cap_cancel_request']}" value="../resources/images/cancel-booking-icon.png" class="table-action" /> 
+                            </h:commandLink> 
+                        </h:panelGroup>
+                        <h:panelGroup rendered="#{bookingsController.loggedUserIsAdmin()}">
+                            <h:link outcome="edit-appointment.xhtml?faces-redirect=true&amp;appointment=#{appointment.id}"> 
+                                <h:graphicImage title="#{txt['cap_edit']}" value="../resources/images/edit_user.png" class="table-action" /> 
+                            </h:link> 
+                            <h:commandLink action="#{bookingsController.activateAppointment(appointment)}" rendered="#{appointment.status eq 'SUSPENDED'}"> 
+                                <h:graphicImage title="#{txt['cap_activate']}" value="../resources/images/activate_user.png" class="table-action" /> 
+                            </h:commandLink> 
+                            <h:commandLink action="#{bookingsController.deactivateAppointment(appointment)}" rendered="#{appointment.status eq 'ACTIVATED'}"> 
+                                <h:graphicImage title="#{txt['cap_suspend']}" value="../resources/images/suspend_user.png" class="table-action" /> 
+                            </h:commandLink> 
+                        </h:panelGroup> 
+                    </p:column> 
+                </p:dataTable>
+            </div> 
+
+
+            <div class="row wide-row" style="margin-top: 100px"> 
                 <div class="row page-subtitle-no-spacing margin-bottom-10">
                     <h4>#{txt['past_classes']}:</h4>
                 </div>
@@ -122,6 +195,63 @@
                 </p:dataTable>
             </div> 
 
+            
+            <div class="row wide-row"> 
+                <div class="row page-subtitle-no-spacing margin-bottom-10">
+                    <h4 style="margin-top: 35px;">#{txt['past_appointments']}:</h4>
+                </div>
+
+                <script type="text/javascript">
+                    $(document).ready(function () {
+                        $('#appointmentsForm\\:pastAppointmentsTable .ui-paginator-rpp-options.ui-widget.ui-state-default.ui-corner-left')
+                                .each(function () {
+                                    $(this).children().last().html('#{txt['all']}');
+                                });
+                    });
+                </script>
+
+                <p:dataTable id="pastAppointmentsTable" value="#{bookingsController.pastAppointments}" var="appointment" styleClass="common-table text-center" paginator="true" rows="20" paginatorPosition="bottom" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" 
+                             rowsPerPageTemplate="10, 20, #{bookingsController.appointments.size()}" emptyMessage="#{txt['empty_records']}"> 
+                    <p:column headerText="#{txt['service']}" sortBy="#{appointment.service.name}"> 
+                        <h:link outcome="appointments.xhtml?faces-redirect=true&amp;service=#{appointment.service.id}"> 
+                            <h:outputText value="#{appointment.service.name}" class="#{appointment.status eq 'SUSPENDED' ? 'lightgray-color' : 'blue-link'}" /> 
+                        </h:link> 
+                    </p:column> 
+                    <p:column headerText="#{txt['description']}" sortBy="#{appointment.description}" style="width: 170px;"> 
+                        <h:outputText value="#{appointment.description}" class="#{appointment.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" /> 
+                    </p:column> 
+                    <p:column headerText="#{txt['date']}" sortBy="#{appointment.date}"> 
+                        <h:outputText value="#{appointment.date}" class="#{appointment.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" >
+                            <f:convertDateTime pattern="#{dateFormatController.dateFormatString}" />
+                        </h:outputText>
+                    </p:column> 
+                    <p:column headerText="#{txt['starting_time']}" sortBy="#{appointment.startTime}"> 
+                        <h:outputText value="#{appointment.startTime}" class="#{appointment.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" >
+                            <f:convertDateTime pattern="#{dateFormatController.timeFormatString}" />
+                        </h:outputText>
+                    </p:column> 
+                    <p:column headerText="#{txt['ending_time']}" sortBy="#{appointment.endTime}"> 
+                        <h:outputText value="#{appointment.endTime}" class="#{appointment.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" >
+                            <f:convertDateTime pattern="#{dateFormatController.timeFormatString}" />
+                        </h:outputText>
+                    </p:column> 
+                    <p:column headerText="#{txt['price']}" sortBy="#{appointment.price}"> 
+                        <h:outputText value="#{txt['free']}" rendered="#{appointment.price eq 0}" class="#{appointment.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" />
+                        <h:outputText value="#{appointment.price}" rendered="#{appointment.price ne 0}" class="#{appointment.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" >
+                            <f:convertNumber type="currency" currencySymbol="€" locale="es_ES" />
+                        </h:outputText>
+                    </p:column> 
+                    <p:column headerText="#{txt['status']}" sortBy="#{appointment.available}"> 
+                        <h:outputText value="#{appointment.status eq 'SUSPENDED' ? txt['suspended'] : (bookingsController.isMyAppointmentBooking(appointment) ? txt['booked'] : txt['pending'])}" 
+                                      style="#{appointment.status eq 'SUSPENDED' ? 'color:lightgray' : (bookingsController.isMyAppointmentBooking(appointment) ? '' : 'color:orange')}" />
+                    </p:column> 
+                    <p:column headerText="#{txt['options']}"> 
+                        <h:link outcome="view-appointment.xhtml?faces-redirect=true&amp;appointment=#{appointment.id}" >
+                            <h:graphicImage title="#{txt['cap_view']}" value="../resources/images/view.png" class="table-action" /> 
+                        </h:link>  
+                    </p:column> 
+                </p:dataTable>
+            </div> 
 
         </div> 
     </h:form>

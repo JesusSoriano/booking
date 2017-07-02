@@ -50,25 +50,25 @@ public class AppointmentRequestFacade extends AbstractFacade<AppointmentRequest>
     }
 
     public List<AppointmentRequest> findAllRequestsOfAppointment(Appointment appointment) {
-        return em.createQuery("SELECT a FROM AppointmentRequest a WHERE a.appointment = :appointment ORDER BY a.createdDate ASC").
+        return em.createQuery("SELECT a FROM AppointmentRequest a WHERE a.appointment = :appointment ORDER BY a.createdDate DESC").
                 setParameter("appointment", appointment).getResultList();
     }
 
     public AppointmentRequest findCurrentRequestOfAppointment(Appointment appointment) {
-        return findUniqueResult(em.createQuery("SELECT a FROM AppointmentRequest a WHERE a.appointment = :appointment AND a.status = :pending ORDER BY a.createdDate ASC").
+        return findUniqueResult(em.createQuery("SELECT a FROM AppointmentRequest a WHERE a.appointment = :appointment AND a.status = :pending ORDER BY a.createdDate DESC").
                 setParameter("pending", RequestStatus.PENDING).
                 setParameter("appointment", appointment).getResultList());
     }
 
     public AppointmentRequest findCurrentRequestOfAppointmentForUser(Appointment appointment, User user) {
-        return findUniqueResult(em.createQuery("SELECT a FROM AppointmentRequest a WHERE a.appointment = :appointment AND a.status = :pending AND a.requestUser = :user ORDER BY a.createdDate ASC").
+        return findUniqueResult(em.createQuery("SELECT a FROM AppointmentRequest a WHERE a.appointment = :appointment AND a.status = :pending AND a.requestUser = :user ORDER BY a.createdDate DESC").
                 setParameter("pending", RequestStatus.PENDING).
                 setParameter("appointment", appointment).
                 setParameter("user", user).getResultList());
     }
 
     public AppointmentRequest findAcceptedRequestOfAppointment(Appointment appointment) {
-        return findUniqueResult(em.createQuery("SELECT a FROM AppointmentRequest a WHERE a.appointment = :appointment AND a.status = :accepted ORDER BY a.createdDate ASC").
+        return findUniqueResult(em.createQuery("SELECT a FROM AppointmentRequest a WHERE a.appointment = :appointment AND a.status = :accepted ORDER BY a.createdDate DESC").
                 setParameter("accepted", RequestStatus.ACCEPTED).
                 setParameter("appointment", appointment).getResultList());
     }

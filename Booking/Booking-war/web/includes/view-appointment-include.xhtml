@@ -126,7 +126,7 @@
                                 </div>
                                 <div class="col-xs-8">
                                     <h:outputText id="availability" styleClass="form-control" value="#{editAppointmentController.currentAppointment.available ? txt['available'] : (editAppointmentController.isUserAppointmentRequestOrAdminCanSeeRequest() ? txt['pending'] : txt['booked'])}" 
-                                                  style="#{editAppointmentController.currentAppointment.status eq 'SUSPENDED' ? 'color:red' : (editAppointmentController.currentAppointment.available ? '' : (editAppointmentController.isUserAppointmentRequestOrAdminCanSeeRequest() ? 'color:orange' : (editAppointmentController.isMyAppointmentBooking() ? 'color:green' : '')))}" />
+                                                  style="#{editAppointmentController.currentAppointment.status eq 'SUSPENDED' ? 'color:red' : (editAppointmentController.currentAppointment.available ? '' : (editAppointmentController.isUserAppointmentRequestOrAdminCanSeeRequest() ? 'color:orange' : (editAppointmentController.isMyAppointmentBooking() ? 'color: #06C200' : '')))}" />
                                 </div>
                             </div>
                             <h:panelGroup rendered="#{editAppointmentController.loggedUserIsAdmin()}">

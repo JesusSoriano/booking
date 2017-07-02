@@ -47,6 +47,11 @@
                                 <h:outputText value="#{servicesController.getNumberOfClasses(service)}" class="#{service.status eq 'SUSPENDED' ? 'lightgray-color' : 'blue-link'}" /> 
                             </h:link>
                         </p:column> 
+                        <p:column headerText="#{txt['number_of_appointments']}" sortBy="#{servicesController.getNumberOfAppointments(service)}"> 
+                            <h:link outcome="appointments.xhtml?faces-redirect=true&amp;service=#{service.id}" >
+                                <h:outputText value="#{servicesController.getNumberOfAppointments(service)}" class="#{service.status eq 'SUSPENDED' ? 'lightgray-color' : 'blue-link'}" /> 
+                            </h:link>
+                        </p:column> 
                         <p:column headerText="#{txt['created_date']}" sortBy="#{service.createdDate}"> 
                             <h:outputText value="#{service.createdDate}" class="#{service.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" >
                                 <f:convertDateTime pattern="#{dateFormatController.dateWithTimeFormatString}" />

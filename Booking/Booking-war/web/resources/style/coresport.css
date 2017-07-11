@@ -587,18 +587,19 @@ input[type='text'], input[type='password'] {
 .appointmentEvent {  
     padding: 5px !important;
     color: black !important;
+    background-color: transparent !important;
+}
+.availableAppointment {
+    border: 2px solid #3a87ad !important;
 }
 .pastAppointment {
     border: 2px solid #BBBBBB !important;
-    background-color: transparent !important;
 }
 .bookedAppointment {
     border: 2px solid #10B010 !important;
-    background-color: transparent !important;
 }
 .allBookedAppointment {
     border: 2px solid #FFAE00 !important;
-    background-color: transparent !important;
 }
 
 .button-action {

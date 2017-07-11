@@ -21,7 +21,9 @@ import com.booking.facades.AuditFacade;
 import com.booking.facades.BookingFacade;
 import com.booking.facades.ClassDayFacade;
 import com.booking.facades.ClassFacade;
+import com.booking.util.Constants;
 import com.booking.util.FacesUtil;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -122,7 +124,7 @@ public class ScheduleController implements Serializable {
             eventDay.setStyleClass(eventClass + " classEvent");
             eventModel.addEvent(eventDay);
         }
-        
+
         List<Appointment> appointments = appointmentFacade.findAllActiveAppointmentsOfOrganisation(organisation);
         for (Appointment appointment : appointments) {
             ScheduleElement scheduleElement = new ScheduleElement(appointment);
@@ -134,21 +136,23 @@ public class ScheduleController implements Serializable {
                 eventClass = "bookedAppointment";
             } else if (!appointment.isAvailable()) {
                 eventClass = "allBookedAppointment";
+            } else {
+                eventClass = "availableAppointment";
             }
             eventAppointment.setStyleClass(eventClass + " appointmentEvent");
             eventModel.addEvent(eventAppointment);
         }
     }
-    
-    private Date getStartingDateOfAppointment (Appointment appointment) {
+
+    private Date getStartingDateOfAppointment(Appointment appointment) {
         return new Date(appointment.getDate().getTime() + appointment.getStartTime().getTime());
     }
-    
-    private Date getEndingDateOfAppointment (Appointment appointment) {
+
+    private Date getEndingDateOfAppointment(Appointment appointment) {
         return new Date(appointment.getDate().getTime() + appointment.getEndTime().getTime());
     }
 
-    public String bookClass(ActivityClass activityClass) {
+    public void bookClass(ActivityClass activityClass) {
         try {
             // Check if the booking already exists
             if (bookingFacade.existsBooking(loggedUser, activityClass)) {
@@ -170,19 +174,23 @@ public class ScheduleController implements Serializable {
                         String ipAddress = FacesUtil.getRequest().getRemoteAddr();
                         auditFacade.createAudit(AuditType.RESERVAR_CLASE, loggedUser, ipAddress, activityClass.getId(), organisation);
                     } catch (Exception e) {
-                        Logger.getLogger(ClassesController.class.getName()).log(Level.SEVERE, null, e);
+                        Logger.getLogger(ScheduleController.class.getName()).log(Level.SEVERE, null, e);
                     }
                 }
             }
         } catch (Exception e) {
-            Logger.getLogger(ClassesController.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(ScheduleController.class.getName()).log(Level.SEVERE, null, e);
             FacesUtil.addErrorMessage("scheduleForm:msg", "Lo sentimos, ha habido un problema al reservar la plaza.");
         }
 
-        return "calendar.xhtml";
+        try {
+            FacesUtil.redirectTo("calendar.xhtml");
+        } catch (IOException ex) {
+            Logger.getLogger(ScheduleController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
-    public String cancelClassBooking(ActivityClass activityClass) {
+    public void cancelClassBooking(ActivityClass activityClass) {
         try {
             // Remove booking
             if (bookingFacade.removeBooking(loggedUser, activityClass)) {
@@ -193,7 +201,7 @@ public class ScheduleController implements Serializable {
                 FacesUtil.addErrorMessage("scheduleForm:msg", "Error, la reserva no existe.");
             }
         } catch (Exception e) {
-            Logger.getLogger(ClassesController.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(ScheduleController.class.getName()).log(Level.SEVERE, null, e);
             FacesUtil.addErrorMessage("scheduleForm:msg", "Lo sentimos, ha habido un problema al cancelar la reserva.");
         }
 
@@ -202,13 +210,18 @@ public class ScheduleController implements Serializable {
             String ipAddress = FacesUtil.getRequest().getRemoteAddr();
             auditFacade.createAudit(AuditType.CANCELAR_RESERVA, loggedUser, ipAddress, activityClass.getId(), organisation);
         } catch (Exception e) {
-            Logger.getLogger(ClassesController.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(ScheduleController.class.getName()).log(Level.SEVERE, null, e);
         }
 
-        return "calendar.xhtml";
+        try {
+            FacesUtil.redirectTo("calendar.xhtml");
+        } catch (IOException ex) {
+            Logger.getLogger(ScheduleController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+//        return "calendar.xhtml" + Constants.FACES_REDIRECT;
     }
 
-    public String bookAppointment(Appointment appointment) {
+    public void bookAppointment(Appointment appointment) {
         try {
             // Check if the appointment is available
             if (!appointment.isAvailable()) {
@@ -242,10 +255,14 @@ public class ScheduleController implements Serializable {
             FacesUtil.addErrorMessage("scheduleForm:msg", "Lo sentimos, ha habido un problema al solicitar la cita.");
         }
 
-        return "calendar.xhtml";
+        try {
+            FacesUtil.redirectTo("calendar.xhtml");
+        } catch (IOException ex) {
+            Logger.getLogger(ScheduleController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
-    public String cancelAppointmentBooking(Appointment appointment) {
+    public void cancelAppointmentBooking(Appointment appointment) {
         try {
             // Check if there is a appointment request
             AppointmentRequest appointmentRequest = appointmentRequestFacade.findCurrentRequestOfAppointment(appointment);
@@ -254,7 +271,12 @@ public class ScheduleController implements Serializable {
                 appointmentRequest = appointmentRequestFacade.findAcceptedRequestOfAppointment(appointment);
                 if (appointmentRequest == null) {
                     FacesUtil.addErrorMessage("scheduleForm:msg", "Error, la solicitud o cita no existe.");
-                    return "calendar.xhtml";
+
+                    try {
+                        FacesUtil.redirectTo("calendar.xhtml");
+                    } catch (IOException ex) {
+                        Logger.getLogger(ScheduleController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
             }
             // Make the request status as CANCELLED
@@ -276,7 +298,11 @@ public class ScheduleController implements Serializable {
             FacesUtil.addErrorMessage("scheduleForm:msg", "Lo sentimos, ha habido un problema al cancelar la reserva.");
         }
 
-        return "calendar.xhtml";
+        try {
+            FacesUtil.redirectTo("calendar.xhtml");
+        } catch (IOException ex) {
+            Logger.getLogger(ScheduleController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public boolean isMyAppointmentBooking(Appointment appointment) {

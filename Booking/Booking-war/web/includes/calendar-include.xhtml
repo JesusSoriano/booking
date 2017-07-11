@@ -40,7 +40,7 @@
                 </script>
 
                 <h3 style="margin-top: 0">#{txt['bookings_calendar']}</h3>
-                <p:schedule id="schedule" value="#{scheduleController.eventModel}" locale="#{txt['calendar_locale']}" widgetVar="myschedule" timeZone="GMT+1" class="booking-schedule" timeFormat="HH:mm">
+                <p:schedule id="schedule" value="#{scheduleController.eventModel}" locale="#{txt['calendar_locale']}" widgetVar="myschedule" timeZone="GMT+2" class="booking-schedule" timeFormat="HH:mm">
 
                     <p:ajax event="eventSelect" listener="#{scheduleController.onEventSelect}" update="eventDetails" oncomplete="PF('eventDialog').show();" />
                     <p:ajax event="eventMove" listener="#{scheduleController.onEventMove}" update="messages" />
@@ -81,12 +81,12 @@
 
                         <h:outputLabel for="from" value="#{txt['starting_time']}" />
                         <h:outputText id="from" value="#{scheduleController.event.startDate}">   
-                            <f:convertDateTime pattern="#{dateFormatController.timeFormatString}" timeZone="GMT+1"/> 
+                            <f:convertDateTime pattern="#{dateFormatController.timeFormatString}" timeZone="GMT+2"/> 
                         </h:outputText>
 
                         <h:outputLabel for="to" value="#{txt['ending_time']}" />
                         <h:outputText id="to" value="#{scheduleController.event.endDate}">   
-                            <f:convertDateTime pattern="#{dateFormatController.timeFormatString}" timeZone="GMT+1"/> 
+                            <f:convertDateTime pattern="#{dateFormatController.timeFormatString}" timeZone="GMT+2"/> 
                         </h:outputText>
 
                         <h:outputLabel for="places" value="#{txt['free_places']}" />
@@ -114,12 +114,12 @@
 
                         <h:outputLabel for="appFrom" value="#{txt['starting_time']}" />
                         <h:outputText id="appFrom" value="#{scheduleController.event.startDate}">   
-                            <f:convertDateTime pattern="#{dateFormatController.timeFormatString}" timeZone="GMT+1"/> 
+                            <f:convertDateTime pattern="#{dateFormatController.timeFormatString}" timeZone="GMT+2"/> 
                         </h:outputText>
 
                         <h:outputLabel for="appTo" value="#{txt['ending_time']}" />
                         <h:outputText id="appTo" value="#{scheduleController.event.endDate}">   
-                            <f:convertDateTime pattern="#{dateFormatController.timeFormatString}" timeZone="GMT+1"/> 
+                            <f:convertDateTime pattern="#{dateFormatController.timeFormatString}" timeZone="GMT+2"/> 
                         </h:outputText>
 
                         <h:outputLabel for="status" value="#{txt['status']}"/>
@@ -127,12 +127,12 @@
                                       style="#{scheduleController.event.data.appointment.status eq 'SUSPENDED' ? 'color:lightgray' : (scheduleController.event.data.appointment.available ? '' : (scheduleController.isUserAppointmentRequest(scheduleController.event.data.appointment) ? 'color:orange' : (scheduleController.isMyAppointmentBooking(scheduleController.event.data.appointment) ? 'color: #06C200' : '')))}" />
 
                         <p:commandButton value="#{txt['b_request_appointment']}" actionListener="#{scheduleController.bookAppointment(scheduleController.event.data.appointment)}" style='margin-left: 6px; margin-top: 8px;'
-                                         oncomplete="PF('myschedule').update();PF('eventDialog').hide();" styleClass="btn btn-primary btn-main" 
+                                         oncomplete="PF('myschedule').update();PF('eventDialog').hide();" update="eventDetails" styleClass="btn btn-primary btn-main" 
                                          rendered="#{scheduleController.event.data.appointment.available}"/>
                         <p:commandButton value="#{txt['b_cancel_booking']}" actionListener="#{scheduleController.cancelAppointmentBooking(scheduleController.event.data.appointment)}" style='margin-left: 6px; margin-top: 8px;'
-                                         oncomplete="PF('myschedule').update();PF('eventDialog').hide();" styleClass="btn btn-primary btn-main" 
+                                         oncomplete="PF('myschedule').update();PF('eventDialog').hide();" update="eventDetails" styleClass="btn btn-primary btn-main" 
                                          rendered="#{scheduleController.isMyAppointmentBooking(scheduleController.event.data.appointment)}"/>
-                        <p:commandButton value="#{txt['b_close']}" styleClass="btn btn-primary btn-cancel" style='margin-left: 6px; margin-top: 8px;'
+                        <p:commandButton value="#{txt['b_close']}" styleClass="btn btn-primary btn-cancel" update="eventDetails" style='margin-left: 6px; margin-top: 8px;'
                                          onclick="PF('eventDialog').hide();"/>
                     </h:panelGrid>
                 </h:panelGrid>

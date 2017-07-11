@@ -1,3 +1,4 @@
+% !TEX encoding = UTF-8 Unicode
 % ------------------------------------------------------------------------------
 % Este fichero es parte de la plantilla LaTeX para la realización de Proyectos
 % Final de Grado, protegido bajo los términos de la licencia GFDL.
@@ -7,19 +8,1164 @@
 % Copyright (C) 2012 SPI-FM. Universidad de Cádiz
 % ------------------------------------------------------------------------------
 
+
 Esta sección cubre el análisis del sistema de información a desarrollar, haciendo uso del lenguaje de modelado UML.
 
 \section{Modelo Conceptual}
 A partir de los requisitos de información, se desarrollará un diagrama conceptual de clases UML, identificando las clases, atributos, relaciones, restricciones adicionales y reglas de derivación necesarias.
 
+
+
 \section{Modelo de Casos de Uso}
-A partir de los requisitos funcionales descritos anteriormente, se emplearan los casos de uso como mecanismo para representar las interacciones entre los actores y el sistema bajo estudio. Para cada caso de uso deberá indicarse los actores implicados, las precondiciones y postcondiciones, los pasos que conforman el escenario principal y el conjunto de posibles escenarios alternativos.
+
+A continuación se describirán los casos de uso correspondientes a los requisitos funcionales listados anteriormente en \ref{subsec:requisitosfuncionales}. Estos casos de uso se pueden emplear como mecanismo para representar las interacciones entre los actores y el sistema:
+\\
+
+\begin{table}[H]
+  \begin{center}
+    \begin{tabularx}{16.4cm}{|l|X|}
+      \hline
+      \textbf{UC-01} & \textbf{Seleccionar idioma}\\
+      \hline
+      \textbf{Descripción} & Cambiar el idioma en el que se muestra la aplicación.\\
+      \hline
+      \textbf{Actores} & Usuario.\\
+      \hline
+      \textbf{Precondiciones} & Ninguna.\\
+      \hline
+      \textbf{Postcondiciones} & El idioma de la aplicación se establecerá al que el usuario seleccione. Se establecerá este lenguaje por defecto para el usuario.\\
+      \hline
+      \textbf{Escenario principal} & \smallskip 1. El usuario selecciona uno de los idiomas disponibles en la lista de selección del mismo, en cualquier pantalla de la aplicación.\\
+      & 2. La aplicación se mostrará en el idioma seleccionado.\\
+      & 3. El idioma se establece por defecto para el resto de veces que el usuario acceda a la aplicación.\\
+      & \\
+      \hline
+      \textbf{Escenarios alternativos} & \\
+      & \\
+      \hline
+    \end{tabularx}
+    \caption{UC-01: Seleccionar idioma}
+    \label{tab:casousoselidioma}
+  \end{center}
+\end{table}
+
+
+\begin{table}[H]
+  \begin{center}
+    \begin{tabularx}{16.4cm}{|l|X|}
+      \hline
+      \textbf{UC-02} & \textbf{Registro}\\
+      \hline
+      \textbf{Descripción} & Registro de usuario en el sistema.\\
+      \hline
+      \textbf{Actores} & Usuario.\\
+      \hline
+      \textbf{Precondiciones} & El usuario no puede haberse registrado previamente.\\
+      \hline
+      \textbf{Postcondiciones} & El usuario quedará registrado en el sistema y se mostrará la página de home del mismo.\\
+      \hline
+      \textbf{Escenario principal} & \smallskip 1. El sistema muestra la página de registro con los campos correspondientes.\\
+      & 2. El usuario rellena al menos los campos obligatorios y hace click en el botón de registro.\\
+      & 3. El sistema valida los datos y registra al usuario en la base de datos.\\
+      & 4. El sistema muestra la pantalla de aceptación de términos y condiciones.\\
+      & 5. El usuario acepta los términos y condiciones.\\
+      & 6. El sistema realiza el login del usuario y lo redirige automáticamente a su página de inicio de la aplicación.\\
+      & \\
+      \hline
+      \textbf{Escenarios alternativos} & \smallskip 3.a. Los datos introducidos no son válidos:\\
+      & \hspace{0.3cm} 3.a.1. El sistema muestra el mensaje de error correspondiente.\\
+      & \hspace{0.3cm} 3.a.2. Vuelve al paso 2.\\
+      & 5.a. El usuario no acepta los términos y condiciones.\\
+      & \hspace{0.3cm} 5.a.1. El sistema muestra el mensaje de error correspondiente.\\
+      & \hspace{0.3cm} 5.a.2. El sistema no permite al usuario acceder al menú principal hasta que los términos y condiciones no se hayan aceptado.\\
+      & \hspace{0.3cm} 5.a.3. Vuelve al paso 4.\\
+      & \\
+      \hline
+    \end{tabularx}
+    \caption{UC-02: Registro}
+  \end{center}
+\end{table}
+
+
+\begin{table}[H]
+  \begin{center}
+    \begin{tabularx}{16.4cm}{|l|X|}
+      \hline
+      \textbf{UC-03} & \textbf{Login}\\
+      \hline
+      \textbf{Descripción} & Inicio de sesión del usuario en el sistema.\\
+      \hline
+      \textbf{Actores} & Usuario.\\
+      \hline
+      \textbf{Precondiciones} & Ninguna.\\
+      \hline
+      \textbf{Postcondiciones} & El usuario se identificará en el sistema y se mostrará la página de home.\\
+      \hline
+      \textbf{Escenario principal} & \smallskip 1. El sistema muestra la pantalla de inicio de sesión.\\
+      & 2. El usuario introduce su correo electrónico y contraseña.\\
+      & 3. El sistema valida los datos e inicia la sesión del usuario.\\
+      & 4. El sistema muestra la página de home con el menú principal.\\
+      & \\
+      \hline
+      \textbf{Escenarios alternativos} & \smallskip 3.a. Los datos introducidos no son válidos:\\
+      & \hspace{0.3cm} 3.a.1. El sistema muestra el mensaje de error correspondiente.\\
+      & \hspace{0.3cm} 3.a.2. Vuelve al paso 2.\\
+      & \\
+      \hline
+    \end{tabularx}
+    \caption{UC-03: Login}
+  \end{center}
+\end{table}
+
+
+\begin{table}[H]
+  \begin{center}
+    \begin{tabularx}{16.4cm}{|l|X|}
+      \hline
+      \textbf{UC-04} & \textbf{Restablecer contraseña}\\
+      \hline
+      \textbf{Descripción} & Restablecer la contraseña del usuario si esta ha sido olvidada.\\
+      \hline
+      \textbf{Actores} & Usuario.\\
+      \hline
+      \textbf{Precondiciones} & El usuario debe estar registrado en el sistema y su correo electrónico estar operativo.\\
+      \hline
+      \textbf{Postcondiciones} & El usuario establecerá una nueva contraseña para su login.\\
+      \hline
+      \textbf{Escenario principal} & \smallskip 1. El sistema muestra la pantalla de restablecer contraseña. \\
+      & 2. El usuario introduce la dirección de correo electrónico que usó para su registro.\\
+      & 3. El sistema valida la dirección y envía un correo con el enlace para restablecer la contraseña.\\
+      & 4. El usuario accede al enlace recibido en el email.\\
+      & 5. El usuario introduce su nueva contraseña y la repite por seguridad.\\
+      & 6. El sistema valida los datos y la nueva contraseña para el usuario queda registrada en la base de datos.\\
+      & \\
+      \hline
+      \textbf{Escenarios alternativos} & \smallskip  3.a. La dirección de correo introducida no es válida:\\
+      & \hspace{0.3cm} 3.a.1. El sistema muestra el mensaje de error correspondiente.\\
+      & \hspace{0.3cm} 3.a.2. Vuelve al paso 2.\\
+      & 4.a. El correo electrónico no ha sido recibido:\\
+      & \hspace{0.3cm} 4.a.1. Vuelve al paso 1.\\
+      & 4.b. El enlace no es válido o ha expirado:\\
+      & \hspace{0.3cm} 4.b.1. Vuelve al paso 1.\\
+      & 6.a. Las contraseñas introducidas no son válidas:\\
+      & \hspace{0.3cm} 6.a.1. El sistema muestra el mensaje de error correspondiente.\\
+      & \hspace{0.3cm} 6.a.2. Vuelve al paso 5.\\
+      & \\
+      \hline
+    \end{tabularx}
+    \caption{UC-04: Recuperar contraseña}
+  \end{center}
+\end{table}
+
+
+\begin{table}[H]
+  \begin{center}
+    \begin{tabularx}{16.4cm}{|l|X|}
+      \hline
+      \textbf{UC-05} & \textbf{Logout}\\
+      \hline
+      \textbf{Descripción} & Cerrar la sesión del usuario en el sistema.\\
+      \hline
+      \textbf{Actores} & Usuario.\\
+      \hline
+      \textbf{Precondiciones} & Debe ser un usuario previamente identificado.\\
+      \hline
+      \textbf{Postcondiciones} & Se terminará la sesión del usuario.\\
+      \hline
+      \textbf{Escenario principal} & \smallskip 1. El usuario hará click en la opción para salir del sistema desde cualquier pantalla de la aplicación.\\
+      & 2. El sistema cerrará la sesión, quedando esta inhabilitada.\\
+      & \\
+      \hline
+      \textbf{Escenarios alternativos} & \smallskip 1.a. El usuario hace click en salir del sistema a través del menú de opciones.\\
+      & \\
+      \hline
+    \end{tabularx}
+    \caption{UC-05: Logout}
+  \end{center}
+\end{table}
+
+
+\begin{table}[H]
+  \begin{center}
+    \begin{tabularx}{16.4cm}{|l|X|}
+      \hline
+      \textbf{UC-06} & \textbf{Cambiar contraseña}\\
+      \hline
+      \textbf{Descripción} & Establecer una nueva contraseña para el usuario.\\
+      \hline
+      \textbf{Actores} & Usuario.\\
+      \hline
+      \textbf{Precondiciones} & El usuario debe haberse identificado previamente.\\
+      \hline
+      \textbf{Postcondiciones} & El usuario establecerá una nueva contraseña para su login.\\
+      \hline
+      \textbf{Escenario principal} & \smallskip 1. El sistema muestra la pantalla donde ingresar los datos para la nueva contraseña.\\
+      & 2. El usuario introduce los datos pedidos.\\
+      & 3. El sistema valida los datos y la nueva contraseña para el usuario queda registrada en la base de datos.\\
+      & \\
+      \hline
+      \textbf{Escenarios alternativos} & \smallskip 3.a. Los datos introducidos no son válidos:\\
+      & \hspace{0.3cm} 3.a.1. El sistema muestra el mensaje de error correspondiente.\\
+      & \hspace{0.3cm} 3.a.2. Vuelve al paso 2.\\
+      & \\
+      \hline
+    \end{tabularx}
+    \caption{UC-06: Cambiar contraseña}
+  \end{center}
+\end{table}
+
+
+\begin{table}[H]
+  \begin{center}
+    \begin{tabularx}{16.4cm}{|l|X|}
+      \hline
+      \textbf{UC-07} & \textbf{Leer el correo interno.}\\
+      \hline
+      \textbf{Descripción} & Leer alguno de los correos recibidos o enviados.\\
+      \hline
+      \textbf{Actores} & Usuario.\\
+      \hline
+      \textbf{Precondiciones} & El usuario debe haberse identificado previamente.\\
+      \hline
+      \textbf{Postcondiciones} & El sistema mostrará el mensaje seleccionado.\\
+      \hline
+      \textbf{Escenario principal} & \smallskip 1. El usuario navega hasta la página deseada donde se encuentra el correo a leer, ya sea recibido o enviado.\\
+      & 2. El usuario hace click en el asunto del mensaje en cuestión.\\
+      & 3. El sistema muestra el mensaje y sus datos correspondientes. Si el mensaje no había sido previamente abierto, se marcará como mensaje leído.\\
+      & \\
+      \hline
+      \textbf{Escenarios alternativos} & \\
+      & \\
+      \hline
+    \end{tabularx}
+    \caption{UC-07: Leer correo interno}
+  \end{center}
+\end{table}
+
+
+\begin{table}[H]
+  \begin{center}
+    \begin{tabularx}{16.4cm}{|l|X|}
+      \hline
+      \textbf{UC-08} & \textbf{Mandar un correo}\\
+      \hline
+      \textbf{Descripción} & Mandar un correo interno a otro usuario de la aplicación.\\
+      \hline
+      \textbf{Actores} & Usuario.\\
+      \hline
+      \textbf{Precondiciones} & El usuario debe haberse identificado previamente.\\
+      \hline
+      \textbf{Postcondiciones} & Se mandará el mensaje redactado al usuario seleccionado.\\
+      \hline
+      \textbf{Escenario principal} & \smallskip 1. El sistema muestra la página para redactar un nuevo email.\\
+      & 2. El usuario selecciona destinatario e introduce asunto y el mensaje a mandar.\\
+      & 3. El sistema valida los datos y manda el correo a la persona seleccionada.\\
+      & \\
+      \hline
+      \textbf{Escenarios alternativos} & \smallskip 3.a. Los datos introducidos no son válidos:\\
+      & \hspace{0.3cm} 3.a.1. El sistema muestra el mensaje de error correspondiente.\\
+      & \hspace{0.3cm} 3.a.2. Vuelve al paso 2.\\
+      & \\
+      \hline
+    \end{tabularx}
+    \caption{UC-08: Mandar un correo}
+  \end{center}
+\end{table}
+
+
+\begin{table}[H]
+  \begin{center}
+    \begin{tabularx}{16.4cm}{|l|X|}
+      \hline
+      \textbf{UC-09} & \textbf{Alta en un grupo}\\
+      \hline
+      \textbf{Descripción} & El usuario se dará de alta en un grupo de un determinado servicio ofrecido.\\
+      \hline
+      \textbf{Actores} & Usuario y administrador o superadministrador.\\
+      \hline
+      \textbf{Precondiciones} & El usuario y administrador deben haberse identificado previamente.\\
+      \hline
+      \textbf{Postcondiciones} & El usuario será dado de alta en el grupo deseado.\\
+      \hline
+      \textbf{Escenario principal} & \smallskip 1. El sistema muestra los grupos disponibles.\\
+      & 2. El usuario selecciona el grupo a ingresar haciendo click en la opción disponible para unirse al mismo. \\
+      & 3. El sistema manda una petición de unión al grupo a los administradores.\\
+      & 4. El administrador recibe la notificación de petición y se dirige a la página de grupos.\\
+      & 5. El administrador acepta la petición del usuario.\\
+      & 6. El sistema registra al usuario en el grupo, quedando una plaza menos libre, y manda una notificación de aceptación al usuario.\\
+      & \\
+      \hline
+      \textbf{Escenarios alternativos} & \smallskip 5.a. El administrador declina la petición del usuario:\\
+      & \hspace{0.3cm} 5.a.1. El sistema envía una notificación al usuario.\\
+      & \hspace{0.3cm} 5.a.2. Vuelve al punto 1.\\
+      & \\
+      \hline
+    \end{tabularx}
+    \caption{UC-09: Gestión de servicios: Alta en un grupo}
+  \end{center}
+\end{table}
+
+
+\begin{table}[H]
+  \begin{center}
+    \begin{tabularx}{16.4cm}{|l|X|}
+      \hline
+      \textbf{UC-10} & \textbf{Baja de un grupo}\\
+      \hline
+      \textbf{Descripción} & El usuario se dará de baja en un grupo de un determinado servicio ofrecido.\\
+      \hline
+      \textbf{Actores} & Usuario.\\
+      \hline
+      \textbf{Precondiciones} & El usuario debe haberse identificado previamente.\\
+      \hline
+      \textbf{Postcondiciones} & El usuario será dado de baja en el grupo deseado.\\
+      \hline
+      \textbf{Escenario principal} & \smallskip 1. El sistema mostrará los grupos a los que el usuario pertenece.\\
+      & 2. El usuario hará click en la opción correspondiente a darse de baja del grupo deseado.\\
+      & 3. El sistema dará de baja al usuario, quedando así su plaza libre en el grupo. \\
+      & 4. Los administradores recibirán una notificación de baja del grupo por parte del usuario.\\
+      & \\
+      \hline
+      \textbf{Escenarios alternativos} & \\
+      & \\
+      \hline
+    \end{tabularx}
+    \caption{UC-10: Gestión de servicios: Baja de un grupo}
+  \end{center}
+\end{table}
+
+
+\begin{table}[H]
+  \begin{center}
+    \begin{tabularx}{16.4cm}{|l|X|}
+      \hline
+      \textbf{UC-11} & \textbf{Alta en una clase}\\
+      \hline
+      \textbf{Descripción} & El usuario podrá darse de alta en una clase puntual de un determinado grupo sin la obligación de pertenecer al mismo.\\
+      \hline
+      \textbf{Actores} & Usuario.\\
+      \hline
+      \textbf{Precondiciones} & El usuario debe haberse identificado previamente.\\
+      \hline
+      \textbf{Postcondiciones} & El usuario se dará de alta en una clase puntual de un determinado grupo.\\
+      \hline
+      \textbf{Escenario principal} & \smallskip 1. El sistema muestra los servicios disponibles.\\
+      & 2. El usuario seleccionará el servicio para el cual desea darse de alta en la clase.\\
+      & 3. El sistema muestra los grupos disponibles.\\
+      & 4. El usuario selecciona el grupo al que pertenece la clase. \\
+      & 5. El sistema muestra las próximas clases del grupo.\\
+      & 6. El usuario selecciona la clase a ingresar.\\
+      & 7. El sistema muestra la información de la clase y las plazas disponibles.\\
+      & 8. El usuario elige la opción de registrarse en la clase.\\
+      & 9. El sistema añade al usuario a la clase, quedando una plaza libre menos.\\
+      & \\
+      \hline
+      \textbf{Escenarios alternativos} & \smallskip 8.a. La clase a ingresar no dispone de plazas libres.\\
+      & \hspace{0.3cm} 8.a.1: Vuelve al punto 6. \\
+      & \\
+      \hline
+    \end{tabularx}
+    \caption{UC-11: Gestión de servicios: Alta en una clase}
+  \end{center}
+\end{table}
+
+
+\begin{table}[H]
+  \begin{center}
+    \begin{tabularx}{16.4cm}{|l|X|}
+      \hline
+      \textbf{UC-12} & \textbf{Baja de una clase}\\
+      \hline
+      \textbf{Descripción} & El usuario se dará de baja en una clase de su grupo asignado, quedando así su plaza libre ese día puntual.\\
+      \hline
+      \textbf{Actores} & Usuario.\\
+      \hline
+      \textbf{Precondiciones} & El usuario debe haberse identificado previamente.\\
+      \hline
+      \textbf{Postcondiciones} & El usuario se dará de baja en una clase de su grupo asignado.\\
+      \hline
+      \textbf{Escenario principal} & \smallskip 1. El sistema mostrará los grupos a los que el usuario pertenece.\\
+      & 2. El usuario selecciona el grupo al que pertenece la clase. \\
+      & 3. El sistema muestra las próximas clases del grupo.\\
+      & 4. El usuario selecciona la clase a darse de baja.\\
+      & 5. El sistema muestra la información de la clase y las plazas disponibles.\\
+      & 6. El usuario hará click en la opción correspondiente para darse de baja de esa clase puntual.\\
+      & 7. El sistema dará de baja al usuario, quedando así su plaza libre en la clase. \\
+      & \\
+      \hline
+      \textbf{Escenarios alternativos} & \\
+      & \\
+      \hline
+    \end{tabularx}
+    \caption{UC-12: Gestión de servicios: Baja de una clase}
+  \end{center}
+\end{table}
+
+
+\begin{table}[H]
+  \begin{center}
+    \begin{tabularx}{16.4cm}{|l|X|}
+      \hline
+      \textbf{UC-13} & \textbf{Alta en una clase para un invitado}\\
+      \hline
+      \textbf{Descripción} & El administrador podrá dar de alta en una clase puntual de un determinado grupo a un usuario no registrado.\\
+      \hline
+      \textbf{Actores} & Administrador o superadministrador.\\
+      \hline
+      \textbf{Precondiciones} & El usuario debe haberse identificado previamente como administrador o superadministrador.\\
+      \hline
+      \textbf{Postcondiciones} & El administrador dará de alta a un invitado en una clase puntual de un determinado grupo.\\
+      \hline
+      \textbf{Escenario principal} & \smallskip 1. El sistema muestra los servicios disponibles.\\
+      & 2. El administrador seleccionará el servicio para el cual desea dar de alta al invitado.\\
+      & 3. El sistema muestra los grupos disponibles.\\
+      & 4. El administrador selecciona el grupo al que pertenece la clase. \\
+      & 5. El sistema muestra las próximas clases del grupo.\\
+      & 6. El administrador selecciona la clase a ingresar al usuario no registrado.\\
+      & 7. El sistema muestra la información de la clase y las plazas disponibles.\\
+      & 8. El administrador elige la opción de registrar un invitado en la clase.\\
+      & 9. El sistema añade al usuario no registrado a la clase, quedando una plaza libre menos.\\
+      & \\
+      \hline
+      \textbf{Escenarios alternativos} & \smallskip 8.a. La clase a ingresar no dispone de plazas libres.\\
+      & \hspace{0.3cm} 8.a.1: Vuelve al punto 6. \\
+      & \\
+      \hline
+    \end{tabularx}
+    \caption{UC-13: Gestión de servicios: Alta en una clase para un invitado}
+  \end{center}
+\end{table}
+
+
+\begin{table}[H]
+  \begin{center}
+    \begin{tabularx}{16.4cm}{|l|X|}
+      \hline
+      \textbf{UC-14} & \textbf{Baja de una clase para un invitado}\\
+      \hline
+      \textbf{Descripción} & El administrador podrá dar de baja a un usuario no registrado en una clase puntual a la que se haya añadido previamente. \\
+      \hline
+      \textbf{Actores} & Administrador o superadministrador..\\
+      \hline
+      \textbf{Precondiciones} & El usuario debe haberse identificado previamente como administrador o superadministrador. La clase debe tener al menos un invitado registrado.\\
+      \hline
+      \textbf{Postcondiciones} & El usuario se dará de baja en una clase de su grupo asignado.\\
+      \hline
+      \textbf{Escenario principal} & \smallskip 1. El sistema muestra los servicios disponibles.\\
+      & 2. El administrador seleccionará el servicio para el cual desea dar de baja al invitado.\\
+      & 3. El sistema muestra los grupos disponibles.\\
+      & 4. El administrador selecciona el grupo al que pertenece la clase. \\
+      & 5. El sistema muestra las próximas clases del grupo.\\
+      & 6. El administrador selecciona la clase a dar de baja al invitado.\\
+      & 7. El sistema muestra la información de la clase y las plazas disponibles.\\
+      & 8. El administrador hará click en la opción correspondiente para dar de baja al usuario no registrado de esa clase puntual.\\
+      & 9. El sistema dará de baja a dicho usuario, quedando así su plaza libre en la clase. \\
+      & \\
+      \hline
+      \textbf{Escenarios alternativos} & \\
+      & \\
+      \hline
+    \end{tabularx}
+    \caption{UC-14: Gestión de servicios: Baja de una clase para un invitado}
+  \end{center}
+\end{table}
+
+
+\begin{table}[H]
+  \begin{center}
+    \begin{tabularx}{16.4cm}{|l|X|}
+      \hline
+      \textbf{UC-15} & \textbf{Pedir cita}\\
+      \hline
+      \textbf{Descripción} & El usuario podrá solicitar cita de un determinado servicio a la hora seleccionada.\\
+      \hline
+      \textbf{Actores} & Usuario y administrador o superadministrador.\\
+      \hline
+      \textbf{Precondiciones} & El usuario y administrador deben haberse identificado previamente.\\
+      \hline
+      \textbf{Postcondiciones} & Se le asignará la cita seleccionada al usuario.\\
+      \hline
+      \textbf{Escenario principal} & \smallskip 1. El sistema muestra los servicios disponibles.\\
+      & 2. El usuario seleccionará el servicio para el cual desea solicitar la cita.\\
+      & 3. El usuario seleccionará el día en el cual pedir la cita.\\
+      & 4. El sistema muestra los rangos de horarios disponibles.\\
+      & 5. El usuario selecciona el horario y envía la solicitud.\\
+      & 6. El sistema hace llegar la solicitud a los administradores.\\
+      & 7. El administrador recibe la notificación de cita.\\
+      & 8. El administrador acepta la solicitud del usuario.\\
+      & 9. El sistema registra la cita, dejando de estar disponible el horario especificado para el resto de usuarios, y manda una notificación de aceptación al usuario.\\
+      & \\
+      \hline
+      \textbf{Escenarios alternativos} & \smallskip 8.a. El administrador declina la solicitud de cita del usuario:\\
+      & \hspace{0.3cm} 8.a.1. El sistema envía una notificación al usuario.\\
+      & \hspace{0.3cm} 8.a.2. Vuelve al punto 1.\\
+      & \\
+      \hline
+    \end{tabularx}
+    \caption{UC-15: Gestión de servicios: Pedir cita}
+  \end{center}
+\end{table}
+
+
+\begin{table}[H]
+  \begin{center}
+    \begin{tabularx}{16.4cm}{|l|X|}
+      \hline
+      \textbf{UC-16} & \textbf{Cancelar cita}\\
+      \hline
+      \textbf{Descripción} & Cancelación de una cita por parte del administrador. El usuario debe contactar con algún administrador para pedir la cancelación de la misma.\\
+      \hline
+      \textbf{Actores} & Administrador.\\
+      \hline
+      \textbf{Precondiciones} & El usuario debe haberse identificado previamente como administrador.\\
+      \hline
+      \textbf{Postcondiciones} & La cita del usuario quedará cancelada por parte del administrador.\\
+      \hline
+      \textbf{Escenario principal} & \smallskip 1. El sistema muestra el listado de citas.\\
+      & 2. El administrador selecciona la cita que desea cancelar.\\
+      & 3. El sistema muestra la información de la cita y opciones disponibles.\\
+      & 4. El administrador selecciona cancelar la cita.\\
+      & 5. El sistema cancela la cita dejando el horario libre nuevamente para las citas de ese determinado servicio, y notifica al usuario.\\
+      & \\
+      \hline
+      \textbf{Escenarios alternativos} & \\
+      & \\
+      \hline
+    \end{tabularx}
+    \caption{UC-16: Gestión de servicios: Cancelar cita}
+  \end{center}
+\end{table}
+
+
+\begin{table}[H]
+  \begin{center}
+    \begin{tabularx}{16.4cm}{|l|X|}
+      \hline
+      \textbf{UC-17} & \textbf{Pedir cita para usuario no registrado}\\
+      \hline
+      \textbf{Descripción} & El administrador podrá solicitar cita para un usuario no registrado de un determinado servicio a la hora seleccionada.\\
+      \hline
+      \textbf{Actores} & Administrador o superadministrador.\\
+      \hline
+      \textbf{Precondiciones} & El usuario deben haberse identificado previamente como administrador o superadministrador..\\
+      \hline
+      \textbf{Postcondiciones} & Se asignará la cita seleccionada a un usuario no registrado en el sistema.\\
+      \hline
+      \textbf{Escenario principal} & \smallskip 1. El sistema muestra los servicios disponibles.\\
+      & 2. El administrador seleccionará el servicio para el cual desea registrar la cita.\\
+      & 3. El administrador seleccionará el día en el cual ocurrirá la cita.\\
+      & 4. El sistema muestra los rangos de horarios disponibles.\\
+      & 5. El administrador selecciona el horario y la opción de asignación a un invitado.\\
+      & 9. El sistema registra la cita, dejando de estar disponible el horario especificado para el resto de usuarios.\\
+      & \\
+      \hline
+      \textbf{Escenarios alternativos} & \\
+      & \\
+      \hline
+    \end{tabularx}
+    \caption{UC-17: Gestión de servicios: Pedir cita para usuario no registrado}
+  \end{center}
+\end{table}
+
+
+\begin{table}[H]
+  \begin{center}
+    \begin{tabularx}{16.4cm}{|l|X|}
+      \hline
+      \textbf{UC-18} & \textbf{Cancelar cita de usuario no registrado}\\
+      \hline
+      \textbf{Descripción} & Cancelación de una cita por parte del administrador. El usuario debe contactar con algún administrador para pedir la cancelación de la misma.\\
+      \hline
+      \textbf{Actores} & Administrador o superadministrador..\\
+      \hline
+      \textbf{Precondiciones} & El usuario debe haberse identificado previamente como administrador o superadministrador..\\
+      \hline
+      \textbf{Postcondiciones} & La cita del usuario quedará cancelada por parte del administrador.\\
+      \hline
+      \textbf{Escenario principal} & \smallskip 1. El sistema muestra el listado de citas.\\
+      & 2. El administrador selecciona la cita que desea cancelar.\\
+      & 3. El sistema muestra la información de la cita y opciones disponibles.\\
+      & 4. El administrador selecciona cancelar la cita.\\
+      & 5. El sistema cancela la cita dejando el horario libre nuevamente para las citas de ese determinado servicio.\\
+      & \\
+      \hline
+      \textbf{Escenarios alternativos} & \\
+      & \\
+      \hline
+    \end{tabularx}
+    \caption{UC-18: Gestión de servicios: Cancelar cita de usuario no registrado}
+  \end{center}
+\end{table}
+
+
+\begin{table}[H]
+  \begin{center}
+    \begin{tabularx}{16.4cm}{|l|X|}
+      \hline
+      \textbf{UC-19} & \textbf{Calendario de actividades}\\
+      \hline
+      \textbf{Descripción} & El usuario dispondrá de un calendario donde ver todas las clases y citas. \\
+      \hline
+      \textbf{Actores} & Usuario.\\
+      \hline
+      \textbf{Precondiciones} & El usuario debe haberse identificado previamente.\\
+      \hline
+      \textbf{Postcondiciones} & El sistema mostrará el calendario con las clases y citas del usuario.\\
+      \hline
+      \textbf{Escenario principal} & \smallskip 1. El usuario se navegará hasta la página correspondiente del calendario.\\
+      & 2. El sistema mostrará el calendario con los datos de actividades y citas de todos los servicios que el usuario haya reservado previamente.\\
+      & \\
+      \hline
+      \textbf{Escenarios alternativos} & \\
+      & \\
+      \hline
+    \end{tabularx}
+    \caption{UC-19: Calendario de actividades}
+  \end{center}
+\end{table}
+
+
+\begin{table}[H]
+  \begin{center}
+    \begin{tabularx}{16.4cm}{|l|X|}
+      \hline
+      \textbf{UC-20} & \textbf{Notificaciones}\\
+      \hline
+      \textbf{Descripción} & El sistema notificará acciones como nuevo correo recibido. \\
+      \hline
+      \textbf{Actores} & Usuario.\\
+      \hline
+      \textbf{Precondiciones} & El usuario debe haberse identificado previamente.\\
+      \hline
+      \textbf{Postcondiciones} & El usuario dispondrá de notificaciones de determinadas acciones del sistema. \\
+      \hline
+      \textbf{Escenario principal} & \smallskip 1. El usuario se dirigirá a la página correspondiente del calendario.\\
+      & 2. El sistema mostrará las últimas notificaciones por orden cronológico, marcando como vistas las nuevas si existiesen.\\
+      & \\
+      \hline
+      \textbf{Escenarios alternativos} & \\
+      & \\
+      \hline
+    \end{tabularx}
+    \caption{UC-20: Notificaciones}
+  \end{center}
+\end{table}
+
+
+\begin{table}[H]
+  \begin{center}
+    \begin{tabularx}{16.4cm}{|l|X|}
+      \hline
+      \textbf{UC-21} & \textbf{Auditoría}\\
+      \hline
+      \textbf{Descripción} & Registro de operaciones llevadas a cabo en el sistema por el usuario.\\
+      \hline
+      \textbf{Actores} & Usuario.\\
+      \hline
+      \textbf{Precondiciones} & Debe ser un usuario previamente identificado.\\
+      \hline
+      \textbf{Postcondiciones} & El sistema mostrará las acciones llevadas a cabo por el usuario en las fechas indicadas.\\
+      \hline
+      \textbf{Escenario principal} & \smallskip 1. El sistema mostrará la página correspondiente al histórico de acciones.\\
+      & 2. El usuario seleccionará el periodo del que desea ver las acciones llevadas a cabo y el tipo de acción si lo desea.\\
+      & 3. El sistema muestra las acciones correspondientes.\\
+      & \\
+      \hline
+      \textbf{Escenarios alternativos} & \\
+      & \\
+      \hline
+    \end{tabularx}
+    \caption{UC-21: Auditoría}
+  \end{center}
+\end{table}
+
+
+\begin{table}[H]
+  \begin{center}
+    \begin{tabularx}{16.4cm}{|l|X|}
+      \hline
+      \textbf{UC-22} & \textbf{Auditoría para administradores}\\
+      \hline
+      \textbf{Descripción} & Registro de operaciones llevadas a cabo en el sistema por los usuario.\\
+      \hline
+      \textbf{Actores} & Administrador o superadministrador.\\
+      \hline
+      \textbf{Precondiciones} & Debe ser un usuario previamente identificado como administrador o superadministrador.\\
+      \hline
+      \textbf{Postcondiciones} & El sistema mostrará las acciones llevadas a cabo por el usuario seleccionado en las fechas indicadas.\\
+      \hline
+      \textbf{Escenario principal} & \smallskip 1. El sistema mostrará la página correspondiente al histórico de acciones.\\
+      & 2. El administrador seleccionará el periodo del que desea ver las acciones llevadas a cabo, así como el usuario y el tipo de acción si lo desea.\\
+      & 3. El sistema muestra las acciones correspondientes.\\
+      & \\
+      \hline
+      \textbf{Escenarios alternativos} & \\
+      & \\
+      \hline
+    \end{tabularx}
+    \caption{UC-22: Auditoría para administradores}
+  \end{center}
+\end{table}
+
+
+\begin{table}[H]
+  \begin{center}
+    \begin{tabularx}{16.4cm}{|l|X|}
+      \hline
+      \textbf{UC-23} & \textbf{Gestión de usuarios: ver, suspender, activar o mandar email}\\
+      \hline
+      \textbf{Descripción} & Gestión de usuarios, con posibilidad de ver, suspender, activar o mandar email a usuarios.\\
+      \hline
+      \textbf{Actores} & Administrador o superadministrador.\\
+      \hline
+      \textbf{Precondiciones} & Debe ser un usuario previamente identificado como administrador o superadministrador.\\
+      \hline
+      \textbf{Postcondiciones} & El administrador podrá ver, suspender, activar o mandar un email al usuario seleccionado.\\
+      \hline
+      \textbf{Escenario principal} & \smallskip 1. El sistema muestra el listado de usuarios del sistema.\\
+      & 2. El administrador navega por la lista y selecciona la acción correspondiente en la casilla del usuario en cuestión.\\
+      & 3. El sistema ejecuta la acción (activar/suspender) o redirecciona al usuario a la página correspondiente para realizar la acción deseada (perfil del usuario o redactar email).\\
+      & \\
+      \hline
+      \textbf{Escenarios alternativos} & \\
+      & \\
+      \hline
+    \end{tabularx}
+    \caption{UC-23: Gestión de usuarios: ver, suspender, activar o mandar email}
+  \end{center}
+\end{table}
+
+
+\begin{table}[H]
+  \begin{center}
+    \begin{tabularx}{16.4cm}{|l|X|}
+      \hline
+      \textbf{UC-24} & \textbf{Gestión de usuarios: editar usuario}\\
+      \hline
+      \textbf{Descripción} & Modificación de los datos de usuarios.\\
+      \hline
+      \textbf{Actores} & Administrador o superadministrador.\\
+      \hline
+      \textbf{Precondiciones} & Debe ser un usuario previamente identificado como administrador o superadministrador.\\
+      \hline
+      \textbf{Postcondiciones} & El administrador podrá modificar los datos del usuario seleccionado.\\
+      \hline
+      \textbf{Escenario principal} & \smallskip 1. El administrador se dirige al perfil del usuario deseado siguiendo los pasos de gestión de usuario detallados en el caso de uso anterior.\\
+      & 2. El administrador hace click en la opción de modificar usuario. \\
+      & 3. El sistema muestra los datos del usuario en campos editables.\\
+      & 4. El administrador modifica o rellena los datos correspondientes.\\
+      & 5. El sistema modifica los datos y notifica al usuario de los cambios realizados.\\ 
+      & \\
+      \hline
+      \textbf{Escenarios alternativos} & \smallskip 5.a. Los datos introducidos no son válidos:\\
+      & \hspace{0.3cm} 5.a.1. El sistema muestra el mensaje de error correspondiente.\\
+      & \hspace{0.3cm} 5.a.2. Vuelve al paso 4.\\
+      & \\
+      \hline
+    \end{tabularx}
+    \caption{UC-24: Gestión de usuarios: editar usuario}
+  \end{center}
+\end{table}
+
+
+\begin{table}[H]
+  \begin{center}
+    \begin{tabularx}{16.4cm}{|l|X|}
+      \hline
+      \textbf{UC-25} & \textbf{Ver administrador}\\
+      \hline
+      \textbf{Descripción} & Gestión de administradores: ver datos de los administradores. \\
+      \hline
+      \textbf{Actores} & Administrador o superadministrador.\\
+      \hline
+      \textbf{Precondiciones} & Debe ser un usuario previamente identificado como administrador o superadministrador.\\
+      \hline
+      \textbf{Postcondiciones} & El administrador podrá ver los datos de otro administrador.\\
+      \hline
+      \textbf{Escenario principal} & \smallskip 1. El sistema muestra el listado de administradores del sistema.\\
+      & 2. El administrador navega por la lista y selecciona la acción correspondiente en la casilla del administrador en cuestión.\\
+      & 3. El sistema redirecciona al administrador a la página correspondiente al perfil del usuario.\\
+      & \\
+      \hline
+      \textbf{Escenarios alternativos} & \\
+      & \\
+      \hline
+    \end{tabularx}
+    \caption{UC-25: Gestión de administradores: ver datos de los administradores}
+  \end{center}
+\end{table}
+
+
+\begin{table}[H]
+  \begin{center}
+    \begin{tabularx}{16.4cm}{|l|X|}
+      \hline
+      \textbf{UC-26} & \textbf{Mandar email a administradores}\\
+      \hline
+      \textbf{Descripción} & Gestión de administradores: mandar correo. \\
+      \hline
+      \textbf{Actores} & Administrador o superadministrador.\\
+      \hline
+      \textbf{Precondiciones} & Debe ser un usuario previamente identificado como administrador o superadministrador.\\
+      \hline
+      \textbf{Postcondiciones} & El administrador podrá ver, activar, suspender o mandar un email al usuario seleccionado.\\
+      \hline
+      \textbf{Escenario principal} & \smallskip 1. El sistema muestra el listado de administradores del sistema.\\
+      & 2. El administrador navega por la lista y selecciona la acción correspondiente en la casilla del administrador en cuestión.\\
+      & 3. El sistema redirecciona al administrador a la página correspondiente para redactar un email al administrador seleccionado.\\
+      & \\
+      \hline
+      \textbf{Escenarios alternativos} & \\
+      & \\
+      \hline
+    \end{tabularx}
+    \caption{UC-26: Gestión de administradores: mandar correo}
+  \end{center}
+\end{table}
+
+
+\begin{table}[H]
+  \begin{center}
+    \begin{tabularx}{16.4cm}{|l|X|}
+      \hline
+      \textbf{UC-27} & \textbf{Suspender/activar administrador}\\
+      \hline
+      \textbf{Descripción} & Gestión de administradores: suspender/activar administrador. \\
+      \hline
+      \textbf{Actores} & Superadministrador.\\
+      \hline
+      \textbf{Precondiciones} & Debe ser un usuario previamente identificado como superadministrador.\\
+      \hline
+      \textbf{Postcondiciones} & El superadministrador podrá ver, activar, suspender o mandar un email al usuario seleccionado.\\
+      \hline
+      \textbf{Escenario principal} & \smallskip 1. El sistema muestra el listado de administradores del sistema.\\
+      & 2. El superadministrador navega por la lista y selecciona la acción correspondiente en la casilla del administrador en cuestión.\\
+      & 3. El sistema ejecuta la acción (activar/suspender) y refleja el nuevo estado del administrador en la lista. \\
+      & \\
+      \hline
+      \textbf{Escenarios alternativos} & \\
+      & \\
+      \hline
+    \end{tabularx}
+    \caption{UC-27: Gestión de administradores: suspender/activar administrador}
+  \end{center}
+\end{table}
+
+
+\begin{table}[H]
+  \begin{center}
+    \begin{tabularx}{16.4cm}{|l|X|}
+      \hline
+      \textbf{UC-28} & \textbf{Editar administrador}\\
+      \hline
+      \textbf{Descripción} & Gestión de administradores: Modificación de los datos de administradores.\\
+      \hline
+      \textbf{Actores} & Superadministrador.\\
+      \hline
+      \textbf{Precondiciones} & Debe ser un usuario previamente identificado como superadministrador.\\
+      \hline
+      \textbf{Postcondiciones} & El superadministrador podrá modificar los datos del administrador seleccionado.\\
+      \hline
+      \textbf{Escenario principal} & \smallskip 1. El superadministrador se dirige al perfil del usuario deseado siguiendo los pasos de gestión de administrador detallados en el caso de uso correspondiente.\\
+      & 2. El superadministrador hace click en la opción de editar. \\
+      & 3. El sistema muestra los datos del administrador en campos editables.\\
+      & 4. El superadministrador modifica o rellena los datos correspondientes.\\
+      & 5. El sistema modifica los datos y notifica al administrador de los cambios realizados.\\ 
+      & \\
+      \hline
+      \textbf{Escenarios alternativos} & \smallskip 5.a. Los datos introducidos no son válidos:\\
+      & \hspace{0.3cm} 5.a.1. El sistema muestra el mensaje de error correspondiente.\\
+      & \hspace{0.3cm} 5.a.2. Vuelve al paso 4.\\
+      & \\
+      \hline
+    \end{tabularx}
+    \caption{UC-28: Gestión de administradores: editar administrador}
+  \end{center}
+\end{table}
+
+
+\begin{table}[H]
+  \begin{center}
+    \begin{tabularx}{16.4cm}{|l|X|}
+      \hline
+      \textbf{UC-29} & \textbf{Alta de servicio}\\
+      \hline
+      \textbf{Descripción} & Añadir un servicio nuevo al sistema.\\
+      \hline
+      \textbf{Actores} & Administrador o superadministrador.\\
+      \hline
+      \textbf{Precondiciones} & Debe ser un usuario previamente identificado como administrador o superadministrador.\\
+      \hline
+      \textbf{Postcondiciones} & Se añadirá un nuevo servicio al sistema.\\
+      \hline
+      \textbf{Escenario principal} & \smallskip 1. El sistema muestra la lista de servicios actuales.\\
+      & 2. El administrador hace click en la opción de añadir un nuevo servicio.\\
+      & 3. El sistema muestra una ventana con los datos necesarios para la creación del servicio.\\
+      & 4. El administrador introduce los datos necesarios.\\
+      & 5. El sistema valida los datos y registra el nuevo servicio, quedando reflejado en la lista.\\
+      & \\
+      \hline
+      \textbf{Escenarios alternativos} & \smallskip 5.a. Los datos introducidos no son válidos:\\
+      & \hspace{0.3cm} 5.a.1. El sistema muestra el mensaje de error correspondiente.\\
+      & \hspace{0.3cm} 5.a.2. Vuelve al paso 4.\\
+      & \\
+      \hline
+    \end{tabularx}
+    \caption{UC-29: Gestión de servicios: Alta de servicio}
+  \end{center}
+\end{table}
+
+
+\begin{table}[H]
+  \begin{center}
+    \begin{tabularx}{16.4cm}{|l|X|}
+      \hline
+      \textbf{UC-30} & \textbf{Suspender/activar servicio}\\
+      \hline
+      \textbf{Descripción} & Suspender o activar uno de los servicios del sistema.\\
+      \hline
+      \textbf{Actores} & Administrador o superadministrador.\\
+      \hline
+      \textbf{Precondiciones} & Debe ser un usuario previamente identificado como administrador o superadministrador.\\
+      \hline
+      \textbf{Postcondiciones} & El administrador activará o suspenderá unos de los servicios existentes en el sistema.\\
+      \hline
+      \textbf{Escenario principal} & \smallskip 1. El sistema muestra la lista de servicios actuales.\\
+      & 2. El administrador hace click en la opción deseada (suspender/activar) de la casilla del servicio deseado.\\
+      & 3. El sistema suspende/activa el servicio y notifica a los usuarios que estén haciendo uso del mismo sobre la acción.\\
+      & \\
+      \hline
+      \textbf{Escenarios alternativos} & \smallskip \\
+      & \\
+      \hline
+    \end{tabularx}
+    \caption{UC-30: Gestión de servicios: Suspender/activar servicio}
+  \end{center}
+\end{table}
+
+
+\begin{table}[H]
+  \begin{center}
+    \begin{tabularx}{16.4cm}{|l|X|}
+      \hline
+      \textbf{UC-31} & \textbf{Editar servicio}\\
+      \hline
+      \textbf{Descripción} & Editar uno de los servicios del sistema.\\
+      \hline
+      \textbf{Actores} & Administrador o superadministrador.\\
+      \hline
+      \textbf{Precondiciones} & Debe ser un usuario previamente identificado como administrador o superadministrador.\\
+      \hline
+      \textbf{Postcondiciones} & El administrador editará los datos de unos de los servicios existentes en el sistema.\\
+      \hline
+      \textbf{Escenario principal} & \smallskip 1. El sistema muestra la lista de servicios actuales.\\
+      & 2. El administrador hace click en la opción de editar de la casilla del servicio deseado.\\
+      & 3. El sistema muestra una ventana editable con los datos actuales del servicio.\\
+      & 4. El administrador edita los datos deseados.\\
+      & 5. El sistema valida los datos y registra los cambios, quedando reflejados en la lista de servicios.\\
+      & \\
+      \hline
+      \textbf{Escenarios alternativos} & \smallskip 5.a. Los datos introducidos no son válidos:\\
+      & \hspace{0.3cm} 5.a.1. El sistema muestra el mensaje de error correspondiente.\\
+      & \hspace{0.3cm} 5.a.2. Vuelve al paso 4.\\
+      & \\
+      \hline
+    \end{tabularx}
+    \caption{UC-31: Gestión de servicios: Editar servicio}
+  \end{center}
+\end{table}
+
+
+\begin{table}[H]
+  \begin{center}
+    \begin{tabularx}{16.4cm}{|l|X|}
+      \hline
+      \textbf{UC-32} & \textbf{Alta de grupo}\\
+      \hline
+      \textbf{Descripción} & Añadir un grupo nuevo de un determinado servicio al sistema. A partir de este momento, los usuarios podrán darse de alta en la actividad.\\
+      \hline
+      \textbf{Actores} & Administrador o superadministrador.\\
+      \hline
+      \textbf{Precondiciones} & Debe ser un usuario previamente identificado como administrador o superadministrador.\\
+      \hline
+      \textbf{Postcondiciones} & Se añadirá un nuevo grupo del servicio seleccionado al sistema.\\
+      \hline
+      \textbf{Escenario principal} & \smallskip 1. El sistema muestra la lista de grupos actuales.\\
+      & 2. El administrador hace click en la opción de añadir un nuevo grupo.\\
+      & 3. El sistema muestra una ventana con los datos necesarios para la creación del grupo.\\
+      & 4. El administrador introduce los datos necesarios.\\
+      & 5. El sistema valida los datos y registra el nuevo grupo, quedando reflejado en la lista.\\
+      & \\
+      \hline
+      \textbf{Escenarios alternativos} & \smallskip 5.a. Los datos introducidos no son válidos:\\
+      & \hspace{0.3cm} 5.a.1. El sistema muestra el mensaje de error correspondiente.\\
+      & \hspace{0.3cm} 5.a.2. Vuelve al paso 4.\\
+      & \\
+      \hline
+    \end{tabularx}
+    \caption{UC-32: Gestión de servicios: Alta de grupo}
+  \end{center}
+\end{table}
+
+
+\begin{table}[H]
+  \begin{center}
+    \begin{tabularx}{16.4cm}{|l|X|}
+      \hline
+      \textbf{UC-33} & \textbf{Suspender/activar grupo}\\
+      \hline
+      \textbf{Descripción} & Suspender o activar uno de los grupos de un determinado servicio del sistema.\\
+      \hline
+      \textbf{Actores} & Administrador o superadministrador.\\
+      \hline
+      \textbf{Precondiciones} & Debe ser un usuario previamente identificado como administrador o superadministrador.\\
+      \hline
+      \textbf{Postcondiciones} & El administrador activará o suspenderá unos de los grupos existentes en el sistema.\\
+      \hline
+      \textbf{Escenario principal} & \smallskip 1. El sistema muestra la lista de grupos actuales.\\
+      & 2. El administrador hace click en la opción deseada (suspender/activar) de la casilla del grupo deseado.\\
+      & 3. El sistema suspende/activa el grupo y notifica a los usuarios que estén haciendo uso del mismo sobre la acción.\\
+      & \\
+      \hline
+      \textbf{Escenarios alternativos} & \smallskip \\
+      & \\
+      \hline
+    \end{tabularx}
+    \caption{UC-33: Gestión de servicios: Suspender/activar grupo}
+  \end{center}
+\end{table}
+
+
+\begin{table}[H]
+  \begin{center}
+    \begin{tabularx}{16.4cm}{|l|X|}
+      \hline
+      \textbf{UC-34} & \textbf{Editar grupo}\\
+      \hline
+      \textbf{Descripción} & Editar uno de los grupos del sistema.\\
+      \hline
+      \textbf{Actores} & Administrador o superadministrador.\\
+      \hline
+      \textbf{Precondiciones} & Debe ser un usuario previamente identificado como administrador o superadministrador.\\
+      \hline
+      \textbf{Postcondiciones} & El administrador editará los datos de unos de los grupos existentes en el sistema.\\
+      \hline
+      \textbf{Escenario principal} & \smallskip 1. El sistema muestra la lista de grupos actuales.\\
+      & 2. El administrador hace click en la opción de editar de la casilla del grupo deseado.\\
+      & 3. El sistema muestra una ventana editable con los datos actuales del grupo.\\
+      & 4. El administrador edita los datos deseados.\\
+      & 5. El sistema valida los datos y registra los cambios, quedando reflejados en la lista de grupos.\\
+      & \\
+      \hline
+      \textbf{Escenarios alternativos} & \smallskip 5.a. Los datos introducidos no son válidos:\\
+      & \hspace{0.3cm} 5.a.1. El sistema muestra el mensaje de error correspondiente.\\
+      & \hspace{0.3cm} 5.a.2. Vuelve al paso 4.\\
+      & \\
+      \hline
+    \end{tabularx}
+    \caption{UC-34: Gestión de servicios: Editar grupo}
+  \end{center}
+\end{table}
+
+
+\begin{table}[H]
+  \begin{center}
+    \begin{tabularx}{16.4cm}{|l|X|}
+      \hline
+      \textbf{UC-35} & \textbf{Alta de rango de cita}\\
+      \hline
+      \textbf{Descripción} & Añadir un rango de horario dentro del cual estará disponible pedir citas para un determinado servicio. A partir de este momento, los usuarios podrán pedir hora para este servicio.\\
+      \hline
+      \textbf{Actores} & Administrador o superadministrador.\\
+      \hline
+      \textbf{Precondiciones} & Debe ser un usuario previamente identificado como administrador o superadministrador.\\
+      \hline
+      \textbf{Postcondiciones} & Se añadirá al sistema un nuevo rango para pedir citas del servicio seleccionado.\\
+      \hline
+      \textbf{Escenario principal} & \smallskip 1. El sistema muestra la lista de rangos de cita actuales.\\
+      & 2. El administrador hace click en la opción de añadir un nuevo rango.\\
+      & 3. El sistema muestra una ventana con los datos necesarios para la creación del rango.\\
+      & 4. El administrador introduce los datos necesarios.\\
+      & 5. El sistema valida los datos y registra el nuevo rango para pedir citas, quedando reflejado en la lista.\\
+      & \\
+      \hline
+      \textbf{Escenarios alternativos} & \smallskip 5.a. Los datos introducidos no son válidos:\\
+      & \hspace{0.3cm} 5.a.1. El sistema muestra el mensaje de error correspondiente.\\
+      & \hspace{0.3cm} 5.a.2. Vuelve al paso 4.\\
+      & \\
+      \hline
+    \end{tabularx}
+    \caption{UC-35: Gestión de servicios: Alta de rango de cita}
+  \end{center}
+\end{table}
+
+
+\begin{table}[H]
+  \begin{center}
+    \begin{tabularx}{16.4cm}{|l|X|}
+      \hline
+      \textbf{UC-36} & \textbf{Suspender/activar rango de cita}\\
+      \hline
+      \textbf{Descripción} & Suspender o activar uno de los rangos de cita de un determinado servicio del sistema.\\
+      \hline
+      \textbf{Actores} & Administrador o superadministrador.\\
+      \hline
+      \textbf{Precondiciones} & Debe ser un usuario previamente identificado como administrador o superadministrador.\\
+      \hline
+      \textbf{Postcondiciones} & El administrador activará o suspenderá unos de los rangos de cita existentes en el sistema.\\
+      \hline
+      \textbf{Escenario principal} & \smallskip 1. El sistema muestra la lista de rangos de cita actuales.\\
+      & 2. El administrador hace click en la opción deseada (suspender/activar) de la casilla del rango deseado.\\
+      & 3. El sistema suspende/activa el rango, quedando este inhabilitado/habilitado para que se pidan citas en el horario que comprende.\\
+      & \\
+      \hline
+      \textbf{Escenarios alternativos} & \smallskip \\
+      & \\
+      \hline
+    \end{tabularx}
+    \caption{UC-36: Gestión de servicios: Suspender/activar rango de cita}
+  \end{center}
+\end{table}
+
+
+\begin{table}[H]
+  \begin{center}
+    \begin{tabularx}{16.4cm}{|l|X|}
+      \hline
+      \textbf{UC-37} & \textbf{Editar rango de cita}\\
+      \hline
+      \textbf{Descripción} & Editar uno de los rangos de cita del sistema.\\
+      \hline
+      \textbf{Actores} & Administrador o superadministrador.\\
+      \hline
+      \textbf{Precondiciones} & Debe ser un usuario previamente identificado como administrador o superadministrador.\\
+      \hline
+      \textbf{Postcondiciones} & El administrador editará los datos de unos de los rangos existentes en el sistema.\\
+      \hline
+      \textbf{Escenario principal} & \smallskip 1. El sistema muestra la lista de rangos de cita actuales.\\
+      & 2. El administrador hace click en la opción de editar de la casilla del rango deseado.\\
+      & 3. El sistema muestra una ventana editable con los datos actuales del rango.\\
+      & 4. El administrador edita los datos deseados.\\
+      & 5. El sistema valida los datos y registra los cambios, quedando reflejados en la lista de rangos.\\
+      & \\
+      \hline
+      \textbf{Escenarios alternativos} & \smallskip 5.a. Los datos introducidos no son válidos:\\
+      & \hspace{0.3cm} 5.a.1. El sistema muestra el mensaje de error correspondiente.\\
+      & \hspace{0.3cm} 5.a.2. Vuelve al paso 4.\\
+      & \\
+      \hline
+    \end{tabularx}
+    \caption{UC-37: Gestión de servicios: Editar rango de cita}
+  \end{center}
+\end{table}
+
+
 
 \subsection{Actores} 
-En este apartado se describirán los diferentes roles que juegan los usuarios que interactúan con el sistema. Los actores pueden ser roles de personas físicas, sistemas externos o incluso el tiempo (eventos temporales).
+En este apartado se describirán los diferentes roles que juegan los usuarios que interactúan con el sistema. Los actores pueden ser roles de personas fí­sicas, sistemas externos o incluso el tiempo (eventos temporales).
 
 \section{Modelo de Comportamiento}
 A partir de los casos de uso anteriores, se crea el modelo de comportamiento. Para ello, se realizarán los diagramas de secuencia del sistema, donde se identificarán las operaciones o servicios del sistema. Luego, se detallará el contrato de las operaciones identificadas.
 
 \section{Modelo de Interfaz de Usuario}
-En esta sección se deberá incluir un prototipo de baja fidelidad o mockup de la interfaz de usuario del sistema. Además, es preciso elaborar un diagrama de navegación, reflejando la secuencia de pantallas a las que tienen acceso los diferentes roles de usuario y la conexión entre éstas.
+En esta sección se deberá incluir un prototipo de baja fidelidad o mockup de la interfaz de usuario del sistema. Además, es preciso elaborar un diagrama de navegación, reflejando la secuencia de pantallas a las que tienen acceso los diferentes roles de usuario y la conexión entre estas.

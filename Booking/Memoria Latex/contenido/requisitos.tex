@@ -1,3 +1,4 @@
+% !TEX encoding = UTF-8 Unicode
 % ------------------------------------------------------------------------------
 % Este fichero es parte de la plantilla LaTeX para la realización de Proyectos
 % Final de Grado, protegido bajo los términos de la licencia GFDL.
@@ -7,50 +8,159 @@
 % Copyright (C) 2012 SPI-FM. Universidad de Cádiz
 % ------------------------------------------------------------------------------
 
-En esta sección se detalla la situación actual de la organización y las necesidades de la misma, que originan el desarrollo o mejora de un sistema informático. Luego se presentan los objetivos y el catálogo de requisitos del nuevo sistema. Finalmente se describen las diferentes alternativas tecnológicas y el análisis de la brecha entre los requisitos planteados y la solución base seleccionada, si aplica.
+En esta sección se detalla la situación actual de la organización y las necesidades de la misma, que originan el desarrollo o mejora de un sistema informático. Seguidamente se presentan los objetivos y el catálogo de requisitos del nuevo sistema. Finalmente se describen las tecnologías a usar en la solución al problema.
 
 \section{Situación actual} 
-Esta sección debe contener información sobre la situación actual de la organización para la que se va a desarrollar el sistema software.
 
-\subsection{Procesos de Negocio}
-Esta sección debe contener información sobre los modelos de procesos de negocio actuales, que suelen ser la base de los modelos de procesos de negocio a implantar.
+Como se especificó en la sección \ref{sec:introducción}, actualmente \textsl{CoreSport} no consta de proceso telemático alguno para la gestión de usuarios y actividades, por tanto, todos los datos de los servicios que se ofrecen, grupos, citas, etc. quedan registrados en papel con sus respectivas consecuencias, como pueden ser: dificultad para la gestión y el mantenimiento de la información, menor comodidad para el usuario a la hora de obtener información o gestionar sus servicios, mayor tiempo empleado tanto para los administradores del centro como para los usuarios del mismo a la hora de realizar este tipo de gestiones, etc.
+\\
+
+La organización dispone, sin embargo, de un software de contabilidad para la gestión de pagos mensuales y puntuales de los usuarios. Este seguirá en uso una vez el producto resultante del PFC entre en producción, por lo que este no incluirá una sección destinada a tal efecto.
+
+\subsection{Procesos de Negocio}\label{subsec:procesosnegocios}
+
+Asimilando que la organización no posee ningún proceso informático para la gestión deseada, analizaremos el proceso seguido para este fin. 
+\\
+
+Toda la información de los servicios, usuarios que van a usarlos, horarios, etc., se mantienen en papel. Básicamente, por cada mes se posee un listado de los grupos de actividades colectivas con todos los clientes que pertenecen a ellos, consultando así las plazas libres buscando el grupo correspondiente y apuntando o eliminando usuarios del mismo sobre el papel. \\
+Respecto a las citas para el resto de servicios, se gestionan mediante agenda, donde se apunta cada una de ellas, incluyendo servicio, hora y usuario e, igualmente al caso anterior, se consulta si se puede dar cita a una determinada hora para un determinado servicio. 
+\\
+
+Como se ha mencionado anteriormente en este documento, la empresa posee un software específico para la gestión de pagos, siendo este el único medio telemático que almacena los datos de usuarios del centro.
+
 
 \subsection{Entorno Tecnológico}
-Esta sección debe contener información general sobre el entorno tecnológico en la organización del cliente antes del comienzo del desarrollo del sistema software, incluyendo hardware, redes, software, etc.
+
+Al ser un centro pequeño con escasos socios y trabajadores, el entorno tecnológico de la organización es bastante reducido: El ordenador principal está situado en la recepción del centro, el cual posee el software de gestión de pagos mencionado y periféricos básicos junto a un datáfono para cobro de cuotas y servicios. Aparte de esto, varios de los administradores hacen uso de sus propios portátiles como herramienta de trabajo, ya sea para seguimiento de los clientes en algunos servicios, realizar dietas, como herramienta de comunicación, investigación, etc. 
+\\
+
+El centro también posee conexión wifi para uso interno.
+\\
+
+Asimismo, poseen también una página web realizada a través una plataforma de desarrollo de webs, mediante una de las plantillas que ofrecían.
+
 
 \subsection{Fortalezas y Debilidades}
-Esta sección debe contener información sobre los aspectos positivos y negativos del negocio actual de la organización para la que se va a desarrollar el sistema software.
+
+Como fortaleza, cabe destacar que se trata de una empresa en crecimiento, con buenos profesionales del sector. Tanto es así, que se han visto obligado a trasladarse a un centro más amplio y con mejores instalaciones que el anterior, debido al incremento de usuarios y de servicios ofertados.
+\\
+
+Su principal debilidad podría recaer en la falta de un software para la gestión de usuarios y servicios, situación que genera la creación del producto de este PFC. Decir que la organización del centro y sus trabajadores, usando este tipo de procesos para la información, ha funcionado de manera eficaz hasta el momento.
+
 
 \section{Necesidades de Negocio}
-Esta sección debe contener información sobre los objetivos de negocio de clientes y usuarios, incluyendo los modelos de procesos de negocio a implantar.
 
-\subsection{Objetivos de Negocio}
-Esta sección debe contener los objetivos de negocio que se esperan alcanzar cuando el sistema software a desarrollar esté en producción.
+Los procesos de negocios que la aplicación reflejará son los explicados anteriormente en el punto \ref{subsec:procesosnegocios}, pero en este caso de una forma informatizada, donde los clientes toman también cierto protagonismo a la hora de la gestión tanto de los servicios, como de los propios usuarios.
 
-\subsection{Procesos de Negocio}
-Esta sección, debe contener los modelos de procesos de negocio a implantar, que normalmente son los modelos de procesos de negocio actuales con ciertas mejoras.
 
 \section{Objetivos del Sistema}
-Esta sección debe contener la especificación de los objetivos o requisitos generales del sistema.
+
+De acuerdo a lo tratado hasta el momento, los principales objetivos a cumplir serían los siguientes: 
+
+\begin{itemize}
+\item Creación de una página web conteniendo información referente a la organización, sus servicios, contacto, etc. 
+\item Desarrollo de un sistema online que ofrezca al menos: 
+\begin{itemize}
+\item Gestión de clientes.
+\item Gesión de administradores.
+\item Gestión de servicios por parte de clientes y administradores, incluyendo entrenamiento grupal, individual y citas entre otros servicios.
+\item Comunicación entre usuarios.
+\end {itemize}
+\end{itemize}
+
 
 \section{Catálogo de Requisitos}
-Esta sección debe contener la descripción del conjunto de requisitos específicos del sistema a desarrollar para satisfacer las necesidades de negocio del cliente.
 
-\subsection{Requisitos funcionales}
-Descripción completa de la funcionalidad que ofrece el sistema. 
+\subsection{Requisitos funcionales.}\label{subsec:requisitosfuncionales}
+
+Los requisitos funcionales que debe cumplir el sistema son los siguientes: 
+
+\begin{itemize}
+\item Seleccionar idioma.
+\item Registro.
+\item Login.
+\item Restablecer contraseña.
+\item Logout.
+\item Cambiar contraseña.
+\item Modificar datos de usuario.
+\item Comunicarse con otros usuarios del sistema.
+\item Gestionar clases, citas y otros servicios (alta, baja y modificación).
+\item Calendario de actividades.
+\item Notificaciones, tales como nuevos emails.
+\item Registro de operaciones llevadas a cabo en el sistema.
+\item Siguientes opciones para administradores:
+\begin{itemize}
+\item Gestión de usuarios (suspender, activar y modificar).
+\item Gestión de administradores (total para administrador del sistema y limitada para administradores de la organización).
+\item Gestión de servicios (alta, baja y modificación).
+\end{itemize}
+\end{itemize}
+
 
 \subsection{Requisitos no funcionales}
-Descripción de otros requisitos (relacionados con la calidad del software) que el sistema deberá satisfacer: portabilidad, seguridad, estándares de obligado cumplimiento, accesibilidad, usabilidad, etc.
+
+Los requisitos no funcionales que debe cumplir el producto final del PFC estarán relaciones con la calidad del software, seguridad, etc., especificándose cada uno de ellos a continuación: 
+
+\begin{itemize}
+\item Disponibilidad: El sistema deberá estar disponible las 24 horas del día. Esto dependerá del servidor externo donde se aloje el producto, aunque en regla general será un requisito que podrá cumplirse. \\
+Será accesible desde cualquier dispositivo con acceso a Internet y opción de navegación.
+\item Fiabilidad: Deberá ser una aplicación fiable para todo tipo de usuario, que no presente errores y contenga un mínimo de seguridad, tanto en posibles ataques como en la gestión de la base de datos. Para ello, las contraseñas se almacenarán encriptadas con un algoritmo adecuado y se gestionará el acceso de usuario mediante sesión y funciones habilitadas dependiendo de su rol. 
+\item Internacionalización del producto, al menos disponible en español e inglés.
+\item Alto grado de usabilidad, ya que el software será utilizado por una gran variedad de perfiles de usuario. Se mantendrá una interfaz intuitiva y de fácil acceso y uso.
+\item Mantenibilidad:  Poseerá un fácil mantenimiento del software, ya que prácticamente no requerirá acción alguna. Además, el código tiene en cuenta la escalabilidad del producto y se podrá modificar o añadir funcionalidades de forma cómoda e intuitiva para el desarrollador.  
+\end{itemize}
+
 
 \subsection{Reglas de negocio}
-En el desarrollo del sistema, hay que tener en cuenta las denominadas reglas de negocio, es decir, el conjunto de restricciones, normas o políticas de la organización que deben ser respetadas por el sistema, las cuales suelen ser cambiantes.
+
+Respecto a las reglas de negocio, la organización especifica simplemente: 
+
+\begin{itemize}
+\item El producto final deberá ser de acceso online para estar disponible desde cualquier ubicación en cualquier momento.
+\item Hacer visible los términos y condiciones del uso de la aplicación, que pueden ser cambiantes.
+\end{itemize}
+
 
 \subsection{Requisitos de información}
-En esta sección se describen los requisitos de gestión de información (datos) que el sistema debe gestionar.
 
-\section{Alternativas de Solución}
-En esta sección, se debe ofrecer un estudio del arte de las diferentes alternativas tecnológicas que permitan satisfacer los requerimientos del sistema, para luego seleccionar (si procede) la herramienta o conjunto de herramientas que utilizaremos como base para el software a desarrollar.
+El sistema gestionará datos de usuarios y de los servicios que ofrece la empresa. 
+\\
+De los usuarios, se recogerán los siguientes campos obligatorios: 
+
+\begin{itemize}
+\item Nombre y apellidos.
+\item Correo electrónico.
+\item Contraseña.
+\end{itemize}
+
+Y opcionales:
+
+\begin{itemize}
+\item Teléfono.
+\item Dirección.
+\item Ciudad.
+\item País.
+\item Código Postal.
+\end{itemize}
+
+Respecto a los servicios, se guardarán los siguientes datos: 
+
+\begin{itemize}
+\item Nombre del servicio.
+\item Descripción.
+\item Grupos de usuarios, en caso aplicable / Usuario individual en otros casos.
+\item Horarios en los que se ofrece el servicio.
+\end{itemize}
+
+
 
 \section{Solución Propuesta}
-Si se ha optado por utilizar un software de base, debemos identificar y medir las diferencias entre lo que proporciona este software y los requisitos definidos para el proyecto.\\
-El resultado de este análisis permitirá identificar cuáles de éstos requisitos ya están solventados total o parcialmente por el sistema base y cuales tendremos que diseñar e implementar la propuesta de solución.
+
+El producto que se desarrollará en este PFC consistirá en una aplicación web donde, tanto administradores como clientes, interactuarán para lograr una gestión óptima de usuarios y servicios. Estará basado en los procesos de negocios explicados en \ref{subsec:procesosnegocios}, con la diferencia que será un proceso informatizado accesible las 24 horas del día desde cualquier localización. 
+\\
+
+Cada usuario tendrá acceso a sus datos y a los servicios ofrecidos por la organización para su gestión, así como los administradores podrán realizar acciones similares con la ventaja de poder gestionar no sólo sus datos y los servicios del centro, si no los de cada uno de los clientes, ofreciendo así una aplicación de gestión completa y personalizada, con posibilidad de alta, baja y modificación de usuarios y servicios en tiempo real.
+\\
+
+Se hará uso de un servidor de aplicaciones para el alojamiento del producto, así como de una base de datos para el almacenamiento de la información. Ambos serán externos a la organización, contratando uno de tantos servicios ofrecidos en la red que posean las cualidades y seguridad deseada para tal fin. 
+

@@ -12,10 +12,14 @@
 \documentclass[a4paper,11pt]{book}
 
 % PAQUETES
+\usepackage[spanish]{babel} % para escribir en español
 \usepackage{./estilo/paquetes}
 \usepackage{./estilo/colores}
 \usepackage{./estilo/comandos}
 \usepackage[utf8]{inputenc}
+\usepackage{multirow, array} % para las tablas
+\usepackage{float} % para usar [H]
+\usepackage{tabularx} % para el ancho de tablas
 
 % Ruta al directorio de imágenes
 \graphicspath{{./img/}} 
@@ -76,8 +80,8 @@ El segundo capí­tulo debe incluir una planificación del proyecto. La planific
 \chapter{Requisitos del Sistema}
 \input{./contenido/requisitos}
 
-%\chapter{Análisis del Sistema}
-%\input{./contenido/analisis}
+\chapter{Análisis del Sistema}
+\input{./contenido/analisis}
 
 %\chapter{Diseño del Sistema}
 %\input{./contenido/diseno}

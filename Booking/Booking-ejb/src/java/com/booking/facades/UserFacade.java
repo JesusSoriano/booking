@@ -53,7 +53,6 @@ public class UserFacade extends AbstractFacade<User> {
         user.setEmail(email);
         user.setPassword(password);
         user.setStatus(Status.ACTIVATED);
-        user.setTermsVersionAccepted(false);
         user.setPhone(phone);
         user.setAddress(address);
 
@@ -85,13 +84,6 @@ public class UserFacade extends AbstractFacade<User> {
 //        em.merge(user.getUserRole());
         
         edit(user);
-    }
-
-    public User setTermsVersionAccepted(User user) {
-        user.setTermsVersionAccepted(true);
-        edit(user);
-
-        return user;
     }
 
     public void activateUser(User user) {

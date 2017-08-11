@@ -54,14 +54,9 @@ public class TermsAndConditionsController implements Serializable {
      */
     public void TNCDone() {
         String outcome = "";
-        System.out.println("-------- tNcCheckVisible: " + tNcCheckVisible);
         if (tNcCheckVisible) {
-            System.out.println("-------- tncAccepted: " + tncAccepted);
             if (tncAccepted) {
-                System.out.println("-------- currentUser: " + currentUser);
                 if (currentUser != null) {
-                    userFacade.setTermsVersionAccepted(currentUser);
-                    System.out.println("-------- setTermsVersionAccepted: " + true);
 
                     // login
                     HttpServletRequest request = FacesUtil.getRequest();
@@ -72,11 +67,8 @@ public class TermsAndConditionsController implements Serializable {
                     }
 
                     try {
-                        System.out.println("------ request");
                         request.getSession(true);
-                        System.out.println("------- session");
                         request.login(currentUser.getEmail(), currentUser.getPassword());
-                        System.out.println("------- login");
                         FacesUtil.setSessionAttribute(Constants.CURRENT_USER, currentUser);
                     } catch (Exception ex) {
                         Logger.getLogger(TermsAndConditionsController.class.getName()).log(Level.SEVERE, null, ex);

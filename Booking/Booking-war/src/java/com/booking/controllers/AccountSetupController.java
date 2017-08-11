@@ -47,6 +47,7 @@ public class AccountSetupController implements Serializable {
     private String city;
     private String country;
     private String postcode;
+    private boolean tncAccepted;
 
     /**
      * Creates a new instance of AccountSetupController
@@ -133,7 +134,7 @@ public class AccountSetupController implements Serializable {
             }
 
             FacesUtil.setSessionAttribute(Constants.CURRENT_USER, newUser);
-            return "terms-and-conditions.xhtml";
+            return homePage(newUser);
         } catch (NoSuchAlgorithmException | InvalidKeySpecException ex) {
             Logger.getLogger(AccountSetupController.class.getName()).log(Level.SEVERE, null, ex);
             FacesUtil.addErrorMessage("registrationForm", "Lo sentimos, ha habido un error. Inténtelo de nuevo más tarde.");
@@ -141,6 +142,25 @@ public class AccountSetupController implements Serializable {
         }
     }
 
+    
+    private String homePage(User newUser) {
+        Role userRole = newUser.getUserRole().getRole();
+        switch (userRole) {
+            case USER: {
+                return "/client/home.xhtml";
+            }
+            case ADMIN: {
+                return "/admin/home.xhtml";
+            }
+            case SUPER_ADMIN: {
+                return "/super-admin/home.xhtml";
+            }
+            default: {
+                return "";
+            }
+        }
+    }
+    
     public String getPassword() {
         return password;
     }
@@ -237,4 +257,11 @@ public class AccountSetupController implements Serializable {
         this.postcode = postcode;
     }
 
+    public boolean isTncAccepted() {
+        return tncAccepted;
+    }
+
+    public void setTncAccepted(boolean tncAccepted) {
+        this.tncAccepted = tncAccepted;
+    }
 }

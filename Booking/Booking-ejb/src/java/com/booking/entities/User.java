@@ -54,8 +54,6 @@ public class User implements Serializable {
     private Date createdDate;
     @Column(name = "phone")
     private String phone;
-    @Column(name = "terms_version_accepted")
-    private boolean termsVersionAccepted;
     @Column(name = "application_language")
     private String applicationLanguage;
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "user", cascade = {CascadeType.REMOVE, CascadeType.PERSIST, CascadeType.MERGE})
@@ -76,10 +74,6 @@ public class User implements Serializable {
 
     public String getHashId() {
         return hashId;
-    }
-
-    public boolean isTermsVersionAccepted() {
-        return termsVersionAccepted;
     }
 
     public void setHashId(String hashId) {
@@ -132,14 +126,6 @@ public class User implements Serializable {
 
     public void setCreatedDate(Date createdDate) {
         this.createdDate = createdDate;
-    }
-
-    public boolean getTermsVersionAccepted() {
-        return termsVersionAccepted;
-    }
-
-    public void setTermsVersionAccepted(boolean termsVersionAccepted) {
-        this.termsVersionAccepted = termsVersionAccepted;
     }
 
     public UserRole getUserRole() {

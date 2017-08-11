@@ -100,12 +100,6 @@ public class LoginController implements Serializable {
                 return;
             }
 
-            if (!currentUser.isTermsVersionAccepted()) {
-                FacesUtil.setSessionAttribute(Constants.CURRENT_USER, currentUser);
-                FacesUtil.redirectTo("terms-and-conditions.xhtml");
-                return;
-            }
-
             HttpServletRequest request = FacesUtil.getRequest();
             try {
                 request.logout();

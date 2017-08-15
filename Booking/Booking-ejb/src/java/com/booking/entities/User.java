@@ -37,8 +37,6 @@ public class User implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private long id;
-    @Column(name = "hash_id")
-    private String hashId;
     @Column(name = "first_name")
     private String firstName;
     @Column(name = "first_last_name")
@@ -70,14 +68,6 @@ public class User implements Serializable {
 
     public long getId() {
         return id;
-    }
-
-    public String getHashId() {
-        return hashId;
-    }
-
-    public void setHashId(String hashId) {
-        this.hashId = hashId;
     }
 
     public String getFirstName() {

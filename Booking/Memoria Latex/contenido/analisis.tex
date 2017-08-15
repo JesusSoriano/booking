@@ -12,8 +12,17 @@
 Esta sección cubre el análisis del sistema de información a desarrollar, haciendo uso del lenguaje de modelado UML.
 
 \section{Modelo Conceptual}
-A partir de los requisitos de información, se desarrollará un diagrama conceptual de clases UML, identificando las clases, atributos, relaciones, restricciones adicionales y reglas de derivación necesarias.
 
+El diagrama conceptual de clases UML que muestra la figura \ref{fig:modelo-conceptual} es la presentación gráfica de las clases necesarias para llegar a la solución del problema deseada, así como sus atributos, relaciones, etc. Nos basaremos en él para la posterior programación del software, donde cada clase del diagrama UML quedará representada por una clase Java. 
+
+\vspace{15mm}
+
+\begin{figure}[h!]
+\centering
+  \includegraphics[scale=.35]{img/modelo-conceptual.jpeg}
+  \caption{Modelo Conceptual de Clases UML}
+  \label{fig:modelo-conceptual}
+\end{figure}
 
 
 \section{Modelo de Casos de Uso}
@@ -78,7 +87,7 @@ A continuación se describirán los principales casos de uso que se llevarán a 
       & \\
       \hline
     \end{tabularx}
-    \caption{UC-02: Registro}
+    \caption{UC-02: Gestión de usuarios: Registro}
     \label{tab:CU-registro}
   \end{center}
 \end{table}
@@ -110,7 +119,8 @@ A continuación se describirán los principales casos de uso que se llevarán a 
       & \\
       \hline
     \end{tabularx}
-    \caption{UC-03: Login}
+    \caption{UC-03: Gestión de usuarios: Login}
+    \label{tab:CU-login}
   \end{center}
 \end{table}
 
@@ -150,7 +160,8 @@ A continuación se describirán los principales casos de uso que se llevarán a 
       & \\
       \hline
     \end{tabularx}
-    \caption{UC-04: Recuperar contraseña}
+    \caption{UC-04: Gestión de usuarios: Recuperar contraseña}
+    \label{tab:CU-restablecer-contrasena}
   \end{center}
 \end{table}
 
@@ -177,7 +188,8 @@ A continuación se describirán los principales casos de uso que se llevarán a 
       & \\
       \hline
     \end{tabularx}
-    \caption{UC-05: Cerrar sesión}
+    \caption{UC-05: Gestión de usuarios: Cerrar sesión}
+    \label{tab:CU-cerrar-sesion}
   \end{center}
 \end{table}
 
@@ -207,7 +219,8 @@ A continuación se describirán los principales casos de uso que se llevarán a 
       & \\
       \hline
     \end{tabularx}
-    \caption{UC-06: Cambiar contraseña}
+    \caption{UC-06: Gestión de usuarios: Cambiar contraseña}
+    \label{tab:CU-cambiar-contrasena}
   \end{center}
 \end{table}
 
@@ -220,7 +233,7 @@ A continuación se describirán los principales casos de uso que se llevarán a 
       \hline
       \textbf{Descripción} & Modificación de los datos del usuario.\\
       \hline
-      \textbf{Actores} & Usuario.\\
+      \textbf{Actores} & Usuario, administrador o superadministrador..\\
       \hline
       \textbf{Precondiciones} & Debe ser un usuario previamente identificado en el sistema.\\
       \hline
@@ -239,7 +252,8 @@ A continuación se describirán los principales casos de uso que se llevarán a 
       & \\
       \hline
     \end{tabularx}
-    \caption{UC-07: Editar perfil}
+    \caption{UC-07: Gestión de usuarios: Editar perfil}
+    \label{tab:CU-editar-perfil}
   \end{center}
 \end{table}
 
@@ -267,7 +281,8 @@ A continuación se describirán los principales casos de uso que se llevarán a 
       & \\
       \hline
     \end{tabularx}
-    \caption{UC-08: Leer correo interno}
+    \caption{UC-08: Gestión de servicios: Leer correo interno}
+    \label{tab:CU-leer-correo}
   \end{center}
 \end{table}
 
@@ -297,7 +312,8 @@ A continuación se describirán los principales casos de uso que se llevarán a 
       & \\
       \hline
     \end{tabularx}
-    \caption{UC-09: Mandar un correo}
+    \caption{UC-09: Gestión de servicios: Mandar un correo}
+    \label{tab:CU-mandar-correo}
   \end{center}
 \end{table}
 
@@ -326,6 +342,7 @@ A continuación se describirán los principales casos de uso que se llevarán a 
       \hline
     \end{tabularx}
     \caption{UC-10: Notificaciones}
+    \label{tab:CU-notificaciones}
   \end{center}
 \end{table}
 
@@ -357,6 +374,7 @@ A continuación se describirán los principales casos de uso que se llevarán a 
       \hline
     \end{tabularx}
     \caption{UC-11: Gestión de servicios: Reservar plaza en una clase}
+    \label{tab:CU-reservar-clase}
   \end{center}
 \end{table}
 
@@ -387,6 +405,7 @@ A continuación se describirán los principales casos de uso que se llevarán a 
       \hline
     \end{tabularx}
     \caption{UC-12: Gestión de servicios: Cancelación de reserva de una clase}
+    \label{tab:CU-cancelar-reserva-clase}
   \end{center}
 \end{table}
 
@@ -423,6 +442,7 @@ A continuación se describirán los principales casos de uso que se llevarán a 
       \hline
     \end{tabularx}
     \caption{UC-13: Gestión de servicios: Solicitar cita}
+    \label{tab:CU-solicitar-cita}
   \end{center}
 \end{table}
 
@@ -453,6 +473,7 @@ A continuación se describirán los principales casos de uso que se llevarán a 
       \hline
     \end{tabularx}
     \caption{UC-14: Gestión de servicios: Responder a solicitud de cita}
+    \label{tab:CU-responder-solicitud-cita}
   \end{center}
 \end{table}
 
@@ -465,7 +486,7 @@ A continuación se describirán los principales casos de uso que se llevarán a 
       \hline
       \textbf{Descripción} & Cancelación de una cita o solicitud de cita por parte del propio usuario. \\
       \hline
-      \textbf{Actores} & Usuario.\\
+      \textbf{Actores} & Usuario, administrador o superadministrador..\\
       \hline
       \textbf{Precondiciones} & El usuario debe haberse identificado previamente.\\
       \hline
@@ -483,6 +504,7 @@ A continuación se describirán los principales casos de uso que se llevarán a 
       \hline
     \end{tabularx}
     \caption{UC-15: Gestión de servicios: Cancelar cita}
+    \label{tab:CU-cancelar-cita}
   \end{center}
 \end{table}
 
@@ -495,7 +517,7 @@ A continuación se describirán los principales casos de uso que se llevarán a 
       \hline
       \textbf{Descripción} & Cancelación de una cita por parte del administrador. \\
       \hline
-      \textbf{Actores} & Administrador.\\
+      \textbf{Actores} & Administrador o superadministrador..\\
       \hline
       \textbf{Precondiciones} & El usuario debe haberse identificado previamente como administrador.\\
       \hline
@@ -513,6 +535,7 @@ A continuación se describirán los principales casos de uso que se llevarán a 
       \hline
     \end{tabularx}
     \caption{UC-16: Gestión de servicios: Cancelar cita de un usuario}
+    \label{tab:CU-cancelar-cita-admin}
   \end{center}
 \end{table}
 
@@ -525,7 +548,7 @@ A continuación se describirán los principales casos de uso que se llevarán a 
       \hline
       \textbf{Descripción} & El usuario dispondrá de un calendario donde ver todas las clases y citas. \\
       \hline
-      \textbf{Actores} & Usuario.\\
+      \textbf{Actores} & Usuario, administrador o superadministrador..\\
       \hline
       \textbf{Precondiciones} & El usuario debe haberse identificado previamente.\\
       \hline
@@ -539,7 +562,8 @@ A continuación se describirán los principales casos de uso que se llevarán a 
       & \\
       \hline
     \end{tabularx}
-    \caption{UC-17: Calendario de actividades}
+    \caption{UC-17: Gestión de servicios: Calendario de actividades}
+    \label{tab:CU-calendario}
   \end{center}
 \end{table}
 
@@ -566,7 +590,8 @@ A continuación se describirán los principales casos de uso que se llevarán a 
       & \\
       \hline
     \end{tabularx}
-    \caption{UC-18: Consultar mis reservas}
+    \caption{UC-18: Gestión de servicios: Consultar mis reservas}
+    \label{tab:CU-reservas}
   \end{center}
 \end{table}
 
@@ -579,7 +604,7 @@ A continuación se describirán los principales casos de uso que se llevarán a 
       \hline
       \textbf{Descripción} & El sistema notificará acciones como nuevo correo recibido, cita o clase cancelada, etc. \\
       \hline
-      \textbf{Actores} & Usuario.\\
+      \textbf{Actores} & Usuario, administrador o superadministrador..\\
       \hline
       \textbf{Precondiciones} & El usuario debe haberse identificado previamente.\\
       \hline
@@ -594,6 +619,7 @@ A continuación se describirán los principales casos de uso que se llevarán a 
       \hline
     \end{tabularx}
     \caption{UC-19: Notificaciones}
+    \label{tab:CU-notificaciones}
   \end{center}
 \end{table}
 
@@ -622,6 +648,7 @@ A continuación se describirán los principales casos de uso que se llevarán a 
       \hline
     \end{tabularx}
     \caption{UC-20: Auditoría}
+    \label{tab:CU-auditorias}
   \end{center}
 \end{table}
 
@@ -632,13 +659,13 @@ A continuación se describirán los principales casos de uso que se llevarán a 
       \hline
       \textbf{UC-21} & \textbf{Auditoría para administradores}\\
       \hline
-      \textbf{Descripción} & Registro de operaciones llevadas a cabo en el sistema por los usuario.\\
+      \textbf{Descripción} & Registro de operaciones llevadas a cabo en el sistema por el administrador o los usuarios.\\
       \hline
       \textbf{Actores} & Administrador o superadministrador.\\
       \hline
       \textbf{Precondiciones} & Debe ser un usuario previamente identificado como administrador o superadministrador.\\
       \hline
-      \textbf{Postcondiciones} & El sistema mostrará las acciones llevadas a cabo por el usuario seleccionado en las fechas indicadas.\\
+      \textbf{Postcondiciones} & El sistema mostrará las acciones llevadas a cabo por el el propio administrador o un usuario seleccionado en las fechas indicadas.\\
       \hline
       \textbf{Escenario principal} & \smallskip 1. El sistema mostrará la página correspondiente al histórico de acciones.\\
       & 2. El administrador seleccionará el periodo del que desea ver las acciones llevadas a cabo, así como el usuario y el tipo de acción si lo desea.\\
@@ -650,6 +677,7 @@ A continuación se describirán los principales casos de uso que se llevarán a 
       \hline
     \end{tabularx}
     \caption{UC-21: Auditoría para administradores}
+    \label{tab:CU-auditorias-admin}
   \end{center}
 \end{table}
 
@@ -658,7 +686,7 @@ A continuación se describirán los principales casos de uso que se llevarán a 
   \begin{center}
     \begin{tabularx}{16.4cm}{|l|X|}
       \hline
-      \textbf{UC-22} & \textbf{Gestión de usuarios: activar o suspender}\\
+      \textbf{UC-22} & \textbf{Activar o suspender usuario}\\
       \hline
       \textbf{Descripción} & Activar o suspender a un usuario específico.\\
       \hline
@@ -677,7 +705,8 @@ A continuación se describirán los principales casos de uso que se llevarán a 
       & \\
       \hline
     \end{tabularx}
-    \caption{UC-22: Gestión de usuarios: activar o suspender}
+    \caption{UC-22: Gestión de usuarios: Activar o suspender}
+    \label{tab:CU-activar-suspender-usuario}
   \end{center}
 \end{table}
 
@@ -686,26 +715,27 @@ A continuación se describirán los principales casos de uso que se llevarán a 
   \begin{center}
     \begin{tabularx}{16.4cm}{|l|X|}
       \hline
-      \textbf{UC-23} & \textbf{Gestión de usuarios: ver o mandar correo}\\
+      \textbf{UC-23} & \textbf{Ver perfil}\\
       \hline
-      \textbf{Descripción} & Ver el perfil o mandar email a usuarios.\\
+      \textbf{Descripción} & Los administrador podrán ver el perfil de los usuarios del sistema.\\
       \hline
       \textbf{Actores} & Administrador o superadministrador.\\
       \hline
       \textbf{Precondiciones} & Debe ser un usuario previamente identificado como administrador o superadministrador.\\
       \hline
-      \textbf{Postcondiciones} & El administrador podrá ver el perfil o mandar un mensaje interno al usuario seleccionado.\\
+      \textbf{Postcondiciones} & El administrador podrá ver el perfil del usuario seleccionado.\\
       \hline
       \textbf{Escenario principal} & \smallskip 1. El sistema muestra el listado de usuarios del sistema.\\
-      & 2. El administrador navega por la lista y selecciona la acción correspondiente en la casilla del usuario en cuestión.\\
-      & 3. El sistema redirecciona al administrador a la página correspondiente para realizar la acción deseada (perfil del usuario o redactar correo).\\
+      & 2. El administrador navega por la lista y selecciona la acción del usuario en cuestión.\\
+      & 3. El sistema redirecciona al administrador a la página del perfil del usuario.\\
       & \\
       \hline
       \textbf{Escenarios alternativos} & \\
       & \\
       \hline
     \end{tabularx}
-    \caption{UC-23: Gestión de usuarios: ver o mandar correo}
+    \caption{UC-23: Gestión de usuarios: Ver perfil}
+    \label{tab:CU-ver-perfil-admin}
   \end{center}
 \end{table}
 
@@ -714,9 +744,9 @@ A continuación se describirán los principales casos de uso que se llevarán a 
   \begin{center}
     \begin{tabularx}{16.4cm}{|l|X|}
       \hline
-      \textbf{UC-24} & \textbf{Gestión de usuarios: editar usuario}\\
+      \textbf{UC-24} & \textbf{Editar usuario}\\
       \hline
-      \textbf{Descripción} & Modificación de los datos de usuarios.\\
+      \textbf{Descripción} & Modificación de los datos de usuarios por parte del administrador.\\
       \hline
       \textbf{Actores} & Administrador o superadministrador.\\
       \hline
@@ -737,7 +767,8 @@ A continuación se describirán los principales casos de uso que se llevarán a 
       & \\
       \hline
     \end{tabularx}
-    \caption{UC-24: Gestión de usuarios: editar usuario}
+    \caption{UC-24: Gestión de usuarios: Editar usuario}
+    \label{tab:CU-editar-usuario}
   \end{center}
 \end{table}
 
@@ -748,7 +779,7 @@ A continuación se describirán los principales casos de uso que se llevarán a 
       \hline
       \textbf{UC-25} & \textbf{Ver administrador}\\
       \hline
-      \textbf{Descripción} & Gestión de administradores: ver datos de los administradores. \\
+      \textbf{Descripción} & Ver perfil de administradores. \\
       \hline
       \textbf{Actores} & Administrador o superadministrador.\\
       \hline
@@ -765,7 +796,8 @@ A continuación se describirán los principales casos de uso que se llevarán a 
       & \\
       \hline
     \end{tabularx}
-    \caption{UC-25: Gestión de administradores: ver datos de los administradores}
+    \caption{UC-25: Gestión de administradores: Ver perfil de administradores}
+    \label{tab:CU-ver-perfil-de-admin}
   \end{center}
 \end{table}
 
@@ -774,43 +806,15 @@ A continuación se describirán los principales casos de uso que se llevarán a 
   \begin{center}
     \begin{tabularx}{16.4cm}{|l|X|}
       \hline
-      \textbf{UC-26} & \textbf{Mandar email a administradores}\\
+      \textbf{UC-26} & \textbf{Activar o suspender administrador}\\
       \hline
-      \textbf{Descripción} & Gestión de administradores: mandar correo. \\
-      \hline
-      \textbf{Actores} & Administrador o superadministrador.\\
-      \hline
-      \textbf{Precondiciones} & Debe ser un usuario previamente identificado como administrador o superadministrador.\\
-      \hline
-      \textbf{Postcondiciones} & El administrador podrá ver, activar, suspender o mandar un email al usuario seleccionado.\\
-      \hline
-      \textbf{Escenario principal} & \smallskip 1. El sistema muestra el listado de administradores del sistema.\\
-      & 2. El administrador navega por la lista y selecciona la acción correspondiente en la casilla del administrador en cuestión.\\
-      & 3. El sistema redirecciona al administrador a la página correspondiente para redactar un email al administrador seleccionado.\\
-      & \\
-      \hline
-      \textbf{Escenarios alternativos} & \\
-      & \\
-      \hline
-    \end{tabularx}
-    \caption{UC-26: Gestión de administradores: mandar correo}
-  \end{center}
-\end{table}
-
-
-\begin{table}[H]
-  \begin{center}
-    \begin{tabularx}{16.4cm}{|l|X|}
-      \hline
-      \textbf{UC-27} & \textbf{Suspender/activar administrador}\\
-      \hline
-      \textbf{Descripción} & Gestión de administradores: suspender/activar administrador. \\
+      \textbf{Descripción} & Activar o suspender administrador por parte del superadministrador. \\
       \hline
       \textbf{Actores} & Superadministrador.\\
       \hline
       \textbf{Precondiciones} & Debe ser un usuario previamente identificado como superadministrador.\\
       \hline
-      \textbf{Postcondiciones} & El superadministrador podrá ver, activar, suspender o mandar un email al usuario seleccionado.\\
+      \textbf{Postcondiciones} & El superadministrador podrá activar/suspender al administrador seleccionado.\\
       \hline
       \textbf{Escenario principal} & \smallskip 1. El sistema muestra el listado de administradores del sistema.\\
       & 2. El superadministrador navega por la lista y selecciona la acción correspondiente en la casilla del administrador en cuestión.\\
@@ -821,7 +825,8 @@ A continuación se describirán los principales casos de uso que se llevarán a 
       & \\
       \hline
     \end{tabularx}
-    \caption{UC-27: Gestión de administradores: suspender/activar administrador}
+    \caption{UC-26: Gestión de administradores: Activar o suspender administrador}
+    \label{tab:CU-activar-suspender-admin}
   \end{center}
 \end{table}
 
@@ -830,9 +835,9 @@ A continuación se describirán los principales casos de uso que se llevarán a 
   \begin{center}
     \begin{tabularx}{16.4cm}{|l|X|}
       \hline
-      \textbf{UC-28} & \textbf{Editar administrador}\\
+      \textbf{UC-27} & \textbf{Editar administrador}\\
       \hline
-      \textbf{Descripción} & Gestión de administradores: Modificación de los datos de administradores.\\
+      \textbf{Descripción} & Modificación de los datos de administradores.\\
       \hline
       \textbf{Actores} & Superadministrador.\\
       \hline
@@ -853,7 +858,8 @@ A continuación se describirán los principales casos de uso que se llevarán a 
       & \\
       \hline
     \end{tabularx}
-    \caption{UC-28: Gestión de administradores: editar administrador}
+    \caption{UC-27: Gestión de administradores: Editar administrador}
+    \label{tab:CU-editar-admin}
   \end{center}
 \end{table}
 
@@ -862,7 +868,7 @@ A continuación se describirán los principales casos de uso que se llevarán a 
   \begin{center}
     \begin{tabularx}{16.4cm}{|l|X|}
       \hline
-      \textbf{UC-29} & \textbf{Alta de servicio}\\
+      \textbf{UC-28} & \textbf{Alta de servicio}\\
       \hline
       \textbf{Descripción} & Añadir un servicio nuevo al sistema.\\
       \hline
@@ -885,7 +891,8 @@ A continuación se describirán los principales casos de uso que se llevarán a 
       & \\
       \hline
     \end{tabularx}
-    \caption{UC-29: Gestión de servicios: Alta de servicio}
+    \caption{UC-28: Gestión de servicios: Alta de servicio}
+    \label{tab:CU-alta-servicio}
   \end{center}
 \end{table}
 
@@ -894,9 +901,9 @@ A continuación se describirán los principales casos de uso que se llevarán a 
   \begin{center}
     \begin{tabularx}{16.4cm}{|l|X|}
       \hline
-      \textbf{UC-30} & \textbf{Suspender/activar servicio}\\
+      \textbf{UC-29} & \textbf{Activar o suspender servicio}\\
       \hline
-      \textbf{Descripción} & Suspender o activar uno de los servicios del sistema.\\
+      \textbf{Descripción} & Activar o suspender uno de los servicios del sistema.\\
       \hline
       \textbf{Actores} & Administrador o superadministrador.\\
       \hline
@@ -915,7 +922,8 @@ A continuación se describirán los principales casos de uso que se llevarán a 
       & \\
       \hline
     \end{tabularx}
-    \caption{UC-30: Gestión de servicios: Suspender/activar servicio}
+    \caption{UC-29: Gestión de servicios: Activar o suspender servicio}
+    \label{tab:CU-activar-suspender-servicio}
   \end{center}
 \end{table}
 
@@ -924,7 +932,7 @@ A continuación se describirán los principales casos de uso que se llevarán a 
   \begin{center}
     \begin{tabularx}{16.4cm}{|l|X|}
       \hline
-      \textbf{UC-31} & \textbf{Editar servicio}\\
+      \textbf{UC-30} & \textbf{Editar servicio}\\
       \hline
       \textbf{Descripción} & Editar uno de los servicios del sistema.\\
       \hline
@@ -947,7 +955,8 @@ A continuación se describirán los principales casos de uso que se llevarán a 
       & \\
       \hline
     \end{tabularx}
-    \caption{UC-31: Gestión de servicios: Editar servicio}
+    \caption{UC-30: Gestión de servicios: Editar servicio}
+    \label{tab:CU-editar-servicio}
   \end{center}
 \end{table}
 
@@ -956,7 +965,7 @@ A continuación se describirán los principales casos de uso que se llevarán a 
   \begin{center}
     \begin{tabularx}{16.4cm}{|l|X|}
       \hline
-      \textbf{UC-32} & \textbf{Alta de clase}\\
+      \textbf{UC-31} & \textbf{Alta de clase}\\
       \hline
       \textbf{Descripción} & Añadir una clase nueva al sistema. A partir de este momento, los usuarios podrán reservar plaza en esta actividad.\\
       \hline
@@ -979,7 +988,8 @@ A continuación se describirán los principales casos de uso que se llevarán a 
       & \\
       \hline
     \end{tabularx}
-    \caption{UC-32: Gestión de servicios: Alta de clase}
+    \caption{UC-31: Gestión de servicios: Alta de clase}
+    \label{tab:CU-alta-clase}
   \end{center}
 \end{table}
 
@@ -988,7 +998,7 @@ A continuación se describirán los principales casos de uso que se llevarán a 
   \begin{center}
     \begin{tabularx}{16.4cm}{|l|X|}
       \hline
-      \textbf{UC-33} & \textbf{Suspender/activar clase}\\
+      \textbf{UC-32} & \textbf{Activar o suspender clase}\\
       \hline
       \textbf{Descripción} & Suspender o activar uno de las clases de un determinado servicio del sistema.\\
       \hline
@@ -1007,7 +1017,8 @@ A continuación se describirán los principales casos de uso que se llevarán a 
       & \\
       \hline
     \end{tabularx}
-    \caption{UC-33: Gestión de servicios: Suspender/activar grupo}
+    \caption{UC-32: Gestión de servicios: Activar o suspender clase}
+    \label{tab:CU-activar-suspender-clase}
   \end{center}
 \end{table}
 
@@ -1016,7 +1027,7 @@ A continuación se describirán los principales casos de uso que se llevarán a 
   \begin{center}
     \begin{tabularx}{16.4cm}{|l|X|}
       \hline
-      \textbf{UC-34} & \textbf{Editar clase}\\
+      \textbf{UC-33} & \textbf{Editar clase}\\
       \hline
       \textbf{Descripción} & Editar uno de las clases del sistema.\\
       \hline
@@ -1039,7 +1050,8 @@ A continuación se describirán los principales casos de uso que se llevarán a 
       & \\
       \hline
     \end{tabularx}
-    \caption{UC-34: Gestión de servicios: Editar clase}
+    \caption{UC-33: Gestión de servicios: Editar clase}
+    \label{tab:CU-editar-clase}
   \end{center}
 \end{table}
 
@@ -1048,7 +1060,7 @@ A continuación se describirán los principales casos de uso que se llevarán a 
   \begin{center}
     \begin{tabularx}{16.4cm}{|l|X|}
       \hline
-      \textbf{UC-35} & \textbf{Alta de cita}\\
+      \textbf{UC-34} & \textbf{Alta de cita}\\
       \hline
       \textbf{Descripción} & Añadir una cita al sistema para un determinado servicio.\\
       \hline
@@ -1071,7 +1083,8 @@ A continuación se describirán los principales casos de uso que se llevarán a 
       & \\
       \hline
     \end{tabularx}
-    \caption{UC-35: Gestión de servicios: Alta de rango de cita}
+    \caption{UC-34: Gestión de servicios: Alta de cita}
+    \label{tab:CU-alta-cita}
   \end{center}
 \end{table}
 
@@ -1080,9 +1093,9 @@ A continuación se describirán los principales casos de uso que se llevarán a 
   \begin{center}
     \begin{tabularx}{16.4cm}{|l|X|}
       \hline
-      \textbf{UC-36} & \textbf{Suspender/activar cita}\\
+      \textbf{UC-35} & \textbf{Activar o suspender cita}\\
       \hline
-      \textbf{Descripción} & Suspender o activar una de las citas de un determinado servicio del sistema.\\
+      \textbf{Descripción} & Activar o suspender una de las citas de un determinado servicio del sistema.\\
       \hline
       \textbf{Actores} & Administrador o superadministrador.\\
       \hline
@@ -1100,7 +1113,8 @@ A continuación se describirán los principales casos de uso que se llevarán a 
       & \\
       \hline
     \end{tabularx}
-    \caption{UC-36: Gestión de servicios: Suspender/activar cita}
+    \caption{UC-35: Gestión de servicios: Activar o suspender cita}
+    \label{tab:CU-activar-suspender-cita}
   \end{center}
 \end{table}
 
@@ -1109,7 +1123,7 @@ A continuación se describirán los principales casos de uso que se llevarán a 
   \begin{center}
     \begin{tabularx}{16.4cm}{|l|X|}
       \hline
-      \textbf{UC-37} & \textbf{Editar cita}\\
+      \textbf{UC-36} & \textbf{Editar cita}\\
       \hline
       \textbf{Descripción} & Editar una cita del sistema.\\
       \hline
@@ -1124,7 +1138,7 @@ A continuación se describirán los principales casos de uso que se llevarán a 
       & 3. El sistema navega hacia la página de edición de la cita seleccionada.\\
       & 4. El administrador edita los datos deseados.\\
       & 5. El sistema valida los datos y registra los cambios.\\
-      & 4. En caso de ser una cita con usuario asignado, se le notificará el cambio al mismo.\\
+      & 6. En caso de ser una cita con usuario asignado, se le notificará el cambio al mismo.\\
       & \\
       \hline
       \textbf{Escenarios alternativos} & \smallskip 5.a. Los datos introducidos no son válidos:\\
@@ -1133,7 +1147,134 @@ A continuación se describirán los principales casos de uso que se llevarán a 
       & \\
       \hline
     \end{tabularx}
-    \caption{UC-37: Gestión de servicios: Editar cita}
+    \caption{UC-36: Gestión de servicios: Editar cita}
+    \label{tab:CU-editar-cita}
+  \end{center}
+\end{table}
+
+
+\begin{table}[H]
+  \begin{center}
+    \begin{tabularx}{16.4cm}{|l|X|}
+      \hline
+      \textbf{UC-37} & \textbf{Subir archivo}\\
+      \hline
+      \textbf{Descripción} & Subir un archivo específico destinado a uno o varios usuarios, como entrenamientos personales, dietas, etc. \\
+      \hline
+      \textbf{Actores} & Administrador o superadministrador.\\
+      \hline
+      \textbf{Precondiciones} & Debe ser un usuario previamente identificado como administrador o superadministrador.\\
+      \hline
+      \textbf{Postcondiciones} & El administrador podrá subir un archivo especificando a qué usuario o usuarios va destinado el mismo, pero que este/estos puedan descargarlo.\\
+      \hline
+      \textbf{Escenario principal} & \smallskip 1. El sistema muestra la lista de documentos actuales.\\
+      & 2. El administrador hace click en la opción de añadir un nuevo archivo.\\
+      & 3. El sistema navega hacia la página de subida de archivos.\\
+      & 4. El administrador introduce los datos necesarios, junto a los usuarios a los que van destinados el archivo, y selecciona el documento a subir de su dispositivo.\\
+      & 5. El sistema valida los datos y aloja el archivo, quedando disponible para su descarga por los usuarios especificados.\\
+      & \\
+      \hline
+      \textbf{Escenarios alternativos} & \\
+      & \\
+      \hline
+    \end{tabularx}
+    \caption{UC-37: Gestión de servicios: Subir archivo}
+    \label{tab:CU-subir-archivo}
+  \end{center}
+\end{table}
+
+
+\begin{table}[H]
+  \begin{center}
+    \begin{tabularx}{16.4cm}{|l|X|}
+      \hline
+      \textbf{UC-38} & \textbf{Descargar archivo}\\
+      \hline
+      \textbf{Descripción} & Descargar un archivo específico subido por un administrador, como entrenamientos personales, dietas, etc. \\
+      \hline
+      \textbf{Actores} & Usuario, administrador o superadministrador.\\
+      \hline
+      \textbf{Precondiciones} & Debe ser un usuario previamente identificado.\\
+      & Debe haber algún documento subido destinado al usuario.\\
+      \hline
+      \textbf{Postcondiciones} & El usuario podrá descargar un archivo previamente subido por un administrador y destinado al mismo.\\
+      \hline
+      \textbf{Escenario principal} & \smallskip 1. El sistema muestra el listado de archivos disponibles para el usuario.\\
+      & 2. El usuario selecciona el documento a descargar.\\
+      & 3. El sistema realiza la descarga del mismo al dispositivo del usuario.\\
+      & \\
+      \hline
+      \textbf{Escenarios alternativos} & \\
+      & \\
+      \hline
+    \end{tabularx}
+    \caption{UC-38: Gestión de servicios: Descargar archivo}
+    \label{tab:CU-descargar-archivo}
+
+  \end{center}
+\end{table}
+
+
+\begin{table}[H]
+  \begin{center}
+    \begin{tabularx}{16.4cm}{|l|X|}
+      \hline
+      \textbf{UC-39} & \textbf{Editar archivo}\\
+      \hline
+      \textbf{Descripción} & Editar los datos un archivo específico subido por un administrador, como entrenamientos personales, dietas, etc. \\
+      \hline
+      \textbf{Actores} & Administrador o superadministrador.\\
+      \hline
+      \textbf{Precondiciones} & Debe ser un usuario previamente identificado como administrador.\\
+      & Debe haber algún documento subido.\\
+      \hline
+      \textbf{Postcondiciones} & El administrador podrá editar un archivo previamente subido.\\
+      \hline
+      \textbf{Escenario principal} & \smallskip 1. El sistema muestra el listado de archivos subidos.\\
+      & 2. El administrador hace click en la opción de editar en el archivo deseado.\\
+      & 3. El sistema navega hacia la página de edición del archivo seleccionado.\\
+      & 4. El administrador edita los datos deseados.\\
+      & 5. El sistema valida los datos y registra los cambios.\\
+      & 6. En caso de ser una archivo con usuario/s asignado/s, se le/s notificará la edición del documento.\\
+      & \\
+      \hline
+      \textbf{Escenarios alternativos} & \\
+      & \\
+      \hline
+    \end{tabularx}
+    \caption{UC-39: Gestión de servicios: Editar archivo}
+    \label{tab:CU-editar-archivo}
+  \end{center}
+\end{table}
+
+
+\begin{table}[H]
+  \begin{center}
+    \begin{tabularx}{16.4cm}{|l|X|}
+      \hline
+      \textbf{UC-40} & \textbf{Eliminar archivo}\\
+      \hline
+      \textbf{Descripción} & Eliminar un archivo específico subido por un administrador, como entrenamientos personales, dietas, etc. \\
+      \hline
+      \textbf{Actores} & Administrador o superadministrador.\\
+      \hline
+      \textbf{Precondiciones} & Debe ser un usuario previamente identificado como administrador.\\
+      & Debe haber algún documento subido.\\
+      \hline
+      \textbf{Postcondiciones} & El administrador podrá eliminar un archivo previamente subido.\\
+      \hline
+      \textbf{Escenario principal} & \smallskip 1. El sistema muestra el listado de archivos subidos.\\
+      & 2. El administrador hace click en la opción de eliminar en el archivo deseado.\\
+      & 3. El sistema elimina el documento.\\
+      & 4. En caso de ser una archivo con usuario/s asignado/s, se le/s notificará la eliminación del documento.\\
+      & \\
+      \hline
+      \textbf{Escenarios alternativos} & \\
+      & \\
+      \hline
+    \end{tabularx}
+    \caption{UC-40: Gestión de servicios: Eliminar archivo}
+    \label{tab:CU-eliminar-archivo}
   \end{center}
 \end{table}
 
@@ -1214,9 +1355,9 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \begin{figure}[h!]
 \centering
-  \includegraphics[scale=.55]{img/secuencias/registro.jpeg}
-  \caption{Diagrama de secuencia: Registro de nuevo usuario}
-  \label{fig:secuencia-registro}
+  \includegraphics[scale=.55]{img/secuencias/gestion-usuarios-registro.jpeg}
+  \caption{Diagrama de secuencia: Gestión de usuarios: Registro de nuevo usuario}
+  \label{fig:secuencia-gestion-usuarios-registro}
 \end{figure}
 
 
@@ -1270,9 +1411,9 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \begin{figure}[h!]
 \centering
-  \includegraphics[scale=.55]{img/secuencias/login.jpeg}
-  \caption{Diagrama de secuencia: Iniciar Sesión}
-  \label{fig:secuencia-login}
+  \includegraphics[scale=.55]{img/secuencias/gestion-usuarios-login.jpeg}
+  \caption{Diagrama de secuencia: Iniciar sesión}
+  \label{fig:secuencia-gestion-usuarios-login}
 \end{figure}
 
 
@@ -1313,9 +1454,9 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \begin{figure}[h!]
 \centering
-  \includegraphics[scale=.55]{img/secuencias/restablecer-contrasena.jpeg}
-  \caption{Diagrama de secuencia: Restablecer Contraseña}
-  \label{fig:secuencia-restablecer-contrasena}
+  \includegraphics[scale=.55]{img/secuencias/gestion-usuarios-restablecer-contrasena.jpeg}
+  \caption{Diagrama de secuencia: Restablecer contraseña}
+  \label{fig:secuencia-gestion-usuarios-restablecer-contrasena}
 \end{figure}
 
 
@@ -1381,9 +1522,9 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \begin{figure}[h!]
 \centering
-  \includegraphics[scale=.55]{img/secuencias/cerrar-sesion.jpeg}
-  \caption{Diagrama de secuencia: Cerrar Sesión}
-  \label{fig:secuencia-serrar-sesion}
+  \includegraphics[scale=.55]{img/secuencias/gestion-usuarios-cerrar-sesion.jpeg}
+  \caption{Diagrama de secuencia: Cerrar sesión}
+  \label{fig:secuencia-gestion-usuarios-cerrar-sesion}
 \end{figure}
 
 \textbf{Contrato de operación: cerrarSesion()}
@@ -1408,9 +1549,9 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \begin{figure}[h!]
 \centering
-  \includegraphics[scale=.55]{img/secuencias/cambiar-contrasena.jpeg}
-  \caption{Diagrama de secuencia: Cambiar Contraseña}
-  \label{fig:secuencia-cambiar-contrasena}
+  \includegraphics[scale=.55]{img/secuencias/gestion-usuarios-cambiar-contrasena.jpeg}
+  \caption{Diagrama de secuencia: Cambiar contraseña}
+  \label{fig:secuencia-gestion-usuarios-cambiar-contrasena}
 \end{figure}
 
 \textbf{Contrato de operación: cambiarContraseña(contraseña, repContraseña)}
@@ -1448,9 +1589,9 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \begin{figure}[h!]
 \centering
-  \includegraphics[scale=.55]{img/secuencias/editar-perfil.jpeg}
-  \caption{Diagrama de secuencia: Editar Perfil}
-  \label{fig:secuencia-editar-perfil}
+  \includegraphics[scale=.55]{img/secuencias/gestion-usuarios-editar-perfil.jpeg}
+  \caption{Diagrama de secuencia: Gestión de usuarios: Editar perfil}
+  \label{fig:secuencia-gestion-usuarios-editar-perfil}
 \end{figure}
 
 \textbf{Contrato de operación: editarPerfil()}
@@ -1531,9 +1672,9 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \begin{figure}[h!]
 \centering
-  \includegraphics[scale=.55]{img/secuencias/leer-correo.jpeg}
-  \caption{Diagrama de secuencia: Leer Correo Interno}
-  \label{fig:secuencia-leer-correo}
+  \includegraphics[scale=.55]{img/secuencias/gestion-servicios-leer-correo.jpeg}
+  \caption{Diagrama de secuencia: Leer correo interno}
+  \label{fig:secuencia-gestion-servicios-leer-correo}
 \end{figure}
 
 \textbf{Contrato de operación: seleccionarMensaje(mensaje)}
@@ -1571,9 +1712,9 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \begin{figure}[h!]
 \centering
-  \includegraphics[scale=.45]{img/secuencias/mandar-correo.jpeg}
-  \caption{Diagrama de secuencia: Mandar Correo Interno}
-  \label{fig:secuencia-mandar-correo}
+  \includegraphics[scale=.45]{img/secuencias/gestion-servicios-mandar-correo.jpeg}
+  \caption{Diagrama de secuencia: Mandar correo interno}
+  \label{fig:secuencia-gestion-servicios-mandar-correo}
 \end{figure}
 
 \textbf{Contrato de operación: mandarMensaje(destinatario, asunto, mensaje)}
@@ -1665,9 +1806,9 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \begin{figure}[h!]
 \centering
-  \includegraphics[scale=.55]{img/secuencias/reservar-clase.jpeg}
-  \caption{Diagrama de secuencia: Gestión de Servicios: Reservar Plaza en una Clase}
-  \label{fig:secuencia-reservar-clase}
+  \includegraphics[scale=.55]{img/secuencias/gestion-servicios-reservar-clase.jpeg}
+  \caption{Diagrama de secuencia: Gestión de servicios: Reservar plaza en una clase}
+  \label{fig:secuencia-gestion-servicios-reservar-clase}
 \end{figure}
 
 \textbf{Contrato de operación: reservarPlaza(clase)}
@@ -1708,9 +1849,9 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \begin{figure}[h!]
 \centering
-  \includegraphics[scale=.55]{img/secuencias/cancelar-reserva-clase.jpeg}
-  \caption{Diagrama de secuencia: Gestión de Servicios: Cancelación de Reserva de una Clase}
-  \label{fig:secuencia-cancelar-reserva-clase}
+  \includegraphics[scale=.55]{img/secuencias/gestion-servicios-cancelar-reserva-clase.jpeg}
+  \caption{Diagrama de secuencia: Gestión de servicios: Cancelación de reserva de una clase}
+  \label{fig:secuencia-gestion-servicios-cancelar-reserva-clase}
 \end{figure}
 
 \textbf{Contrato de operación: cancelarReservaClase(clase)}
@@ -1750,9 +1891,9 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \begin{figure}[h!]
 \centering
-  \includegraphics[scale=.45]{img/secuencias/solicitar-responder-cita.jpeg}
+  \includegraphics[scale=.45]{img/secuencias/gestion-servicios-solicitar-responder-cita.jpeg}
   \caption{Diagrama de secuencia:: Gestión de servicios: Solicitud de cita y respuesta}
-  \label{fig:secuencia-solicitar-responder-cita.jpeg}
+  \label{fig:secuencia-gestion-servicios-solicitar-responder-cita.jpeg}
 \end{figure}
 
 \textbf{Contrato de operación: solicitarCita(cita)}
@@ -1836,9 +1977,9 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \begin{figure}[h!]
 \centering
-  \includegraphics[scale=.50]{img/secuencias/cancelar-cita-por-parte-de-usuario.jpeg}
-  \caption{Diagrama de secuencia: Cancelar Cita}
-  \label{fig:secuencia-cancelar-cita-por-parte-de-usuario}
+  \includegraphics[scale=.50]{img/secuencias/gestion-servicios-cancelar-cita-por-parte-de-usuario.jpeg}
+  \caption{Diagrama de secuencia: Gestión de servicios: Cancelar Cita}
+  \label{fig:secuencia-gestion-servicios-cancelar-cita-por-parte-de-usuario}
 \end{figure}
 
 \textbf{Contrato de operación: cancelarReserva(cita)}
@@ -1891,9 +2032,9 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \begin{figure}[h!]
 \centering
-  \includegraphics[scale=.50]{img/secuencias/cancelar-cita-por-parte-de-admin.jpeg}
-  \caption{Diagrama de secuencia: Cancelar Cita (Administrador)}
-  \label{fig:secuencia-cancelar-cita-por-parte-de-admin}
+  \includegraphics[scale=.50]{img/secuencias/gestion-servicios-cancelar-cita-por-parte-de-admin.jpeg}
+  \caption{Diagrama de secuencia: Gestión de servicios: Cancelar cita (Administrador)}
+  \label{fig:secuencia-gestion-servicios-cancelar-cita-por-parte-de-admin}
 \end{figure}
 
 \textbf{Contrato de operación: cancelarReserva(cita)}
@@ -1946,9 +2087,9 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \begin{figure}[h!]
 \centering
-  \includegraphics[scale=.55]{img/secuencias/calendario.jpeg}
-  \caption{Diagrama de secuencia: Calendario de Actividades}
-  \label{fig:secuencia-calendario}
+  \includegraphics[scale=.55]{img/secuencias/gestion-servicios-calendario.jpeg}
+  \caption{Diagrama de secuencia: Gestión de servicios: Calendario de actividades}
+  \label{fig:secuencia-gestion-servicios-calendario}
 \end{figure}
 
 \textbf{Contrato de operación: mostrarCalendario(clases, citas)}
@@ -1973,9 +2114,9 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \begin{figure}[h!]
 \centering
-  \includegraphics[scale=.55]{img/secuencias/reservas.jpeg}
-  \caption{Diagrama de secuencia: Consultar Reservas}
-  \label{fig:secuencia-reservas}
+  \includegraphics[scale=.55]{img/secuencias/gestion-servicios-reservas.jpeg}
+  \caption{Diagrama de secuencia: Gestión de servicios: Consultar reservas}
+  \label{fig:secuencia-gestion-servicios-reservas}
 \end{figure}
 
 \textbf{Contrato de operación: mostrarReservas(citas, clases)}
@@ -2121,7 +2262,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 \begin{figure}[h!]
 \centering
   \includegraphics[scale=.50]{img/secuencias/gestion-usuarios-activar-suspender.jpeg}
-  \caption{Diagrama de secuencia: Gestión de Usuarios: Activar/Suspender}
+  \caption{Diagrama de secuencia: Gestión de usuarios: Activar/Suspender}
   \label{fig:secuencia-gestion-usuarios-activar-suspender}
 \end{figure}
 
@@ -2176,7 +2317,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 \begin{figure}[h!]
 \centering
   \includegraphics[scale=.55]{img/secuencias/gestion-usuarios-ver-perfil.jpeg}
-  \caption{Diagrama de secuencia: Gestión de Usuarios: Ver Perfil}
+  \caption{Diagrama de secuencia: Gestión de usuarios: Ver perfil (Administrador)}
   \label{fig:secuencia-gestion-usuarios-ver-perfil}
 \end{figure}
 
@@ -2196,7 +2337,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: realizarNavegacion()}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} 
+\item \textbf{Referencias cruzadas:} UC-23 (Cuadro \ref{tab:CU-ver-perfil-admin})
 \item \textbf{Responsabilidades:} El sistema mostrará la página correspondiente al perfil del usuario.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2215,14 +2356,14 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \begin{figure}[h!]
 \centering
-  \includegraphics[scale=.50]{img/secuencias/editar-usuario-administrador.jpeg}
-  \caption{Diagrama de secuencia: Gestión de Usuarios: Editar Usuario}
-  \label{fig:secuencia-editar-usuario-administrador}
+  \includegraphics[scale=.50]{img/secuencias/gestion-usuarios-editar-usuario-administrador.jpeg}
+  \caption{Diagrama de secuencia: Gestión de usuarios: Editar usuario (Administrador)}
+  \label{fig:secuencia-gestion-usuarios-editar-usuario-administrador}
 \end{figure}
 
 \textbf{Contrato de operación: editarUsuario(usuario)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} 
+\item \textbf{Referencias cruzadas:} UC-24 (Cuadro \ref{tab:CU-editar-usuario-admin})
 \item \textbf{Responsabilidades:} Se informará al sistema de la acción de edición de un usuario específico.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2236,7 +2377,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: navegacionEdicion()}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} 
+\item \textbf{Referencias cruzadas:} UC-24 (Cuadro \ref{tab:CU-editar-usuario-admin})
 \item \textbf{Responsabilidades:} El sistema mostrará la página correspondiente a la edición de los datos del usuario.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2250,7 +2391,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: editarUsuario(Datos)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} 
+\item \textbf{Referencias cruzadas:} UC-24 (Cuadro \ref{tab:CU-editar-usuario-admin})
 \item \textbf{Responsabilidades:} Se mandará al sistema los datos del usuario para que este sea editado.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2264,7 +2405,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: edicionUsuario(Datos)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} 
+\item \textbf{Referencias cruzadas:} UC-24 (Cuadro \ref{tab:CU-editar-usuario-admin})
 \item \textbf{Responsabilidades:} Se realizará la edición de los datos del usuario, guardándolos en el sistema.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2278,7 +2419,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: notificarEdicion()}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} 
+\item \textbf{Referencias cruzadas:} UC-24 (Cuadro \ref{tab:CU-editar-usuario-admin})
 \item \textbf{Responsabilidades:} Mandar una notificación de edición del perfil por parte del administrador al usuario.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2292,7 +2433,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: mostrarNotificacion()}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} 
+\item \textbf{Referencias cruzadas:} UC-24 (Cuadro \ref{tab:CU-editar-usuario-admin})
 \item \textbf{Responsabilidades:} Se mostrará un mensaje de acción por pantalla.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2311,28 +2452,28 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \begin{figure}[h!]
 \centering
-  \includegraphics[scale=.55]{img/secuencias/gestion-administradores-ver-correo.jpeg}
-  \caption{Diagrama de secuencia: Gestión Administradores (Ver/Mandar Correo)}
-  \label{fig:secuencia-gestion-administradores-ver-correo}
+  \includegraphics[scale=.55]{img/secuencias/gestion-administradores-ver-perfil.jpeg}
+  \caption{Diagrama de secuencia: Gestión de administradores: Ver perfil de administrador}
+  \label{fig:secuencia-gestion-administradores-ver-perfil}
 \end{figure}
 
-\textbf{Contrato de operación: accion(administrador)}
+\textbf{Contrato de operación: verPerfil(administrador)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} 
-\item \textbf{Responsabilidades:} El administrador podrá ver o mandar un correo interno a otro administrador seleccionado, dependiendo de la acción que elija.
+\item \textbf{Referencias cruzadas:} UC-25 (Cuadro \ref{tab:CU-ver-perfil-de-admin})
+\item \textbf{Responsabilidades:} El administrador podrá ver el perfil de otro administrador seleccionado.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
 \item El administrador se ha identificado en el sistema previamente.
 \end {itemize}
 \item \textbf{Postcondiciones:} 
  \begin{itemize}
-\item Se navegará a la página correspondiente para realizar la acción \textit{(ver detalles o mandar un mensaje)} referente a un administrador específico, dependiendo de la acción que elija el administrador entre las disponibles para cada usuario.
+\item Se navegará a la página del perfil del administrador seleccionado para ver sus detalles en el sistema.
 \end {itemize}
 \end {itemize}
 
 \textbf{Contrato de operación: realizarNavegacion()}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} 
+\item \textbf{Referencias cruzadas:} UC-25 (Cuadro \ref{tab:CU-ver-perfil-de-admin})
 \item \textbf{Responsabilidades:} El sistema mostrará la página correspondiente a la opción seleccionada para realizar la acción (ver administrador o mandar un mensaje al administrador).
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2351,13 +2492,13 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 \begin{figure}[h!]
 \centering
   \includegraphics[scale=.50]{img/secuencias/gestion-administradores-activar-suspender.jpeg}
-  \caption{Diagrama de secuencia: Gestión de Administradores: Activar/Suspender}
+  \caption{Diagrama de secuencia: Gestión de administradores: Activar/Suspender administrador}
   \label{fig:secuencia-gestion-administradores-activar-suspender}
 \end{figure}
 
 \textbf{Contrato de operación: accion(administrador)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} 
+\item \textbf{Referencias cruzadas:} UC-26 (Cuadro \ref{tab:CU-activar-suspender-admin})
 \item \textbf{Responsabilidades:} El administrador podrá activar o suspender a otro administrador seleccionado.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2372,7 +2513,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: notificarAccion()}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} 
+\item \textbf{Referencias cruzadas:} UC-26 (Cuadro \ref{tab:CU-activar-suspender-admin})
 \item \textbf{Responsabilidades:} Mandar una notificación de suspensión/activación de la cuenta al administrador.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2386,7 +2527,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: mostrarNotificacion()}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} 
+\item \textbf{Referencias cruzadas:} UC-26 (Cuadro \ref{tab:CU-activar-suspender-admin})
 \item \textbf{Responsabilidades:} Se mostrará un mensaje de acción por pantalla.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2405,14 +2546,14 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \begin{figure}[h!]
 \centering
-  \includegraphics[scale=.50]{img/secuencias/editar-administrador.jpeg}
-  \caption{Diagrama de secuencia: Editar Administrador}
-  \label{fig:secuencia-editar-administrador}
+  \includegraphics[scale=.50]{img/secuencias/gestion-administradores-editar-administrador.jpeg}
+  \caption{Diagrama de secuencia: Gestión de administradores: Editar administrador}
+  \label{fig:secuencia-gestion-administradores-editar-administrador}
 \end{figure}
 
 \textbf{Contrato de operación: editarAdministrador(administrador)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} 
+\item \textbf{Referencias cruzadas:} UC-27 (Cuadro \ref{tab:CU-editar-admin})
 \item \textbf{Responsabilidades:} Se informará al sistema de la acción de edición de un administrador específico por parte del superadministrador.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2426,7 +2567,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: navegacionEdicion()}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} 
+\item \textbf{Referencias cruzadas:} UC-27 (Cuadro \ref{tab:CU-editar-admin})
 \item \textbf{Responsabilidades:} El sistema mostrará la página correspondiente a la edición de los datos del administrador.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2440,7 +2581,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: editarAdministrador(Datos)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} 
+\item \textbf{Referencias cruzadas:} UC-27 (Cuadro \ref{tab:CU-editar-admin})
 \item \textbf{Responsabilidades:} Se mandará al sistema los datos del administrador para que este sea editado.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2454,7 +2595,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: edicionAdministrador(Datos)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} 
+\item \textbf{Referencias cruzadas:} UC-27 (Cuadro \ref{tab:CU-editar-admin})
 \item \textbf{Responsabilidades:} Se realizará la edición de los datos del administrador, guardándolos en el sistema.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2468,7 +2609,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: notificarEdicion()}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} 
+\item \textbf{Referencias cruzadas:} UC-27 (Cuadro \ref{tab:CU-editar-admin})
 \item \textbf{Responsabilidades:} Mandar una notificación de edición del perfil por parte del superadministrador al administrador.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2482,7 +2623,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: mostrarNotificacion()}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} 
+\item \textbf{Referencias cruzadas:} UC-27 (Cuadro \ref{tab:CU-editar-admin})
 \item \textbf{Responsabilidades:} Se mostrará un mensaje de acción por pantalla.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2501,14 +2642,14 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \begin{figure}[h!]
 \centering
-  \includegraphics[scale=.55]{img/secuencias/alta-servicio.jpeg}
-  \caption{Diagrama de secuencia: Alta Servicio}
-  \label{fig:secuencia-alta-servicio}
+  \includegraphics[scale=.55]{img/secuencias/gestion-servicios-alta-servicio.jpeg}
+  \caption{Diagrama de secuencia: Gestión de servicios: Alta servicio}
+  \label{fig:secuencia-gestion-servicios-alta-servicio}
 \end{figure}
 
 \textbf{Contrato de operación: añadirServicio()}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} 
+\item \textbf{Referencias cruzadas:} UC-28 (Cuadro \ref{tab:CU-alta-servicio})
 \item \textbf{Responsabilidades:} Solicitar al sistema crear un nuevo servicio.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2523,7 +2664,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: navegacionNuevoServicio()}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} 
+\item \textbf{Referencias cruzadas:} UC-28 (Cuadro \ref{tab:CU-alta-servicio})
 \item \textbf{Responsabilidades:} El sistema mostrará la ventana correspondiente a la creación de un nuevo servicio.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2537,7 +2678,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: nuevoServicio(nombre, descripcion)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} 
+\item \textbf{Referencias cruzadas:} UC-28 (Cuadro \ref{tab:CU-alta-servicio})
 \item \textbf{Responsabilidades:} Se mandará al sistema los datos necesarios para la creación de un nuevo servicio.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2552,7 +2693,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: crearServicio(nombre, descripcion)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} 
+\item \textbf{Referencias cruzadas:} UC-28 (Cuadro \ref{tab:CU-alta-servicio})
 \item \textbf{Responsabilidades:} Creación de un nuevo servicio con los datos recibidos.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2567,7 +2708,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: mostrarNotificacion()}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} 
+\item \textbf{Referencias cruzadas:} UC-28 (Cuadro \ref{tab:CU-alta-servicio})
 \item \textbf{Responsabilidades:} Se mostrará un mensaje de acción por pantalla.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2586,14 +2727,14 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \begin{figure}[h!]
 \centering
-  \includegraphics[scale=.55]{img/secuencias/suspender-activar-servicio.jpeg}
-  \caption{Diagrama de secuencia: Activar/Suspender Servicio}
-  \label{fig:secuencia-suspender-activar-servicio}
+  \includegraphics[scale=.55]{img/secuencias/gestion-servicios-suspender-activar-servicio.jpeg}
+  \caption{Diagrama de secuencia: Gestión de servicios: Activar/Suspender servicio}
+  \label{fig:secuencia-gestion-servicios-suspender-activar-servicio}
 \end{figure}
 
 \textbf{Contrato de operación: accion(servicio)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} 
+\item \textbf{Referencias cruzadas:} UC-29 (Cuadro \ref{tab:CU-activar-suspender-servicio})
 \item \textbf{Responsabilidades:} El administrador podrá activar o suspender el servicio seleccionado.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2608,7 +2749,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: mostrarNotificacion()}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} 
+\item \textbf{Referencias cruzadas:} UC-29 (Cuadro \ref{tab:CU-activar-suspender-servicio})
 \item \textbf{Responsabilidades:} Se mostrará un mensaje de acción por pantalla.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2627,14 +2768,14 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \begin{figure}[h!]
 \centering
-  \includegraphics[scale=.50]{img/secuencias/editar-servicio.jpeg}
-  \caption{Diagrama de secuencia: Editar Servicio}
-  \label{fig:secuencia-editar-servicio}
+  \includegraphics[scale=.55]{img/secuencias/gestion-servicios-editar-servicio.jpeg}
+  \caption{Diagrama de secuencia: Gestión de servicios: Editar servicio}
+  \label{fig:secuencia-gestion-servicios-editar-servicio}
 \end{figure}
 
 \textbf{Contrato de operación: editar(servicio)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} 
+\item \textbf{Referencias cruzadas:} UC-30 (Cuadro \ref{tab:CU-editar-servicio})
 \item \textbf{Responsabilidades:} Se solicitará al sistema la edición de un servicio específico por parte del administrador.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2648,7 +2789,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: navegacionEdicion()}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} 
+\item \textbf{Referencias cruzadas:} UC-30 (Cuadro \ref{tab:CU-editar-servicio})
 \item \textbf{Responsabilidades:} El sistema mostrará la página correspondiente a la edición del servicio.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2662,7 +2803,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: editarServicio(nombre, descripcion)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} 
+\item \textbf{Referencias cruzadas:} UC-30 (Cuadro \ref{tab:CU-editar-servicio})
 \item \textbf{Responsabilidades:} Se mandará al sistema los datos del servicio para que este sea editado.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2676,7 +2817,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: edicionServicio(nombre, descripcion)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} 
+\item \textbf{Referencias cruzadas:} UC-30 (Cuadro \ref{tab:CU-editar-servicio})
 \item \textbf{Responsabilidades:} Se realizará la edición de los datos del servicio, guardándolos en el sistema.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2691,7 +2832,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: mostrarNotificacion()}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} 
+\item \textbf{Referencias cruzadas:} UC-30 (Cuadro \ref{tab:CU-editar-servicio})
 \item \textbf{Responsabilidades:} Se mostrará un mensaje de acción por pantalla.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2710,14 +2851,14 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \begin{figure}[h!]
 \centering
-  \includegraphics[scale=.55]{img/secuencias/alta-clase.jpeg}
-  \caption{Diagrama de secuencia: Alta Clase}
-  \label{fig:secuencia-alta-clase}
+  \includegraphics[scale=.55]{img/secuencias/gestion-servicios-alta-clase.jpeg}
+  \caption{Diagrama de secuencia: Gestión de servicios: Alta clase}
+  \label{fig:secuencia-gestion-servicios-alta-clase}
 \end{figure}
 
 \textbf{Contrato de operación: añadirClase()}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} 
+\item \textbf{Referencias cruzadas:} UC-31 (Cuadro \ref{tab:CU-alta-clase})
 \item \textbf{Responsabilidades:} Solicitar al sistema crear una nueva clase.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2732,7 +2873,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: navegacionNuevaClase()}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} 
+\item \textbf{Referencias cruzadas:} UC-31 (Cuadro \ref{tab:CU-alta-clase})
 \item \textbf{Responsabilidades:} El sistema mostrará la ventana correspondiente a la creación de una nueva clase.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2746,7 +2887,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: nuevaClase(Datos)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} 
+\item \textbf{Referencias cruzadas:} UC-31 (Cuadro \ref{tab:CU-alta-clase})
 \item \textbf{Responsabilidades:} Se mandará al sistema los datos necesarios para la creación de una nueva clase.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2761,7 +2902,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: crearClase(Datos)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} 
+\item \textbf{Referencias cruzadas:} UC-31 (Cuadro \ref{tab:CU-alta-clase})
 \item \textbf{Responsabilidades:} Creación de una nueva clase con los datos recibidos.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2776,7 +2917,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: mostrarNotificacion()}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} 
+\item \textbf{Referencias cruzadas:} UC-31 (Cuadro \ref{tab:CU-alta-clase})
 \item \textbf{Responsabilidades:} Se mostrará un mensaje de acción por pantalla.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2795,14 +2936,14 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \begin{figure}[h!]
 \centering
-  \includegraphics[scale=.55]{img/secuencias/suspender-activar-clase.jpeg}
-  \caption{Diagrama de secuencia: Activar/Suspender Clase}
-  \label{fig:secuencia-suspender-activar-clase}
+  \includegraphics[scale=.55]{img/secuencias/gestion-servicios-suspender-activar-clase.jpeg}
+  \caption{Diagrama de secuencia: Gestión de servicios: Activar/Suspender clase}
+  \label{fig:secuencia-gestion-servicios-suspender-activar-clase}
 \end{figure}
 
 \textbf{Contrato de operación: accion(clase)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} 
+\item \textbf{Referencias cruzadas:} UC-32 (Cuadro \ref{tab:CU-activar-suspender-clase})
 \item \textbf{Responsabilidades:} El administrador podrá activar o suspender la clase seleccionada.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2817,7 +2958,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: notificar(listaUsuarios)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} 
+\item \textbf{Referencias cruzadas:} UC-32 (Cuadro \ref{tab:CU-activar-suspender-clase})
 \item \textbf{Responsabilidades:} Mandar una notificación de activación o suspensión de una clase específica por parte del administrador a todos los usuarios con reserva en la misma, en caso que existan.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2831,7 +2972,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: mostrarNotificacion()}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} 
+\item \textbf{Referencias cruzadas:} UC-32 (Cuadro \ref{tab:CU-activar-suspender-clase})
 \item \textbf{Responsabilidades:} Se mostrará un mensaje de acción por pantalla.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2850,14 +2991,14 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \begin{figure}[h!]
 \centering
-  \includegraphics[scale=.50]{img/secuencias/editar-clase.jpeg}
-  \caption{Diagrama de secuencia: Editar Clase}
+  \includegraphics[scale=.50]{img/secuencias/gestion-servicios-editar-clase.jpeg}
+  \caption{Diagrama de secuencia: Gestión de servicios: Editar clase}
   \label{fig:secuencia-editar-clase}
 \end{figure}
 
 \textbf{Contrato de operación: editar(clase)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} 
+\item \textbf{Referencias cruzadas:} UC-33 (Cuadro \ref{tab:CU-editar-clase})
 \item \textbf{Responsabilidades:} Se solicitará al sistema la edición de una clase específica por parte del administrador.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2871,7 +3012,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: navegacionEdicion()}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} 
+\item \textbf{Referencias cruzadas:} UC-33 (Cuadro \ref{tab:CU-editar-clase})
 \item \textbf{Responsabilidades:} El sistema mostrará la página correspondiente a la edición de la clase.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2885,7 +3026,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: editarClase(Datos)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} 
+\item \textbf{Referencias cruzadas:} UC-33 (Cuadro \ref{tab:CU-editar-clase})
 \item \textbf{Responsabilidades:} Se mandará al sistema los datos de la clase para que esta sea editada.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2899,7 +3040,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: edicionClase(Datos)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} 
+\item \textbf{Referencias cruzadas:} UC-33 (Cuadro \ref{tab:CU-editar-clase})
 \item \textbf{Responsabilidades:} Se realizará la edición de los datos de la clase, guardándolos en el sistema.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2914,7 +3055,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: mostrarNotificacion()}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} 
+\item \textbf{Referencias cruzadas:} UC-33 (Cuadro \ref{tab:CU-editar-clase})
 \item \textbf{Responsabilidades:} Se mostrará un mensaje de acción por pantalla.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2933,14 +3074,14 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \begin{figure}[h!]
 \centering
-  \includegraphics[scale=.55]{img/secuencias/alta-cita.jpeg}
-  \caption{Diagrama de secuencia: Alta Cita}
-  \label{fig:secuencia-alta-cita}
+  \includegraphics[scale=.55]{img/secuencias/gestion-servicios-alta-cita.jpeg}
+  \caption{Diagrama de secuencia: Gestión de servicios: Alta cita}
+  \label{fig:secuencia-gestion-servicios-alta-cita}
 \end{figure}
 
 \textbf{Contrato de operación: añadirCita()}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} 
+\item \textbf{Referencias cruzadas:} UC-34 (Cuadro \ref{tab:CU-alta-cita})
 \item \textbf{Responsabilidades:} Solicitar al sistema crear una nueva cita.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2955,7 +3096,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: navegacionNuevaCita()}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} 
+\item \textbf{Referencias cruzadas:} UC-34 (Cuadro \ref{tab:CU-alta-cita})
 \item \textbf{Responsabilidades:} El sistema mostrará la ventana correspondiente a la creación de una nueva cita.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2969,7 +3110,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: nuevaCita(Datos)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} 
+\item \textbf{Referencias cruzadas:} UC-34 (Cuadro \ref{tab:CU-alta-cita})
 \item \textbf{Responsabilidades:} Se mandará al sistema los datos necesarios para la creación de una nueva cita.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2984,7 +3125,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: crearCita(Datos)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} 
+\item \textbf{Referencias cruzadas:} UC-34 (Cuadro \ref{tab:CU-alta-cita})
 \item \textbf{Responsabilidades:} Creación de una nueva cita con los datos recibidos.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2999,7 +3140,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: mostrarNotificacion()}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} 
+\item \textbf{Referencias cruzadas:} UC-34 (Cuadro \ref{tab:CU-alta-cita})
 \item \textbf{Responsabilidades:} Se mostrará un mensaje de acción por pantalla.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -3018,14 +3159,14 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \begin{figure}[h!]
 \centering
-  \includegraphics[scale=.55]{img/secuencias/suspender-activar-cita.jpeg}
-  \caption{Diagrama de secuencia: Activar/Suspender Cita}
-  \label{fig:secuencia-suspender-activar-cita}
+  \includegraphics[scale=.55]{img/secuencias/gestion-servicios-suspender-activar-cita.jpeg}
+  \caption{Diagrama de secuencia: Gestión de servicios: Activar/Suspender cita}
+  \label{fig:secuencia-gestion-servicios-suspender-activar-cita}
 \end{figure}
 
 \textbf{Contrato de operación: accion(cita)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} 
+\item \textbf{Referencias cruzadas:} UC-35 (Cuadro \ref{tab:CU-activar-suspender-cita})
 \item \textbf{Responsabilidades:} El administrador podrá activar o suspender la cita seleccionada.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -3040,7 +3181,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: notificar(listaUsuarios)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} 
+\item \textbf{Referencias cruzadas:} UC-35 (Cuadro \ref{tab:CU-activar-suspender-cita})
 \item \textbf{Responsabilidades:} Mandar una notificación de activación o suspensión de una cita específica por parte del administrador a todos los usuarios con reserva en la misma, en caso que existan.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -3054,7 +3195,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: mostrarNotificacion()}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} 
+\item \textbf{Referencias cruzadas:} UC-35 (Cuadro \ref{tab:CU-activar-suspender-cita})
 \item \textbf{Responsabilidades:} Se mostrará un mensaje de acción por pantalla.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -3073,14 +3214,14 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \begin{figure}[h!]
 \centering
-  \includegraphics[scale=.50]{img/secuencias/editar-cita.jpeg}
-  \caption{Diagrama de secuencia: Editar Cita}
-  \label{fig:secuencia-editar-cita}
+  \includegraphics[scale=.50]{img/secuencias/gestion-servicios-editar-cita.jpeg}
+  \caption{Diagrama de secuencia: Gestión de servicios: Editar cita}
+  \label{fig:secuencia-gestion-servicios-editar-cita}
 \end{figure}
 
 \textbf{Contrato de operación: editar(cita)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} 
+\item \textbf{Referencias cruzadas:} UC-36 (Cuadro \ref{tab:CU-editar-cita})
 \item \textbf{Responsabilidades:} Se solicitará al sistema la edición de una cita específica por parte del administrador.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -3094,7 +3235,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: navegacionEdicion()}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} 
+\item \textbf{Referencias cruzadas:} UC-36 (Cuadro \ref{tab:CU-editar-cita})
 \item \textbf{Responsabilidades:} El sistema mostrará la página correspondiente a la edición de la cita.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -3108,7 +3249,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: editarCita(Datos)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} 
+\item \textbf{Referencias cruzadas:} UC-36 (Cuadro \ref{tab:CU-editar-cita})
 \item \textbf{Responsabilidades:} Se mandará al sistema los datos de la cita para que esta sea editada.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -3122,7 +3263,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: edicionCita(Datos)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} 
+\item \textbf{Referencias cruzadas:} UC-36 (Cuadro \ref{tab:CU-editar-cita})
 \item \textbf{Responsabilidades:} Se realizará la edición de los datos de la cita, guardándolos en el sistema.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -3137,7 +3278,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: mostrarNotificacion()}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} 
+\item \textbf{Referencias cruzadas:} UC-36 (Cuadro \ref{tab:CU-editar-cita})
 \item \textbf{Responsabilidades:} Se mostrará un mensaje de acción por pantalla.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -3156,42 +3297,359 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \begin{figure}[h!]
 \centering
-  \includegraphics[scale=.50]{img/secuencias/.jpeg}
-  \caption{Diagrama de secuencia: }
-  \label{fig:secuencia-}
+  \includegraphics[scale=.50]{img/secuencias/gestion-servicios-subir-archivo.jpeg}
+  \caption{Diagrama de secuencia: Gestión de servicios: Subir archivo}
+  \label{fig:secuencia-gestion-servicios-subir-archivo}
 \end{figure}
 
-\textbf{Contrato de operación: }
+\textbf{Contrato de operación: añadirArchivo()}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} 
-\item \textbf{Responsabilidades:} 
+\item \textbf{Referencias cruzadas:} UC-37 (Cuadro \ref{tab:CU-subir-archivo})
+\item \textbf{Responsabilidades:} Solicitar al sistema subir un archivo.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
-\item El usuario se ha identificado en el sistema previamente.
+\item El administrador se ha identificado en el sistema previamente.
 \end {itemize}
 \item \textbf{Postcondiciones:} 
  \begin{itemize}
-\item 
+\item Se enviará al sistema la solicitud de subir un documento por parte del administrador.
 \end {itemize}
 \end {itemize}
+\end{figure}
 
-\textbf{Contrato de operación: }
+\textbf{Contrato de operación: navegacionNuevoArchivo()}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} 
-\item \textbf{Responsabilidades:} 
+\item \textbf{Referencias cruzadas:} UC-37 (Cuadro \ref{tab:CU-subir-archivo})
+\item \textbf{Responsabilidades:} El sistema mostrará la ventana correspondiente a la subida de un nuevo archivo.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
-\item El usuario se ha identificado en el sistema previamente.
+\item Se ha realizado la acción correspondiente para activar la navegación.
 \end {itemize}
 \item \textbf{Postcondiciones:} 
  \begin{itemize}
-\item 
+\item Se mostrará la ventana de subida de un nuevo archivo en la interfaz del administrador.
 \end {itemize}
 \end {itemize}
 
+\textbf{Contrato de operación: nuevoArchivo(Datos, archivo, usuarios)}
+\begin{itemize}
+\item \textbf{Referencias cruzadas:} UC-37 (Cuadro \ref{tab:CU-subir-archivo})
+\item \textbf{Responsabilidades:} Se mandará al sistema los datos necesarios para subir el archivo.
+\item \textbf{Precondiciones:} 
+ \begin{itemize}
+\item El administrador se ha identificado en el sistema previamente.
+\end {itemize}
+\item \textbf{Postcondiciones:} 
+ \begin{itemize}
+\item Se envía al sistema los datos del archivo a subir, el propio archivo y el usuario o lista de usuarios a los que el documento va destinado.
+\end {itemize}
+\end {itemize}
+\end{figure}
+
+\textbf{Contrato de operación: subirArchivo(Datos, archivo, usuarios)}
+\begin{itemize}
+\item \textbf{Referencias cruzadas:} UC-37 (Cuadro \ref{tab:CU-subir-archivo})
+\item \textbf{Responsabilidades:} Almacenamiento de una nuevo archivo, con los datos y archivo recibidos.
+\item \textbf{Precondiciones:} 
+ \begin{itemize}
+\item Se han recibido los datos y el archivo para la creación de un documento nuevo.
+\end {itemize}
+\item \textbf{Postcondiciones:} 
+ \begin{itemize}
+ \item Se comprueban que los datos recibidos y el archivo son correctos.
+\item Se crea y almacena un nuevo archivo y se introducen los datos en la base de datos.
+\item Se especifica qué usuarios tienen acceso al archivo para su posterior consulta o descarga.
+\end {itemize}
+\end {itemize}
+
+\textbf{Contrato de operación: notificar(usuarios)}
+\begin{itemize}
+\item \textbf{Referencias cruzadas:} UC-37 (Cuadro \ref{tab:CU-subir-archivo})
+\item \textbf{Responsabilidades:} Mandar una notificación de documento disponible a los usuarios especificados al subir el archivo, en caso que existan.
+\item \textbf{Precondiciones:} 
+ \begin{itemize}
+\item Se ha subido al sistema un nuevo documento.
+\end {itemize}
+\item \textbf{Postcondiciones:} 
+ \begin{itemize}
+\item Se creará una nueva notificación de archivo subido disponible para cada uno de los usuarios especificados por el administrador en el proceso de subida.
+\end {itemize}
+\end {itemize}
+
+\textbf{Contrato de operación: mostrarNotificacion()}
+\begin{itemize}
+\item \textbf{Referencias cruzadas:} UC-37 (Cuadro \ref{tab:CU-subir-archivo})
+\item \textbf{Responsabilidades:} Se mostrará un mensaje de acción por pantalla.
+\item \textbf{Precondiciones:} 
+ \begin{itemize}
+\item Se ha realizado la acción correspondiente para activar el mensaje.
+\end {itemize}
+\item \textbf{Postcondiciones:} 
+ \begin{itemize}
+\item Se muestra el mensaje correspondiente a la acción en la pantalla, a modo de notificación para el administrador. Este puede ser confirmación de la acción o algún tipo de error en la ejecución de la misma.
+\end {itemize}
+\end {itemize}
+
+
+\vspace{7mm}
+\dotfill
+\vspace{7mm}
+
+\begin{figure}[h!]
+\centering
+  \includegraphics[scale=.55]{img/secuencias/gestion-servicios-descargar-archivo.jpeg}
+  \caption{Diagrama de secuencia: Gestión de servicios: Descargar archivo}
+  \label{fig:secuencia-gestion-servicios-descargar-archivo}
+\end{figure}
+
+\textbf{Contrato de operación: descargarArchivo(archivo)}
+\begin{itemize}
+\item \textbf{Referencias cruzadas:} UC-38 (Cuadro \ref{tab:CU-descargar-archivo})
+\item \textbf{Responsabilidades:} Solicitar al sistema la descarga del archivo seleccionado.
+\item \textbf{Precondiciones:} 
+ \begin{itemize}
+\item El usuario se ha identificado en el sistema previamente.
+\item Existen documentos subidos destinados al usuario.
+\end {itemize}
+\item \textbf{Postcondiciones:} 
+ \begin{itemize}
+\item El usuario manda al sistema la solicitud de descarga de un archivo específico.
+\end {itemize}
+\end {itemize}
+
+\textbf{Contrato de operación: realizarDescarga(archivo)}
+\begin{itemize}
+\item \textbf{Referencias cruzadas:} UC-38 (Cuadro \ref{tab:CU-descargar-archivo})
+\item \textbf{Responsabilidades:} Realizar la descarga del documento seleccionado al dispositivo del usuario.
+\item \textbf{Precondiciones:} 
+ \begin{itemize}
+\item El usuario ha solicitado la descarga de un archivo específico.
+\end {itemize}
+\item \textbf{Postcondiciones:} 
+ \begin{itemize}
+\item El documento seleccionado se descargará al dispositivo del usuario.
+\end {itemize}
+\end {itemize}
+
+
+\vspace{7mm}
+\dotfill
+\vspace{7mm}
+
+\begin{figure}[h!]
+\centering
+  \includegraphics[scale=.50]{img/secuencias/gestion-servicios-editar-archivo.jpeg}
+  \caption{Diagrama de secuencia: Gestión de servicios: Editar archivo}
+  \label{fig:secuencia-gestion-servicios-editar-archivo}
+\end{figure}
+
+\textbf{Contrato de operación: editar(archivo)}
+\begin{itemize}
+\item \textbf{Referencias cruzadas:} UC-39 (Cuadro \ref{tab:CU-editar-archivo})
+\item \textbf{Responsabilidades:} Se solicitará al sistema la edición de un archivo específico por parte del administrador.
+\item \textbf{Precondiciones:} 
+ \begin{itemize}
+\item El administrador se ha identificado en el sistema previamente.
+\item Existen documentos subidos.
+\end {itemize}
+\item \textbf{Postcondiciones:} 
+ \begin{itemize}
+\item Se manda la solicitud de edición del archivo seleccionado.
+\end {itemize}
+\end {itemize}
+
+\textbf{Contrato de operación: navegacionEdicion()}
+\begin{itemize}
+\item \textbf{Referencias cruzadas:} UC-39 (Cuadro \ref{tab:CU-editar-archivo})
+\item \textbf{Responsabilidades:} El sistema mostrará la página correspondiente a la edición del archivo.
+\item \textbf{Precondiciones:} 
+ \begin{itemize}
+\item Se ha realizado la acción correspondiente para activar la navegación.
+\end {itemize}
+\item \textbf{Postcondiciones:} 
+ \begin{itemize}
+\item Se mostrará la ventana de edición del archivo seleccionado.
+\end {itemize}
+\end {itemize}
+
+\textbf{Contrato de operación: editarArchivo(Datos, usuarios)}
+\begin{itemize}
+\item \textbf{Referencias cruzadas:} UC-39 (Cuadro \ref{tab:CU-editar-archivo})
+\item \textbf{Responsabilidades:} Se mandará al sistema los datos del archivo y usuarios a los que va destinado para que sea editado.
+\item \textbf{Precondiciones:} 
+ \begin{itemize}
+\item El administrador se ha identificado en el sistema previamente.
+\end {itemize}
+\item \textbf{Postcondiciones:} 
+ \begin{itemize}
+\item Se envían todos los datos del formulario de edición del archivo al sistema.
+\item Se especifican todos los usuarios que tendrán acceso al documento.
+\end {itemize}
+\end {itemize}
+
+\textbf{Contrato de operación: edicionArchivo(Datos)}
+\begin{itemize}
+\item \textbf{Referencias cruzadas:} UC-39 (Cuadro \ref{tab:CU-editar-archivo})
+\item \textbf{Responsabilidades:} Se realizará la edición de los datos del archivo y la lista de usuarios con permiso para su acceso, guardándolos en el sistema.
+\item \textbf{Precondiciones:} 
+ \begin{itemize}
+\item Se ha enviado el formulario con los datos a editar y la lista de usuarios a los que el documento va destinado.
+\end {itemize}
+\item \textbf{Postcondiciones:} 
+ \begin{itemize}
+ \item Se comprueban que los datos recibidos son correctos.
+\item El sistema guarda los datos recibidos para el archivo específico en la base de datos.
+\item El sistema da autorización a los usuarios especificados para que tengan acceso al archivo.
+\end {itemize}
+\end {itemize}
+
+\textbf{Contrato de operación: mostrarNotificacion()}
+\begin{itemize}
+\item \textbf{Referencias cruzadas:} UC-39 (Cuadro \ref{tab:CU-editar-archivo})
+\item \textbf{Responsabilidades:} Se mostrará un mensaje de acción por pantalla.
+\item \textbf{Precondiciones:} 
+ \begin{itemize}
+\item Se ha realizado la acción correspondiente para activar el mensaje.
+\end {itemize}
+\item \textbf{Postcondiciones:} 
+ \begin{itemize}
+\item Se muestra el mensaje correspondiente a la acción en la pantalla, a modo de notificación para el administrador. Este puede ser confirmación de la acción o algún tipo de error en la ejecución de la misma.
+\end {itemize}
+\end {itemize}
+
+
+\vspace{7mm}
+\dotfill
+\vspace{7mm}
+
+\begin{figure}[h!]
+\centering
+  \includegraphics[scale=.50]{img/secuencias/gestion-servicios-eliminar-archivo.jpeg}
+  \caption{Diagrama de secuencia: Gestión de servicios: Eliminar archivo}
+  \label{fig:secuencia-gestion-servicios-eliminar-archivo}
+\end{figure}
+
+\textbf{Contrato de operación: eliminarArchivo(archivo)}
+\begin{itemize}
+\item \textbf{Referencias cruzadas:} UC-40 (Cuadro \ref{tab:CU-eliminar-archivo})
+\item \textbf{Responsabilidades:} Solicitar al sistema la eliminación del archivo seleccionado.
+\item \textbf{Precondiciones:} 
+ \begin{itemize}
+\item El administrador se ha identificado en el sistema previamente.
+\item Existen documentos subidos.
+\end {itemize}
+\item \textbf{Postcondiciones:} 
+ \begin{itemize}
+\item El usuario manda al sistema la solicitud de eliminación de un archivo específico.
+\end {itemize}
+\end {itemize}
+
+\textbf{Contrato de operación: realizarBorrado(archivo)}
+\begin{itemize}
+\item \textbf{Referencias cruzadas:} UC-40 (Cuadro \ref{tab:CU-eliminar-archivo})
+\item \textbf{Responsabilidades:} Realizar la eliminación del documento seleccionado.
+\item \textbf{Precondiciones:} 
+ \begin{itemize}
+\item El administrador ha solicitado la eliminación de un archivo específico.
+\end {itemize}
+\item \textbf{Postcondiciones:} 
+ \begin{itemize}
+\item Los datos del documento seleccionado se eliminarán de la base de datos y el propio archivo de donde esté almacenado.
+\end {itemize}
+\end {itemize}
+
+
+\vspace{7mm}
+\dotfill
+\vspace{7mm}
 
 
 \section{Modelo de Interfaz de Usuario}
+
+A continuación se muestra un prototipo de la interfaz de usuario del sistema para PC. Se mostrarán las páginas principales de la aplicación web de manera generalizada: Pantalla de registro de usuario, inicio de sesión, pantalla generalizada de la aplicación una vez iniciada la sesión y página con prototipo de tabla de datos (para listado de usuarios, servicios, clases, etc.).   
+
+
+
+\begin{figure}[h!]
+\centering
+  \includegraphics[scale=.40]{img/interfaz/registro.jpg}
+  \caption{Interfaz de usuario: Registro}
+  \label{fig:interfaz-registro}
+\end{figure}
+
+\vspace{10mm}
+
+\begin{figure}[h!]
+\centering
+  \includegraphics[scale=.40]{img/interfaz/inicio-sesion.jpg}
+  \caption{Interfaz de usuario: Inicio de sesión}
+  \label{fig:interfaz-inicio-sesion}
+\end{figure}
+
+
+\begin{figure}[h!]
+\centering
+  \includegraphics[scale=.40]{img/interfaz/pantalla-principal.jpg}
+  \caption{Interfaz de usuario: Pantalla principal}
+  \label{fig:interfaz-pantalla-principal}
+\end{figure}
+
+\vspace{10mm}
+
+\begin{figure}[h!]
+\centering
+  \includegraphics[scale=.40]{img/interfaz/cuadro-general.jpg}
+  \caption{Interfaz de usuario: Pantalla con tabla de datos}
+  \label{fig:interfaz-cuadro-general}
+\end{figure}
+
+
+Asimismo, se ha realizado el diseño de las pantallas equivalentes para dispositivos de menor tamaño, al ser un diseño adaptativo dependiendo del mismo. A continuación se podrán visualizar los mockups realizados para la interfaz de dispositivos móviles.
+
+
+\begin{figure}[h!]
+\centering
+  \includegraphics[scale=.40]{img/interfaz/registro-movil.jpg}
+  \caption{Interfaz de usuario para dispositivos móviles: Registro}
+  \label{fig:interfaz-registro-movil}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+  \includegraphics[scale=.40]{img/interfaz/inicio-sesion-movil.jpg}
+  \caption{Interfaz de usuario para dispositivos móviles: Inicio de sesión}
+  \label{fig:interfaz-inicio-sesion-movil}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+  \includegraphics[scale=.40]{img/interfaz/pantalla-principal-movil.jpg}
+  \caption{Interfaz de usuario para dispositivos móviles: Pantalla principal}
+  \label{fig:interfaz-pantalla-principal-movil}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+  \includegraphics[scale=.40]{img/interfaz/cuadro-general-movil.jpg}
+  \caption{Interfaz de usuario para dispositivos móviles: Pantalla con tabla de datos}
+  \label{fig:interfaz-cuadro-general-movil}
+\end{figure}
+
+
+Además, la figura \ref{fig:interfaz-navegacion} muestra el diagrama de navegación entre pantallas. Observamos que es una navegación sencilla; la página inicial sería la de registro de usuario, o inicio de sesión para usuarios registrados. A continuación, el sistema nos llevaría a la página de inicio, desde la que se podrá navegar, a través del menú y/o enlaces disponibles hasta las distintas vistas de la interfaz. En todo momento será posible cerrar la sesión del usuario, volviendo a la página de inicio de sesión, o cambiar el idioma de la interfaz mediante la opción destinada a ello en la parte superior derecha de la pantalla. 
+
+
+Esta navegación ocurrirá de la misma manera en todo tipo de dispositivos, donde el único cambio sería el diseño de la pantalla, como hemos observado en los prototipos para PC y móvil.
+
+
+\begin{figure}[h!]
+\centering
+  \includegraphics[scale=.55]{img/interfaz/navegacion.jpg}
+  \caption{Interfaz de usuario: Diagrama de navegación}
+  \label{fig:interfaz-navegacion}
+\end{figure}
+
+
 En esta sección se deberá incluir un prototipo de baja fidelidad o mockup de la interfaz de usuario del sistema. Además, es preciso elaborar un diagrama de navegación, reflejando la secuencia de pantallas a las que tienen acceso los diferentes roles de usuario y la conexión entre estas.
 
 

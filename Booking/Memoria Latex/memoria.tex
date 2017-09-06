@@ -27,7 +27,7 @@
 % METADATOS
 \title{MEMORIA DEL PFC: GESTIÓN DE CENTRO DE MEJORA DEL RENDIMIENTO Y LA SALUD}
 \author{Jesús Soriano Candón}
-\date{21 Septiembre 2015} 
+\date{\today} 
  
 \begin{document}
 
@@ -93,10 +93,10 @@ El segundo capí­tulo debe incluir una planificación del proyecto. La planific
 %\input{./contenido/pruebas}
 
 % EPILOGO
-%\part{Epí­logo}
-%\null\vfill
-%\noindent En esta última parte quedarán recogidas las conclusiones y los manuales necesarios para el manejo de la aplicación resultado del desarrollo. Si se ha realizado algún tipo de evaluación de la solución proporcionada, más allá de las pruebas del sistema, tambií©n deberá venir recogida en un capí­tulo separado dentro de esta parte. Pueden consultarse diversos tipos de evaluaciones sobre sistemas de información en \cite{hevner2004}: casos de estudio, análisis estático, análisis dinámico, simulación, experimento controlado, etc.
-%\vfill
+\part{Epí­logo}
+\null\vfill
+\noindent En esta última parte quedarán recogidas las conclusiones y los manuales necesarios para el manejo de la aplicación resultado del desarrollo. Si se ha realizado algún tipo de evaluación de la solución proporcionada, más allá de las pruebas del sistema, también deberá venir recogida en un capí­tulo separado dentro de esta parte. Pueden consultarse diversos tipos de evaluaciones sobre sistemas de información en \cite{hevner2004}: casos de estudio, análisis estático, análisis dinámico, simulación, experimento controlado, etc.
+\vfill
 
 %\chapter{Manual de implantación y explotación}
 %\input{./contenido/manual_instexp}
@@ -107,6 +107,12 @@ El segundo capí­tulo debe incluir una planificación del proyecto. La planific
 %\chapter{Conclusiones}
 %\input{./contenido/conclusiones}
 
+\\
+
+\cite{PostgreSQL}
+\nocite{*}
+
+
 \chapter*{\bibname}
 \addcontentsline{toc}{chapter}{\bibname}
 \renewcommand{\bibname}{}
@@ -114,9 +120,9 @@ El segundo capí­tulo debe incluir una planificación del proyecto. La planific
 \input{./bibliografia}
 
 \begingroup
-\def\chapter*#1{}
+  \def\chapter*#1{}
 \renewcommand{\bibname}{}
-Bibliografí­a con BibTeX
+% Bibliografí­a con BibTeX
 \bibliographystyle{apalike}
 \bibliography{bibliografia}
 

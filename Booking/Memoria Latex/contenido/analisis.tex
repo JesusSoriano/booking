@@ -11,7 +11,7 @@
 
 Esta sección cubre el análisis del sistema de información a desarrollar, haciendo uso del lenguaje de modelado UML.
 
-\section{Modelo Conceptual}
+\section{Modelo Conceptual} \label{sec:modelo-conceptual}
 
 El diagrama conceptual de clases UML que muestra la figura \ref{fig:modelo-conceptual} es la presentación gráfica de las clases necesarias para llegar a la solución del problema deseada, así como sus atributos, relaciones, etc. Nos basaremos en él para la posterior programación del software, donde cada clase del diagrama UML quedará representada por una clase Java. 
 
@@ -768,7 +768,7 @@ A continuación se describirán los principales casos de uso que se llevarán a 
       \hline
     \end{tabularx}
     \caption{UC-24: Gestión de usuarios: Editar usuario}
-    \label{tab:CU-editar-usuario}
+    \label{tab:CU-editar-usuario-admin}
   \end{center}
 \end{table}
 
@@ -1310,7 +1310,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: seleccionarLenguaje()}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-01 (Cuadro \ref{tab:CU-idioma})
+\item \textbf{Referencias cruzadas:} UC-01 (Cuadro \ref{tab:CU-idioma}).
 \item \textbf{Responsabilidades:} Seleccionar un nuevo lenguaje a establecer.
 \item \textbf{Precondiciones:} Ninguna
 \item \textbf{Postcondiciones:}
@@ -1321,7 +1321,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: establecerLenguaje(lenguaje)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-01 (Cuadro \ref{tab:CU-idioma})
+\item \textbf{Referencias cruzadas:} UC-01 (Cuadro \ref{tab:CU-idioma}).
 \item \textbf{Responsabilidades:} Establecer un nuevo lenguaje para mostrar la interfaz. Si el usuario está registrado, se establecerá como su lenguaje por defecto.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -1337,7 +1337,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: mostrarNuevoLenguaje()}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-01 (Cuadro \ref{tab:CU-idioma})
+\item \textbf{Referencias cruzadas:} UC-01 (Cuadro \ref{tab:CU-idioma}).
 \item \textbf{Responsabilidades:} Mostrar la interfaz con el nuevo lenguaje establecido.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -1361,7 +1361,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: registrarUsuario(Datos Registro)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-02 (Cuadro \ref{tab:CU-registro})
+\item \textbf{Referencias cruzadas:} UC-02 (Cuadro \ref{tab:CU-registro}).
 \item \textbf{Responsabilidades:} Se mandarán los datos de registro de un nuevo usuario al sistema.
 \item \textbf{Precondiciones:} Ninguna.
 \item \textbf{Postcondiciones:} 
@@ -1373,7 +1373,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: validarYRegistrar(Datos Registro)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-02 (Cuadro \ref{tab:CU-registro})
+\item \textbf{Referencias cruzadas:} UC-02 (Cuadro \ref{tab:CU-registro}).
 \item \textbf{Responsabilidades:} Se validarán los datos recibidos y se realizará el registro del nuevo cliente.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -1390,7 +1390,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: mostrarInicio()}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-02 (Cuadro \ref{tab:CU-registro})
+\item \textbf{Referencias cruzadas:} UC-02 (Cuadro \ref{tab:CU-registro}).
 \item \textbf{Responsabilidades:} Se navegará hasta la página de inicio de la aplicación web.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -1415,7 +1415,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: login(usuario, contraseña)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-03 (Cuadro \ref{tab:CU-login})
+\item \textbf{Referencias cruzadas:} UC-03 (Cuadro \ref{tab:CU-login}).
 \item \textbf{Responsabilidades:} Realizar el login del usuario en el sistema.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -1430,7 +1430,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: mostrarInicio()}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-03 (Cuadro \ref{tab:CU-login})
+\item \textbf{Referencias cruzadas:} UC-03 (Cuadro \ref{tab:CU-login}).
 \item \textbf{Responsabilidades:} Se navegará hasta la página de inicio de la aplicación web.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -1456,7 +1456,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: solicitudRestablecer(email)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-04 (Cuadro \ref{tab:CU-restablecer-contrasena})
+\item \textbf{Referencias cruzadas:} UC-04 (Cuadro \ref{tab:CU-restablecer-contrasena}).
 \item \textbf{Responsabilidades:} Se solicitará al sistema restablecer la contraseña de un usuario que no ha iniciado sesión.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -1470,7 +1470,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: enviarEmail(link)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-04 (Cuadro \ref{tab:CU-restablecer-contrasena})
+\item \textbf{Referencias cruzadas:} UC-04 (Cuadro \ref{tab:CU-restablecer-contrasena}).
 \item \textbf{Responsabilidades:} Se enviará un email al usuario con el enlace para establecer una nueva contraseña.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -1485,7 +1485,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: restablecerContraseña(contraseña, repContraseña)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-04 (Cuadro \ref{tab:CU-restablecer-contrasena})
+\item \textbf{Referencias cruzadas:} UC-04 (Cuadro \ref{tab:CU-restablecer-contrasena}).
 \item \textbf{Responsabilidades:} Se mandará al sistema una nueva contraseña para el usuario.
 \item \textbf{Precondiciones:} Ninguna.
 \item \textbf{Postcondiciones:} 
@@ -1496,7 +1496,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: establecerNuevaContraseña(contraseña)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-04 (Cuadro \ref{tab:CU-restablecer-contrasena})
+\item \textbf{Referencias cruzadas:} UC-04 (Cuadro \ref{tab:CU-restablecer-contrasena}).
 \item \textbf{Responsabilidades:} Se establecerá una nueva contraseña para el usuario.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -1521,7 +1521,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: cerrarSesion()}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-05 (Cuadro \ref{tab:CU-cerrar-sesion})
+\item \textbf{Referencias cruzadas:} UC-05 (Cuadro \ref{tab:CU-cerrar-sesion}).
 \item \textbf{Responsabilidades:} Se cerrará sesión del usuario actualmente identificado.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -1546,7 +1546,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: cambiarContraseña(contraseña, repContraseña)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-06 (Cuadro \ref{tab:CU-cambiar-contrasena})
+\item \textbf{Referencias cruzadas:} UC-06 (Cuadro \ref{tab:CU-cambiar-contrasena}).
 \item \textbf{Responsabilidades:} Se mandará al sistema una nueva contraseña para el usuario.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -1560,7 +1560,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: establecerNuevaContraseña(contraseña)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-06 (Cuadro \ref{tab:CU-cambiar-contrasena})
+\item \textbf{Referencias cruzadas:} UC-06 (Cuadro \ref{tab:CU-cambiar-contrasena}).
 \item \textbf{Responsabilidades:} Se establecerá una nueva contraseña para el usuario.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -1584,7 +1584,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: editarPerfil()}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-07 (Cuadro \ref{tab:CU-editar-perfil})
+\item \textbf{Referencias cruzadas:} UC-07 (Cuadro \ref{tab:CU-editar-perfil}).
 \item \textbf{Responsabilidades:} El usuario enviará al sistema la opción de editar su perfil.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -1599,7 +1599,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: navegacionEdicion()}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-07 (Cuadro \ref{tab:CU-editar-perfil})
+\item \textbf{Referencias cruzadas:} UC-07 (Cuadro \ref{tab:CU-editar-perfil}).
 \item \textbf{Responsabilidades:} El sistema mostrará la página correspondiente a la edición de los datos del perfil del usuario.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -1613,7 +1613,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: editarUsuario(Datos)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-07 (Cuadro \ref{tab:CU-editar-perfil})
+\item \textbf{Referencias cruzadas:} UC-07 (Cuadro \ref{tab:CU-editar-perfil}).
 \item \textbf{Responsabilidades:} Se mandará al sistema los datos del usuario para que este sea editado.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -1627,7 +1627,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: edicionUsuario(Datos)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-07 (Cuadro \ref{tab:CU-editar-perfil})
+\item \textbf{Referencias cruzadas:} UC-07 (Cuadro \ref{tab:CU-editar-perfil}).
 \item \textbf{Responsabilidades:} Se realizará la edición de los datos del usuario, guardándolos en el sistema.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -1641,7 +1641,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: mostrarNotificacion()}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-07 (Cuadro \ref{tab:CU-editar-perfil})
+\item \textbf{Referencias cruzadas:} UC-07 (Cuadro \ref{tab:CU-editar-perfil}).
 \item \textbf{Responsabilidades:} Se mostrará un mensaje de acción por pantalla.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -1665,7 +1665,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: seleccionarMensaje(mensaje)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-08 (Cuadro \ref{tab:CU-leer-correo})
+\item \textbf{Referencias cruzadas:} UC-08 (Cuadro \ref{tab:CU-leer-correo}).
 \item \textbf{Responsabilidades:} Se seleccionará el mensaje a mostrar.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -1679,7 +1679,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: mostrarMensaje(mensaje)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-08 (Cuadro \ref{tab:CU-leer-correo})
+\item \textbf{Referencias cruzadas:} UC-08 (Cuadro \ref{tab:CU-leer-correo}).
 \item \textbf{Responsabilidades:} Se mostrará el mensaje seleccionado al usuario.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -1703,7 +1703,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: mandarMensaje(destinatario, asunto, mensaje)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-09 (Cuadro \ref{tab:CU-mandar-correo})
+\item \textbf{Referencias cruzadas:} UC-09 (Cuadro \ref{tab:CU-mandar-correo}).
 \item \textbf{Responsabilidades:} Se mandará al sistema el mensaje que se desea enviar, junto al asunto y el destinatario.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -1717,7 +1717,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: mandarMensaje(remitente, asunto, mensaje)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-09 (Cuadro \ref{tab:CU-mandar-correo})
+\item \textbf{Referencias cruzadas:} UC-09 (Cuadro \ref{tab:CU-mandar-correo}).
 \item \textbf{Responsabilidades:} El sistema mandará el mensaje recibido a su destinatario.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -1731,7 +1731,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: notificarReciboMensaje()}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-09 (Cuadro \ref{tab:CU-mandar-correo})
+\item \textbf{Referencias cruzadas:} UC-09 (Cuadro \ref{tab:CU-mandar-correo}).
 \item \textbf{Responsabilidades:} Notificar al destinatario del mensaje que ha recibido un correo interno.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -1755,7 +1755,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: verNotificaciones(inicio, fin, tipo)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-10 (Cuadro \ref{tab:CU-notificaciones})
+\item \textbf{Referencias cruzadas:} UC-10 (Cuadro \ref{tab:CU-notificaciones}).
 \item \textbf{Responsabilidades:} Solicitar las notificaciones destinadas al usuario en unas determinadas fechas.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -1769,7 +1769,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: mostrarNotificaciones(notificaciones)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-10 (Cuadro \ref{tab:CU-notificaciones})
+\item \textbf{Referencias cruzadas:} UC-10 (Cuadro \ref{tab:CU-notificaciones}).
 \item \textbf{Responsabilidades:} Mostrar las notificaciones destinadas al usuario.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -1793,7 +1793,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: reservarPlaza(clase)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-11 (Cuadro \ref{tab:CU-reservar-clase})
+\item \textbf{Referencias cruzadas:} UC-11 (Cuadro \ref{tab:CU-reservar-clase}).
 \item \textbf{Responsabilidades:} Se reservará una plaza de la clase seleccionada al usuario.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -1810,7 +1810,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: mostrarNotificacion()}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-11 (Cuadro \ref{tab:CU-reservar-clase})
+\item \textbf{Referencias cruzadas:} UC-11 (Cuadro \ref{tab:CU-reservar-clase}).
 \item \textbf{Responsabilidades:} Se mostrará un mensaje de acción por pantalla.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -1834,7 +1834,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: cancelarReservaClase(clase)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-12 (Cuadro \ref{tab:CU-cancelar-reserva-clase})
+\item \textbf{Referencias cruzadas:} UC-12 (Cuadro \ref{tab:CU-cancelar-reserva-clase}).
 \item \textbf{Responsabilidades:} Se cancelará la reserva del usuario previamente realizada de una clase específica.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -1850,7 +1850,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: mostrarNotificacion()}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-12 (Cuadro \ref{tab:CU-cancelar-reserva-clase})
+\item \textbf{Referencias cruzadas:} UC-12 (Cuadro \ref{tab:CU-cancelar-reserva-clase}).
 \item \textbf{Responsabilidades:} Se mostrará un mensaje de acción por pantalla.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -1874,7 +1874,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: solicitarCita(cita)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-13 (Cuadro \ref{tab:CU-solicitar-cita}), UC-14 (Cuadro \ref{tab:CU-responder-cita})
+\item \textbf{Referencias cruzadas:} UC-13 (Cuadro \ref{tab:CU-solicitar-cita}), UC-14 (Cuadro \ref{tab:CU-responder-solicitud-cita}).
 \item \textbf{Responsabilidades:} Se enviará una solicitud de la cita seleccionada a los administradores.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -1890,7 +1890,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: notificarSolicitudCita(usuario, cita)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-13 (Cuadro \ref{tab:CU-solicitar-cita}), UC-14 (Cuadro \ref{tab:CU-responder-cita})
+\item \textbf{Referencias cruzadas:} UC-13 (Cuadro \ref{tab:CU-solicitar-cita}), UC-14 (Cuadro \ref{tab:CU-responder-solicitud-cita}).
 \item \textbf{Responsabilidades:} Mandar una notificación de solicitud de cita de un determinado usuario a los administradores.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -1904,7 +1904,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: mostrarNotificacion()}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-13 (Cuadro \ref{tab:CU-solicitar-cita}), UC-14 (Cuadro \ref{tab:CU-responder-cita})
+\item \textbf{Referencias cruzadas:} UC-13 (Cuadro \ref{tab:CU-solicitar-cita}), UC-14 (Cuadro \ref{tab:CU-responder-solicitud-cita}).
 \item \textbf{Responsabilidades:} Se mostrará un mensaje de acción por pantalla.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -1918,7 +1918,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: responderSolicitudCita(usuario, cita)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-13 (Cuadro \ref{tab:CU-solicitar-cita}), UC-14 (Cuadro \ref{tab:CU-responder-cita})
+\item \textbf{Referencias cruzadas:} UC-13 (Cuadro \ref{tab:CU-solicitar-cita}), UC-14 (Cuadro \ref{tab:CU-responder-solicitud-cita}).
 \item \textbf{Responsabilidades:} Responder a la solicitud de cita recibida por parte de un usuario específico.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -1934,7 +1934,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: notificarRespuestaCita(cita)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-13 (Cuadro \ref{tab:CU-solicitar-cita}), UC-14 (Cuadro \ref{tab:CU-responder-cita})
+\item \textbf{Referencias cruzadas:} UC-13 (Cuadro \ref{tab:CU-solicitar-cita}), UC-14 (Cuadro \ref{tab:CU-responder-solicitud-cita}).
 \item \textbf{Responsabilidades:} Mandar una notificación de respuesta de la solicitud de cita al usuario.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -1958,7 +1958,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: cancelarReserva(cita)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-15 (Cuadro \ref{tab:CU-cancelar-cita})
+\item \textbf{Referencias cruzadas:} UC-15 (Cuadro \ref{tab:CU-cancelar-cita}).
 \item \textbf{Responsabilidades:} Se cancelará la cita o solicitud de cita del usuario, notificando a los administradores.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -1973,7 +1973,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: notificarCancelacion(cita)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-15 (Cuadro \ref{tab:CU-cancelar-cita})
+\item \textbf{Referencias cruzadas:} UC-15 (Cuadro \ref{tab:CU-cancelar-cita}).
 \item \textbf{Responsabilidades:} Mandar una notificación de cancelación de la reserva o solicitud de cita a los administradores.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -1987,7 +1987,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: mostrarNotificacion()}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-15 (Cuadro \ref{tab:CU-cancelar-cita})
+\item \textbf{Referencias cruzadas:} UC-15 (Cuadro \ref{tab:CU-cancelar-cita}).
 \item \textbf{Responsabilidades:} Se mostrará un mensaje de acción por pantalla.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2011,7 +2011,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: cancelarReserva(cita)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-16 (Cuadro \ref{tab:CU-cancelar-cita-admin})
+\item \textbf{Referencias cruzadas:} UC-16 (Cuadro \ref{tab:CU-cancelar-cita-admin}).
 \item \textbf{Responsabilidades:} Un administrador cancelará la cita o solicitud de cita del usuario, notificando al mismo.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2026,7 +2026,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: notificarCancelacion(cita)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-16 (Cuadro \ref{tab:CU-cancelar-cita-admin})
+\item \textbf{Referencias cruzadas:} UC-16 (Cuadro \ref{tab:CU-cancelar-cita-admin}).
 \item \textbf{Responsabilidades:} Mandar una notificación de cancelación de la reserva o solicitud de cita al usuario.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2040,7 +2040,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: mostrarNotificacion()}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-16 (Cuadro \ref{tab:CU-cancelar-cita-admin})
+\item \textbf{Referencias cruzadas:} UC-16 (Cuadro \ref{tab:CU-cancelar-cita-admin}).
 \item \textbf{Responsabilidades:} Se mostrará un mensaje de acción por pantalla.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2064,7 +2064,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: mostrarCalendario(clases, citas)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-17 (Cuadro \ref{tab:CU-calendario})
+\item \textbf{Referencias cruzadas:} UC-17 (Cuadro \ref{tab:CU-calendario}).
 \item \textbf{Responsabilidades:} Mostrar el calendario mensual con las clases y citas disponibles en el sistema. Se distinguirá el estado de las mismas por su color de fondo o borde, para diferenciar entre clases o citas pasadas, disponibles, reservadas por el usuario...
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2089,7 +2089,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: mostrarReservas(citas, clases)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-18 (Cuadro \ref{tab:CU-reservas})
+\item \textbf{Referencias cruzadas:} UC-18 (Cuadro \ref{tab:CU-reservas}).
 \item \textbf{Responsabilidades:} Se mostrará una lista de las citas y reservas del usuario, tanto pasadas como actuales.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2114,7 +2114,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: verAuditorias(inicio, fin, tipo)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-19 (Cuadro \ref{tab:CU-notificaciones})
+\item \textbf{Referencias cruzadas:} UC-19 (Cuadro \ref{tab:CU-notificaciones}).
 \item \textbf{Responsabilidades:} Solicitar las notificaciones que el sistema ha creado destinadas al usuario en unas determinadas fechas.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2128,7 +2128,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: mostrarNotificaciones(notificaciones)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-19 (Cuadro \ref{tab:CU-notificaciones})
+\item \textbf{Referencias cruzadas:} UC-19 (Cuadro \ref{tab:CU-notificaciones}).
 \item \textbf{Responsabilidades:} Se mostrará la lista de notificaciones destinadas al usuario.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2153,7 +2153,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: verAuditorias(inicio, fin, tipo)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-20 (Cuadro \ref{tab:CU-auditorias})
+\item \textbf{Referencias cruzadas:} UC-20 (Cuadro \ref{tab:CU-auditorias}).
 \item \textbf{Responsabilidades:} Solicitar las acciones llevadas a cabo por el usuario en unas determinadas fechas.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2167,7 +2167,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: mostrarAuditorias(auditorias)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-20 (Cuadro \ref{tab:CU-auditorias})
+\item \textbf{Referencias cruzadas:} UC-20 (Cuadro \ref{tab:CU-auditorias}).
 \item \textbf{Responsabilidades:} Mostrar las acciones llevadas a cabo por el usuario en el sistema.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2191,7 +2191,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: verAuditorias(usuario, inicio, fin, tipo)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-21 (Cuadro \ref{tab:CU-auditorias-admin})
+\item \textbf{Referencias cruzadas:} UC-21 (Cuadro \ref{tab:CU-auditorias-admin}).
 \item \textbf{Responsabilidades:} Solicitar las acciones llevadas a cabo por el usuario seleccionado en unas determinadas fechas.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2205,7 +2205,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: mostrarAuditorias(auditorias)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-21 (Cuadro \ref{tab:CU-auditorias-admin})
+\item \textbf{Referencias cruzadas:} UC-21 (Cuadro \ref{tab:CU-auditorias-admin}).
 \item \textbf{Responsabilidades:} Mostrar las acciones llevadas a cabo por el usuario seleccionado en el sistema.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2228,7 +2228,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: accion(usuario)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-22 (Cuadro \ref{tab:CU-activar-suspender-usuario})
+\item \textbf{Referencias cruzadas:} UC-22 (Cuadro \ref{tab:CU-activar-suspender-usuario}).
 \item \textbf{Responsabilidades:} El administrador podrá activar o suspender al usuario seleccionado.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2243,7 +2243,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: notificarAccion()}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-22 (Cuadro \ref{tab:CU-activar-suspender-usuario})
+\item \textbf{Referencias cruzadas:} UC-22 (Cuadro \ref{tab:CU-activar-suspender-usuario}).
 \item \textbf{Responsabilidades:} Mandar una notificación de suspensión/activación de la cuenta al usuario.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2257,7 +2257,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: mostrarNotificacion()}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-22 (Cuadro \ref{tab:CU-activar-suspender-usuario})
+\item \textbf{Referencias cruzadas:} UC-22 (Cuadro \ref{tab:CU-activar-suspender-usuario}).
 \item \textbf{Responsabilidades:} Se mostrará un mensaje de acción por pantalla.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2281,7 +2281,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: verPerfil(usuario)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-23 (Cuadro \ref{tab:CU-ver-perfil-admin})
+\item \textbf{Referencias cruzadas:} UC-23 (Cuadro \ref{tab:CU-ver-perfil-admin}).
 \item \textbf{Responsabilidades:} El administrador podrá ver el perfil del usuario seleccionado.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2295,7 +2295,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: realizarNavegacion()}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-23 (Cuadro \ref{tab:CU-ver-perfil-admin})
+\item \textbf{Referencias cruzadas:} UC-23 (Cuadro \ref{tab:CU-ver-perfil-admin}).
 \item \textbf{Responsabilidades:} El sistema mostrará la página correspondiente al perfil del usuario.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2319,7 +2319,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: editarUsuario(usuario)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-24 (Cuadro \ref{tab:CU-editar-usuario-admin})
+\item \textbf{Referencias cruzadas:} UC-24 (Cuadro \ref{tab:CU-editar-usuario-admin}).
 \item \textbf{Responsabilidades:} Se informará al sistema de la acción de edición de un usuario específico.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2333,7 +2333,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: navegacionEdicion()}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-24 (Cuadro \ref{tab:CU-editar-usuario-admin})
+\item \textbf{Referencias cruzadas:} UC-24 (Cuadro \ref{tab:CU-editar-usuario-admin}).
 \item \textbf{Responsabilidades:} El sistema mostrará la página correspondiente a la edición de los datos del usuario.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2347,7 +2347,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: editarUsuario(Datos)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-24 (Cuadro \ref{tab:CU-editar-usuario-admin})
+\item \textbf{Referencias cruzadas:} UC-24 (Cuadro \ref{tab:CU-editar-usuario-admin}).
 \item \textbf{Responsabilidades:} Se mandará al sistema los datos del usuario para que este sea editado.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2361,7 +2361,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: edicionUsuario(Datos)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-24 (Cuadro \ref{tab:CU-editar-usuario-admin})
+\item \textbf{Referencias cruzadas:} UC-24 (Cuadro \ref{tab:CU-editar-usuario-admin}).
 \item \textbf{Responsabilidades:} Se realizará la edición de los datos del usuario, guardándolos en el sistema.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2375,7 +2375,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: notificarEdicion()}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-24 (Cuadro \ref{tab:CU-editar-usuario-admin})
+\item \textbf{Referencias cruzadas:} UC-24 (Cuadro \ref{tab:CU-editar-usuario-admin}).
 \item \textbf{Responsabilidades:} Mandar una notificación de edición del perfil por parte del administrador al usuario.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2389,7 +2389,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: mostrarNotificacion()}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-24 (Cuadro \ref{tab:CU-editar-usuario-admin})
+\item \textbf{Referencias cruzadas:} UC-24 (Cuadro \ref{tab:CU-editar-usuario-admin}).
 \item \textbf{Responsabilidades:} Se mostrará un mensaje de acción por pantalla.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2413,7 +2413,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: verPerfil(administrador)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-25 (Cuadro \ref{tab:CU-ver-perfil-de-admin})
+\item \textbf{Referencias cruzadas:} UC-25 (Cuadro \ref{tab:CU-ver-perfil-de-admin}).
 \item \textbf{Responsabilidades:} El administrador podrá ver el perfil de otro administrador seleccionado.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2427,7 +2427,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: realizarNavegacion()}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-25 (Cuadro \ref{tab:CU-ver-perfil-de-admin})
+\item \textbf{Referencias cruzadas:} UC-25 (Cuadro \ref{tab:CU-ver-perfil-de-admin}).
 \item \textbf{Responsabilidades:} El sistema mostrará la página correspondiente a la opción seleccionada para realizar la acción (ver administrador o mandar un mensaje al administrador).
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2450,7 +2450,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: accion(administrador)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-26 (Cuadro \ref{tab:CU-activar-suspender-admin})
+\item \textbf{Referencias cruzadas:} UC-26 (Cuadro \ref{tab:CU-activar-suspender-admin}).
 \item \textbf{Responsabilidades:} El administrador podrá activar o suspender a otro administrador seleccionado.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2465,7 +2465,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: notificarAccion()}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-26 (Cuadro \ref{tab:CU-activar-suspender-admin})
+\item \textbf{Referencias cruzadas:} UC-26 (Cuadro \ref{tab:CU-activar-suspender-admin}).
 \item \textbf{Responsabilidades:} Mandar una notificación de suspensión/activación de la cuenta al administrador.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2479,7 +2479,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: mostrarNotificacion()}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-26 (Cuadro \ref{tab:CU-activar-suspender-admin})
+\item \textbf{Referencias cruzadas:} UC-26 (Cuadro \ref{tab:CU-activar-suspender-admin}).
 \item \textbf{Responsabilidades:} Se mostrará un mensaje de acción por pantalla.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2503,7 +2503,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: editarAdministrador(administrador)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-27 (Cuadro \ref{tab:CU-editar-admin})
+\item \textbf{Referencias cruzadas:} UC-27 (Cuadro \ref{tab:CU-editar-admin}).
 \item \textbf{Responsabilidades:} Se informará al sistema de la acción de edición de un administrador específico por parte del superadministrador.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2517,7 +2517,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: navegacionEdicion()}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-27 (Cuadro \ref{tab:CU-editar-admin})
+\item \textbf{Referencias cruzadas:} UC-27 (Cuadro \ref{tab:CU-editar-admin}).
 \item \textbf{Responsabilidades:} El sistema mostrará la página correspondiente a la edición de los datos del administrador.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2531,7 +2531,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: editarAdministrador(Datos)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-27 (Cuadro \ref{tab:CU-editar-admin})
+\item \textbf{Referencias cruzadas:} UC-27 (Cuadro \ref{tab:CU-editar-admin}).
 \item \textbf{Responsabilidades:} Se mandará al sistema los datos del administrador para que este sea editado.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2545,7 +2545,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: edicionAdministrador(Datos)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-27 (Cuadro \ref{tab:CU-editar-admin})
+\item \textbf{Referencias cruzadas:} UC-27 (Cuadro \ref{tab:CU-editar-admin}).
 \item \textbf{Responsabilidades:} Se realizará la edición de los datos del administrador, guardándolos en el sistema.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2559,7 +2559,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: notificarEdicion()}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-27 (Cuadro \ref{tab:CU-editar-admin})
+\item \textbf{Referencias cruzadas:} UC-27 (Cuadro \ref{tab:CU-editar-admin}).
 \item \textbf{Responsabilidades:} Mandar una notificación de edición del perfil por parte del superadministrador al administrador.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2573,7 +2573,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: mostrarNotificacion()}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-27 (Cuadro \ref{tab:CU-editar-admin})
+\item \textbf{Referencias cruzadas:} UC-27 (Cuadro \ref{tab:CU-editar-admin}).
 \item \textbf{Responsabilidades:} Se mostrará un mensaje de acción por pantalla.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2597,7 +2597,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: añadirServicio()}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-28 (Cuadro \ref{tab:CU-alta-servicio})
+\item \textbf{Referencias cruzadas:} UC-28 (Cuadro \ref{tab:CU-alta-servicio}).
 \item \textbf{Responsabilidades:} Solicitar al sistema crear un nuevo servicio.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2612,7 +2612,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: navegacionNuevoServicio()}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-28 (Cuadro \ref{tab:CU-alta-servicio})
+\item \textbf{Referencias cruzadas:} UC-28 (Cuadro \ref{tab:CU-alta-servicio}).
 \item \textbf{Responsabilidades:} El sistema mostrará la ventana correspondiente a la creación de un nuevo servicio.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2626,7 +2626,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: nuevoServicio(nombre, descripcion)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-28 (Cuadro \ref{tab:CU-alta-servicio})
+\item \textbf{Referencias cruzadas:} UC-28 (Cuadro \ref{tab:CU-alta-servicio}).
 \item \textbf{Responsabilidades:} Se mandará al sistema los datos necesarios para la creación de un nuevo servicio.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2641,7 +2641,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: crearServicio(nombre, descripcion)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-28 (Cuadro \ref{tab:CU-alta-servicio})
+\item \textbf{Referencias cruzadas:} UC-28 (Cuadro \ref{tab:CU-alta-servicio}).
 \item \textbf{Responsabilidades:} Creación de un nuevo servicio con los datos recibidos.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2656,7 +2656,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: mostrarNotificacion()}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-28 (Cuadro \ref{tab:CU-alta-servicio})
+\item \textbf{Referencias cruzadas:} UC-28 (Cuadro \ref{tab:CU-alta-servicio}).
 \item \textbf{Responsabilidades:} Se mostrará un mensaje de acción por pantalla.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2680,7 +2680,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: accion(servicio)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-29 (Cuadro \ref{tab:CU-activar-suspender-servicio})
+\item \textbf{Referencias cruzadas:} UC-29 (Cuadro \ref{tab:CU-activar-suspender-servicio}).
 \item \textbf{Responsabilidades:} El administrador podrá activar o suspender el servicio seleccionado.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2695,7 +2695,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: mostrarNotificacion()}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-29 (Cuadro \ref{tab:CU-activar-suspender-servicio})
+\item \textbf{Referencias cruzadas:} UC-29 (Cuadro \ref{tab:CU-activar-suspender-servicio}).
 \item \textbf{Responsabilidades:} Se mostrará un mensaje de acción por pantalla.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2719,7 +2719,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: editar(servicio)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-30 (Cuadro \ref{tab:CU-editar-servicio})
+\item \textbf{Referencias cruzadas:} UC-30 (Cuadro \ref{tab:CU-editar-servicio}).
 \item \textbf{Responsabilidades:} Se solicitará al sistema la edición de un servicio específico por parte del administrador.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2733,7 +2733,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: navegacionEdicion()}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-30 (Cuadro \ref{tab:CU-editar-servicio})
+\item \textbf{Referencias cruzadas:} UC-30 (Cuadro \ref{tab:CU-editar-servicio}).
 \item \textbf{Responsabilidades:} El sistema mostrará la página correspondiente a la edición del servicio.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2747,7 +2747,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: editarServicio(nombre, descripcion)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-30 (Cuadro \ref{tab:CU-editar-servicio})
+\item \textbf{Referencias cruzadas:} UC-30 (Cuadro \ref{tab:CU-editar-servicio}).
 \item \textbf{Responsabilidades:} Se mandará al sistema los datos del servicio para que este sea editado.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2761,7 +2761,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: edicionServicio(nombre, descripcion)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-30 (Cuadro \ref{tab:CU-editar-servicio})
+\item \textbf{Referencias cruzadas:} UC-30 (Cuadro \ref{tab:CU-editar-servicio}).
 \item \textbf{Responsabilidades:} Se realizará la edición de los datos del servicio, guardándolos en el sistema.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2776,7 +2776,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: mostrarNotificacion()}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-30 (Cuadro \ref{tab:CU-editar-servicio})
+\item \textbf{Referencias cruzadas:} UC-30 (Cuadro \ref{tab:CU-editar-servicio}).
 \item \textbf{Responsabilidades:} Se mostrará un mensaje de acción por pantalla.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2800,7 +2800,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: añadirClase()}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-31 (Cuadro \ref{tab:CU-alta-clase})
+\item \textbf{Referencias cruzadas:} UC-31 (Cuadro \ref{tab:CU-alta-clase}).
 \item \textbf{Responsabilidades:} Solicitar al sistema crear una nueva clase.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2815,7 +2815,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: navegacionNuevaClase()}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-31 (Cuadro \ref{tab:CU-alta-clase})
+\item \textbf{Referencias cruzadas:} UC-31 (Cuadro \ref{tab:CU-alta-clase}).
 \item \textbf{Responsabilidades:} El sistema mostrará la ventana correspondiente a la creación de una nueva clase.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2829,7 +2829,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: nuevaClase(Datos)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-31 (Cuadro \ref{tab:CU-alta-clase})
+\item \textbf{Referencias cruzadas:} UC-31 (Cuadro \ref{tab:CU-alta-clase}).
 \item \textbf{Responsabilidades:} Se mandará al sistema los datos necesarios para la creación de una nueva clase.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2844,7 +2844,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: crearClase(Datos)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-31 (Cuadro \ref{tab:CU-alta-clase})
+\item \textbf{Referencias cruzadas:} UC-31 (Cuadro \ref{tab:CU-alta-clase}).
 \item \textbf{Responsabilidades:} Creación de una nueva clase con los datos recibidos.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2859,7 +2859,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: mostrarNotificacion()}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-31 (Cuadro \ref{tab:CU-alta-clase})
+\item \textbf{Referencias cruzadas:} UC-31 (Cuadro \ref{tab:CU-alta-clase}).
 \item \textbf{Responsabilidades:} Se mostrará un mensaje de acción por pantalla.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2883,7 +2883,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: accion(clase)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-32 (Cuadro \ref{tab:CU-activar-suspender-clase})
+\item \textbf{Referencias cruzadas:} UC-32 (Cuadro \ref{tab:CU-activar-suspender-clase}).
 \item \textbf{Responsabilidades:} El administrador podrá activar o suspender la clase seleccionada.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2898,7 +2898,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: notificar(listaUsuarios)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-32 (Cuadro \ref{tab:CU-activar-suspender-clase})
+\item \textbf{Referencias cruzadas:} UC-32 (Cuadro \ref{tab:CU-activar-suspender-clase}).
 \item \textbf{Responsabilidades:} Mandar una notificación de activación o suspensión de una clase específica por parte del administrador a todos los usuarios con reserva en la misma, en caso que existan.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2912,7 +2912,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: mostrarNotificacion()}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-32 (Cuadro \ref{tab:CU-activar-suspender-clase})
+\item \textbf{Referencias cruzadas:} UC-32 (Cuadro \ref{tab:CU-activar-suspender-clase}).
 \item \textbf{Responsabilidades:} Se mostrará un mensaje de acción por pantalla.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2936,7 +2936,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: editar(clase)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-33 (Cuadro \ref{tab:CU-editar-clase})
+\item \textbf{Referencias cruzadas:} UC-33 (Cuadro \ref{tab:CU-editar-clase}).
 \item \textbf{Responsabilidades:} Se solicitará al sistema la edición de una clase específica por parte del administrador.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2950,7 +2950,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: navegacionEdicion()}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-33 (Cuadro \ref{tab:CU-editar-clase})
+\item \textbf{Referencias cruzadas:} UC-33 (Cuadro \ref{tab:CU-editar-clase}).
 \item \textbf{Responsabilidades:} El sistema mostrará la página correspondiente a la edición de la clase.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2964,7 +2964,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: editarClase(Datos)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-33 (Cuadro \ref{tab:CU-editar-clase})
+\item \textbf{Referencias cruzadas:} UC-33 (Cuadro \ref{tab:CU-editar-clase}).
 \item \textbf{Responsabilidades:} Se mandará al sistema los datos de la clase para que esta sea editada.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2978,7 +2978,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: edicionClase(Datos)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-33 (Cuadro \ref{tab:CU-editar-clase})
+\item \textbf{Referencias cruzadas:} UC-33 (Cuadro \ref{tab:CU-editar-clase}).
 \item \textbf{Responsabilidades:} Se realizará la edición de los datos de la clase, guardándolos en el sistema.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -2993,7 +2993,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: mostrarNotificacion()}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-33 (Cuadro \ref{tab:CU-editar-clase})
+\item \textbf{Referencias cruzadas:} UC-33 (Cuadro \ref{tab:CU-editar-clase}).
 \item \textbf{Responsabilidades:} Se mostrará un mensaje de acción por pantalla.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -3017,7 +3017,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: añadirCita()}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-34 (Cuadro \ref{tab:CU-alta-cita})
+\item \textbf{Referencias cruzadas:} UC-34 (Cuadro \ref{tab:CU-alta-cita}).
 \item \textbf{Responsabilidades:} Solicitar al sistema crear una nueva cita.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -3032,7 +3032,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: navegacionNuevaCita()}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-34 (Cuadro \ref{tab:CU-alta-cita})
+\item \textbf{Referencias cruzadas:} UC-34 (Cuadro \ref{tab:CU-alta-cita}).
 \item \textbf{Responsabilidades:} El sistema mostrará la ventana correspondiente a la creación de una nueva cita.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -3046,7 +3046,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: nuevaCita(Datos)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-34 (Cuadro \ref{tab:CU-alta-cita})
+\item \textbf{Referencias cruzadas:} UC-34 (Cuadro \ref{tab:CU-alta-cita}).
 \item \textbf{Responsabilidades:} Se mandará al sistema los datos necesarios para la creación de una nueva cita.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -3061,7 +3061,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: crearCita(Datos)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-34 (Cuadro \ref{tab:CU-alta-cita})
+\item \textbf{Referencias cruzadas:} UC-34 (Cuadro \ref{tab:CU-alta-cita}).
 \item \textbf{Responsabilidades:} Creación de una nueva cita con los datos recibidos.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -3076,7 +3076,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: mostrarNotificacion()}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-34 (Cuadro \ref{tab:CU-alta-cita})
+\item \textbf{Referencias cruzadas:} UC-34 (Cuadro \ref{tab:CU-alta-cita}).
 \item \textbf{Responsabilidades:} Se mostrará un mensaje de acción por pantalla.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -3100,7 +3100,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: accion(cita)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-35 (Cuadro \ref{tab:CU-activar-suspender-cita})
+\item \textbf{Referencias cruzadas:} UC-35 (Cuadro \ref{tab:CU-activar-suspender-cita}).
 \item \textbf{Responsabilidades:} El administrador podrá activar o suspender la cita seleccionada.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -3115,7 +3115,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: notificar(listaUsuarios)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-35 (Cuadro \ref{tab:CU-activar-suspender-cita})
+\item \textbf{Referencias cruzadas:} UC-35 (Cuadro \ref{tab:CU-activar-suspender-cita}).
 \item \textbf{Responsabilidades:} Mandar una notificación de activación o suspensión de una cita específica por parte del administrador a todos los usuarios con reserva en la misma, en caso que existan.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -3129,7 +3129,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: mostrarNotificacion()}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-35 (Cuadro \ref{tab:CU-activar-suspender-cita})
+\item \textbf{Referencias cruzadas:} UC-35 (Cuadro \ref{tab:CU-activar-suspender-cita}).
 \item \textbf{Responsabilidades:} Se mostrará un mensaje de acción por pantalla.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -3153,7 +3153,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: editar(cita)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-36 (Cuadro \ref{tab:CU-editar-cita})
+\item \textbf{Referencias cruzadas:} UC-36 (Cuadro \ref{tab:CU-editar-cita}).
 \item \textbf{Responsabilidades:} Se solicitará al sistema la edición de una cita específica por parte del administrador.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -3167,7 +3167,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: navegacionEdicion()}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-36 (Cuadro \ref{tab:CU-editar-cita})
+\item \textbf{Referencias cruzadas:} UC-36 (Cuadro \ref{tab:CU-editar-cita}).
 \item \textbf{Responsabilidades:} El sistema mostrará la página correspondiente a la edición de la cita.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -3181,7 +3181,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: editarCita(Datos)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-36 (Cuadro \ref{tab:CU-editar-cita})
+\item \textbf{Referencias cruzadas:} UC-36 (Cuadro \ref{tab:CU-editar-cita}).
 \item \textbf{Responsabilidades:} Se mandará al sistema los datos de la cita para que esta sea editada.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -3195,7 +3195,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: edicionCita(Datos)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-36 (Cuadro \ref{tab:CU-editar-cita})
+\item \textbf{Referencias cruzadas:} UC-36 (Cuadro \ref{tab:CU-editar-cita}).
 \item \textbf{Responsabilidades:} Se realizará la edición de los datos de la cita, guardándolos en el sistema.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -3210,7 +3210,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: mostrarNotificacion()}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-36 (Cuadro \ref{tab:CU-editar-cita})
+\item \textbf{Referencias cruzadas:} UC-36 (Cuadro \ref{tab:CU-editar-cita}).
 \item \textbf{Responsabilidades:} Se mostrará un mensaje de acción por pantalla.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -3234,7 +3234,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: añadirArchivo()}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-37 (Cuadro \ref{tab:CU-subir-archivo})
+\item \textbf{Referencias cruzadas:} UC-37 (Cuadro \ref{tab:CU-subir-archivo}).
 \item \textbf{Responsabilidades:} Solicitar al sistema subir un archivo.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -3249,7 +3249,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: navegacionNuevoArchivo()}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-37 (Cuadro \ref{tab:CU-subir-archivo})
+\item \textbf{Referencias cruzadas:} UC-37 (Cuadro \ref{tab:CU-subir-archivo}).
 \item \textbf{Responsabilidades:} El sistema mostrará la ventana correspondiente a la subida de un nuevo archivo.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -3263,7 +3263,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: nuevoArchivo(Datos, archivo, usuarios)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-37 (Cuadro \ref{tab:CU-subir-archivo})
+\item \textbf{Referencias cruzadas:} UC-37 (Cuadro \ref{tab:CU-subir-archivo}).
 \item \textbf{Responsabilidades:} Se mandará al sistema los datos necesarios para subir el archivo.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -3278,7 +3278,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: subirArchivo(Datos, archivo, usuarios)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-37 (Cuadro \ref{tab:CU-subir-archivo})
+\item \textbf{Referencias cruzadas:} UC-37 (Cuadro \ref{tab:CU-subir-archivo}).
 \item \textbf{Responsabilidades:} Almacenamiento de una nuevo archivo, con los datos y archivo recibidos.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -3294,7 +3294,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: notificar(usuarios)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-37 (Cuadro \ref{tab:CU-subir-archivo})
+\item \textbf{Referencias cruzadas:} UC-37 (Cuadro \ref{tab:CU-subir-archivo}).
 \item \textbf{Responsabilidades:} Mandar una notificación de documento disponible a los usuarios especificados al subir el archivo, en caso que existan.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -3308,7 +3308,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: mostrarNotificacion()}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-37 (Cuadro \ref{tab:CU-subir-archivo})
+\item \textbf{Referencias cruzadas:} UC-37 (Cuadro \ref{tab:CU-subir-archivo}).
 \item \textbf{Responsabilidades:} Se mostrará un mensaje de acción por pantalla.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -3332,7 +3332,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: descargarArchivo(archivo)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-38 (Cuadro \ref{tab:CU-descargar-archivo})
+\item \textbf{Referencias cruzadas:} UC-38 (Cuadro \ref{tab:CU-descargar-archivo}).
 \item \textbf{Responsabilidades:} Solicitar al sistema la descarga del archivo seleccionado.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -3347,7 +3347,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: realizarDescarga(archivo)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-38 (Cuadro \ref{tab:CU-descargar-archivo})
+\item \textbf{Referencias cruzadas:} UC-38 (Cuadro \ref{tab:CU-descargar-archivo}).
 \item \textbf{Responsabilidades:} Realizar la descarga del documento seleccionado al dispositivo del usuario.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -3371,7 +3371,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: editar(archivo)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-39 (Cuadro \ref{tab:CU-editar-archivo})
+\item \textbf{Referencias cruzadas:} UC-39 (Cuadro \ref{tab:CU-editar-archivo}).
 \item \textbf{Responsabilidades:} Se solicitará al sistema la edición de un archivo específico por parte del administrador.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -3386,7 +3386,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: navegacionEdicion()}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-39 (Cuadro \ref{tab:CU-editar-archivo})
+\item \textbf{Referencias cruzadas:} UC-39 (Cuadro \ref{tab:CU-editar-archivo}).
 \item \textbf{Responsabilidades:} El sistema mostrará la página correspondiente a la edición del archivo.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -3400,7 +3400,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: editarArchivo(Datos, usuarios)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-39 (Cuadro \ref{tab:CU-editar-archivo})
+\item \textbf{Referencias cruzadas:} UC-39 (Cuadro \ref{tab:CU-editar-archivo}).
 \item \textbf{Responsabilidades:} Se mandará al sistema los datos del archivo y usuarios a los que va destinado para que sea editado.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -3415,7 +3415,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: edicionArchivo(Datos)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-39 (Cuadro \ref{tab:CU-editar-archivo})
+\item \textbf{Referencias cruzadas:} UC-39 (Cuadro \ref{tab:CU-editar-archivo}).
 \item \textbf{Responsabilidades:} Se realizará la edición de los datos del archivo y la lista de usuarios con permiso para su acceso, guardándolos en el sistema.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -3431,7 +3431,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: notificar(usuarios)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-39 (Cuadro \ref{tab:CU-editar-archivo})
+\item \textbf{Referencias cruzadas:} UC-39 (Cuadro \ref{tab:CU-editar-archivo}).
 \item \textbf{Responsabilidades:} Mandar una notificación de documento editado a los usuarios especificados con acceso al archivo, en caso que existan.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -3445,7 +3445,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: mostrarNotificacion()}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-39 (Cuadro \ref{tab:CU-editar-archivo})
+\item \textbf{Referencias cruzadas:} UC-39 (Cuadro \ref{tab:CU-editar-archivo}).
 \item \textbf{Responsabilidades:} Se mostrará un mensaje de acción por pantalla.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -3469,7 +3469,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: eliminarArchivo(archivo)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-40 (Cuadro \ref{tab:CU-eliminar-archivo})
+\item \textbf{Referencias cruzadas:} UC-40 (Cuadro \ref{tab:CU-eliminar-archivo}).
 \item \textbf{Responsabilidades:} Solicitar al sistema la eliminación del archivo seleccionado.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -3484,7 +3484,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: borradoArchivo(archivo)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-40 (Cuadro \ref{tab:CU-eliminar-archivo})
+\item \textbf{Referencias cruzadas:} UC-40 (Cuadro \ref{tab:CU-eliminar-archivo}).
 \item \textbf{Responsabilidades:} Realizar la eliminación del documento seleccionado.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -3498,7 +3498,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: notificar(usuarios)}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-40 (Cuadro \ref{tab:CU-eliminar-archivo})
+\item \textbf{Referencias cruzadas:} UC-40 (Cuadro \ref{tab:CU-eliminar-archivo}).
 \item \textbf{Responsabilidades:} Mandar una notificación de documento eliminado a los usuarios con permisos para ver el archivo, en caso que existan.
 \item \textbf{Precondiciones:} 
  \begin{itemize}
@@ -3512,7 +3512,7 @@ A continuación se describirá el modelo de comportamiento del sistema. Para ell
 
 \textbf{Contrato de operación: mostrarNotificacion()}
 \begin{itemize}
-\item \textbf{Referencias cruzadas:} UC-40 (Cuadro \ref{tab:CU-eliminar-archivo})
+\item \textbf{Referencias cruzadas:} UC-40 (Cuadro \ref{tab:CU-eliminar-archivo}).
 \item \textbf{Responsabilidades:} Se mostrará un mensaje de acción por pantalla.
 \item \textbf{Precondiciones:} 
  \begin{itemize}

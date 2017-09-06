@@ -30,6 +30,8 @@ public enum AuditType {
     RESERVAR_CITA("ha reservado una cita"),
     CANCELAR_CITA("ha cancelado la reserva de una cita"),
     ACEPTAR_CITA("ha aceptado la reserva de una cita"),
+    CREAR_ARCHIVO("ha creado un archivo"),
+    ELIMINAR_ARCHIVO("ha eliminado un archivo"),
     SUSPENDER_USUARIO("ha suspendido un usuario"),
     ACTIVAR_USUARIO("ha activado un usuario"),
     SUSPENDER_ADMIN("ha suspendido un administrador"),
@@ -68,6 +70,8 @@ public enum AuditType {
         audits.add(ACTIVAR_CITA);
         audits.add(RESERVAR_CITA);
         audits.add(CANCELAR_CITA);
+        audits.add(CREAR_ARCHIVO);
+        audits.add(ELIMINAR_ARCHIVO);
         audits.add(SUSPENDER_USUARIO);
         audits.add(ACTIVAR_USUARIO);
         audits.add(SUSPENDER_ADMIN);
@@ -98,6 +102,8 @@ public enum AuditType {
         audits.add(ACTIVAR_CITA);
         audits.add(RESERVAR_CITA);
         audits.add(CANCELAR_CITA);
+        audits.add(CREAR_ARCHIVO);
+        audits.add(ELIMINAR_ARCHIVO);
         audits.add(SUSPENDER_USUARIO);
         audits.add(ACTIVAR_USUARIO);
         audits.add(SUSPENDER_ADMIN);

@@ -45,6 +45,8 @@ public class Organisation implements Serializable {
     private Status status;
     @Column(name = "default_language")
     private String defaultLanguage;
+    @Column(name="domain_name")
+    private String domainName;
     @OneToMany(mappedBy = "organisation", cascade = CascadeType.REMOVE)
     private List<User> usersEntities;
 
@@ -149,5 +151,13 @@ public class Organisation implements Serializable {
 
     public void setDefaultLanguage(String defaultLanguage) {
         this.defaultLanguage = defaultLanguage;
+    }
+
+    public String getDomainName() {
+        return domainName;
+    }
+
+    public void setDomainName(String domainName) {
+        this.domainName = domainName;
     }
 }

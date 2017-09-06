@@ -43,7 +43,7 @@ Para el desarrollo de esta aplicación web se ha utilizado una arquitectura de 3
 
 La programación por capas es un modelo de desarrollo software en el que el objetivo primordial es la separación (desacomplamiento) de las partes que componen un sistema software o también una arquitectura cliente-servidor: lógica de negocios, capa de presentación y capa de datos. De esta forma, por ejemplo, es sencillo y mantenible crear diferentes interfaces sobre un mismos sistema sin requerirse cambio alguno en la capa de datos o lógica.\\
 
-La ventaja principal de este estilo es que el desarrollo se puede llevar a cabo en varios niveles y, en caso de que sobrevenga algún cambio, solo afectará al nivel requerido sin tener que revisar entre el código fuente de otros módulos (\ref{bio:wikipedia-programacion-por-capas}).
+La ventaja principal de este estilo es que el desarrollo se puede llevar a cabo en varios niveles y, en caso de que sobrevenga algún cambio, solo afectará al nivel requerido sin tener que revisar entre el código fuente de otros módulos (\cite{bib:wikipedia-programacion-por-capas}).
 
 \paragraph*{Capa de presentación (frontend)}
 
@@ -63,7 +63,7 @@ Es donde residen los datos y es la encargada de acceder a los mismos. Está form
 
 Es común que a la capa de negocio y de datos de los sistemas web se denomine conjuntamente como backend de la aplicación.\\
 
-Como se ha comentado anteriormente, el patrón de diseño usado para el desarrollo del proyecto ha sido Modelo-Vista-Controlador, el cual separa los datos y la lógica de negocio de una aplicación de la interfaz de usuario y el módulo encargado de gestionar los eventos y las comunicaciones. Para ello MVC propone la construcción de tres componentes distintos que son el modelo, la vista y el controlador, es decir, por un lado define componentes para la representación de la información, y por otro lado para la interacción del usuario.​ Este patrón de arquitectura de software se basa en las ideas de reutilización de código y la separación de conceptos, características que buscan facilitar la tarea de desarrollo de aplicaciones y su posterior mantenimiento (\ref{bio:wikipedia-modelo-vista-controlador}).
+Como se ha comentado anteriormente, el patrón de diseño usado para el desarrollo del proyecto ha sido Modelo-Vista-Controlador, el cual separa los datos y la lógica de negocio de una aplicación de la interfaz de usuario y el módulo encargado de gestionar los eventos y las comunicaciones. Para ello MVC propone la construcción de tres componentes distintos que son el modelo, la vista y el controlador, es decir, por un lado define componentes para la representación de la información, y por otro lado para la interacción del usuario.​ Este patrón de arquitectura de software se basa en las ideas de reutilización de código y la separación de conceptos, características que buscan facilitar la tarea de desarrollo de aplicaciones y su posterior mantenimiento (\cite{bib:wikipedia-modelo-vista-controlador}).
 
 \vspace{10mm}
 
@@ -111,10 +111,17 @@ Y es por ello por lo que la arquitectura lógica del sistema se divide en 3 capa
 
 \section{Diseño de la Interfaz de Usuario} 
 
-A continuación se muestra un prototipo de la interfaz de usuario del sistema para PC. Se mostrarán las páginas principales de la aplicación web de manera generalizada: Pantalla de registro de usuario, inicio de sesión, pantalla generalizada de la aplicación una vez iniciada la sesión y página con prototipo de tabla de datos (para listado de usuarios, servicios, clases, etc.). 
+A continuación se muestra un prototipo de la interfaz de usuario del sistema para PC. Se mostrarán las páginas principales de la aplicación web de manera generalizada: pantalla de registro de usuario, inicio de sesión, pantalla generalizada de la aplicación una vez iniciada la sesión y página con prototipo de tabla de datos (para listado de usuarios, servicios, clases, etc.). 
 
 
 \vspace{10mm}
+
+\begin{figure}[H]
+\centering
+  \includegraphics[scale=.40]{img/interfaz/inicio-sesion.jpg}
+  \caption{Interfaz de usuario: Inicio de sesión}
+  \label{fig:interfaz-inicio-sesion}
+\end{figure}
 
 \begin{figure}[H]
 \centering
@@ -125,16 +132,8 @@ A continuación se muestra un prototipo de la interfaz de usuario del sistema pa
 
 \begin{figure}[H]
 \centering
-  \includegraphics[scale=.40]{img/interfaz/inicio-sesion.jpg}
-  \caption{Interfaz de usuario: Inicio de sesión}
-  \label{fig:interfaz-inicio-sesion}
-\end{figure}
-
-
-\begin{figure}[H]
-\centering
   \includegraphics[scale=.40]{img/interfaz/pantalla-principal.jpg}
-  \caption{Interfaz de usuario: Pantalla principal}
+  \caption{Interfaz de usuario: Pantalla general}
   \label{fig:interfaz-pantalla-principal}
 \end{figure}
 
@@ -159,7 +158,7 @@ Asimismo, se ha realizado el diseño de las pantallas para dispositivos de menor
 \begin{figure}[H]
 \centering
   \includegraphics[scale=.50]{img/interfaz/pantalla-principal-movil.jpg}
-  \caption{Interfaz de usuario para dispositivos móviles: Pantalla principal}
+  \caption{Interfaz de usuario para dispositivos móviles: Pantalla general}
   \label{fig:interfaz-pantalla-principal-movil}
 \end{figure}
 
@@ -171,15 +170,16 @@ Asimismo, se ha realizado el diseño de las pantallas para dispositivos de menor
 \end{figure}
 
 
-Además, la figura \ref{fig:interfaz-navegacion} muestra el diagrama de navegación entre pantallas. Observamos que es una navegación sencilla; la página inicial sería la de registro de usuario, o inicio de sesión para usuarios registrados. A continuación, el sistema nos llevaría a la página de inicio, desde la que se podrá navegar, a través del menú y/o enlaces disponibles hasta las distintas vistas de la interfaz. En todo momento será posible cerrar la sesión del usuario, volviendo a la página de inicio de sesión, o cambiar el idioma de la interfaz mediante la opción destinada a ello en la parte superior derecha de la pantalla. 
+Además, la figura \ref{fig:interfaz-navegacion} muestra el diagrama de navegación entre pantallas. Observamos que es una navegación sencilla; la página que se mostraría al acceder a la aplicación sería la de inicio de sesión. Si se trata de un usuario registrado, podrá acceder directamente a la página principal de la aplicación (\textit{Home}) a través del usuario y contraseña. En caso contrario, habría que navegar a la página de registro para que, una vez registrado, pueda acceder al sistema llegando a la página principal mencionada. Desde esta página de inicio (\textit{Home}) se podrá navegar, a través del menú y/o enlaces disponibles, hasta las distintas vistas de la interfaz. En todo momento será posible cerrar la sesión del usuario, volviendo a la página de inicio de sesión, o cambiar el idioma de la interfaz mediante la opción destinada a ello en la parte superior derecha de la pantalla. \\ 
 
+En el diagrama observamos que se navega hacia la vista de una tabla de datos. Este es un ejemplo de tantas vistas como hay en el sistema. Algunos ejemplos de tablas de datos pueden ser las página donde se listan los servicios, clases, citas, usuarios (para administradores) o reservas del usuario. Existen muchas más páginas en el sistema para navegar, como las páginas de perfil, cambio de contraseña, bandeja de entrada, calendario, creación/edición de servicios/clases/citas/usuarios para administradores, etc. \\
 
 Esta navegación ocurrirá de la misma manera en todo tipo de dispositivos, donde el único cambio sería el diseño de la pantalla, como hemos observado en los prototipos para PC y móvil.
 
 
 \begin{figure}[H]
 \centering
-  \includegraphics[scale=.55]{img/interfaz/navegacion.jpg}
+  \includegraphics[scale=.50]{img/interfaz/navegacion.jpg}
   \caption{Interfaz de usuario: Diagrama de navegación}
   \label{fig:interfaz-navegacion}
 \end{figure}

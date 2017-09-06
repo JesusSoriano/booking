@@ -103,16 +103,6 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>Archivo:</td>
-                                <td>
-                                    <p:growl showDetail="true" />
-                                    <p:fileUpload id="newServiceFile" value="#{servicesController.file}" mode="simple" />
-                                    <p:commandButton value="Subir" icon="ui-icon-arrow-u" ajax="false" actionListener="#{servicesController.upload()}" />
-                                    <br/>
-                                    <h:message for="newServiceDescription" styleClass="loginError" errorStyle="color :red" infoStyle="color : green"/>
-                                </td>
-                            </tr>
-                            <tr>
                                 <td>&emsp;</td>
                                 <td>
                                     <h:commandButton class="btn btn-primary btn-gray" value="#{txt['b_save_changes']}" action="#{servicesController.updateService()}" rendered="#{!servicesController.isNewService}"/>

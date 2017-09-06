@@ -1,34 +1,64 @@
+% !TEX encoding = UTF-8 Unicode
 % ------------------------------------------------------------------------------
-% Este fichero es parte de la plantilla LaTeX para la realización de Proyectos
-% Final de Grado, protegido bajo los términos de la licencia GFDL.
-% Para más información, la licencia completa viene incluida en el
+% Este fichero es parte de la plantilla LaTeX para la realizaciÃ³n de Proyectos
+% Final de Grado, protegido bajo los tÃ©rminos de la licencia GFDL.
+% Para mÃ¡s informaciÃ³n, la licencia completa viene incluida en el
 % fichero fdl-1.3.tex
 
-% Copyright (C) 2012 SPI-FM. Universidad de Cádiz
+% Copyright (C) 2012 SPI-FM. Universidad de CÃ¡diz
 % ------------------------------------------------------------------------------
 
 \ProvidesPackage{paquete}
 
-% Idioma español
+% Idioma espaÃ±ol
 \usepackage[utf8]{inputenc}
 \usepackage[spanish]{babel}
 
-% Paquetes de elementos matemáticos
+% Paquetes de elementos matemÃ¡ticos
 \usepackage{amsfonts}
 \usepackage{amssymb}
 \usepackage{amsthm}
 \usepackage{amsmath}
 \usepackage{array}
-\usepackage{eurosym} % Utilización del símbolo del euro
+\usepackage{eurosym} % UtilizaciÃ³n del sÃ­mbolo del euro
 \usepackage{fancybox}
 \usepackage{float}
 \usepackage[T1]{fontenc}
 \usepackage[left=2.5cm,top=3.5cm,right=2.5cm,bottom=3.5cm]{geometry}
 \usepackage{graphicx}
-% Hyperref es muy importante: añade referencias al documento.
+% Hyperref es muy importante: aÃ±ade referencias al documento.
 \usepackage[colorlinks=true,linkcolor=azuloscuro,urlcolor=azuloscuro,
   filecolor=azuloscuro, menucolor=azuloscuro, pagecolor=azuloscuro]{hyperref}
 \usepackage[ilines]{scrpage2} % Formato de página
 \usepackage{supertabular} % Tablas mejoradas
 \usepackage{tikz}
 \usepackage[dotinlabels]{titletoc}
+
+\usepackage{listings} % Insertar código
+\lstset{ frame=Ltb,
+framerule=0pt,
+aboveskip=0.5cm,
+framextopmargin=3pt,
+framexbottommargin=3pt,
+framexleftmargin=0.4cm,
+framesep=0pt,
+rulesep=.4pt,
+backgroundcolor=\color{gray97},
+rulesepcolor=\color{black},
+%
+stringstyle=\ttfamily,
+showstringspaces = false,
+basicstyle=\small\ttfamily,
+commentstyle=\color{gray45},
+keywordstyle=\bfseries,
+%
+numbers=left,
+numbersep=15pt,
+numberstyle=\tiny,
+numberfirstline = false,
+breaklines=true,
+}
+
+% minimizar fragmentado de listados
+\lstnewenvironment{listing}[1][]
+{\lstset{#1}\pagebreak[0]}{\pagebreak[0]}

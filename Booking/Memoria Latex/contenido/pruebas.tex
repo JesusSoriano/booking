@@ -1,3 +1,4 @@
+% !TEX encoding = UTF-8 Unicode
 % ------------------------------------------------------------------------------
 % Este fichero es parte de la plantilla LaTeX para la realización de Proyectos
 % Final de Grado, protegido bajo los términos de la licencia GFDL.
@@ -7,35 +8,102 @@
 % Copyright (C) 2012 SPI-FM. Universidad de Cádiz
 % ------------------------------------------------------------------------------
 
-En este capítulo se presenta el plan de pruebas del sistema de información, incluyendo los diferentes tipos de pruebas que se han llevado a cabo, ya sean manuales (mediante listas de comprobación) o automatizadas mediante algún software específico de pruebas.
+En este capí­tulo se presenta el plan de pruebas del sistema de información, incluyendo los diferentes tipos de pruebas que se han llevado a cabo.
 
-\section{Estrategia}
-En esta sección se debe incluir el alcance de las pruebas, hasta donde se pretende llegar con ellas, si se registrarán todas o sólo aquellas de un cierto tipo y cómo se interpretarán y evaluarán los resultados.
-También, se incluirá el procedimiento a seguir para las pruebas de regresión, esto es, la repetición de ciertas pruebas para comprobar que nuevos cambios que se vayan introduciendo no originen errores en el software ya probado.
 
 \section{Entorno de Pruebas}
-Incluir en este apartado los requisitos de los entornos hardware/software donde se ejecutarán las pruebas.
+
+Como se mencionó en la sección \textit{Arquitectura Física} \ref{sec:arquitectura-fisica}, para la realización de las pruebas de este PFC se utilizarán dos ordenadores portátiles del propio alumno: 
+
+\begin{itemize}
+\item El primero, un MacBook Pro de 15 pulgadas, con procesador Intel Core i7 de 2.2 GHz y 16GB de memoria RAM DDR3, usando, por tanto, Mac OS y todos los elementos software nombrados en la sección \textit{Entorno de Construcción} \ref{sec:entorno-construcción}. 
+\item El segundo equipo, un Acer Aspire 5732z con procesador Dual Core, 4GB de memoria RAM y disco duro SSD y Windows 7, con los mismos programas y frameworks, los necesarios para la instalación y ejecución del sistema.
+\end{itemize}
+
 
 \section{Roles}
-Describir en esa sección cuáles serán los perfiles y participantes necesarios para la ejecución de cada uno de los niveles de prueba.
+
+La mayor parte de las pruebas serán realizadas por el alumno en sus equipos, utilizando perfiles de los diferentes tipos de usuarios posibles en el sistema. Una vez estas hayan sido llevadas a cabo, se procederá a evaluar el sistema con los dos miembros que componen la empresa, para verificar requisitos y usabilidad.
+
 
 \section{Niveles de Pruebas}
-En este sección se documentan los diferentes tipos de pruebas que se han llevado a cabo, ya sean manuales o automatizadas mediante algún software específico de pruebas.
+
+Las pruebas realizadas en el sistema han sido en su totalidad de forma manual. \\
+
+Durante el desarrollo del mismo se han ido realizando pruebas unitarias para corroborar el funcionamiento de las funciones que se iban desarrollando, además de realizar pruebas de integración cuando se finalizaban módulos completos, como por ejemplo la creación y gestión de citas y su integración en el calendario de actividades, probándose la funcionalidad del entorno de citas y su interacción.\\ 
+
+Una vez finalizado cada ciclo de desarrollo, con los objetivos propuestos en cada uno, se realizan también pruebas de sistema, comprobando que las nuevas funcionalidades no han afectado a la funcionalidad del resto del sistema y el funcionamiento del mismo es el adecuado.\\ 
+
+En la finalización del sistema completo, se volverán a realizar todas las pruebas mencionadas siguiendo los mismos procesos, como se explica a continuación.
+
 
 \subsection{Pruebas Unitarias}
-Las pruebas unitarias tienen por objetivo localizar errores en cada nuevo artefacto software desarrollado, antes que se produzca la integración con el resto de artefactos del sistema.
+
+Se realizan pruebas unitarias para cada funcionalidad del sistema, poniendo especial atención a los detalles y que cada una de ellas tenga el funcionamiento esperado, como por ejemplo la función de todos los elementos de cada formulario, que se muestren correctamente los mensajes de error o de información, los datos introducidos se comprueban correctamente, etc. \\ 
+
+El sistema pasa con éxito las pruebas y se procede a las pruebas de integración.
+
 
 \subsection{Pruebas de Integración}
-Este tipo de pruebas tienen por objetivo localizar errores en módulos o subsistemas completos, analizando la interacción entre varios artefactos software.
+
+Una vez comprobado que el sistema pasa correctamente las pruebas unitarias, se procede a las de integración. \\
+
+Se comprueba que los conjuntos de funcionalidades o módulos funcionan correctamente e interactúan entre sí de forma esperada. Por ejemplo, se comprobará que todos los datos introducidos por el usuario se guardan correctamente en la BD pasando por las capas correspondientes o que el número de plazas disponibles en una clase se reduce cuando un usuario reserva.\\
+
+De este modo, se comprueba que la funcionalidad de los módulos es correcta.
+
 
 \subsection{Pruebas de Sistema}
-En esta actividad se realizan las pruebas de sistema de modo que se asegure que el sistema cumple con todos los requisitos establecidos: funcionales, de almacenamiento, reglas de negocio y no funcionales. Se suelen desarrollar en un entorno específico para pruebas.
+
+Una vez el sistema parece funcionar de una forma adecuada y sin errores, se procede a realizar pruebas funcionales y no funcionales, de acuerdo a los requisitos establecidos en el catálogo de requistos \ref{sec:catalogo-requisitos}. 
+
 
 \subsubsection{Pruebas Funcionales}
-Con estas pruebas se analiza el buen funcionamiento de la implementación de los flujos normales y alternativos de los distintos casos de uso del sistema.
+
+Con estas pruebas se analiza el buen funcionamiento de la implementación de los flujos normales y alternativos de los distintos casos de uso del sistema. Así, iremos probando cada requisito funcional: 
+
+\begin{itemize}
+\item Se comprueba que la opción de \textbf{selección} de idioma está presente y realiza el cambio correctamente.
+\item Un nuevo usuario puede realizar su \textbf{registro} obteniendo acceso al sistema.
+\item El \textbf{acceso al sistema} para usuarios registrados se hace como se espera.
+\item La \textbf{sesión queda cerrada} de forma correcta, siendo obligatorio volver a identificarse para acceder al sistema.
+\item En la página de inicio se observa las \textbf{notificaciones} del usuario.
+\item Los usuarios tienen acceso a la bandeja de su \textbf{correo}.
+\item Aquí, es posible navegar a la edición de correos y \textbf{enviar uno nuevo} adecuadamente.
+\item La opción de \textbf{restablecer contraseña} se prueba y se recibe el correo correctamente, pudiéndose completar la acción.
+\item Asimismo, una vez identificado, el usuario puede \textbf{cambiar su contraseña} de forma adecuada.
+\item También sus \textbf{datos del perfil}, quedando los cambios reflejados en el sistema.
+\item Las clases disponibles son mostradas de forma correcta y el usuario puede \textbf{realizar reservas} en las mismas.
+\item Así como \textbf{cancelar dichas reservas}.
+\item En cuanto a \textbf{citas}, vemos que el sistema muestra también un correcto comportamiento y el usuario puede \textbf{solicitarlas}.
+\item El administrador, por su parte, \textbf{responde a las solicitudes de cita} de forma adecuada, llegándole la notificación al usuario.
+\item El propio usuario puede \textbf{cancelarla}, siendo el administrador quien recibe la solicitud en caso de estar aceptada.
+\item Todas las citas y clases, tanto reservadas como disponibles y pasadas, pueden consultarse en el \textbf{calendario de actividades} diponible.
+\item Otra opción sería \textbf{consultar las reservas} del usuario en la página correspondiente, donde se observa que se muestran correctamente.
+\item Se comprueba que, tanto el perfil de usuario como los de administración, pueden ver todas las acciones realizadas por él mismo o por otros usuarios (solo administradores), mediante la página de \textbf{auditorías}.
+\item Las opciones de administración de usuarios también son testadas, siendo posible \textbf{activar/suspender usuarios, ver y editar sus perfiles, así como activar/suspender y ver los perfiles de otros administradores.}
+\item El superadministrador, además, puede editar el perfil de los administradores sin ningún tipo de error.
+\item Respecto a al gestión de servicios, los dos roles de administración pueden \textbf{dar de alta, activar, suspender y editar servicios.}
+\item De la misma forma, la \textbf{gestión de clases} se realiza correctamente, estando disponibles las mismas opciones.
+\item El \textbf{alta, activación y suspensión de cita} también se ejecutan con éxito.
+\item Por último, se comprueba la gestión de \textbf{archivos}, donde la \textbf{creación y edición} de los mismos parece correcta.
+\item Tanto el administrador como los usuarios a los que van dirigido son capaces de realizar su \textbf{descarga del archivo}.
+\end{itemize}
 
 \subsubsection{Pruebas No Funcionales}
-Estas pruebas pretenden comprobar el funcionamiento del sistema, con respecto a los requisitos no funcionales identificados: eficiencia, seguridad, etc.
+
+Respecto a las pruebas de los requisitos no funcionales identificados en la subsección \ref{subsec:requisitos-no-funcionales} los resultados han sido:
+
+\begin{itemize}
+\item \textbf{Disponibilidad:} Este requisito dependerá del servidor donde se aloje el producto final. Todavía no se han realizado pruebas de producción, solo de desarrollo. Una vez se contrate un servidor se realizarán las pruebas pertinentes. En principio, un servidor debe proporcionar el servicio adecuado para cumplir este requisito, siendo la aplicación alojada en él accesible 24 horas.
+\item \textbf{Fiabilidad:} Por una parte, se realizan pruebas de testeo para asegurarnos que el sistema no posee ningún error. Por otro, se utilizan sesiones Java para los usuarios y se encriptan las contraseñas para ofrecer más seguridad a la aplicación, quedando guardadas en base de datos de esta manera, con el objetivo de que este requisito se cumpla correctamente.
+\item \textbf{Internacionalización:} Se comprueba que la opción de traducción se realiza correctamente, eligiendo el idioma deseado en el desplegable que el sistema muestra en todo momento. 
+\item \textbf{Usabilidad:} Se ha desarrollado una interfaz intuitiva de fácil acceso y uso, así como adaptada a distintos dispositivos, cumpliendo con este requisito. Aunque se recomiendo su uso en pantallas medianas o grandes, como tablets u ordenadores, debido al tamaño de algunas tablas de datos y mayor facilidad de uso por el espaciado.
+\item \textbf{Mantenibilidad:} Esta prueba se realizará a lo largo de la vida del sistema. En principio, hará falta poco mantenimiento y la opción de escalabilidad, ya sea para su uso con otras empresas o para añadir nuevas funcionalidades, ha sido tenida en cuenta en el desarrollo del proyecto para facilitarlo.
+\end{itemize}
 
 \subsection{Pruebas de Aceptación}
-El objetivo de estas pruebas es demostrar que el producto está listo para el paso a producción. Suelen ser las mismas pruebas que se realizaron anteriormente pero en el entorno de producción. En estas pruebas, es importante la participación del cliente final.
+
+Una vez todas las pruebas han sido realizadas, se realizan a nivel general con los clientes finales, tanto administradores, que han ido interactuando con el sistema a lo largo de su desarrollo, como usuarios voluntarios del centro. De esta manera, se busca obtener un feedback, tanto en la facilidad de uso como sensaciones de los usuarios. \\ 
+
+Estas pruebas de aceptación resultan exitosas. Si bien es cierto que han sido realizadas con una pequeña muestra en entorno de desarrollo. Las mismas se realizarán en entorno de producción con una muestra de testeadores mayor y por un periodo algo más prolongado, antes de su uso definitivo.

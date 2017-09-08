@@ -31,7 +31,7 @@
  
 \begin{document}
 
-\pagestyle{empty}
+\pagestyle{plain}
 
 % PORTADAS
 \input{./portadas/portada-inicial}
@@ -60,12 +60,6 @@
 % PROLEGÓMENO
 \part{Prolegómeno}
 \null\vfill
-\noindent La primera parte de la memoria del PFC debe contener una introducción y una planificación del proyecto.\\
-
-La introducción es un capí­tulo que, a modo de resumen, debe contener una breve descripción del contexto de la disciplina en la que el proyecto tiene aplicación y la motivación para su desarrollo, así­ como del alcance previsto.\\
-
-El segundo capí­tulo debe incluir una planificación del proyecto. La planificación deberá ajustarse a las prácticas de ingenierí­a en general, y de la ingenierí­a del software en particular. Deberá tener en cuenta los plazos, los entregables (documentos y software), los recursos (humanos y de equipamiento inventariable) y el mí©todo de ingenierí­a de software a emplear.
-\\
 
 \chapter{Introducción}
 \input{./contenido/introduccion}
@@ -89,13 +83,13 @@ El segundo capí­tulo debe incluir una planificación del proyecto. La planific
 \chapter{Construcción del Sistema}
 \input{./contenido/implementacion}
 
-%\chapter{Pruebas del Sistema}
-%\input{./contenido/pruebas}
+\chapter{Pruebas del Sistema}
+\input{./contenido/pruebas}
 
 % EPILOGO
 \part{Epí­logo}
 \null\vfill
-\noindent En esta última parte quedarán recogidas las conclusiones y los manuales necesarios para el manejo de la aplicación resultado del desarrollo. Si se ha realizado algún tipo de evaluación de la solución proporcionada, más allá de las pruebas del sistema, también deberá venir recogida en un capí­tulo separado dentro de esta parte. Pueden consultarse diversos tipos de evaluaciones sobre sistemas de información en \cite{hevner2004}: casos de estudio, análisis estático, análisis dinámico, simulación, experimento controlado, etc.
+\noindent En esta última parte quedarán recogidas las conclusiones y los manuales necesarios para el manejo de la aplicación resultado del desarrollo. 
 \vfill
 
 %\chapter{Manual de implantación y explotación}
@@ -104,13 +98,8 @@ El segundo capí­tulo debe incluir una planificación del proyecto. La planific
 %\chapter{Manual de usuario}
 %\input{./contenido/manual_usuario}
 
-%\chapter{Conclusiones}
-%\input{./contenido/conclusiones}
-
-\\
-
-\cite{PostgreSQL}
-\nocite{*}
+\chapter{Conclusiones}
+\input{./contenido/conclusiones}
 
 
 \chapter*{\bibname}

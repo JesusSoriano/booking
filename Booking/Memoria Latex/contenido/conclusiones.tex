@@ -1,3 +1,4 @@
+% !TEX encoding = UTF-8 Unicode
 % ------------------------------------------------------------------------------
 % Este fichero es parte de la plantilla LaTeX para la realización de Proyectos
 % Final de Grado, protegido bajo los términos de la licencia GFDL.
@@ -7,17 +8,40 @@
 % Copyright (C) 2012 SPI-FM. Universidad de Cádiz
 % ------------------------------------------------------------------------------
 
-En este último capítulo se detallan las lecciones aprendidas tras el desarrollo del presente proyecto y se identifican las posibles oportunidades de mejora sobre el software desarrollado.
+En este último capí­tulo se detallan las lecciones aprendidas tras el desarrollo del presente proyecto y se identifican las posibles oportunidades de mejora sobre el software desarrollado.
 
 \section{Objetivos alcanzados}
-Este apartado debe resumir los objetivos generales y específicos alcanzados, relacionándolos con todo lo descrito en el capítulo de introducción.\\
+
+Tras la finalización de este Proyecto Fin de Carrera se han alcanzado tanto objetivos previamente definidos como experiencias motivadoras de las que se hablará en la siguiente sección. \\ 
+
+En pocas semanas desde el inicio del proyecto se alcanzó unos de los objetivos del mismo, la página web pública de la empresa \ref{bio:CoreSport}. Este primer objetivo fue a la vez un aporte de motivación, ya que se obtuvieron los primeros resultados visibles y un pequeño logro personal al finalizar mi segunda página web en activo en ese momento. Desde su realización, la web ha tenido un buen funcionamiento, con resultados visibles para la empresa. \\
+
+Tras el desarrollo y finalización de la parte principal del proyecto el resultado obtenido es bastante más funcional y motivador. Se consigue exitosamente una solución al problema planteado en la introducción de esta memoria \ref{sec:introduccion}, obteniendo un software capaz de gestionar la totalidad de servicios del centro, con la opción de añadir actividades, clases, citas, archivos, usuarios, la comunicación entre ellos, seguimiento de acciones, etc. \\
+
+Se obtiene, por tanto, un sistema que palia todos los objetivos definidos con la aprobación de los clientes finales y el incentivo de haber realizado un completo sistema de gestión que servirá de uso para, al menos, una empresa en expansión con entre 100 y 200 clientes hasta el momento.
+
 
 \section{Lecciones aprendidas}
-A continuación, se detallan las buenas prácticas adquiridas, tanto tecnológicas como procedimentales, así como cualquier otro aspecto de interés.\\
-Resumir cuantitativamente el tiempo y esfuerzo dedicados al proyecto a lo largo de su desarrollo que escribir un sencillo 'he trabajado mucho en este proyecto'.
+
+La realización de este proyecto me ha aportado muchas cosas interesantes, desde la adquisición de conocimiento respecto a las tecnologías usadas o la mejora en la codificación del software -tanto estructuralmente como en la programación en general- hasta el crecimiento personal a la hora de la resolución de problemas, autoaprendizaje y gestión del tiempo. Aunque no ha sido un camino fácil, claro está. \\
+
+Desde el primer momento, la realización de este proyecto ha sido todo un reto. Para empezar, la decisión de qué lenguajes usar, frameworks, tecnologías, etc. Afortunadamente, mi experiencia laboral e inquietud por el aprendizaje me ha facilitado el trabajo en muchos aspectos, ya que anteriormente al inicio del PFC había estado trabajando con aplicaciones webs usando JavaEE y los frameworks usados. Además, toda la parte de web pública, interfaz de usuario y estilos ha coincidido con, puede decirse que, mis inicios en el aprendizaje de diseño web más formalmente, variante en la que estoy centrando mi carrera profesional actualmente. \\
+
+Aunque la planificación temporal de toda la realización del PFC se estimara para 8 meses, diversas circunstancias han influido en que el espacio temporal se haya alargado hasta los 33 meses, cuatro veces más de lo estimado. Esto no quiere decir que los requisitos hayan crecido en número o dificultad, o que la programación se haya complicado más de lo estimado, sino que, principalmente, el atraso se ha debido a compaginar el desarrollo del proyecto con diversos trabajos a tiempo parcial, desde programador Java hasta diseñador web, incluyendo otros trabajos esporádicos relacionados con el diseño o el arte. Aparte, claro está, de imprevistos que han surgido en el camino, vida social, voluntariado en un grupo Scout, práctica de deporte, etc. Por supuesto, han surgido dificultades de programación -no sería un proyecto real sin algún que otro quebradero de cabeza- y algún cambio en los requisitos por parte de los clientes.\\ 
+
+Aún así, ha sido una gran satisfacción haber acabado este sistema de gestión, habiendo aportado y mejorado competencias en cuanto a este ámbito se refiere.  
+
 
 \section{Trabajo futuro}
-En esta sección, se presentan las diversas áreas u oportunidades de mejora detectadas durante el desarrollo del proyecto y que podrán ser abarcadas en futuras versiones del software.\\
 
-Los elementos aquí descritos deben estar en relación con lo relatado en el apartado de objetivos y alcance del proyecto descritos en la introducción.
+Aunque el sistema de gestión obtenido cumpla con los objetivos y necesidades de la empresa en cuestión, a mi parecer, y en parte consecuencia de cambios de requisitos por parte de la propia empresa, existen diversas mejoras que se pueden aplicar de cara al futuro: 
+
+\begin{itemize}
+\item Para empezar, en lo que la gestión de actividades y citas se refiere, una posible mejora, que seguramente se lleve a cabo en un futuro próximo, podría ser la opción de crear clases o citas recursivas. Es decir, que se repitan en el tiempo, ya sea mediante la elección de los días de la semana en las que se repetiría, realizando el calendario de clases o citas semanalmente, o hacerla recursiva para que se repita la misma clase o cita cada semana el mismo día a la misma hora, creando dicha clase o cita solo una vez, eligiendo fecha de finalización del bucle si fuese oportuno.
+\item Otra posible mejora sería la adaptación total del sistema para su uso por parte de distintas empresas. El desarrollo ha sido realizado teniendo en cuenta esta opción, pero habría que completarlo con una gestión completa de organizaciones, y que todo lo relacionado con cada una de ellas esté automatizado, añadiendo simplemente su logo, estilo, etc. Que, por otra parte, sería un trabajo de poco esfuerzo, ya que como se ha mencionado la programación se ha realizado de esta forma, por lo que habría que dedicarle tiempo a la realización de pruebas con varias organizaciones y mejora o ampliación de las funcionalidades que necesiten.
+\item También se ha tenido en cuenta una mejora en cuanto a opciones y permisos. Con esto quiero decir, añadir la opción de que cada usuario elija si desea que se le pueda contactar mediante el correo interno, si desea recibir notificaciones por correo, etc. Esta mejora se aplicará próximamente, seguramente antes de que pase a producción. 
+\item Un requisito que no se ha citado por parte de los clientes ha sido la internacionalización de la web pública. Por motivos de marketing y usabilidad, esta característica también será tenida muy en cuenta para un futuro próximo.
+\item Y por último, respecto a la misma web pública, se está barajando la posibilidad de realizar un nuevo diseño usando \textit{WordPress} \ref{WordPress} un \textit{CMS} \ref{CMS} mundialmente conocido y cada vez más extendido en el diseño web. Este cambio daría acceso a los clientes a la gestión de la web para realizar acciones puntuales, como la escritura de entradas del blog, por ejemplo. También facilitaría el mantenimiento de la web, así como posibles extensiones de la web, como la creación de un módulo de ventas. 
+\end{itemize}
+
 

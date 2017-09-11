@@ -155,4 +155,13 @@
         <location>/error-page.xhtml</location>
     </error-page>
     
+    <context-param>
+        <param-name>primefaces.PUBLIC_CAPTCHA_KEY</param-name>
+        <param-value>6LdRTTAUAAAAACLtTblztjjrydZjTnpznTB3dFzo</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>primefaces.PRIVATE_CAPTCHA_KEY</param-name>
+        <param-value>6LdRTTAUAAAAABE5mxZ8ESz1495COv3Vb0l5lP5l</param-value>
+    </context-param>
 </web-app>

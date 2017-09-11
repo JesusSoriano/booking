@@ -75,7 +75,7 @@
 \input{./contenido/requisitos}
 
 \chapter{Análisis del Sistema}
-\input{./contenido/analisis}
+%\input{./contenido/analisis}
 
 \chapter{Diseño del Sistema}
 \input{./contenido/diseno}
@@ -92,32 +92,18 @@
 \noindent En esta última parte quedarán recogidas las conclusiones y los manuales necesarios para el manejo de la aplicación resultado del desarrollo. 
 \vfill
 
-%\chapter{Manual de implantación y explotación}
-%\input{./contenido/manual_instexp}
+\chapter{Manual de implantación y explotación}
+\input{./contenido/manual_instexp}
 
-%\chapter{Manual de usuario}
-%\input{./contenido/manual_usuario}
+\chapter{Manual de usuario}
+\input{./contenido/manual_usuario}
 
 \chapter{Conclusiones}
 \input{./contenido/conclusiones}
 
 
-\chapter*{\bibname}
-\addcontentsline{toc}{chapter}{\bibname}
-\renewcommand{\bibname}{}
-
-\input{./bibliografia}
-
-\begingroup
-  \def\chapter*#1{}
-\renewcommand{\bibname}{}
-% Bibliografí­a con BibTeX
-\bibliographystyle{apalike}
-\bibliography{bibliografia}
-
 \backmatter
 
-%\input{./anexos/general}
-%GNU \input{./anexos/fdl-1.3}
+\input{./anexos/gnu}
 
 \end{document}

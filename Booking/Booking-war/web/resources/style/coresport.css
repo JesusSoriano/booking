@@ -561,7 +561,7 @@ input[type='text'], input[type='password'] {
 }
 
 
-// Calendar (events)
+/* Calendar (events) */
 .fc-day-grid-event .fc-content {
     white-space: normal;
 }

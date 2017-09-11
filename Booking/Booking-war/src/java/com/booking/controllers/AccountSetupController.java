@@ -10,6 +10,7 @@ import com.booking.util.Constants;
 import com.booking.util.FacesUtil;
 import com.booking.security.PBKDF2HashGenerator;
 import com.booking.util.StringsUtil;
+import java.io.IOException;
 import java.io.Serializable;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
@@ -17,8 +18,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  *
@@ -62,41 +66,41 @@ public class AccountSetupController implements Serializable {
     /**
      * Registers a new user and goes to the terms & conditions page
      */
-    public String userRegistration() {
+    public void userRegistration() {
 
         try {
             if (StringsUtil.isNotNullNotEmpty(firstName)) {
                 FacesUtil.addErrorMessage("registrationForm", "Introduce tu nombre");
-                return "";
+                return;
             }
             if (StringsUtil.isNotNullNotEmpty(firstLastName)) {
                 FacesUtil.addErrorMessage("registrationForm", "Introduce tu primer apellido");
-                return "";
+                return;
             }
             
             // Remove start and end white spaces of email
             email = email.trim();
             if (StringsUtil.isNotNullNotEmpty(email)) {
                 FacesUtil.addErrorMessage("registrationForm", "Introduce tu email");
-                return "";
+                return;
             }
             
             if (StringsUtil.isNotNullNotEmpty(password)) {
                 FacesUtil.addErrorMessage("registrationForm", "Introduce contraseña");
-                return "";
+                return;
             }
             if (StringsUtil.isNotNullNotEmpty(confirmPassword)) {
                 FacesUtil.addErrorMessage("registrationForm", "Confirma tu contraseña");
-                return "";
+                return;
             }
             if (!password.equals(confirmPassword)) {
                 FacesUtil.addErrorMessage("registrationForm:confirmPassword", "Las contraseñas no coinciden.");
-                return "";
+                return;
             }
             
             if(userFacade.findUserByEmail(email) != null) {
                 FacesUtil.addErrorMessage("registrationForm", "La dirección de correo electrónico ya existe.");
-                return "";
+                return;
                 
             }
             
@@ -108,16 +112,16 @@ public class AccountSetupController implements Serializable {
                     addressLine, addressLine2, city, country, postcode, Role.USER, organisation);
 
             // login
-//            try {
-//                HttpServletRequest request = FacesUtil.getRequest();
-//                request.logout();
-//                request.login(newUser.getEmail(), password);
-////            FacesUtil.setSessionAttribute(Constants.CURRENT_USER, newUser);
-//            } catch (Exception ex) {
-//                Logger.getLogger(AccountSetupController.class.getName()).log(Level.SEVERE, null, ex);
-//                FacesUtil.addErrorMessage("registrationForm", "El usuario ha sido registrado, pero el inicio de sesión ha fallado. Inténtelo de nuevo desde la página de login.");
-//                return "";
-//            }
+            try {
+                HttpServletRequest request = FacesUtil.getRequest();
+                request.logout();
+                request.login(newUser.getEmail(), password);
+            FacesUtil.setSessionAttribute(Constants.CURRENT_USER, newUser);
+            } catch (Exception ex) {
+                Logger.getLogger(AccountSetupController.class.getName()).log(Level.SEVERE, null, ex);
+                FacesUtil.addErrorMessage("registrationForm", "El usuario ha sido registrado, pero el inicio de sesión ha fallado. Inténtelo de nuevo desde la página de login.");
+                return;
+            }
 
             //TODO: Send registration completed email?
 //            try {
@@ -133,34 +137,14 @@ public class AccountSetupController implements Serializable {
                 Logger.getLogger(AccountSetupController.class.getName()).log(Level.SEVERE, null, e);
             }
 
-            FacesUtil.setSessionAttribute(Constants.CURRENT_USER, newUser);
-            return homePage(newUser);
-        } catch (NoSuchAlgorithmException | InvalidKeySpecException ex) {
+//            FacesUtil.setSessionAttribute(Constants.CURRENT_USER, newUser);
+            FacesUtil.redirectTo("/client/home.xhtml");
+        } catch (NoSuchAlgorithmException | InvalidKeySpecException | IOException ex) {
             Logger.getLogger(AccountSetupController.class.getName()).log(Level.SEVERE, null, ex);
             FacesUtil.addErrorMessage("registrationForm", "Lo sentimos, ha habido un error. Inténtelo de nuevo más tarde.");
-            return "";
         }
     }
-
-    
-    private String homePage(User newUser) {
-        Role userRole = newUser.getUserRole().getRole();
-        switch (userRole) {
-            case USER: {
-                return "/client/home.xhtml";
-            }
-            case ADMIN: {
-                return "/admin/home.xhtml";
-            }
-            case SUPER_ADMIN: {
-                return "/super-admin/home.xhtml";
-            }
-            default: {
-                return "";
-            }
-        }
-    }
-    
+        
     public String getPassword() {
         return password;
     }

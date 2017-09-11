@@ -136,15 +136,23 @@
                                             </div>
                                         </div>
                                     </div>
+
                                     <div class="row accept">
                                         <h:selectBooleanCheckbox id="terms" value="#{accountSetupController.tncAccepted}" required="true" style="margin-right: 5px" >
                                             <p:ajax update="singup" />
                                         </h:selectBooleanCheckbox>
                                         <h:outputText value="#{txt['read_accept']}" /><a href="terms-and-conditions.xhtml" target="_blank" ><h:outputText value=" #{txt['tNc']}" /></a>
                                     </div>  
+
                                     <div class="row">
                                         <div class="col-xs-offset-4 col-sm-offset-2 col-md-offset-2 col-lg-offset-2 col-xs-5 col-sm-3 col-md-3 col-lg-3">
-                                            <h:commandButton id="singup" value="#{txt['b_next']}" class="btn btn-primary btn-block btn-main" action="#{accountSetupController.userRegistration()}" disabled="#{!accountSetupController.tncAccepted}" />
+                                            <p:messages showDetail="true"/>
+                                            <p:captcha label="Captcha" language="es" theme="clean" />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-offset-4 col-sm-offset-2 col-md-offset-2 col-lg-offset-2 col-xs-5 col-sm-3 col-md-3 col-lg-3">
+                                            <p:commandButton id="singup" value="#{txt['b_next']}" class="btn btn-primary btn-block btn-main" actionListener="#{accountSetupController.userRegistration()}" ajax="false" disabled="#{!accountSetupController.tncAccepted}" />
                                         </div>
                                     </div>
 

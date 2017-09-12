@@ -74,18 +74,158 @@ Para la utilización del sistema no se requiere ningún elemento hardware o soft
 
 El sistema no precisa de conocimiento fuera de lo común en un sistema de gestión. La interfaz es intuitiva y las funcionalidades están estructuradas de manera sencilla a través del menú. Se irá relatando cómo realizar las tareas disponibles, mostrando visualmente algunos ejemplos más representativos. \\
 
-El primer paso para usar la aplicación web sería el registro de usuario. Para ello, 
+La interfaz del sistema aparecerá en el idioma por defecto de la organización, en este caso será el español. Si no hablamos castellano, se podrá \textbf{cambiar el lenguaje} haciendo uso del selector destinado a ello en la esquina superior derecha de la interfaz.
+
+El primer paso para usar la aplicación web sería el \textit{registro de usuario}. Para ello, hacemos clic en el enlace "\textit{¿Todavía no tienes tu cuenta CoreSport? Click aquí}" que aparece bajo los campos de datos de inicio de sesión. En esta página de registro, introduciremos, al menos, los cambios obligatorios marcados con asterisco (*) y marcaremos la casilla de haber leído y aceptar los términos y condiciones, una vez hecho. Introduciendo las palabras del \textit{captcha} de seguridad podremos pasar a registrarnos haciendo clic en el botón de registro. En cuanto uno de los administradores acepte la solicitud de registro, el usuario quedará activo en el sistema y podrá hacer uso de él. \\
+
+Para \textbf{identificarse en el sistema}, simplemente introduciremos nuestro correo electrónico y contraseña en los campos destinados a ello y pulsaremos el botón de inicio de sesión. Una vez verificados los datos el sistema nos redirigirá a la página de bienvenida. En esta página podremos ver los \textbf{comunicados} para usuarios. \\
+
+Las posibles opciones principales para un usuario identificado, como se ha descrito en la sección anterior, serían: gestión de clases, citas, mensajes internos y datos del usuario, ver acciones realizadas, comunicados y notificaciones y consultar archivos si posee alguno para su descarga. El menú guiará al usuario por estas funcionalidades, dividiéndose en varios bloques: 
+
+\begin{itemize}
+\item Inicio
+\item Reservas
+
+\begin{itemize}
+\item Calendario
+\item Servicios
+\item Clases
+\item Citas
+\item Mis Resevas
+\end{itemize}
+
+\item Mi Cuenta
+
+\begin{itemize}
+\item Perfil
+\item Cambiar Contraseña
+\item Correo Interno
+\item Notificaciones
+\item Archivos
+\item Histórico de Acciones
+\item Cerrar Sesión
+\end{itemize}
+
+\item Ayuda
+
+\begin{itemize}
+\item Contacto
+\item Términos y Condiciones
+\item About
+\end{itemize}
+
+\end{itemize}
+
+La mayoría de las funciones son triviales y de fácil realización. Al acceder a páginas como \textbf{servicios, clases, citas, reservas, correo o archivos}, todas ellas mostrarán un cuadro con la lista de información que buscas, cada fila corresponderá a un/a servicio, clase, cita, reserva, correo o archivo, con la diferencia de que cada tabla te permitirá realizar distintas opciones con la información mostrada. \\
+
+\begin{figure}
+\centering
+  \includegraphics[scale=.70]{img/manual/tabla-clases.jpg}
+  \caption{\textit{Tabla de clases}}
+  \label{fig:tabla-clases}
+\end{figure}
+
+En el caso de servicios no se permite ninguna opción a realizar. Las tablas de clases y citas mostrarán la opción de ver más información detallada o reservar la clase o cita: en el primer caso, se podrá ver las plazas disponibles restantes como muestra la figura \ref{fig:tabla-clases}; en el segundo caso, cada cita mostrará su estado, que podrá ser \texit{disponible, reservada, pendiente} o texit{suspendido/a}, como vemos en la imagen \ref{fig:tabla-citas}. Además, los estados que se muestren de algún verde (\textit{aceptada}) o naranja (\textit{pendiente}) indicarán que la cita está reservada o solicitada -respectivamente- por el usuario. Las reservas mostrarían las clases y citas del usuario -con las mismas opciones citadas-, junto con un historial de las reservas anteriores. En el caso de los archivos, la opción posible será la de descarga del mismo. 
+
+\begin{figure}
+\centering
+  \includegraphics[scale=.70]{img/manual/tabla-citas.jpg}
+  \caption{\textit{Tabla de citas}}
+  \label{fig:tabla-citas}
+\end{figure}
+
+Finalizando con las páginas de tablas, el caso del correo interno sería algo diferente, ya que posee dos pestañas, una para el correo recibido (\textit{bandeja de entrada} y otra para el enviado. En este caso, y en ambas pestañas, clicando en el asunto de un correo específico se podrá acceder a la información del mismo. Se distinguirá entre nuevo correo y leído por el texto en negrita de los nuevos, como apreciamos en la imagen \ref{fig:correo-interno}. Observamos también que se da la opción a redactar un email, acción que redirigirá al usuario a la página de redacción de un nuevo email, donde elegirá el destinatario a través del desplegable que se facilita y podrá escribir el asunto y mensaje a enviar como vemos en la imagen. 
+
+\begin{figure}
+\centering
+  \includegraphics[scale=.70]{img/manual/correo-interno.jpg}
+  \caption{\textit{Correo interno}}
+  \label{fig:correo-interno}
+\end{figure}
+
+\begin{figure}
+\centering
+  \includegraphics[scale=.50]{img/manual/redactar-email.jpg}
+  \caption{\textit{Redactar email}}
+  \label{fig:redactar-email}
+\end{figure}
+
+El caso de notificaciones e historial de acciones se diferencia del resto de tablas en que se eligen las fechas entre las que se desea ver la información. Las página de notificaciones mostrará todas las de la última semana, pudiendo elegir las fechas y el tipo de notificación que se desea consultar. Al igual que en el caso de los correos, las que no han sido leídas se mostrarán en negrita, quedando marcada como leída una vez vista. En cuanto al histórico de acciones, no se mostrará la tabla por defecto, sino que el usuario será el que elija las fechas y el tipo de acción a mostrar, obteniendo lo resultados definidos. \\
+
+Otra de las opciones disponibles, y unas de las más importantes del sistema, sería el calendario de actividades. Este mostrará todas las clases y citas existentes, tanto pasadas como futuras, para una mayor facilidad de visión y ubicación en el tiempo. El calendario, como vemos en la figura \ref{calendario}, distinguirá entre citas y clases dependiendo del diseño del cuadro de información, como aclara la explicación de colores y formas que se facilita bajo el mismo. Así, vemos que las clases tendrán un fondo a color, mientras que las citas solo un borde. Los colores indicarán la misma información, si la clase o cita es pasada (gris), está disponible para reservar (azul), está reservada por el usuario (verde) o no está disponible (naranja). En este último caso, podría ser una cita en estado de \textit{pendiente}, ya sea del usuario en concreto o de cualquier otro usuario. 
+
+\begin{figure}
+\centering
+  \includegraphics[scale=.60]{img/manual/calendario.jpg}
+  \caption{\textit{Calendario de actividades}}
+  \label{fig:calendario}
+\end{figure}
+
+Por último, la opción restante sería el perfil del usuario. Aquí, se podría ver la información del usuario junto con sus reservas. La página del perfil te permite navegar hasta la edición del mismo para modificar algunos de los datos, teniendo en cuenta que el correo electrónico es el único campo que no se podría editar. También se podrá cambiar la contraseña en la página destinada a ello.\\
+
+No podemos olvidar que el administrador y superdaministrador dispone de las mismas opciones que los clientes del centro. Por supuesto, posee muchas más, teniendo la posibilidad de crear, editar, activar y suspender servicios, clases, citas, usuarios... El menú de un administrador quedaría como sigue:
+
+\begin{itemize}
+\item Inicio
+\item Reservas
+
+\begin{itemize}
+\item Calendario
+\item Mis Resevas
+\end{itemize}
+
+\item Administración
+
+\begin{itemize}
+\item Usuarios
+\item Administradores
+\item Servicios
+\item Clases
+\item Citas
+\item Histórico de Acciones
+\end{itemize}
+
+\item Mi Cuenta
+
+\begin{itemize}
+\item Perfil
+\item Cambiar Contraseña
+\item Correo Interno
+\item Cerrar Sesión
+\end{itemize}
+
+\item Ayuda
+
+\begin{itemize}
+\item Contacto
+\item Términos y Condiciones
+\item About
+\end{itemize}
+
+\end{itemize}
+
+El del superadministrador sería prácticamente el mismo, con la diferencia de poseer una opción más en la administración, dedicada a las organizaciones, así como permisos para editar administradores.
 
 
 
+\begin{figure}
+\centering
+  \includegraphics[scale=.70]{img/manual/.jpg}
+  \caption{\textit{}}
+  \label{fig:}
+\end{figure}
 
 
 
+\begin{figure}
+\centering
+  \includegraphics[scale=.70]{img/manual/.jpg}
+  \caption{\textit{}}
+  \label{fig:}
+\end{figure}
 
 
 
-
-Describir todos los aspectos necesarios para una utilización efectiva y eficiente del sistema por parte de los usuarios.
 
 
 

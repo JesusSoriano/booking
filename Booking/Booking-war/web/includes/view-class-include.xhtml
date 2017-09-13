@@ -169,13 +169,13 @@
                                 <p:column headerText="#{txt['options']}"> 
                                     <h:panelGroup rendered="#{editClassController.userRole eq 'ADMIN' or editClassController.userRole eq 'SUPER_ADMIN'}">
                                         <p:commandLink action="#{editClassController.prepareClassDay(classDay)}" update=":newClassDayForm:newClassDay" oncomplete="PF('newClassDayDialog').show()" >
-                                            <h:graphicImage title="#{txt['cap_edit']}" value="../resources/images/edit_user.png" class="table-action" /> 
+                                            <h:graphicImage title="#{txt['cap_edit']}" value="../resources/images/edit.png" class="table-action" /> 
                                         </p:commandLink> 
                                         <h:commandLink action="#{editClassController.activateClassDay(classDay)}" rendered="#{classDay.status eq 'SUSPENDED'}"> 
-                                            <h:graphicImage title="#{txt['cap_activate']}" value="../resources/images/activate_user.png" class="table-action" /> 
+                                            <h:graphicImage title="#{txt['cap_activate']}" value="../resources/images/activate.png" class="table-action" /> 
                                         </h:commandLink> 
                                         <h:commandLink action="#{editClassController.deactivateClassDay(classDay)}" rendered="#{classDay.status eq 'ACTIVATED'}"> 
-                                            <h:graphicImage title="#{txt['cap_suspend']}" value="../resources/images/suspend_user.png" class="table-action" /> 
+                                            <h:graphicImage title="#{txt['cap_suspend']}" value="../resources/images/suspend.png" class="table-action" /> 
                                         </h:commandLink> 
                                     </h:panelGroup>
                                 </p:column> 

@@ -50,7 +50,7 @@ public class ClassFacade extends AbstractFacade<ActivityClass> {
 
         ActivityClass duplicatedClass = new ActivityClass();
         duplicatedClass.setService(activityClass.getService());
-        duplicatedClass.setName(activityClass.getName() + " copy");
+        duplicatedClass.setName(activityClass.getName());
         duplicatedClass.setDescription(activityClass.getDescription());
         duplicatedClass.setMaximumUsers(activityClass.getMaximumUsers());
         duplicatedClass.setNumberOfDays(0);

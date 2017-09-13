@@ -44,8 +44,6 @@ public class ServicesController implements Serializable {
     private String newServiceDescription;
     private boolean isNewService;
 
-    private UploadedFile file;
-
     public ServicesController() {
     }
 
@@ -191,21 +189,5 @@ public class ServicesController implements Serializable {
 
     public int getNumberOfAppointments(Service service) {
         return appointmentsFacade.findNumberOfActiveCurrentAppointmentsOfService(service, organisation);
-    }
-
-    public void setFile(UploadedFile file) {
-        this.file = file;
-    }
-
-    public UploadedFile getFile() {
-        return file;
-    }
-
-    public void upload() {
-        if (file != null) {
-            System.out.println("------------ ARCHIVO SUBIDO: " + file.getFileName());
-        } else {
-            System.out.println("------------ EMPTY FILE");
-        }
     }
 }

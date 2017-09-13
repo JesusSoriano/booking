@@ -201,8 +201,7 @@ public class LoginController implements Serializable {
                 // create a PasswordChangeRequest
                 PasswordChangeRequest passwordChangeRequest = passwordChangeRequestFacade.createNewPasswordChangeRequest(user);
                 // set an encryption id to the request
-                passwordChangeRequest.setHashId(PBKDF2HashGenerator.createHash(passwordChangeRequest.getId().toString()));
-                passwordChangeRequestFacade.edit(passwordChangeRequest);
+                passwordChangeRequestFacade.setHashId(passwordChangeRequest, PBKDF2HashGenerator.createHash(passwordChangeRequest.getId().toString()));
 
                 // send the email with the encrypted id
                 // mailService.sendPasswordResetEmail(user);

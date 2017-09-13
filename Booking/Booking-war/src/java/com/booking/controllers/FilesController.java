@@ -122,7 +122,6 @@ public class FilesController implements Serializable {
     public String getFilePath(Document file) {
         try {
             String filePath = BookingProperties.getInstance().getUploadedFilesPath(organisation) + file.getFileName();
-            System.out.println("------------- Path: " + "file://" + filePath);
             return "file://" + filePath;
         } catch (Exception e) {
             Logger.getLogger(FilesController.class.getName()).log(Level.SEVERE, null, e);

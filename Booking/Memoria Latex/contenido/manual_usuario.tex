@@ -163,7 +163,7 @@ Otra de las opciones disponibles, y unas de las más importantes del sistema, se
 
 Por último, la opción restante sería el perfil del usuario. Aquí, se podría ver la información del usuario junto con sus reservas. La página del perfil te permite navegar hasta la edición del mismo para modificar algunos de los datos, teniendo en cuenta que el correo electrónico es el único campo que no se podría editar. También se podrá cambiar la contraseña en la página destinada a ello.\\
 
-No podemos olvidar que el administrador y superdaministrador dispone de las mismas opciones que los clientes del centro. Por supuesto, posee muchas más, teniendo la posibilidad de crear, editar, activar y suspender servicios, clases, citas, usuarios... El menú de un administrador quedaría como sigue:
+No podemos olvidar que administrador y superdaministrador disponen de las mismas opciones que los clientes del centro. Por supuesto, posee muchas más, teniendo la posibilidad de crear, editar, activar y suspender servicios, clases, citas, usuarios... El menú de un administrador quedaría como sigue:
 
 \begin{itemize}
 \item Inicio
@@ -204,16 +204,37 @@ No podemos olvidar que el administrador y superdaministrador dispone de las mism
 
 \end{itemize}
 
-El del superadministrador sería prácticamente el mismo, con la diferencia de poseer una opción más en la administración, dedicada a las organizaciones, así como permisos para editar administradores.
+El del superadministrador sería prácticamente el mismo, con la diferencia de poseer una opción más en la administración, dedicada a las organizaciones, así como permisos para editar administradores.\\
 
-
+A continuación vamos a ver cómo gestionar el sistema por parte los administradores. Empezaremos por los servicios, que será lo primero que crearemos, necesario para clases y citas. Para ello, navegaremos hasta la página de servicios, donde vemos la opción de añadir un nuevo servicio. La gestión de estos es fácil, ya que solo tendremos que introducir el nombre (único de cada servicio) y una descripción opcional para crearlos, como vemos en la imagen \ref{fig:nuevo-servicio}. Una vez creado, se podrá editar o desactivar el servicio. Hay que tener en cuenta que a la hora de desactivar un servicio, este puede tener clases o citas vigentes. Se suspenderá solo el servicio, y no las clases o citas vigentes, para ello, se deberán suspender las mismas individualmente. 
 
 \begin{figure}
 \centering
-  \includegraphics[scale=.70]{img/manual/.jpg}
-  \caption{\textit{}}
-  \label{fig:}
+  \includegraphics[scale=.70]{img/manual/crear-nuevo-servicio.jpg}
+  \caption{\textit{Creación de un nuevo servicio}}
+  \label{fig:nuevo-servicio}
 \end{figure}
+
+En cuanto a las clases y citas, al navegar a sus respectivas vistas, los administradores dispondrán de una tabla más que los usuarios, el historial de clases o citas. Esto puede ser valioso para consultar alguna clase o cita pasada o para crear nuevas a partir de ellas, con la opción de duplicar que ofrecen las tablas, que copiará la información de clase sin fechas o la cita asignándole la fecha del día siguiente al actual a la misma hora que la original. Fechas que serán editables, claro está. En el caso de citas, existirá una opción extra en las filas de las citas que estén pendiente de respuesta de solicitud, que podremos aceptar o rechazar, como vemos en la imagen \ref{fig:tabla-citas-admin}. \\
+
+\begin{figure}
+\centering
+  \includegraphics[scale=.70]{img/manual/tabla-citas-admin.jpg}
+  \caption{\textit{Tabla de citas para el administrador}}
+  \label{fig:tabla-citas-admin}
+\end{figure}
+
+Vamos observando que cada vez aparecen más opciones en las tablas y, por tanto, más iconos. La figura \ref{fig:explicacion-iconos} aporta una breve explicación a los iconos que aparecen en la columna de acciones de la aplicación. 
+
+\begin{figure}
+\centering
+  \includegraphics[scale=.50]{img/manual/explicacion-iconos.jpg}
+  \caption{\textit{Breve explicación de los iconos de acción}}
+  \label{fig:explicacion-iconos}
+\end{figure}
+
+
+
 
 
 

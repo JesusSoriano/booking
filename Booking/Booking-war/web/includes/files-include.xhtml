@@ -56,14 +56,17 @@
                             </h:link>
                             <h:panelGroup rendered="#{filesController.userRole eq 'ADMIN' or filesController.userRole eq 'SUPER_ADMIN'}">
                                 <p:commandLink action="#{filesController.prepareFile(file)}" update=":newFileForm:newFileClass" oncomplete="PF('newFileDialog').show()" >
-                                    <h:graphicImage title="#{txt['cap_edit']}" value="../resources/images/edit_user.png" class="table-action" /> 
+                                    <h:graphicImage title="#{txt['cap_edit']}" value="../resources/images/edit.png" class="table-action" /> 
                                 </p:commandLink> 
                                 <h:commandLink action="#{filesController.deleteFile(file)}"> 
-                                    <h:graphicImage title="#{txt['cap_delete']}" value="../resources/images/cancel_icon.png" class="table-action" /> 
+                                    <h:graphicImage title="#{txt['cap_delete']}" value="../resources/images/suspend.png" class="table-action" /> 
                                 </h:commandLink> 
-                                <a target="_blank" href="#{filesController.getFilePath(file)}" title="Download File" class="btn-fix btn col-xs-12 btn--input btn-no-margin ">
-                                    <h:graphicImage title="#{txt['cap_download']}" value="../resources/images/downloadIcon2.png" class="table-action" /> 
+                                <a target="_blank" href="#{filesController.getFilePath(file)}">
+                                    <h:graphicImage title="#{txt['cap_download']}" value="../resources/images/download.png" class="table-action" /> 
                                 </a>
+<!--                                <a target="_blank" href="http://esingenieria.uca.es/wp-content/uploads/2013/10/1747882262_2222011131225.pdf" >
+                                    <h:graphicImage title="PRUEBA" value="../resources/images/download.png" class="table-action" /> 
+                                </a>-->
                             </h:panelGroup>
                         </p:column> 
                     </p:dataTable>

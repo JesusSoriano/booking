@@ -49,4 +49,9 @@ public class PasswordChangeRequestFacade extends AbstractFacade<PasswordChangeRe
         passwordChangeRequest.setExpired(true);
         edit(passwordChangeRequest);
     }
+    
+    public void setHashId (PasswordChangeRequest passwordChangeRequest, String hashId) {
+        passwordChangeRequest.setHashId(hashId);
+        edit(passwordChangeRequest);
+    }
 }

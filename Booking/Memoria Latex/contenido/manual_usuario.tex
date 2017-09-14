@@ -125,7 +125,13 @@ La mayoría de las funciones son triviales y de fácil realización. Al acceder 
   \label{fig:tabla-clases}
 \end{figure}
 
-En el caso de servicios no se permite ninguna opción a realizar. Las tablas de clases y citas mostrarán la opción de ver más información detallada o reservar la clase o cita: en el primer caso, se podrá ver las plazas disponibles restantes como muestra la figura \ref{fig:tabla-clases}; en el segundo caso, cada cita mostrará su estado, que podrá ser \texit{disponible, reservada, pendiente} o texit{suspendido/a}, como vemos en la imagen \ref{fig:tabla-citas}. Además, los estados que se muestren de algún verde (\textit{aceptada}) o naranja (\textit{pendiente}) indicarán que la cita está reservada o solicitada -respectivamente- por el usuario. Las reservas mostrarían las clases y citas del usuario -con las mismas opciones citadas-, junto con un historial de las reservas anteriores. En el caso de los archivos, la opción posible será la de descarga del mismo. 
+En el caso de servicios, no se permite ninguna opción a realizar. \\
+
+Las tablas de clases y citas mostrarán la opción de ver más información detallada o reservar la clase o cita: en el primer caso, se podrá ver las plazas disponibles restantes como muestra la figura \ref{fig:tabla-clases}; en el segundo caso, cada cita mostrará su estado, que podrá ser \texit{disponible, reservada, pendiente} o \texit{suspendido/a}, como vemos en la imagen \ref{fig:tabla-citas}. Además, los estados que se muestren de color verde (\textit{aceptada}) o naranja (\textit{pendiente}) indicarán que la cita está reservada o solicitada -respectivamente- por el usuario. En cuanto a las citas pendientes, el usuario recibirá una notificación en el momento que se responda a la misma, ya sea de aceptación o rechazo. \\
+
+Las reservas mostrarían las clases y citas del usuario -con las mismas opciones citadas-, junto con un historial de las reservas anteriores. \\
+
+En el caso de los archivos, la opción posible será la de descarga del mismo. 
 
 \begin{figure}
 \centering
@@ -182,6 +188,8 @@ No podemos olvidar que administrador y superdaministrador disponen de las mismas
 \item Servicios
 \item Clases
 \item Citas
+\item Archivos
+\item Comunicados
 \item Histórico de Acciones
 \end{itemize}
 
@@ -206,7 +214,9 @@ No podemos olvidar que administrador y superdaministrador disponen de las mismas
 
 El del superadministrador sería prácticamente el mismo, con la diferencia de poseer una opción más en la administración, dedicada a las organizaciones, así como permisos para editar administradores.\\
 
-A continuación vamos a ver cómo gestionar el sistema por parte los administradores. Empezaremos por los servicios, que será lo primero que crearemos, necesario para clases y citas. Para ello, navegaremos hasta la página de servicios, donde vemos la opción de añadir un nuevo servicio. La gestión de estos es fácil, ya que solo tendremos que introducir el nombre (único de cada servicio) y una descripción opcional para crearlos, como vemos en la imagen \ref{fig:nuevo-servicio}. Una vez creado, se podrá editar o desactivar el servicio. Hay que tener en cuenta que a la hora de desactivar un servicio, este puede tener clases o citas vigentes. Se suspenderá solo el servicio, y no las clases o citas vigentes, para ello, se deberán suspender las mismas individualmente. 
+A continuación vamos a ver cómo gestionar el sistema por parte los administradores. \\
+
+Empezaremos por los servicios, que será lo primero que crearemos, necesario para clases y citas. Para ello, navegaremos hasta la página de servicios, donde vemos la opción de añadir un nuevo servicio. La gestión de estos es fácil, ya que solo tendremos que introducir el nombre (único de cada servicio) y una descripción opcional para crearlos, como vemos en la imagen \ref{fig:nuevo-servicio}. Una vez creado, se podrá editar o desactivar (y activar) el servicio. Hay que tener en cuenta que a la hora de desactivar un servicio, este puede tener clases o citas vigentes. Se suspenderá solo el servicio, y no las clases o citas vigentes; para lograr esto, se deberán suspender las mismas individualmente. 
 
 \begin{figure}
 \centering
@@ -215,7 +225,7 @@ A continuación vamos a ver cómo gestionar el sistema por parte los administrad
   \label{fig:nuevo-servicio}
 \end{figure}
 
-En cuanto a las clases y citas, al navegar a sus respectivas vistas, los administradores dispondrán de una tabla más que los usuarios, el historial de clases o citas. Esto puede ser valioso para consultar alguna clase o cita pasada o para crear nuevas a partir de ellas, con la opción de duplicar que ofrecen las tablas, que copiará la información de clase sin fechas o la cita asignándole la fecha del día siguiente al actual a la misma hora que la original. Fechas que serán editables, claro está. En el caso de citas, existirá una opción extra en las filas de las citas que estén pendiente de respuesta de solicitud, que podremos aceptar o rechazar, como vemos en la imagen \ref{fig:tabla-citas-admin}. \\
+En cuanto a las clases y citas, al navegar a sus respectivas vistas, los administradores dispondrán de una tabla más que los usuarios, el historial de clases o citas. Esto puede ser valioso para consultar alguna clase o cita pasada o para crear nuevas a partir de ellas, con la opción de duplicar que ofrecen las tablas, que copiará la información de clase sin fechas o la cita asignándole la fecha del día siguiente al actual a la misma hora que la original; fechas que serán editables, claro está. En el caso de citas, existirá una opción extra en las filas de las citas que estén pendiente de respuesta de solicitud, que podremos aceptar o rechazar, como vemos en la imagen \ref{fig:tabla-citas-admin}. \\
 
 \begin{figure}
 \centering
@@ -224,7 +234,7 @@ En cuanto a las clases y citas, al navegar a sus respectivas vistas, los adminis
   \label{fig:tabla-citas-admin}
 \end{figure}
 
-Vamos observando que cada vez aparecen más opciones en las tablas y, por tanto, más iconos. La figura \ref{fig:explicacion-iconos} aporta una breve explicación a los iconos que aparecen en la columna de acciones de la aplicación. 
+Vamos observando en las tablas que cada vez aparecen más opciones en la columna de opciones y, por tanto, más iconos. La figura \ref{fig:explicacion-iconos} aporta una breve explicación de los posibles iconos que pueden aparecer en la columna de acciones de la aplicación. 
 
 \begin{figure}
 \centering
@@ -233,9 +243,33 @@ Vamos observando que cada vez aparecen más opciones en las tablas y, por tanto,
   \label{fig:explicacion-iconos}
 \end{figure}
 
+Para crear clases o citas, en cada una de sus correspondientes páginas aparece un botón con tal objetivo, que llevará al administrador a la página de creación de una nueva clase o cita. Se rellenarán los campos pedidos respecto a la clase (\textit{servicio, nombre, descripción (opcional), plazas totales} y \textit{precio}) o cita (\textit{servicio, descripción (opcional), precio, fecha, hora de inicio} y \textit{hora de fin}) y se pulsará en el botón para crearla. \\
+
+En el caso de las clases, vemos que por el momento no tendría fecha. Una vez creada una clase, es el momento de asignarle al menos una fecha. Para ello, en la vista de la clase se observa una tabla llamada \textit{Horarios}. Justo debajo aparece la opción de \textit{+ Añadir Día}. Clicando, aparecerá una pequeña ventana para añadir la fecha y hora de inicio y fin, junto con una descripción opcional del día. Para una misma clase se pueden añadir tantos días como se desee. Lo lógico, en principio, sería que cada clase posea un solo día, pero es posible que tengan más, como puede ser el caso de cursos de varios días por ejemplo. El usuario reservará plaza para la clase completa, es decir, para todos los días, no para días individuales. En caso que se desee ofrecer esta opción, habría que crear diferentes clases, cada una con un día, las cuales podrán ser reservadas de forma independiente. \\
+
+Al igual que la tabla de días, en la vista de cada clase individual aparece una tabla de usuarios con reserva de la clase. El administrador tiene la opción de añadir clientes a la tabla, asignándole una plaza, seleccionándolo de la lista que aparece bajo la tabla y haciendo uso de la opción \textit{+ Añadir Participante}. Podemos ver un ejemplo en la figura \ref{fig:horarios-y-usuarios-clase}. De igual modo, las vistas de citas tendrán una tabla con el historial de solicitudes y aparecerá la opción de asignarle la cita a un usuario de la misma forma, en caso que la cita esté disponible. \\
+
+\begin{figure}
+\centering
+  \includegraphics[scale=.60]{img/manual/horarios-y-usuarios-clase.jpg}
+  \caption{\textit{Horarios y usuarios con plaza en una clase.}}
+  \label{fig:horarios-y-usuarios-clase}
+\end{figure}
+
+En cuanto a la gestión de usuarios, podremos ver o editar su perfil, suspender o activar al usuario o mandarle un mensaje interno. También aparecerá la opción de añadir nuevo usuario. En este caso, el registro lo realizará directamente el administrador y el usuario recibirá un email con la confirmación de cuenta. Será una opción socorrida cuando algún cliente no registrado quiera reservar una cita o clase personándose en el centro, así como para clientes que no tenga habilidades informáticas para tal fin. \\ 
+
+Si hablamos de la gestión de otros administradores, un administrador podrá ver su perfil o enviarle un mensaje. \\
 
 
 
+
+
+\begin{figure}
+\centering
+  \includegraphics[scale=.70]{img/manual/.jpg}
+  \caption{\textit{}}
+  \label{fig:}
+\end{figure}
 
 
 \begin{figure}

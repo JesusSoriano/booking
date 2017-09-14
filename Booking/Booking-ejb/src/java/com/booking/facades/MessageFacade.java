@@ -50,7 +50,7 @@ public class MessageFacade extends AbstractFacade<Message> {
     }
 
     public List<Message> getUnreadMessages(User currentUser) {
-        return entityManager.createQuery("SELECT m FROM Message m WHERE m.receiver = :receiver AND m.status=false ORDER BY m.sentDate ASC").
+        return entityManager.createQuery("SELECT m FROM Message m WHERE m.receiver = :receiver AND m.status=false ORDER BY m.sentDate DESC").
                 setParameter("receiver", currentUser).getResultList();
     }
 }

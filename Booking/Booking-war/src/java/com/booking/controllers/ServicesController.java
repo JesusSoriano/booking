@@ -21,7 +21,6 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import org.primefaces.context.RequestContext;
-import org.primefaces.model.UploadedFile;
 
 @ManagedBean
 @ViewScoped

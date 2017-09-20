@@ -287,6 +287,7 @@ public class EditClassController implements Serializable {
     }
     
     public void onDatesChange () {
+        //TODO: Revisar
         System.out.println("-------------- ON DATE CHANGE");
         if (newDayEndDate != null && newDayStartDate != null && newDayEndDate.before(newDayStartDate)) {
             newDayEndDate = newDayStartDate;

@@ -48,6 +48,9 @@ public class Document implements Serializable {
     @JoinColumn(name = "admin", referencedColumnName = "id")
     private User admin;
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "file_user", referencedColumnName = "id")
+    private User fileUser;
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "organisation", referencedColumnName = "id")
     private Organisation organisation;
 
@@ -112,6 +115,14 @@ public class Document implements Serializable {
 
     public void setAdmin(User admin) {
         this.admin = admin;
+    }
+
+    public User getFileUser() {
+        return fileUser;
+    }
+
+    public void setFileUser(User fileUser) {
+        this.fileUser = fileUser;
     }
 
     @Override

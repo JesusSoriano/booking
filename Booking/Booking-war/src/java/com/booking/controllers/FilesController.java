@@ -7,11 +7,13 @@ import com.booking.enums.AuditType;
 import com.booking.enums.Role;
 import com.booking.facades.AuditFacade;
 import com.booking.facades.DocumentFacade;
+import com.booking.facades.UserFacade;
 import com.booking.util.BookingProperties;
 import com.booking.util.Constants;
 import com.booking.util.FacesUtil;
 import com.booking.util.FileServiceImpl;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,6 +21,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.model.SelectItem;
 import org.primefaces.context.RequestContext;
 import org.primefaces.model.UploadedFile;
 
@@ -30,6 +33,8 @@ public class FilesController implements Serializable {
     private DocumentFacade documentFacade;
     @EJB
     private AuditFacade auditFacade;
+    @EJB
+    private UserFacade userFacade;
 
     private List<Document> files;
     private User loggedUser;
@@ -37,8 +42,10 @@ public class FilesController implements Serializable {
     private Document selectedDocument;
     private String newFileName;
     private String newFileDescription;
+    private User fileUser;
     private boolean isNewFile;
-
+    private List<SelectItem> allUsers;
+    private long selectedUserId;
     private UploadedFile file;
 
     public FilesController() {
@@ -51,6 +58,12 @@ public class FilesController implements Serializable {
 
         isNewFile = true;
         files = documentFacade.findAllDocumentsOfOrganisation(organisation);
+
+        allUsers = new ArrayList<>();
+        for (User u : userFacade.findAllActiveAdminsAndClientsOfOrganisation(organisation)) {
+            allUsers.add(new SelectItem(u.getId(), u.getFullName()));
+        }
+        selectedUserId = (long) allUsers.get(0).getValue();
     }
 
     public String createNewFile() {
@@ -60,12 +73,18 @@ public class FilesController implements Serializable {
         }
         RequestContext context = RequestContext.getCurrentInstance();
         try {
-            Document newFile = documentFacade.uploadDocument(organisation, newFileName, file.getFileName(), newFileDescription, loggedUser, new FileServiceImpl(), file.getInputstream());
-            context.execute("PF('newFileDialog').hide();");
-            FacesUtil.addSuccessMessage("documentsForm:msg", "El nuevo archivo ha sido creado correctamente.");
-            // Audit document creation
-            String ipAddress = FacesUtil.getRequest().getRemoteAddr();
-            auditFacade.createAudit(AuditType.CREAR_ARCHIVO, loggedUser, ipAddress, newFile.getId(), organisation);
+            User selectedUser = userFacade.find(selectedUserId);
+            if (selectedUser != null) {
+                Document newFile = documentFacade.uploadDocument(organisation, newFileName, file.getFileName(), newFileDescription, loggedUser, selectedUser, new FileServiceImpl(), file.getInputstream());
+                context.execute("PF('newFileDialog').hide();");
+                FacesUtil.addSuccessMessage("documentsForm:msg", "El nuevo archivo ha sido creado correctamente.");
+                // Audit document creation
+                String ipAddress = FacesUtil.getRequest().getRemoteAddr();
+                auditFacade.createAudit(AuditType.CREAR_ARCHIVO, loggedUser, ipAddress, newFile.getId(), organisation);
+            } else {
+                FacesUtil.addErrorMessage("viewClassForm:msg", "Error, el usuario no existe.");
+                return "";
+            }
         } catch (Exception e) {
             FacesUtil.addErrorMessage("documentsForm:msg", "Lo sentimos, no ha sido posible crear el nuevo archivo.");
             Logger.getLogger(FilesController.class.getName()).log(Level.SEVERE, null, e);
@@ -76,10 +95,11 @@ public class FilesController implements Serializable {
     }
 
     public String updateFile() {
-        if (selectedDocument != null) {
+        User selectedUser = userFacade.find(selectedUserId);
+        if (selectedUser != null && selectedDocument != null) {
             RequestContext context = RequestContext.getCurrentInstance();
             try {
-                documentFacade.updateDocument(selectedDocument, newFileName, newFileDescription, organisation);
+                documentFacade.updateDocument(selectedDocument, newFileName, newFileDescription, selectedUser, organisation);
                 context.execute("PF('newFileDialog').hide();");
 
                 FacesUtil.addSuccessMessage("documentsForm:msg", "El archivo ha sido actualizado correctamente.");
@@ -183,6 +203,23 @@ public class FilesController implements Serializable {
 
     public UploadedFile getFile() {
         return file;
+    }
+
+    public boolean loggedUserIsAdmin() {
+        Role userRole = loggedUser.getUserRole().getRole();
+        return userRole == Role.ADMIN || userRole == Role.SUPER_ADMIN;
+    }
+
+    public List<SelectItem> getAllUsers() {
+        return allUsers;
+    }
+
+    public long getSelectedUserId() {
+        return selectedUserId;
+    }
+
+    public void setSelectedUserId(long selectedUserId) {
+        this.selectedUserId = selectedUserId;
     }
 
     public void upload() {

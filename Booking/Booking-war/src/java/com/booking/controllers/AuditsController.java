@@ -36,7 +36,7 @@ public class AuditsController implements Serializable {
     private List<SelectItem> users;
     private long selectedUserId;
     private List<SelectItem> auditTypes;
-    AuditType selectedAuditType;
+    private AuditType selectedAuditType;
     private Date fromDate;
     private Date toDate;
 

@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8' ?> <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:ui="http://java.sun.com/jsf/facelets" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:p="http://primefaces.org/ui" 
+                xmlns:c="http://java.sun.com/jsp/jstl/core"> 
+
+    <h:form id="notificationsForm">
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('#notificationsForm\\:notificationsTable .ui-paginator-rpp-options.ui-widget.ui-state-default.ui-corner-left')
+                        .each(function () {
+                            $(this).children().last().html('#{txt['all']}');
+                        });
+            });
+        </script>
+
+        <h3>#{txt['notifications']}</h3>
+
+        <div class="main-content">
+            <h:panelGroup> 
+                <div class="row"> 
+                    <div class="col-xs-5 col-sm-3 col-md-2">
+                        #{txt['notification_type']}
+                    </div> 
+                    <div class="col-xs-7 col-sm-9 col-md-10">
+                        <h:selectOneMenu id="notification-type-select" value="#{notificationsController.selectedNotificationType}"> 
+                            <f:selectItems value="#{notificationsController.notificationTypes}" /> 
+                        </h:selectOneMenu> 
+                        <br/>
+                        <h:message for="notification-type-select" errorClass="fieldError" infoClass="fieldSuccess" /> 
+                    </div> 
+                </div> 
+            </h:panelGroup> 
+
+            <div class="row">
+                <div class="col-xs-offset-5 col-xs-7 col-sm-offset-3 col-sm-9 col-md-offset-2 col-md-10">
+                    <h:commandButton action="#{notificationsController.search()}" styleClass="btn btn-primary btn-main" value="#{txt['b_search']}" />  
+                </div>
+            </div>
+        </div>
+
+        <br/>
+
+        <p:dataTable id="notificationsTable" value="#{notificationsController.notificationList}" var="notification" styleClass="common-table text-center" paginator="true" rows="20" paginatorPosition="bottom" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" 
+                     rowsPerPageTemplate="10, 20, 50, #{notificationsController.notificationList.size()}" rendered="#{notificationsController.notificationList ne null and notificationsController.notificationList.size() gt 0}" emptyMessage="#{txt['empty_records']}"> 
+            <p:column headerText="#{txt['date']}" sortBy="#{notification.createdDate}"> 
+                <h:outputText value="#{notification.createdDate}"> 
+                    <f:convertDateTime pattern="#{dateFormatController.dateWithTimeFormatString}" />
+                </h:outputText> 
+            </p:column> 
+            <p:column headerText="#{txt['notification']}" sortBy="#{notification.notificationType}"> 
+                <h:outputText value="#{notification.objectId}" rendered="#{notificationsController.loggedUserIsAdmin() and notificationsController.isAdminNotification(notification.notificationType)}"/>
+                <h:outputText value="#{notification.notificationType.label}" />
+            </p:column> 
+            <p:column headerText="#{txt['object_id']}" sortBy="#{notification.objectId}" rendered="#{notificationsController.loggedUserIsAdmin()}"> 
+                <h:outputText value="#{notification.objectId}" />
+            </p:column> 
+            <p:column headerText="#{txt['ip_address']}" sortBy="#{notification.ip}"> 
+                <h:outputText value="#{notification.ip}" />
+            </p:column> 
+        </p:dataTable>
+    </h:form> 
+</ui:composition>

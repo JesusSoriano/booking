@@ -1,18 +1,27 @@
 package com.booking.controllers;
 
+import com.booking.entities.Announcement;
+import com.booking.entities.Organisation;
 import com.booking.entities.User;
+import com.booking.facades.AnnouncementFacade;
 import com.booking.util.FacesUtil;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 
 @ManagedBean
 public class HomeController implements Serializable {
 
+    @EJB
+    private AnnouncementFacade announcementFacade;
+    
     private User currentUser;
+    private List<Announcement> announcements;
 
     /**
      * Creates a new instance of HomeController
@@ -33,6 +42,9 @@ public class HomeController implements Serializable {
         } catch (IOException ioEx) {
             Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ioEx);
         }
+        
+        Organisation organisation = FacesUtil.getCurrentOrganisation();
+        announcements = announcementFacade.findAllActiveAnnouncementsOfOrganisation(organisation);
     }
 
     public User getCurrentUser() {
@@ -43,6 +55,14 @@ public class HomeController implements Serializable {
         return currentUser.getUserRole().getRole().getName();
     }
     
+    public String getUserName() {
+        if (currentUser != null) {
+            return currentUser.getFirstName();
+        } else {
+            return "";
+        }
+    }
+    
     public String getUserFullName() {
         if (currentUser != null) {
             return currentUser.getFullName();
@@ -51,4 +71,7 @@ public class HomeController implements Serializable {
         }
     }
 
+    public List<Announcement> getAnnouncements() {
+        return announcements;
+    }
 }

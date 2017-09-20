@@ -34,24 +34,25 @@ public class DocumentFacade extends AbstractFacade<Document> {
     }
 
     public Document uploadDocument(Organisation organisation, String name, String fileName, String description, 
-            User admin, FileService fileService, InputStream inputStream) {
+            User admin, User fileUser, FileService fileService, InputStream inputStream) {
 
         try {
             fileName = fileService.uploadDocument(fileName, inputStream, organisation);
-            return createNewDocument(name, description, fileName, admin, organisation);
+            return createNewDocument(name, description, fileName, admin, fileUser, organisation);
         } catch (Exception e) {
                 Logger.getLogger(DocumentFacade.class.getName()).log(Level.SEVERE, null, e);
         }
         return null;
     }
 
-    public Document createNewDocument(String name, String description, String fileName, User admin, Organisation organisation) {
+    public Document createNewDocument(String name, String description, String fileName, User admin, User fileUser, Organisation organisation) {
 
         Document document = new Document();
         document.setName(name);
         document.setDescription(description);
         document.setFileName(fileName);
         document.setAdmin(admin);
+        document.setFileUser(fileUser);
         document.setOrganisation(organisation);
         document.setCreatedDate(new Date());
         create(document);
@@ -59,10 +60,11 @@ public class DocumentFacade extends AbstractFacade<Document> {
         return document;
     }
 
-    public Document updateDocument(Document document, String newName, String description, Organisation organisation) {
+    public Document updateDocument(Document document, String newName, String description, User fileUser, Organisation organisation) {
 
         document.setName(newName);
         document.setDescription(description);
+        document.setFileUser(fileUser);
         edit(document);
 
         return document;

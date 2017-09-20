@@ -1,23 +1,15 @@
 <?xml version='1.0' encoding='UTF-8' ?> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets">
 
-    <ui:composition template="/WEB-INF/admin-template.xhtml">
+    <ui:composition template="../WEB-INF/admin-template.xhtml">
         <ui:define name="content">
-
-            <h:form>
-                <div class="row">        
-                    <div class="col-xs-2 col-sm-2 col-md-2"></div>
-
-                    <p>HOME</p>
-
-                    <div class="col-xs-2 col-sm-2 col-md-2"></div>
-                </div>
-            </h:form>
+            
+            <ui:include src="../includes/home-include.xhtml" />
 
         </ui:define>
     </ui:composition>
 
 </html>
+

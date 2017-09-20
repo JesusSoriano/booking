@@ -489,6 +489,11 @@ table {
 }
 
 
+/* Remove last line after announcements */
+#announcementsSet>div:last-of-type>div>hr {
+    display: none;
+}
+
 .ui-widget {
     font: inherit;
 }
@@ -713,7 +718,10 @@ select[multiple], select[size] {
 }
 
 .lightgray-color {
-    color:lightgray;
+    color: lightgray;
+}
+.gray-color {
+    color: gray;
 }
 .blue-link {
     color: #428bca;

@@ -21,7 +21,6 @@ import com.booking.facades.AuditFacade;
 import com.booking.facades.BookingFacade;
 import com.booking.facades.ClassDayFacade;
 import com.booking.facades.ClassFacade;
-import com.booking.util.Constants;
 import com.booking.util.FacesUtil;
 import java.io.IOException;
 import java.io.Serializable;

@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+              xmlns:h="http://java.sun.com/jsf/html"
+              xmlns:ui="http://java.sun.com/jsf/facelets"
+              xmlns:f="http://java.sun.com/jsf/core"
+              xmlns:p="http://primefaces.org/ui">
+
+    <div class="row">        
+        <div class="col-xs-12 col-sm-12 col-md-12">
+
+            <h:form id="homeForm"> 
+                <h:message for="msg" id="msg" errorClass="msgError" infoClass="msgInfo" /> 
+
+                <div class="row">
+                    <h3>#{txt['hi']} #{homeController.getUserName()}</h3> 
+                </div>
+                <div class="row">
+                    <h4 class="margin-bottom-40 gray-color">#{txt['home_announcements_sentence']}:</h4> 
+                </div>
+
+                <div id="announcementsSet">
+                    <p:repeat value="#{homeController.announcements}" var="announcement">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-10">
+                                <h4 class="blue-link" style="margin-bottom: 0px;">#{announcement.title}</h4> 
+                                <h5 style="margin-top: 0px;"><h:outputText value="#{announcement.createdDate}" class="lightgray-color">
+                                        <f:convertDateTime pattern="#{dateFormatController.dateWithTimeFormatString}" />
+                                    </h:outputText>
+                                </h5>
+                                <h:outputText value="#{announcement.text}" />
+                                <hr style="background-color: #eee; margin: 40px 0px;"/>
+                            </div>
+                        </div>
+                    </p:repeat>
+                </div>
+            </h:form>
+
+        </div>
+    </div>
+</ui:component>

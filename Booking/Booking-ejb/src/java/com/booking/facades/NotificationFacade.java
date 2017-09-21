@@ -4,14 +4,11 @@ import com.booking.entities.Notification;
 import com.booking.entities.Organisation;
 import com.booking.entities.User;
 import com.booking.enums.NotificationType;
-import com.booking.enums.Role;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 
 /**
  *
@@ -42,6 +39,17 @@ public class NotificationFacade extends AbstractFacade<Notification> {
 
         create(notification);
         return notification;
+    }
+
+    public void createNotificationForAdmins(NotificationType notificationType, List<User> notificationAdmins, long objectId, Organisation organisation) {
+        for (User admin : notificationAdmins) {
+            createNotification(notificationType, admin, objectId, organisation);
+        }
+    }
+    
+    public void setNotificationCheck(Notification notification, boolean checked) {
+        notification.setChecked(checked);
+        edit(notification);
     }
     
     public List<Notification> findAllNotificationsOfUser(User user) {

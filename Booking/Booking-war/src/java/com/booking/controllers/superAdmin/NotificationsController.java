@@ -1,17 +1,14 @@
 package com.booking.controllers.superAdmin;
 
 import com.booking.entities.Notification;
-import com.booking.entities.Organisation;
 import com.booking.entities.User;
 import com.booking.enums.NotificationType;
 import com.booking.enums.Role;
 import com.booking.facades.NotificationFacade;
 import com.booking.facades.UserFacade;
-import com.booking.util.DateService;
 import com.booking.util.FacesUtil;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -27,6 +24,8 @@ public class NotificationsController implements Serializable {
 
     @EJB
     private NotificationFacade notificationFacade;
+    @EJB
+    private UserFacade userFacade;
 
     private List<Notification> notificationList;
     private Role userRole;
@@ -42,7 +41,7 @@ public class NotificationsController implements Serializable {
         notificationTypes = new ArrayList<>();
         notificationTypes.add(new SelectItem(null, "All"));
 
-        if (userRole == Role.ADMIN || userRole == Role.SUPER_ADMIN) {
+        if (loggedUserIsAdmin()) {
             for (NotificationType at : NotificationType.getAllNotificationTypes()) {
                 notificationTypes.add(new SelectItem(at.name(), at.name()));
             }
@@ -63,8 +62,20 @@ public class NotificationsController implements Serializable {
         }
     }
     
+    public String getUserName (Long id) {
+        User client = userFacade.find(id);
+        if (client != null) {
+            return client.getFullName();
+        }
+        return "";
+    }
+    
+    public void setNotificationCheck (Notification notification) {
+        notificationFacade.setNotificationCheck(notification, !notification.isChecked());
+    }
+    
     public boolean isAdminNotification (NotificationType notificationType) {
-        return (notificationType == NotificationType.REGISTRO_USUARIO) || (notificationType == NotificationType.BAJA_USUARIO)  || (notificationType == NotificationType.RESERVA_SUSPENDIDA);
+        return NotificationType.getAdminNotificationTypes().contains(notificationType);
     }
 
     public boolean loggedUserIsAdmin() {

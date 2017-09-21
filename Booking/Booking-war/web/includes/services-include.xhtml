@@ -15,7 +15,7 @@
                     <div class="col-xs-6 col-sm-6 col-md-6">
                         <h3 class="page-title">#{txt['services']} (#{servicesController.services.size()})</h3> 
                     </div>
-                    <h:panelGroup rendered="#{servicesController.userRole eq 'ADMIN' or servicesController.userRole eq 'SUPER_ADMIN'}">
+                    <h:panelGroup rendered="#{servicesController.loggedUserIsAdmin()}">
                         <div class="col-sm-offset-3 col-md-offset-3 col-xs-6 col-sm-3 col-md-3 text-right">
                             <p:commandLink action="#{servicesController.prepareNewService()}" update=":newServiceForm:newServiceClass" oncomplete="PF('newServiceDialog').show()" >
                                 <span class="btn btn-primary btn-block btn-main">#{txt['b_new_service']}</span>
@@ -60,8 +60,8 @@
                         <p:column headerText="#{txt['organisation']}" sortBy="#{service.organisation.name}" rendered="#{servicesController.userRole eq 'SUPER_ADMIN'}"> 
                             <h:outputText value="#{service.organisation.name}" class="#{service.status eq 'SUSPENDED' ? 'lightgray-color' : ''}"  /> 
                         </p:column> 
-                        <p:column headerText="#{txt['options']}" rendered="#{servicesController.userRole eq 'ADMIN' or servicesController.userRole eq 'SUPER_ADMIN'}"> 
-                            <h:panelGroup rendered="#{servicesController.userRole eq 'ADMIN' or servicesController.userRole eq 'SUPER_ADMIN'}">
+                        <p:column headerText="#{txt['options']}" rendered="#{servicesController.loggedUserIsAdmin()}"> 
+                            <h:panelGroup rendered="#{servicesController.loggedUserIsAdmin()}">
                                 <p:commandLink action="#{servicesController.prepareService(service)}" update=":newServiceForm:newServiceClass" oncomplete="PF('newServiceDialog').show()" >
                                     <h:graphicImage title="#{txt['cap_edit']}" value="../resources/images/edit.png" class="table-action" /> 
                                 </p:commandLink> 

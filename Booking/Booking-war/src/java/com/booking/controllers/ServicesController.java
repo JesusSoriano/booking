@@ -37,6 +37,7 @@ public class ServicesController implements Serializable {
 
     private List<Service> services;
     private User loggedUser;
+    private Role userRole;
     private Organisation organisation;
     private Service selectedService;
     private String newServiceName;
@@ -49,6 +50,7 @@ public class ServicesController implements Serializable {
     @PostConstruct
     public void init() {
         loggedUser = FacesUtil.getCurrentUser();
+        userRole = loggedUser.getUserRole().getRole();
         organisation = FacesUtil.getCurrentOrganisation();
 
         isNewService = true;
@@ -154,12 +156,16 @@ public class ServicesController implements Serializable {
         isNewService = true;
     }
 
+    public boolean loggedUserIsAdmin() {
+        return userRole == Role.ADMIN || userRole == Role.SUPER_ADMIN;
+    }
+
     public List<Service> getServices() {
         return services;
     }
 
     public Role getUserRole() {
-        return loggedUser.getUserRole().getRole();
+        return userRole;
     }
 
     public String getNewServiceName() {

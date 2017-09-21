@@ -24,7 +24,7 @@
                     <div class="col-xs-5 col-sm-3 col-md-2">
                         #{txt['notification_type']}
                     </div> 
-                    <div class="col-xs-7 col-sm-9 col-md-10">
+                    <div class="col-xs-7 col-sm-6 col-md-5">
                         <h:selectOneMenu id="notification-type-select" value="#{notificationsController.selectedNotificationType}"> 
                             <f:selectItems value="#{notificationsController.notificationTypes}" /> 
                         </h:selectOneMenu> 
@@ -46,19 +46,27 @@
         <p:dataTable id="notificationsTable" value="#{notificationsController.notificationList}" var="notification" styleClass="common-table text-center" paginator="true" rows="20" paginatorPosition="bottom" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" 
                      rowsPerPageTemplate="10, 20, 50, #{notificationsController.notificationList.size()}" rendered="#{notificationsController.notificationList ne null and notificationsController.notificationList.size() gt 0}" emptyMessage="#{txt['empty_records']}"> 
             <p:column headerText="#{txt['date']}" sortBy="#{notification.createdDate}"> 
-                <h:outputText value="#{notification.createdDate}"> 
+                <h:outputText value="#{notification.createdDate}" class="#{notification.isChecked() ? '' : 'bold'}"> 
                     <f:convertDateTime pattern="#{dateFormatController.dateWithTimeFormatString}" />
                 </h:outputText> 
             </p:column> 
             <p:column headerText="#{txt['notification']}" sortBy="#{notification.notificationType}"> 
-                <h:outputText value="#{notification.objectId}" rendered="#{notificationsController.loggedUserIsAdmin() and notificationsController.isAdminNotification(notification.notificationType)}"/>
-                <h:outputText value="#{notification.notificationType.label}" />
+                <h:outputText value="#{notificationsController.getUserName(notification.objectId)}" class="#{notification.isChecked() ? '' : 'bold'}" 
+                              rendered="#{notificationsController.loggedUserIsAdmin() and notificationsController.isAdminNotification(notification.notificationType)}"/>
+                <h:outputText value="#{notification.notificationType.label}" class="#{notification.isChecked() ? '' : 'bold'}" />
             </p:column> 
             <p:column headerText="#{txt['object_id']}" sortBy="#{notification.objectId}" rendered="#{notificationsController.loggedUserIsAdmin()}"> 
-                <h:outputText value="#{notification.objectId}" />
+                <h:outputText value="#{notification.objectId}" class="#{notification.isChecked() ? '' : 'bold'}" />
             </p:column> 
-            <p:column headerText="#{txt['ip_address']}" sortBy="#{notification.ip}"> 
-                <h:outputText value="#{notification.ip}" />
+            <p:column headerText="#{txt['options']}" rendered="#{notificationsController.loggedUserIsAdmin()}"> 
+                <h:panelGroup>
+                    <p:commandLink action="#{notificationsController.setNotificationCheck(notification)}" >
+                        <h:graphicImage title="#{txt['cap_check']}" value="../resources/images/suspend.png" class="table-action" /> 
+                    </p:commandLink> 
+                    <p:commandLink action="#{notificationsController.setNotificationCheck(notification)}" >
+                        <h:graphicImage title="#{txt['cap_check']}" value="../resources/images/activate.png" class="table-action" /> 
+                    </p:commandLink> 
+                </h:panelGroup>
             </p:column> 
         </p:dataTable>
     </h:form> 

@@ -13,6 +13,7 @@ public enum NotificationType {
     // Administrators notifications
     REGISTRO_USUARIO(" se ha registrado en el sistema."),
     BAJA_USUARIO(" se ha dado de baja del sistema."),
+    SOLICITUD_RESERVA(" ha solicitado una cita"),
     RESERVA_SUSPENDIDA(" ha suspendido una cita"),
     
     // Clients notifications
@@ -41,17 +42,27 @@ public enum NotificationType {
         List<NotificationType> notifications = new ArrayList<>();
         notifications.add(REGISTRO_USUARIO);
         notifications.add(BAJA_USUARIO);
+        notifications.add(SOLICITUD_RESERVA);
         notifications.add(RESERVA_SUSPENDIDA);
-        notifications.add(USUARIO_ACTIVADO);
         notifications.add(USUARIO_SUSPENDIDO);
-        notifications.add(CLASE_ACTIVADA);
+        notifications.add(USUARIO_ACTIVADO);
         notifications.add(CLASE_SUSPENDIDA);
+        notifications.add(CLASE_ACTIVADA);
         notifications.add(RESERVA_ACEPTADA);
         notifications.add(RESERVA_RECHAZADA);
-        notifications.add(CITA_ACTIVADA);
         notifications.add(CITA_SUSPENDIDA);
+        notifications.add(CITA_ACTIVADA);
         notifications.add(ARCHIVO_CREADO);
         notifications.add(ARCHIVO_BORRADO);
+        return notifications;
+    }
+
+    public static List<NotificationType> getAdminNotificationTypes() {
+        List<NotificationType> notifications = new ArrayList<>();
+        notifications.add(REGISTRO_USUARIO);
+        notifications.add(BAJA_USUARIO);
+        notifications.add(SOLICITUD_RESERVA);
+        notifications.add(RESERVA_SUSPENDIDA);
         return notifications;
     }
 

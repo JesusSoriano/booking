@@ -15,4 +15,9 @@ public class StringsUtil {
         string = string.trim();
         return (string == null || string.isEmpty());
     }
+    
+    public static boolean notSecure (String string) {
+        String regexp = "^(?=.*[a-z])(?=.*[A-Z]).{6,}$";
+        return !string.matches(regexp);
+    }
 }

@@ -1,15 +1,22 @@
 package com.booking.controllers;
 
 import com.booking.entities.ActivityClass;
+import com.booking.entities.Appointment;
+import com.booking.entities.AppointmentRequest;
 import com.booking.entities.Organisation;
 import com.booking.entities.User;
 import com.booking.enums.AuditType;
+import com.booking.enums.NotificationType;
+import com.booking.enums.RequestStatus;
 import com.booking.enums.Role;
+import com.booking.enums.Status;
+import com.booking.facades.AppointmentFacade;
+import com.booking.facades.AppointmentRequestFacade;
 import com.booking.facades.AuditFacade;
 import com.booking.facades.BookingFacade;
 import com.booking.facades.ClassFacade;
+import com.booking.facades.NotificationFacade;
 import com.booking.facades.UserFacade;
-import com.booking.util.Constants;
 import com.booking.util.FacesUtil;
 import com.booking.util.StringsUtil;
 import java.io.IOException;
@@ -33,6 +40,12 @@ public class UserProfileController implements Serializable {
     @EJB
     private ClassFacade classFacade;
     @EJB
+    private AppointmentFacade appointmentFacade;
+    @EJB
+    private AppointmentRequestFacade appointmentRequestFacade;
+    @EJB
+    private NotificationFacade notificationFacade;
+    @EJB
     private AuditFacade auditFacade;
 
     private User profileUser;
@@ -47,8 +60,11 @@ public class UserProfileController implements Serializable {
     private String country;
     private String postcode;
     private String userId;
+    private boolean suspended;
     private List<ActivityClass> classes;
-    private List<ActivityClass> pastClasses;
+    private List<Appointment> appointments;
+    private User loggedUser;
+    private Organisation organisation;
 
     /**
      * Creates a new instance of UserProfileController
@@ -59,9 +75,9 @@ public class UserProfileController implements Serializable {
     @PostConstruct
     public void init() {
 
-        Organisation organisation = FacesUtil.getCurrentOrganisation();
+        organisation = FacesUtil.getCurrentOrganisation();
 
-        User loggedUser = FacesUtil.getCurrentUser();
+        loggedUser = FacesUtil.getCurrentUser();
         userId = FacesUtil.getParameter("user");
         if (userId != null && (loggedUser.getUserRole().getRole() == Role.ADMIN || loggedUser.getUserRole().getRole() == Role.SUPER_ADMIN)) {
             profileUser = userFacade.findUserOfOrganisation(Integer.valueOf(userId), organisation);
@@ -80,32 +96,33 @@ public class UserProfileController implements Serializable {
             city = profileUser.getAddress().getCity();
             country = profileUser.getAddress().getCountry();
             postcode = profileUser.getAddress().getPostcode();
+            suspended = profileUser.getStatus().equals(Status.SUSPENDED);
 
             classes = bookingFacade.findAllCurrentClassesOfUser(profileUser);
-            pastClasses = bookingFacade.findAllPastClassesOfUser(profileUser);
+            appointments = appointmentFacade.findAllCurrentAppointmentsOfUser(profileUser, organisation);
         }
     }
 
     public void saveProfile() {
 
         if (StringsUtil.isNotNullNotEmpty(firstName)) {
-            FacesUtil.addErrorMessage("profileForm", "Introduce tu nombre");
+            FacesUtil.addErrorMessage("user-profileForm", "Introduce tu nombre");
         }
         if (StringsUtil.isNotNullNotEmpty(firstLastName)) {
-            FacesUtil.addErrorMessage("profileForm", "Introduce tu primer apellido");
+            FacesUtil.addErrorMessage("user-profileForm", "Introduce tu primer apellido");
         }
 
         // Remove start and end white spaces of email
         email = email.trim();
         if (StringsUtil.isNotNullNotEmpty(email)) {
-            FacesUtil.addErrorMessage("profileForm", "Introduce tu email");
+            FacesUtil.addErrorMessage("user-profileForm", "Introduce tu email");
         }
 
         userFacade.editUserProfile(profileUser, firstName, firstLastName, secondLastName, email,
                 phone, addressLine, addressLine2, city, country, postcode);
         try {
             FacesUtil.redirectTo("user-profile.xhtml", "&user=" + profileUser.getId());
-        } catch (Exception ex) {
+        } catch (IOException ex) {
             Logger.getLogger(UserProfileController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -126,19 +143,19 @@ public class UserProfileController implements Serializable {
         }
     }
 
-    public String cancelClassBooking(ActivityClass activityClass) {
+    public void cancelClassBooking(ActivityClass activityClass) {
         try {
             // Create the class user
             if (bookingFacade.removeBooking(profileUser, activityClass)) {
                 // Add a booked place in the class
                 classFacade.removeClassBooking(activityClass);
-                FacesUtil.addSuccessMessage("profileForm:msg", "La plaza ha sido cancelada correctamente.");
+                FacesUtil.addSuccessMessage("user-profileForm:msg", "La plaza ha sido cancelada correctamente.");
             } else {
-                FacesUtil.addErrorMessage("profileForm:msg", "Error, la reserva no existe.");
+                FacesUtil.addErrorMessage("user-profileForm:msg", "Error, la reserva no existe.");
             }
         } catch (Exception e) {
             Logger.getLogger(UserProfileController.class.getName()).log(Level.SEVERE, null, e);
-            FacesUtil.addErrorMessage("profileForm:msg", "Lo sentimos, ha habido un problema al cancelar la reserva.");
+            FacesUtil.addErrorMessage("user-profileForm:msg", "Lo sentimos, ha habido un problema al cancelar la reserva.");
         }
 
         try {
@@ -149,8 +166,90 @@ public class UserProfileController implements Serializable {
             Logger.getLogger(UserProfileController.class.getName()).log(Level.SEVERE, null, e);
         }
 
-        String userParam = (userId != null) ? ("user=" + userId) : "";
-        return "user-profile.xhtml" + Constants.FACES_REDIRECT + userParam;
+        profileWithParams();
+    }
+
+    public void cancelAppointmentBooking(Appointment appointment) {
+        try {
+            boolean pendingRequest = true;
+            // Check if there is a appointment request
+            AppointmentRequest appointmentRequest = appointmentRequestFacade.findCurrentRequestOfAppointment(appointment);
+            if (appointmentRequest == null) {
+                // Find the appointment request
+                appointmentRequest = appointmentRequestFacade.findAcceptedRequestOfAppointment(appointment);
+                if (appointmentRequest == null) {
+                    FacesUtil.addErrorMessage("user-profileForm:msg", "Error, la solicitud o cita no existe.");
+                    profileWithParams();
+                }
+                pendingRequest = false;
+            }
+            // Make the request status as CANCELLED
+            appointmentRequestFacade.updateRequestStatus(appointmentRequest, RequestStatus.CANCELLED, "Cancelado por " + loggedUser.getFirstName());
+            appointmentFacade.makeAppointmentAvailable(appointment);
+            User appointmentUser = appointment.getAppointmentUser();
+            appointmentFacade.deleteAppointmentUser(appointment);
+            FacesUtil.addSuccessMessage("user-profileForm:msg", "La solicitud o cita ha sido cancelada correctamente.");
+
+            try {
+                if (loggedUserIsAdmin()) {
+                    if (pendingRequest) {
+                        notificationFacade.createNotification(NotificationType.CITA_RECHAZADA, appointmentUser, loggedUser, appointment.getId(), organisation);
+                    } else if (!appointmentUser.equals(loggedUser)) {
+                        notificationFacade.createNotification(NotificationType.CITA_CANCELADA, appointmentUser, loggedUser, appointment.getId(), organisation);
+                    }
+                } else {
+                    List<User> admins = userFacade.findAllActiveAdminsOfOrganisation(organisation);
+                    notificationFacade.createNotificationForAdmins(NotificationType.CITA_SUSPENDIDA_ADMIN, admins, loggedUser, appointment.getId(), organisation);
+                }
+            } catch (Exception e) {
+                Logger.getLogger(AppointmentsController.class.getName()).log(Level.SEVERE, null, e);
+                FacesUtil.addErrorMessage("user-profileForm:msg", "La notificación de la suspensión no se ha podido crear correctamente.");
+            }
+
+            try {
+                // Audit appointment cancalation
+                String ipAddress = FacesUtil.getRequest().getRemoteAddr();
+                auditFacade.createAudit(AuditType.CANCELAR_CITA, appointment.getAppointmentUser(), ipAddress, appointment.getId(), organisation);
+            } catch (Exception e) {
+                Logger.getLogger(AppointmentsController.class.getName()).log(Level.SEVERE, null, e);
+                FacesUtil.addErrorMessage("user-profileForm:msg", "La solicitud o cita ha sido cancelada correctamente, pero ha habido un problema auditando la cancelación. Por favor informa a algún administrador del problema.");
+            }
+        } catch (Exception e) {
+            Logger.getLogger(AppointmentsController.class.getName()).log(Level.SEVERE, null, e);
+            FacesUtil.addErrorMessage("user-profileForm:msg", "Lo sentimos, ha habido un problema al cancelar la reserva.");
+        }
+
+        profileWithParams();
+    }
+
+    public boolean isUserAppointmentRequestOrAdminCanSeeRequest(Appointment appointment) {
+        AppointmentRequest currentAppointmentRequest;
+        if (loggedUserIsAdmin()) {
+            // Find if there is a current request of the appointment
+            currentAppointmentRequest = appointmentRequestFacade.findCurrentRequestOfAppointment(appointment);
+        } else {
+            // Find if there is a current appointment request from the user
+            currentAppointmentRequest = appointmentRequestFacade.findCurrentRequestOfAppointmentForUser(appointment, loggedUser);
+        }
+        return currentAppointmentRequest != null;
+    }
+
+    private void profileWithParams() {
+        String userParam = (userId != null) ? ("&user=" + userId) : "";
+        try {
+            FacesUtil.redirectTo("user-profile.xhtml", userParam);
+        } catch (IOException ex) {
+            Logger.getLogger(UserProfileController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public boolean loggedUserIsAdmin() {
+        Role userRole = loggedUser.getUserRole().getRole();
+        return userRole == Role.ADMIN || userRole == Role.SUPER_ADMIN;
+    }
+
+    public boolean loggedUserIsNotProfileUser() {
+        return (userId != null);
     }
 
     public String getFirstName() {
@@ -237,7 +336,15 @@ public class UserProfileController implements Serializable {
         return classes;
     }
 
-    public List<ActivityClass> getPastClasses() {
-        return pastClasses;
+    public List<Appointment> getAppointments() {
+        return appointments;
+    }
+
+    public boolean isSuspended() {
+        return suspended;
+    }
+
+    public User getProfileUser() {
+        return profileUser;
     }
 }

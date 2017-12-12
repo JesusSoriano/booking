@@ -35,7 +35,7 @@ public class Announcement implements Serializable {
     private long id;
     @Column(name = "title")
     private String title;
-    @Column(name = "text")
+    @Column(name = "text", columnDefinition = "text")
     private String text;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "organisation", referencedColumnName = "id")

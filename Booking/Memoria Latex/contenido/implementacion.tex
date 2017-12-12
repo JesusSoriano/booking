@@ -55,7 +55,7 @@ En la siguiente figura podemos ver una representación de la integración de los
 \begin{figure}[H]
 \centering
   \includegraphics[scale=.60]{img/arquitectura-jee.jpg}
-  \caption{Arquitectura de 3 Capas con Frameworks}
+  \caption{\textit{Arquitectura de 3 Capas con Frameworks}}
   \label{fig:arquitectura-jee}
 \end{figure}
 
@@ -77,7 +77,7 @@ Para la realización de este proyecto se ha usado Git \cite{Git}, un sistema de 
 
 No podemos olvidar que, aunque la documentación del proyecto se centre en la aplicación web del mismo, también se realiza un sitio web público para la empresa CoreSport \cite{CoreSport}.\\
 
-Para la realización de esta web se ha utilizado el mismo equipo informático, pero distinto entorno software. En este caso, los IDE utilizados han sido Brackets \cite{Brackets} y Sublime \cite{Sublime}, haciendo uso de HTML, CSS y JavaScript, como lenguajes para la realización de la web completa. Además, se ha usado el cliente FTP FileZilla \cite{FileZilla} para alojar la misma.
+Para la realización de esta web se ha utilizado el mismo equipo informático, pero distinto entorno software. En este caso, el IDE utilizado ha sido Brackets \cite{Brackets}, haciendo uso de HTML, CSS y JavaScript, como lenguajes para la realización de la web completa. Además, se ha usado el cliente FTP FileZilla \cite{FileZilla} para alojar la misma.
 
 
 \section{Código Fuente}
@@ -87,7 +87,7 @@ El código del proyecto, llamado Booking, se ha estructurado principalmente en 2
 \begin{figure}
 \centering
   \includegraphics[scale=.65]{img/ficheros/estructura-ficheros.jpg}
-  \caption{Estructura de los ficheros}
+  \caption{\textit{Estructura de los ficheros}}
   \label{fig:estructura-ficheros}
 \end{figure}
 
@@ -105,7 +105,7 @@ El primero de ellos hace referencia a los archivos de la interfaz de usuario, do
 \begin{figure}
 \centering
   \includegraphics[scale=.60]{img/ficheros/web-pages.jpg}
-  \caption{Directorio \textit{Web Pages}}
+  \caption{\textit{Directorio Web Pages}}
   \label{fig:ficheros-pages}
 \end{figure}
 
@@ -152,7 +152,7 @@ Aquí podrían surgir dudas, ya que un superadministrador, un administrador y un
 
 \lstinputlisting[language=XML, firstline=18, lastline=24]{ficheros/services-include.xhtml}
 
-Siguiendo con el ejemplo de la vista de los servicios, el código anterior mostrará un botón para la creación de un nuevo servicio solo a los roles "\textit{ADMIN}" y "\textit{SUPER\_ADMIN}", por lo que estará oculto cuando la vista sea destinada a un usuario del centro. \\
+Siguiendo con el ejemplo de la vista de los servicios, el código anterior mostrará un botón para la creación de un nuevo servicio solo a los roles \textit{ADMIN} y \textit{SUPER\_ADMIN}, por lo que estará oculto cuando la vista sea destinada a un usuario del centro. \\
 
 Además, puede llamar la atención el texto a mostrar en el botón: \textit{#\{txt['b\_new\_service']\}}. Como vimos anteriormente, en el fichero \textit{faces-config.xml} \ref{file:faces-config}, en el sistema se admiten dos idiomas, español e inglés. Pues bien, aquí está la clave para poder generar la interfaz en ambos idiomas -y los que se añadan en un futuro-. En la línea 14 del archivo mencionado se establece dónde encontrar los archivos de traducción: \textit{com.booking.language.text}. Mientras que la línea 15, muestra la variable a usar para realizar las traducciones: \textit{var}. Por lo que, cuando en los archivos XHTML encontramos código como el mostrado, el sistema tomará esa variable como una traducción e irá al directorio establecido en búsqueda del archivo del idioma seleccionado por el usuario, donde tomará el texto introducido para la variable en cuestión. En este caso, la variable sería \textit{b\_new\_service} y el texto equivalente para el idioma español \textit{Nuevo Servicio}, dado por la línea \textit{b\_new\_service=Nuevo Servicio} del fichero del lenguaje español de la ruta. Veremos estos archivos de idioma en unas líneas (\ref{lenguajes}).\\
 
@@ -176,7 +176,7 @@ Por tanto, las opciones que se utilizan son:
 \begin{figure}[H]
 \centering
   \includegraphics[scale=.70]{img/ficheros/source-packages.jpg}
-  \caption{Directorio \textit{Source Packages}}
+  \caption{\textit{Directorio Source Packages}}
   \label{fig:source-packages}
 \end{figure}
 
@@ -212,7 +212,7 @@ Así, existirá un archivo con el nombre base \textit{text.properties} que el si
 \begin{figure}
 \centering
   \includegraphics[scale=.60]{img/comparacion-lenguajes.jpg}
-  \caption{Directorio \textit{Comparativa de Lenguajes}}
+  \caption{\textit{Directorio Comparativa de Lenguajes}}
   \label{fig:comparacion-lenguajes}
 \end{figure}
 
@@ -228,7 +228,7 @@ El directorio \texit{util} se utiliza para almacenar todas aquellas clases que s
 \begin{figure}
 \centering
   \includegraphics[scale=.70]{img/ficheros/otros-directorios-web.jpg}
-  \caption{Directorios \textit{Libraries, Enterprise Beans} y \textit{Configuration Files}}
+  \caption{\textit{Directorios Libraries, Enterprise Beans y Configuration Files}}
   \label{fig:otros-directorios-web}
 \end{figure}
 
@@ -250,7 +250,7 @@ Posee los archivos de configuración de este módulo, como los ya vistos \textit
 \begin{figure}
 \centering
   \includegraphics[scale=.70]{img/ficheros/ficheros-ejb.jpg}
-  \caption{Directorios módulo \textit{Booking-ejb}}
+  \caption{\textit{Directorios módulo Booking-ejb}}
   \label{fig:ficheros-ejb}
 \end{figure}
 
@@ -321,7 +321,7 @@ Como se ha afirmado antes, a cada entidad le corresponderá un archivo \textit{F
 
 \lstinputlisting[language=XML, firstline=17, lastline=47]{ficheros/ServiceFacade.java}
 
-Así, la "fachada" \textit{ServiceFacada} contiene los métodos \textit{createNewService, updateService, activateService} y \textit{deactivateService} que los controladores (beans manejados) usarán para el acceso a la BD. \\
+Así, la 'fachada' \textit{ServiceFacade} contiene los métodos \textit{createNewService, updateService, activateService} y \textit{deactivateService} que los controladores (beans manejados) usarán para el acceso a la BD. \\
 
 Aparte de estas funciones CRUD, también será la clase encargada de realizar las consultas SQL de cada entidad a través de JPQL, como vemos en los siguientes ejemplos: 
 
@@ -380,7 +380,7 @@ Y la representación de dos instancias de la entidad \tesxtit{Service} en la tab
 \begin{figure}[H]
 \centering
   \includegraphics[scale=.50]{img/services-rows.jpg}
-  \caption{Instancias de \textit{Service} en la tabla \textit{services}}
+  \caption{\textit{Instancias de Service en la tabla Services}}
   \label{fig:services-rows}
 \end{figure}
 

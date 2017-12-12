@@ -6,6 +6,7 @@ import com.booking.facades.PasswordChangeRequestFacade;
 import com.booking.facades.UserFacade;
 import com.booking.util.FacesUtil;
 import com.booking.security.PBKDF2HashGenerator;
+import com.booking.util.StringsUtil;
 import java.io.IOException;
 import java.io.Serializable;
 import java.security.NoSuchAlgorithmException;
@@ -72,12 +73,16 @@ public class ResetPasswordController implements Serializable {
     public void resetPassword() {
         try {
             if (passwordChangeRequest.isExpired()) {
-                FacesUtil.addErrorMessage("resetPassword", "The reset passsword request has expired.");
+                FacesUtil.addErrorMessage("resetPassword", "La solicitud de generación de una nueva contraseña ha expirado. Solicita una nueva.");
                 return;
             }
 
+            if (StringsUtil.notSecure(password)) {
+                FacesUtil.addErrorMessage("resetPassword", "La contraseña debe contener al menos 6 caracteres, incluyendo una letra mayúscula y una minúscula.");
+                return;
+            }
             if (!password.equals(confirmPassword)) {
-                FacesUtil.addErrorMessage("resetPassword", "Passwords don't match. Please, enter them again.");
+                FacesUtil.addErrorMessage("resetPassword", "Las contraseñas no coinciden. Vuelve a intentarlo.");
                 return;
             }
 

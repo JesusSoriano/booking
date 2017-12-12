@@ -115,13 +115,13 @@ public class AppointmentFacade extends AbstractFacade<Appointment> {
     }
 
     public Appointment findAppointmentOfOrganisation(long appointmentId, Organisation organisation) {
-        return findUniqueResult(em.createQuery("SELECT a FROM Appointment a WHERE a.id = :appointmentId AND a.organisation = :organisation ORDER BY a.date ASC").
+        return findUniqueResult(em.createQuery("SELECT a FROM Appointment a WHERE a.id = :appointmentId AND a.organisation = :organisation ORDER BY a.date DESC").
                 setParameter("appointmentId", appointmentId).
                 setParameter("organisation", organisation).getResultList());
     }
 
     public List<Appointment> findAllCurrentAppointmentsOfOrganisation(Organisation organisation) {
-        return em.createQuery("SELECT a FROM Appointment a WHERE a.date > :today AND a.organisation = :organisation OR a.date = :today AND a.endTime > :now AND a.organisation = :organisation ORDER BY a.date ASC").
+        return em.createQuery("SELECT a FROM Appointment a WHERE a.date > :today AND a.organisation = :organisation OR a.date = :today AND a.endTime > :now AND a.organisation = :organisation ORDER BY a.date DESC").
                 setParameter("today", new Date()).
                 setParameter("now", new Date()).
                 setParameter("organisation", organisation).getResultList();
@@ -135,7 +135,7 @@ public class AppointmentFacade extends AbstractFacade<Appointment> {
     }
 
     public List<Appointment> findAllCurrentAppointmentsOfService(Service service, Organisation organisation) {
-        return em.createQuery("SELECT a FROM Appointment a WHERE a.service = :service AND a.date > :today AND a.organisation = :organisation OR a.service = :service AND a.date = :today AND a.endTime > :now AND a.organisation = :organisation ORDER BY a.date ASC").
+        return em.createQuery("SELECT a FROM Appointment a WHERE a.service = :service AND a.date > :today AND a.organisation = :organisation OR a.service = :service AND a.date = :today AND a.endTime > :now AND a.organisation = :organisation ORDER BY a.date DESC").
                 setParameter("service", service).
                 setParameter("today", new Date()).
                 setParameter("now", new Date()).
@@ -151,7 +151,7 @@ public class AppointmentFacade extends AbstractFacade<Appointment> {
     }
 
     public List<Appointment> findAllCurrentAppointmentsOfUser(User user, Organisation organisation) {
-        return em.createQuery("SELECT a FROM Appointment a WHERE a.appointmentUser = :user AND a.date > :today AND a.organisation = :organisation OR a.appointmentUser = :user AND a.date = :today AND a.endTime > :now AND a.organisation = :organisation ORDER BY a.date ASC").
+        return em.createQuery("SELECT a FROM Appointment a WHERE a.appointmentUser = :user AND a.date > :today AND a.organisation = :organisation OR a.appointmentUser = :user AND a.date = :today AND a.endTime > :now AND a.organisation = :organisation ORDER BY a.date DESC").
                 setParameter("user", user).
                 setParameter("today", new Date()).
                 setParameter("now", new Date()).
@@ -167,7 +167,7 @@ public class AppointmentFacade extends AbstractFacade<Appointment> {
     }
 
     public List<Appointment> findAllActiveCurrentAppointmentsOfService(Service service, Organisation organisation) {
-        return em.createQuery("SELECT a FROM Appointment a WHERE a.service = :service AND a.status = :activeStatus AND a.date > :today AND a.organisation = :organisation OR a.service = :service AND a.status = :activeStatus AND a.date = :today AND a.endTime > :now AND a.organisation = :organisation ORDER BY a.date ASC").
+        return em.createQuery("SELECT a FROM Appointment a WHERE a.service = :service AND a.status = :activeStatus AND a.date > :today AND a.organisation = :organisation OR a.service = :service AND a.status = :activeStatus AND a.date = :today AND a.endTime > :now AND a.organisation = :organisation ORDER BY a.date DESC").
                 setParameter("service", service).
                 setParameter("today", new Date()).
                 setParameter("now", new Date()).
@@ -176,7 +176,7 @@ public class AppointmentFacade extends AbstractFacade<Appointment> {
     }
 
     public List<Appointment> findAllActiveAppointmentsOfOrganisation(Organisation organisation) {
-        return em.createQuery("SELECT a FROM Appointment a WHERE a.status = :activeStatus AND a.organisation = :organisation ORDER BY a.date ASC").
+        return em.createQuery("SELECT a FROM Appointment a WHERE a.status = :activeStatus AND a.organisation = :organisation ORDER BY a.date DESC").
                 setParameter("activeStatus", Status.ACTIVATED).
                 setParameter("organisation", organisation).getResultList();
     }

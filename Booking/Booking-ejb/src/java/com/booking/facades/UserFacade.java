@@ -52,7 +52,7 @@ public class UserFacade extends AbstractFacade<User> {
         user.setSecondLastName(secondLastName);
         user.setEmail(email);
         user.setPassword(password);
-        user.setStatus(Status.ACTIVATED);
+        user.setStatus(Status.SUSPENDED);
         user.setPhone(phone);
         user.setAddress(address);
 
@@ -72,16 +72,12 @@ public class UserFacade extends AbstractFacade<User> {
         user.setFirstName(firstName);
         user.setFirstLastName(firstLastName);
         user.setSecondLastName(secondLastName);
-//        user.setEmail(email);
         user.setPhone(phone);
         user.getAddress().setAddressLine(addressLine);
         user.getAddress().setAddressLine2(addressLine2);
         user.getAddress().setCity(city);
         user.getAddress().setCountry(country);
         user.getAddress().setPostcode(postcode);
-        // User role email
-//        user.getUserRole().setUser(user);
-//        em.merge(user.getUserRole());
         
         edit(user);
     }
@@ -123,10 +119,10 @@ public class UserFacade extends AbstractFacade<User> {
                 setParameter("organisation", organisation).getResultList());
     }
 
-    public User findUserFromHashId(String hashId, Organisation organisation) {
+   /* public User findUserFromHashId(String hashId, Organisation organisation) {
         return findUniqueResult(em.createQuery("SELECT u FROM User u WHERE u.hashId = :hashId").
                 setParameter("hashId", hashId).getResultList());
-    }
+    } */
 
     public List<User> findAllClientsOfOrganisation(Organisation organisation) {
         return em.createQuery("SELECT u FROM User u WHERE u.organisation = :organisation AND u.userRole.role = :client ORDER BY u.firstName ASC, u.firstLastName ASC").
@@ -138,6 +134,13 @@ public class UserFacade extends AbstractFacade<User> {
         return em.createQuery("SELECT u FROM User u WHERE u.organisation = :organisation AND u.userRole.role = :client ORDER BY u.firstName ASC, u.firstLastName ASC").
                 setParameter("organisation", organisation).
                 setParameter("client", Role.ADMIN).getResultList();
+    }
+
+    public List<User> findAllActiveAdminsOfOrganisation(Organisation organisation) {
+        return em.createQuery("SELECT u FROM User u WHERE u.organisation = :organisation AND u.userRole.role = :admin AND u.status = :activated ORDER BY u.firstName ASC, u.firstLastName ASC").
+                setParameter("organisation", organisation).
+                setParameter("admin", Role.ADMIN).
+                setParameter("activated", Status.ACTIVATED).getResultList();
     }
 
     public List<User> findAllAdminsAndClientsOfOrganisation(Organisation organisation) {

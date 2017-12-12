@@ -13,6 +13,10 @@
                 <h:message for="msg" id="msg" errorClass="msgError" infoClass="msgInfo" /> 
 
                 <div class="row">
+                    <a href="notifications.xhtml?faces-redirect=true"><div style="float: right; font-weight: bold; color: #{homeController.notificationsNumber gt 0 ? 'orange' : '#00b5e2'}" class="notificaciones">
+                            #{txt['you_have']} #{homeController.notificationsNumber} #{txt['notifications_home']} </div></a>
+                </div>
+                <div class="row">
                     <h3>#{txt['hi']} #{homeController.getUserName()}</h3> 
                 </div>
                 <div class="row">
@@ -23,13 +27,13 @@
                     <p:repeat value="#{homeController.announcements}" var="announcement">
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-10">
-                                <h4 class="blue-link" style="margin-bottom: 0px;">#{announcement.title}</h4> 
+                                <h4 class="blue-link" style="margin-bottom: 0px; font-weight: bold;">#{announcement.title}</h4> 
                                 <h5 style="margin-top: 0px;"><h:outputText value="#{announcement.createdDate}" class="lightgray-color">
                                         <f:convertDateTime pattern="#{dateFormatController.dateWithTimeFormatString}" />
                                     </h:outputText>
                                 </h5>
-                                <h:outputText value="#{announcement.text}" />
-                                <hr style="background-color: #eee; margin: 40px 0px;"/>
+                                <h:outputText value="#{announcement.text}" escape="false"/>
+                                <hr style="background-color: #aaa; margin: 40px 0px;"/>
                             </div>
                         </div>
                     </p:repeat>

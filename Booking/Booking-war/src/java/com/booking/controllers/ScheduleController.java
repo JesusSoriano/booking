@@ -13,6 +13,7 @@ import com.booking.entities.ClassDay;
 import com.booking.entities.Organisation;
 import com.booking.entities.User;
 import com.booking.enums.AuditType;
+import com.booking.enums.NotificationType;
 import com.booking.enums.RequestStatus;
 import com.booking.enums.Role;
 import com.booking.facades.AppointmentFacade;
@@ -21,6 +22,8 @@ import com.booking.facades.AuditFacade;
 import com.booking.facades.BookingFacade;
 import com.booking.facades.ClassDayFacade;
 import com.booking.facades.ClassFacade;
+import com.booking.facades.NotificationFacade;
+import com.booking.facades.UserFacade;
 import com.booking.util.FacesUtil;
 import java.io.IOException;
 import java.io.Serializable;
@@ -63,6 +66,10 @@ public class ScheduleController implements Serializable {
     private AppointmentRequestFacade appointmentRequestFacade;
     @EJB
     private AppointmentFacade appointmentFacade;
+    @EJB
+    private NotificationFacade notificationFacade;
+    @EJB
+    private UserFacade userFacade;
 
     private Organisation organisation;
     private User loggedUser;
@@ -109,7 +116,7 @@ public class ScheduleController implements Serializable {
         // Load schedule
         eventModel = new DefaultScheduleModel();
         List<ClassDay> classDays = classDayFacade.findAllActiveDaysOfOrganisation(organisation);
-        for (ClassDay day : classDays) {
+        classDays.stream().map((day) -> {
             ScheduleElement scheduleElement = new ScheduleElement(day);
             DefaultScheduleEvent eventDay = new DefaultScheduleEvent(day.getActivityClass().getService().getName() + ": " + day.getActivityClass().getName(), day.getStartDate(), day.getEndDate(), scheduleElement);
             String eventClass = "";
@@ -121,11 +128,13 @@ public class ScheduleController implements Serializable {
                 eventClass = "allBookedEvent";
             }
             eventDay.setStyleClass(eventClass + " classEvent");
+            return eventDay;
+        }).forEachOrdered((eventDay) -> {
             eventModel.addEvent(eventDay);
-        }
+        });
 
         List<Appointment> appointments = appointmentFacade.findAllActiveAppointmentsOfOrganisation(organisation);
-        for (Appointment appointment : appointments) {
+        appointments.stream().map((appointment) -> {
             ScheduleElement scheduleElement = new ScheduleElement(appointment);
             DefaultScheduleEvent eventAppointment = new DefaultScheduleEvent(appointment.getDescription().isEmpty() ? ("Cita " + appointment.getService().getName()) : (appointment.getService().getName() + ": " + appointment.getDescription()), getStartingDateOfAppointment(appointment), getEndingDateOfAppointment(appointment), scheduleElement);
             String eventClass = "";
@@ -139,8 +148,10 @@ public class ScheduleController implements Serializable {
                 eventClass = "availableAppointment";
             }
             eventAppointment.setStyleClass(eventClass + " appointmentEvent");
+            return eventAppointment;
+        }).forEachOrdered((eventAppointment) -> {
             eventModel.addEvent(eventAppointment);
-        }
+        });
     }
 
     private Date getStartingDateOfAppointment(Appointment appointment) {
@@ -168,6 +179,16 @@ public class ScheduleController implements Serializable {
 
                     FacesUtil.addSuccessMessage("scheduleForm:msg", "La plaza ha sido reservada correctamente.");
 
+                    if (activityClass.getBookedPlaces() == activityClass.getMaximumUsers()) {
+                        try {
+                            // Create full class notification
+                            List<User> admins = userFacade.findAllActiveAdminsOfOrganisation(organisation);
+                            notificationFacade.createNotificationForAdmins(NotificationType.CLASE_COMPLETA_ADMIN, admins, loggedUser, activityClass.getId(), organisation);
+                        } catch (Exception e) {
+                            Logger.getLogger(ScheduleController.class.getName()).log(Level.SEVERE, null, e);
+                        }
+                    }
+                    
                     try {
                         // Audit class booking
                         String ipAddress = FacesUtil.getRequest().getRemoteAddr();
@@ -235,6 +256,14 @@ public class ScheduleController implements Serializable {
                 if (loggedUserIsAdmin()) {
                     appointmentRequestFacade.updateRequestStatus(newAppointmentRequest, RequestStatus.ACCEPTED, "");
                     msg = "La cita ha sido reservada correctamente";
+                } else {
+                    try {
+                        // Create user registration notification
+                        List<User> admins = userFacade.findAllActiveAdminsOfOrganisation(organisation);
+                        notificationFacade.createNotificationForAdmins(NotificationType.SOLICITUD_CITA_ADMIN, admins, loggedUser, appointment.getId(), organisation);
+                    } catch (Exception e) {
+                        Logger.getLogger(ScheduleController.class.getName()).log(Level.SEVERE, null, e);
+                    }
                 }
 
                 FacesUtil.addSuccessMessage("scheduleForm:msg", msg);
@@ -263,6 +292,7 @@ public class ScheduleController implements Serializable {
 
     public void cancelAppointmentBooking(Appointment appointment) {
         try {
+            boolean pendingRequest = true;
             // Check if there is a appointment request
             AppointmentRequest appointmentRequest = appointmentRequestFacade.findCurrentRequestOfAppointment(appointment);
             if (appointmentRequest == null) {
@@ -277,17 +307,35 @@ public class ScheduleController implements Serializable {
                         Logger.getLogger(ScheduleController.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
+                pendingRequest = false;
             }
             // Make the request status as CANCELLED
             appointmentRequestFacade.updateRequestStatus(appointmentRequest, RequestStatus.CANCELLED, "Cancelado por " + loggedUser.getFirstName());
             appointmentFacade.makeAppointmentAvailable(appointment);
+            User appointmentUser = appointment.getAppointmentUser();
             appointmentFacade.deleteAppointmentUser(appointment);
             FacesUtil.addSuccessMessage("scheduleForm:msg", "La solicitud o cita ha sido cancelada correctamente.");
 
             try {
+                if (loggedUserIsAdmin()) {
+                    if (pendingRequest) {
+                        notificationFacade.createNotification(NotificationType.CITA_RECHAZADA, appointmentUser, loggedUser, appointment.getId(), organisation);
+                    } else if (!appointmentUser.equals(loggedUser)) {
+                        notificationFacade.createNotification(NotificationType.CITA_CANCELADA, appointmentUser, loggedUser, appointment.getId(), organisation);
+                    }
+                } else {
+                    List<User> admins = userFacade.findAllActiveAdminsOfOrganisation(organisation);
+                    notificationFacade.createNotificationForAdmins(NotificationType.CITA_SUSPENDIDA_ADMIN, admins, loggedUser, appointment.getId(), organisation);
+                }
+            } catch (Exception e) {
+                Logger.getLogger(ScheduleController.class.getName()).log(Level.SEVERE, null, e);
+                FacesUtil.addErrorMessage("appointmentsForm:msg", "La notificación de la suspensión no se ha podido crear correctamente.");
+            }
+            
+            try {
                 // Audit appointment cancalation
                 String ipAddress = FacesUtil.getRequest().getRemoteAddr();
-                auditFacade.createAudit(AuditType.CANCELAR_CITA, appointment.getAppointmentUser(), ipAddress, appointment.getId(), organisation);
+                auditFacade.createAudit(AuditType.CANCELAR_CITA, appointmentUser, ipAddress, appointment.getId(), organisation);
             } catch (Exception e) {
                 Logger.getLogger(ScheduleController.class.getName()).log(Level.SEVERE, null, e);
                 FacesUtil.addErrorMessage("scheduleForm:msg", "La solicitud o cita ha sido cancelada correctamente, pero ha habido un problema auditando la cancelación. Por favor informa a algún administrador del problema.");

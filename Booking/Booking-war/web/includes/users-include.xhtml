@@ -31,11 +31,11 @@
                         <p:column headerText="#{txt['surname']}" sortBy="#{user.firstLastName}"> 
                             <h:outputText value="#{user.firstLastName} #{user.secondLastName}" class="#{user.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" /> 
                         </p:column> 
-                        <p:column headerText="#{txt['email']}" sortBy="#{user.email}"> 
+                        <p:column headerText="#{txt['email']}" sortBy="#{user.email}" class="only-desktop-column"> 
                             <h:outputText value="#{user.email}" class="#{user.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" /> 
                             <h:outputText value="#{user.email}" rendered="#{user.status eq 'SUSPENDED'}" style="color:lightgray" /> 
                         </p:column> 
-                        <p:column headerText="#{txt['address']}" sortBy="#{user.address.city}"> 
+                        <p:column headerText="#{txt['address']}" sortBy="#{user.address.city}" class="only-desktop-column"> 
                             <h:outputText value="#{user.address.addressLine}" class="#{user.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" style="display: block" /> 
                             <h:outputText value="#{user.address.addressLine2}" class="#{user.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" style="display: block" /> 
                             <h:outputText value="#{user.address.city}" class="#{user.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" />
@@ -43,7 +43,7 @@
                         <p:column headerText="#{txt['phone']}" sortBy="#{user.phone}"> 
                             <h:outputText value="#{user.phone}" class="#{user.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" /> 
                         </p:column> 
-                        <p:column headerText="#{txt['organisation']}" sortBy="#{user.organisation.name}" rendered="#{usersController.userRole eq 'SUPER_ADMIN'}"> 
+                        <p:column headerText="#{txt['organisation']}" sortBy="#{user.organisation.name}" rendered="#{usersController.userRole eq 'SUPER_ADMIN'}" class="only-desktop-column"> 
                             <h:outputText value="#{user.organisation.name}" class="#{user.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" /> 
                         </p:column> 
                         <p:column headerText="#{txt['options']}"> 

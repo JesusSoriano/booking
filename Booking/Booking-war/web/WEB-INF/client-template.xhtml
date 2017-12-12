@@ -19,6 +19,15 @@
                             <ui:include src="/WEB-INF/header-info.xhtml" />
 
                             <div id="navigation">
+                                <!-- Mobile and tablet menu -->
+                                <div id="bar-fixed">
+                                    <div class="button-menu-mobile">
+                                        <a id="open-menu" href="#"> <span></span> <span></span> <span></span> </a>
+                                        <a id="close-menu" href="#"> <img src="../resources/images/close-menu.png" alt="#{txt['b_close']}"/> </a>
+                                    </div>
+                                </div>
+
+                                <!-- Desktop menu -->
                                 <ul id="nav" class="container">
                                     <li><a href="home.xhtml">#{txt['m_home']}</a></li>
                                     <li class="dropdown-li"><a>#{txt['m_bookings']}</a>

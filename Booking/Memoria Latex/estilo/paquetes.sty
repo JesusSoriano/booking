@@ -28,7 +28,7 @@
 \usepackage{graphicx}
 % Hyperref es muy importante: aÃ±ade referencias al documento.
 \usepackage[colorlinks=true,linkcolor=azuloscuro,urlcolor=azuloscuro,
-  filecolor=azuloscuro, menucolor=azuloscuro, pagecolor=azuloscuro]{hyperref}
+  filecolor=azuloscuro, menucolor=azuloscuro, pagecolor=azuloscuro, citecolor=azul]{hyperref}
 \usepackage[ilines]{scrpage2} % Formato de página
 \usepackage{supertabular} % Tablas mejoradas
 \usepackage{tikz}
@@ -62,3 +62,6 @@ breaklines=true,
 % minimizar fragmentado de listados
 \lstnewenvironment{listing}[1][]
 {\lstset{#1}\pagebreak[0]}{\pagebreak[0]}
+
+
+\usepackage{cite} % para contraer referencias

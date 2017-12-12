@@ -3,8 +3,10 @@ package com.booking.controllers;
 import com.booking.entities.Organisation;
 import com.booking.entities.User;
 import com.booking.enums.AuditType;
+import com.booking.enums.NotificationType;
 import com.booking.enums.Role;
 import com.booking.facades.AuditFacade;
+import com.booking.facades.NotificationFacade;
 import com.booking.facades.UserFacade;
 import com.booking.util.Constants;
 import com.booking.util.FacesUtil;
@@ -22,6 +24,8 @@ public class UsersController implements Serializable {
     @EJB
     private UserFacade userFacade;
     @EJB
+    private NotificationFacade notificationFacade;
+    @EJB
     private AuditFacade auditFacade;
 
     private List<User> users;
@@ -31,7 +35,7 @@ public class UsersController implements Serializable {
 
     public UsersController() {
     }
-    
+
     @PostConstruct
     public void init() {
         loggedUser = FacesUtil.getCurrentUser();
@@ -46,6 +50,14 @@ public class UsersController implements Serializable {
         FacesUtil.addSuccessMessage(pageName + "Form:msg", "El usuario ha sido activado correctamente.");
 
         try {
+            // Create user activation notification
+            notificationFacade.createNotification(NotificationType.USUARIO_ACTIVADO, user, loggedUser, 0, organisation);
+        } catch (Exception e) {
+            Logger.getLogger(UsersController.class.getName()).log(Level.SEVERE, null, e);
+            FacesUtil.addErrorMessage("viewAppointmentForm:msg", "La notificación de la activación no se ha podido crear correctamente.");
+        }
+
+        try {
             // Registrar activación de usuario
             String ipAddress = FacesUtil.getRequest().getRemoteAddr();
             auditFacade.createAudit(pageName.equals("admins") ? AuditType.ACTIVAR_ADMIN : AuditType.ACTIVAR_USUARIO, loggedUser, ipAddress, user.getId(), organisation);
@@ -53,12 +65,24 @@ public class UsersController implements Serializable {
             Logger.getLogger(UsersController.class.getName()).log(Level.SEVERE, null, e);
         }
 
-        return pageName + ".xhtml" + Constants.FACES_REDIRECT;
+        if (pageName.equals("user-profile")) {
+            return "user-profile.xhtml" + Constants.FACES_REDIRECT + "&user=" + user.getId();
+        } else {
+            return pageName + ".xhtml" + Constants.FACES_REDIRECT;
+        }
     }
 
     public String deactivateUser(User user, String pageName) {
         userFacade.deactivateUser(user);
         FacesUtil.addSuccessMessage(pageName + "Form:msg", "El usuario ha sido suspendido correctamente.");
+
+        try {
+            // Create user activation notification
+            notificationFacade.createNotification(NotificationType.USUARIO_SUSPENDIDO, user, loggedUser, 0, organisation);
+        } catch (Exception e) {
+            Logger.getLogger(UsersController.class.getName()).log(Level.SEVERE, null, e);
+            FacesUtil.addErrorMessage("viewAppointmentForm:msg", "La notificación de la suspensión no se ha podido crear correctamente.");
+        }
 
         try {
             // Registrar suspensión de usuario
@@ -67,8 +91,12 @@ public class UsersController implements Serializable {
         } catch (Exception e) {
             Logger.getLogger(UsersController.class.getName()).log(Level.SEVERE, null, e);
         }
-
-        return pageName + ".xhtml" + Constants.FACES_REDIRECT;
+        
+        if (pageName.equals("user-profile")) {
+            return "user-profile.xhtml" + Constants.FACES_REDIRECT + "&user=" + user.getId();
+        } else {
+            return pageName + ".xhtml" + Constants.FACES_REDIRECT;
+        }
     }
 
     public List<User> getUsers() {
@@ -78,7 +106,7 @@ public class UsersController implements Serializable {
     public List<User> getAdmins() {
         return admins;
     }
-    
+
     public Role getUserRole() {
         return loggedUser.getUserRole().getRole();
     }

@@ -29,22 +29,24 @@ public class NotificationFacade extends AbstractFacade<Notification> {
         super(Notification.class);
     }
 
-    public Notification createNotification(NotificationType notificationType, User notificationUser, long objectId, Organisation organisation) {
+    public Notification createNotification(NotificationType notificationType, User notificationUser, User actionUser, long objectId, Organisation organisation) {
         Notification notification = new Notification();
         notification.setCreatedDate(new Date());
         notification.setOrganisation(organisation);
         notification.setNotificationType(notificationType);
         notification.setNotificationUser(notificationUser);
+        notification.setActiontionUser(actionUser);
         notification.setObjectId(objectId);
+        notification.setChecked(Boolean.FALSE);
 
         create(notification);
         return notification;
     }
 
-    public void createNotificationForAdmins(NotificationType notificationType, List<User> notificationAdmins, long objectId, Organisation organisation) {
-        for (User admin : notificationAdmins) {
-            createNotification(notificationType, admin, objectId, organisation);
-        }
+    public void createNotificationForAdmins(NotificationType notificationType, List<User> notificationAdmins, User actionUser, long objectId, Organisation organisation) {
+        notificationAdmins.forEach((admin) -> {
+            createNotification(notificationType, admin, actionUser, objectId, organisation);
+        });
     }
     
     public void setNotificationCheck(Notification notification, boolean checked) {
@@ -53,12 +55,18 @@ public class NotificationFacade extends AbstractFacade<Notification> {
     }
     
     public List<Notification> findAllNotificationsOfUser(User user) {
-        return em.createQuery("SELECT n FROM Notification n WHERE n.notificationUser = :user").
+        return em.createQuery("SELECT n FROM Notification n WHERE n.notificationUser = :user ORDER BY n.createdDate DESC").
                 setParameter("user", user).getResultList();
     }
     
+    public int findUserUncheckedNotificationsNumber(User user) {
+        return em.createQuery("SELECT n FROM Notification n WHERE n.notificationUser = :user AND n.checked = :false").
+                setParameter("user", user).
+                setParameter("false", false).getResultList().size();
+    }
+    
     public List<Notification> findAllNotificationsOfTypeOfUser(User user, NotificationType notificationType) {
-        return em.createQuery("SELECT n FROM Notification n WHERE n.notificationUser = :user AND n.notificationType = :notificationType").
+        return em.createQuery("SELECT n FROM Notification n WHERE n.notificationUser = :user AND n.notificationType = :notificationType ORDER BY n.createdDate DESC").
                 setParameter("user", user).
                 setParameter("notificationType", notificationType).getResultList();
     }

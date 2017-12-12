@@ -39,15 +39,15 @@
                         <p:column headerText="#{txt['title']}" sortBy="#{announcement.title}"> 
                             <h:outputText value="#{announcement.title}" class="#{announcement.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" /> 
                         </p:column> 
-                        <p:column headerText="#{txt['text']}" sortBy="#{announcement.text}"> 
-                            <h:outputText value="#{announcement.text}" class="#{announcement.status eq 'SUSPENDED' ? 'lightgray-color' : ''}"  /> 
+                        <p:column headerText="#{txt['text']}" sortBy="#{announcement.text}" class="only-desktop-column"> 
+                            <h:outputText value="#{announcement.text}" escape="false" class="#{announcement.status eq 'SUSPENDED' ? 'lightgray-color' : ''}"  /> 
                         </p:column> 
                         <p:column headerText="#{txt['created_date']}" sortBy="#{announcement.createdDate}"> 
                             <h:outputText value="#{announcement.createdDate}" class="#{announcement.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" >
                                 <f:convertDateTime pattern="#{dateFormatController.dateWithTimeFormatString}" />
                             </h:outputText>
                         </p:column> 
-                        <p:column headerText="#{txt['organisation']}" sortBy="#{announcement.organisation.name}" rendered="#{announcementsController.userRole eq 'SUPER_ADMIN'}"> 
+                        <p:column headerText="#{txt['organisation']}" sortBy="#{announcement.organisation.name}" rendered="#{announcementsController.userRole eq 'SUPER_ADMIN'}" class="only-desktop-column"> 
                             <h:outputText value="#{announcement.organisation.name}" class="#{announcement.status eq 'SUSPENDED' ? 'lightgray-color' : ''}"  /> 
                         </p:column> 
                         <p:column headerText="#{txt['options']}" rendered="#{announcementsController.userRole eq 'ADMIN' or announcementsController.userRole eq 'SUPER_ADMIN'}"> 
@@ -68,7 +68,7 @@
             </h:form>
 
 
-            <h:form enctype="multipart/form-data" id="newAnnouncementForm">
+            <h:form enctype="multipart/form-data" id="newAnnouncementForm" >
                 <p:dialog id="newAnnouncementDialog" widgetVar="newAnnouncementDialog" header="#{txt['create_edit_announcement']}" resizable="false"
                           closable="true">
                     <h:panelGroup id="newAnnouncementClass">
@@ -84,7 +84,7 @@
                             <tr>
                                 <td>#{txt['text']}:</td>
                                 <td>
-                                    <h:inputTextarea id="newAnnouncementText" value="#{announcementsController.newAnnouncementText}"/>
+                                    <p:editor id="newAnnouncementText" value="#{announcementsController.newAnnouncementText}"/>
                                     <br/>
                                     <h:message for="newAnnouncementText" styleClass="loginError" errorStyle="color :red" infoStyle="color : green"/>
                                 </td>

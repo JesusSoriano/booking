@@ -39,21 +39,21 @@
                         <p:column headerText="#{txt['name']}" sortBy="#{file.name}"> 
                             <h:outputText value="#{file.name}" /> 
                         </p:column> 
-                        <p:column headerText="#{txt['description']}" sortBy="#{file.description}"> 
+                        <p:column headerText="#{txt['description']}" sortBy="#{file.description}" class="only-desktop-column"> 
                             <h:outputText value="#{file.description}"  /> 
                         </p:column> 
-                        <p:column headerText="#{txt['created_date']}" sortBy="#{file.createdDate}"> 
+                        <p:column headerText="#{txt['created_date']}" sortBy="#{file.createdDate}" class="only-desktop-column"> 
                             <h:outputText value="#{file.createdDate}" >
                                 <f:convertDateTime pattern="#{dateFormatController.dateWithTimeFormatString}" />
                             </h:outputText>
                         </p:column> 
-                        <p:column headerText="#{txt['administrator']}" sortBy="#{file.admin.fullName}"> 
+                        <p:column headerText="#{txt['administrator']}" sortBy="#{file.admin.fullName}" class="only-desktop-column"> 
                             <h:outputText value="#{file.admin.fullName}" /> 
                         </p:column>
                         <p:column headerText="#{txt['user']}" sortBy="#{file.fileUser.fullName}" rendered="#{filesController.loggedUserIsAdmin()}"> 
                             <h:outputText value="#{file.fileUser.fullName}" /> 
                         </p:column>
-                        <p:column headerText="#{txt['organisation']}" sortBy="#{file.organisation.name}" rendered="#{filesController.userRole eq 'SUPER_ADMIN'}"> 
+                        <p:column headerText="#{txt['organisation']}" sortBy="#{file.organisation.name}" rendered="#{filesController.userRole eq 'SUPER_ADMIN'}" class="only-desktop-column"> 
                             <h:outputText value="#{file.organisation.name}"  /> 
                         </p:column> 
                         <p:column headerText="#{txt['options']}" rendered="#{filesController.loggedUserIsAdmin()}"> 

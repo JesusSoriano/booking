@@ -6,11 +6,14 @@ import com.booking.entities.Organisation;
 import com.booking.entities.Service;
 import com.booking.entities.User;
 import com.booking.enums.AuditType;
+import com.booking.enums.NotificationType;
 import com.booking.enums.Role;
 import com.booking.facades.AuditFacade;
 import com.booking.facades.ClassFacade;
 import com.booking.facades.BookingFacade;
+import com.booking.facades.NotificationFacade;
 import com.booking.facades.ServiceFacade;
+import com.booking.facades.UserFacade;
 import com.booking.util.Constants;
 import com.booking.util.FacesUtil;
 import java.io.Serializable;
@@ -31,7 +34,11 @@ public class ClassesController implements Serializable {
     @EJB
     private BookingFacade bookingFacade;
     @EJB
+    private UserFacade userFacade;
+    @EJB
     private ServiceFacade serviceFacade;
+    @EJB
+    private NotificationFacade notificationFacade;
     @EJB
     private AuditFacade auditFacade;
 
@@ -71,6 +78,17 @@ public class ClassesController implements Serializable {
         FacesUtil.addSuccessMessage("classesForm:msg", "El servicio ha sido activado correctamente.");
 
         try {
+            // Create class activation notification
+            List<User> classUsers = bookingFacade.findAllBookedUsersOfClass(activityClass);
+            classUsers.forEach((classUser) -> {
+                notificationFacade.createNotification(NotificationType.CLASE_ACTIVADA, classUser, loggedUser, activityClass.getId(), organisation);
+            });
+        } catch (Exception e) {
+            Logger.getLogger(ClassesController.class.getName()).log(Level.SEVERE, null, e);
+            FacesUtil.addErrorMessage("classesForm:msg", "La notificación de la activación no se ha podido crear correctamente.");
+        }
+
+        try {
             // Audit class activation
             String ipAddress = FacesUtil.getRequest().getRemoteAddr();
             auditFacade.createAudit(AuditType.ACTIVAR_SERVICIO, loggedUser, ipAddress, activityClass.getId(), organisation);
@@ -84,6 +102,17 @@ public class ClassesController implements Serializable {
     public String deactivateClass(ActivityClass activityClass) {
         classFacade.deactivateClass(activityClass);
         FacesUtil.addSuccessMessage("classesForm:msg", "El servicio ha sido suspendido correctamente.");
+
+        try {
+            // Create class deactivation notification
+            List<User> classUsers = bookingFacade.findAllBookedUsersOfClass(activityClass);
+            classUsers.forEach((classUser) -> {
+                notificationFacade.createNotification(NotificationType.CLASE_SUSPENDIDA, classUser, loggedUser, activityClass.getId(), organisation);
+            });
+        } catch (Exception e) {
+            Logger.getLogger(ClassesController.class.getName()).log(Level.SEVERE, null, e);
+            FacesUtil.addErrorMessage("classesForm:msg", "La notificación de la suspensión no se ha podido crear correctamente.");
+        }
 
         try {
             // Audit class suspention
@@ -112,6 +141,16 @@ public class ClassesController implements Serializable {
                     classFacade.addClassBooking(activityClass);
 
                     FacesUtil.addSuccessMessage("classesForm:msg", "La plaza ha sido reservada correctamente.");
+
+                    if (activityClass.getBookedPlaces() == activityClass.getMaximumUsers()) {
+                        try {
+                            // Create full class notification
+                            List<User> admins = userFacade.findAllActiveAdminsOfOrganisation(organisation);
+                            notificationFacade.createNotificationForAdmins(NotificationType.CLASE_COMPLETA_ADMIN, admins, loggedUser, activityClass.getId(), organisation);
+                        } catch (Exception e) {
+                            Logger.getLogger(AppointmentsController.class.getName()).log(Level.SEVERE, null, e);
+                        }
+                    }
 
                     try {
                         // Audit class booking

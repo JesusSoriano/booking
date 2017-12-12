@@ -61,6 +61,15 @@
                                     </div>
                                 </h:panelGroup>
 
+                                <h:panelGroup rendered="#{infoController.infoType eq 'registration'}">
+                                    <h2>#{txt['new_registration']}</h2>
+                                    <div class="main-content">
+                                        <p>
+                                            #{txt['new_registration_text']}
+                                        </p>
+                                    </div>
+                                </h:panelGroup>
+
                                 <h:panelGroup rendered="#{infoController.infoType eq null}">
                                     <h2>#{txt['information']}</h2>
                                     <div class="main-content">

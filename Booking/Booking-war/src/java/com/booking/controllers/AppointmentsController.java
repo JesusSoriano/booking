@@ -6,12 +6,15 @@ import com.booking.entities.Organisation;
 import com.booking.entities.Service;
 import com.booking.entities.User;
 import com.booking.enums.AuditType;
+import com.booking.enums.NotificationType;
 import com.booking.enums.RequestStatus;
 import com.booking.enums.Role;
 import com.booking.facades.AppointmentFacade;
 import com.booking.facades.AppointmentRequestFacade;
 import com.booking.facades.AuditFacade;
+import com.booking.facades.NotificationFacade;
 import com.booking.facades.ServiceFacade;
+import com.booking.facades.UserFacade;
 import com.booking.util.Constants;
 import com.booking.util.FacesUtil;
 import java.io.Serializable;
@@ -35,6 +38,10 @@ public class AppointmentsController implements Serializable {
     private AuditFacade auditFacade;
     @EJB
     private AppointmentRequestFacade appointmentRequestFacade;
+    @EJB
+    private NotificationFacade notificationFacade;
+    @EJB
+    private UserFacade userFacade;
 
     private List<Appointment> appointments;
     private List<Appointment> pastAppointments;
@@ -72,6 +79,15 @@ public class AppointmentsController implements Serializable {
         FacesUtil.addSuccessMessage("appointmentsForm:msg", "La cita ha sido activado correctamente.");
 
         try {
+            if (appointment.getAppointmentUser() != null) {
+                // Create appointment activation notification
+                notificationFacade.createNotification(NotificationType.CITA_ACTIVADA, appointment.getAppointmentUser(), loggedUser, appointment.getId(), organisation);
+            }
+        } catch (Exception e) {
+            Logger.getLogger(AppointmentsController.class.getName()).log(Level.SEVERE, null, e);
+        }
+
+        try {
             // Audit appointment activation
             String ipAddress = FacesUtil.getRequest().getRemoteAddr();
             auditFacade.createAudit(AuditType.ACTIVAR_SERVICIO, loggedUser, ipAddress, appointment.getId(), organisation);
@@ -85,6 +101,16 @@ public class AppointmentsController implements Serializable {
     public String deactivateAppointment(Appointment appointment) {
         appointmentFacade.deactivateAppointment(appointment);
         FacesUtil.addSuccessMessage("appointmentsForm:msg", "La cita ha sido suspendido correctamente.");
+
+        try {
+            if (appointment.getAppointmentUser() != null) {
+                // Create appointment deactivation notification
+                notificationFacade.createNotification(NotificationType.CITA_ACTIVADA, appointment.getAppointmentUser(), loggedUser, appointment.getId(), organisation);
+            }
+        } catch (Exception e) {
+            Logger.getLogger(AppointmentsController.class.getName()).log(Level.SEVERE, null, e);
+            FacesUtil.addErrorMessage("appointmentsForm:msg", "La notificación de la suspensión no se ha podido crear correctamente.");
+        }
 
         try {
             // Audit appointment suspention
@@ -112,6 +138,14 @@ public class AppointmentsController implements Serializable {
                 if (loggedUserIsAdmin()) {
                     appointmentRequestFacade.updateRequestStatus(newAppointmentRequest, RequestStatus.ACCEPTED, "Cita reservada por " + loggedUser.getFirstName());
                     msg = "La cita ha sido reservada correctamente";
+                } else {
+                    try {
+                        // Create user registration notification
+                        List<User> admins = userFacade.findAllActiveAdminsOfOrganisation(organisation);
+                        notificationFacade.createNotificationForAdmins(NotificationType.SOLICITUD_CITA_ADMIN, admins, loggedUser, appointment.getId(), organisation);
+                    } catch (Exception e) {
+                        Logger.getLogger(AppointmentsController.class.getName()).log(Level.SEVERE, null, e);
+                    }
                 }
 
                 FacesUtil.addSuccessMessage("appointmentsForm:msg", msg);
@@ -136,6 +170,7 @@ public class AppointmentsController implements Serializable {
 
     public String cancelAppointmentBooking(Appointment appointment) {
         try {
+            boolean pendingRequest = true;
             // Check if there is a appointment request
             AppointmentRequest appointmentRequest = appointmentRequestFacade.findCurrentRequestOfAppointment(appointment);
             if (appointmentRequest == null) {
@@ -145,12 +180,30 @@ public class AppointmentsController implements Serializable {
                     FacesUtil.addErrorMessage("appointmentsForm:msg", "Error, la solicitud o cita no existe.");
                     return appointmentsWithParam();
                 }
+                pendingRequest = false;
             }
             // Make the request status as CANCELLED
             appointmentRequestFacade.updateRequestStatus(appointmentRequest, RequestStatus.CANCELLED, "Cancelado por " + loggedUser.getFirstName());
             appointmentFacade.makeAppointmentAvailable(appointment);
+            User appointmentUser = appointment.getAppointmentUser();
             appointmentFacade.deleteAppointmentUser(appointment);
             FacesUtil.addSuccessMessage("appointmentsForm:msg", "La solicitud o cita ha sido cancelada correctamente.");
+
+            try {
+                if (loggedUserIsAdmin()) {
+                    if (pendingRequest) {
+                        notificationFacade.createNotification(NotificationType.CITA_RECHAZADA, appointmentUser, loggedUser, appointment.getId(), organisation);
+                    } else if (!appointmentUser.equals(loggedUser)) {
+                        notificationFacade.createNotification(NotificationType.CITA_CANCELADA, appointmentUser, loggedUser, appointment.getId(), organisation);
+                    }
+                } else {
+                    List<User> admins = userFacade.findAllActiveAdminsOfOrganisation(organisation);
+                    notificationFacade.createNotificationForAdmins(NotificationType.CITA_SUSPENDIDA_ADMIN, admins, loggedUser, appointment.getId(), organisation);
+                }
+            } catch (Exception e) {
+                Logger.getLogger(AppointmentsController.class.getName()).log(Level.SEVERE, null, e);
+                FacesUtil.addErrorMessage("appointmentsForm:msg", "La notificación de la suspensión no se ha podido crear correctamente.");
+            }
 
             try {
                 // Audit appointment cancalation
@@ -179,6 +232,16 @@ public class AppointmentsController implements Serializable {
             // Make the request status as ACCEPTED
             appointmentRequestFacade.updateRequestStatus(appointmentRequest, RequestStatus.ACCEPTED, "Aceptado por " + loggedUser.getFirstName());
             FacesUtil.addSuccessMessage("appointmentsForm:msg", "La solicitud de cita ha sido aceptada correctamente.");
+
+            try {
+                if (appointment.getAppointmentUser() != null) {
+                    // Create appointment acceptation notification
+                    notificationFacade.createNotification(NotificationType.CITA_ACEPTADA, appointment.getAppointmentUser(), loggedUser, appointment.getId(), organisation);
+                }
+            } catch (Exception e) {
+                Logger.getLogger(AppointmentsController.class.getName()).log(Level.SEVERE, null, e);
+                FacesUtil.addErrorMessage("appointmentsForm:msg", "La notificación de la aceptación no se ha podido crear correctamente.");
+            }
 
             try {
                 // Audit appointment acceptance

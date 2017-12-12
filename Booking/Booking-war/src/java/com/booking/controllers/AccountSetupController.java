@@ -3,8 +3,10 @@ package com.booking.controllers;
 import com.booking.entities.Organisation;
 import com.booking.entities.User;
 import com.booking.enums.AuditType;
+import com.booking.enums.NotificationType;
 import com.booking.enums.Role;
 import com.booking.facades.AuditFacade;
+import com.booking.facades.NotificationFacade;
 import com.booking.facades.UserFacade;
 import com.booking.util.Constants;
 import com.booking.util.FacesUtil;
@@ -14,6 +16,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
@@ -34,6 +37,8 @@ public class AccountSetupController implements Serializable {
 //    private MailService mailService;
     @EJB
     private UserFacade userFacade;
+    @EJB
+    private NotificationFacade notificationFacade;
     @EJB
     private AuditFacade auditFacade;
 
@@ -68,58 +73,50 @@ public class AccountSetupController implements Serializable {
 
         try {
             if (StringsUtil.isNotNullNotEmpty(firstName)) {
-                FacesUtil.addErrorMessage("registrationForm", "Introduce tu nombre");
+                FacesUtil.addErrorMessage("registrationForm:msg", "Introduce tu nombre");
                 return;
             }
             if (StringsUtil.isNotNullNotEmpty(firstLastName)) {
-                FacesUtil.addErrorMessage("registrationForm", "Introduce tu primer apellido");
+                FacesUtil.addErrorMessage("registrationForm:msg", "Introduce tu primer apellido");
                 return;
             }
-            
+
             // Remove start and end white spaces of email
             email = email.trim();
             if (StringsUtil.isNotNullNotEmpty(email)) {
-                FacesUtil.addErrorMessage("registrationForm", "Introduce tu email");
+                FacesUtil.addErrorMessage("registrationForm:msg", "Introduce tu email");
                 return;
             }
-            
+
             if (StringsUtil.isNotNullNotEmpty(password)) {
-                FacesUtil.addErrorMessage("registrationForm", "Introduce contraseña");
+                FacesUtil.addErrorMessage("registrationForm:msg", "Introduce contraseña");
+                return;
+            }
+            if (StringsUtil.notSecure(password)) {
+                FacesUtil.addErrorMessage("registrationForm:msg", "La contraseña debe contener al menos 6 caracteres, incluyendo una letra mayúscula y una minúscula.");
                 return;
             }
             if (StringsUtil.isNotNullNotEmpty(confirmPassword)) {
-                FacesUtil.addErrorMessage("registrationForm", "Confirma tu contraseña");
+                FacesUtil.addErrorMessage("registrationForm:msg", "Confirma tu contraseña.");
                 return;
             }
             if (!password.equals(confirmPassword)) {
                 FacesUtil.addErrorMessage("registrationForm:confirmPassword", "Las contraseñas no coinciden.");
                 return;
             }
-            
-            if(userFacade.findUserByEmail(email) != null) {
-                FacesUtil.addErrorMessage("registrationForm", "La dirección de correo electrónico ya existe.");
+
+            if (userFacade.findUserByEmail(email) != null) {
+                FacesUtil.addErrorMessage("registrationForm:msg", "La dirección de correo electrónico ya existe.");
                 return;
-                
+
             }
-            
+
             // Password encryption
             password = PBKDF2HashGenerator.createHash(password);
-            
-            Organisation organisation = FacesUtil.getCurrentOrganisation();
-            User newUser = userFacade.createNewUser(firstName, firstLastName, secondLastName, email, password, phone, 
-                    addressLine, addressLine2, city, country, postcode, Role.USER, organisation);
 
-            // login
-            try {
-                HttpServletRequest request = FacesUtil.getRequest();
-                request.logout();
-                request.login(newUser.getEmail(), password);
-            FacesUtil.setSessionAttribute(Constants.CURRENT_USER, newUser);
-            } catch (Exception ex) {
-                Logger.getLogger(AccountSetupController.class.getName()).log(Level.SEVERE, null, ex);
-                FacesUtil.addErrorMessage("registrationForm", "El usuario ha sido registrado, pero el inicio de sesión ha fallado. Inténtelo de nuevo desde la página de login.");
-                return;
-            }
+            Organisation organisation = FacesUtil.getCurrentOrganisation();
+            User newUser = userFacade.createNewUser(firstName, firstLastName, secondLastName, email, password, phone,
+                    addressLine, addressLine2, city, country, postcode, Role.USER, organisation);
 
             //TODO: Send registration completed email?
 //            try {
@@ -128,6 +125,14 @@ public class AccountSetupController implements Serializable {
 //                Logger.getLogger(AccountSetupController.class.getName()).log(Level.SEVERE, null, ex);
 //            }
             try {
+                // Create user registration notification
+                List<User> admins = userFacade.findAllActiveAdminsOfOrganisation(organisation);
+                notificationFacade.createNotificationForAdmins(NotificationType.REGISTRO_USUARIO_ADMIN, admins, newUser, 0, organisation);
+            } catch (Exception e) {
+                Logger.getLogger(AccountSetupController.class.getName()).log(Level.SEVERE, null, e);
+            }
+
+            try {
                 // Audit user registration
                 String ipAddress = FacesUtil.getCurrentIPAddress();
                 auditFacade.createAudit(AuditType.REGISTRO, newUser, ipAddress, newUser.getId(), organisation);
@@ -135,14 +140,26 @@ public class AccountSetupController implements Serializable {
                 Logger.getLogger(AccountSetupController.class.getName()).log(Level.SEVERE, null, e);
             }
 
+            // login
+            /* try {
+                HttpServletRequest request = FacesUtil.getRequest();
+                request.logout();
+                request.login(newUser.getEmail(), password);
+            FacesUtil.setSessionAttribute(Constants.CURRENT_USER, newUser);
+            } catch (Exception ex) {
+                Logger.getLogger(AccountSetupController.class.getName()).log(Level.SEVERE, null, ex);
+                FacesUtil.addErrorMessage("registrationForm:msg", "El usuario ha sido registrado, pero el inicio de sesión ha fallado. Inténtelo de nuevo desde la página de login.");
+                return;
+            }*/
 //            FacesUtil.setSessionAttribute(Constants.CURRENT_USER, newUser);
-            FacesUtil.redirectTo("/client/home.xhtml");
+
+            FacesUtil.redirectTo("info.xhtml", "&info=registration");
         } catch (NoSuchAlgorithmException | InvalidKeySpecException | IOException ex) {
             Logger.getLogger(AccountSetupController.class.getName()).log(Level.SEVERE, null, ex);
-            FacesUtil.addErrorMessage("registrationForm", "Lo sentimos, ha habido un error. Inténtelo de nuevo más tarde.");
+            FacesUtil.addErrorMessage("registrationForm:msg", "Lo sentimos, ha habido un error. Inténtelo de nuevo más tarde.");
         }
     }
-        
+
     public String getPassword() {
         return password;
     }

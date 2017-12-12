@@ -84,7 +84,7 @@
                     <f:convertDateTime pattern="#{dateFormatController.dateWithTimeFormatString}" />
                 </h:outputText> 
             </p:column> 
-            <p:column headerText="#{txt['role']}" sortBy="#{audit.user.userRole.role}"> 
+            <p:column headerText="#{txt['role']}" sortBy="#{audit.user.userRole.role}" class="only-desktop-column"> 
                 <h:outputText value="#{audit.user.userRole.role}" />
             </p:column> 
             <p:column headerText="#{txt['name']}" sortBy="#{audit.user.getFullName()}"> 
@@ -93,10 +93,7 @@
             <p:column headerText="#{txt['action']}" sortBy="#{audit.action}"> 
                 <h:outputText value="#{audit.action}" />
             </p:column> 
-            <p:column headerText="#{txt['object_id']}" sortBy="#{audit.actionObjectId}"> 
-                <h:outputText value="#{audit.actionObjectId}" />
-            </p:column> 
-            <p:column headerText="#{txt['ip_address']}" sortBy="#{audit.ip}"> 
+            <p:column headerText="#{txt['ip_address']}" sortBy="#{audit.ip}" class="only-desktop-column"> 
                 <h:outputText value="#{audit.ip}" />
             </p:column> 
         </p:dataTable>

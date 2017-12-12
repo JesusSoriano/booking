@@ -4,14 +4,17 @@ import com.booking.entities.Document;
 import com.booking.entities.Organisation;
 import com.booking.entities.User;
 import com.booking.enums.AuditType;
+import com.booking.enums.NotificationType;
 import com.booking.enums.Role;
 import com.booking.facades.AuditFacade;
 import com.booking.facades.DocumentFacade;
+import com.booking.facades.NotificationFacade;
 import com.booking.facades.UserFacade;
 import com.booking.util.BookingProperties;
 import com.booking.util.Constants;
 import com.booking.util.FacesUtil;
 import com.booking.util.FileServiceImpl;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +38,8 @@ public class FilesController implements Serializable {
     private AuditFacade auditFacade;
     @EJB
     private UserFacade userFacade;
+    @EJB
+    private NotificationFacade notificationFacade;
 
     private List<Document> files;
     private User loggedUser;
@@ -42,7 +47,6 @@ public class FilesController implements Serializable {
     private Document selectedDocument;
     private String newFileName;
     private String newFileDescription;
-    private User fileUser;
     private boolean isNewFile;
     private List<SelectItem> allUsers;
     private long selectedUserId;
@@ -60,9 +64,9 @@ public class FilesController implements Serializable {
         files = documentFacade.findAllDocumentsOfOrganisation(organisation);
 
         allUsers = new ArrayList<>();
-        for (User u : userFacade.findAllActiveAdminsAndClientsOfOrganisation(organisation)) {
+        userFacade.findAllActiveAdminsAndClientsOfOrganisation(organisation).forEach((u) -> {
             allUsers.add(new SelectItem(u.getId(), u.getFullName()));
-        }
+        });
         selectedUserId = (long) allUsers.get(0).getValue();
     }
 
@@ -78,14 +82,18 @@ public class FilesController implements Serializable {
                 Document newFile = documentFacade.uploadDocument(organisation, newFileName, file.getFileName(), newFileDescription, loggedUser, selectedUser, new FileServiceImpl(), file.getInputstream());
                 context.execute("PF('newFileDialog').hide();");
                 FacesUtil.addSuccessMessage("documentsForm:msg", "El nuevo archivo ha sido creado correctamente.");
-                // Audit document creation
+
+                // Create appointment activation notification
+                notificationFacade.createNotification(NotificationType.ARCHIVO_CREADO, newFile.getFileUser(), loggedUser, newFile.getId(), organisation);
+
+                // Audit document creation    
                 String ipAddress = FacesUtil.getRequest().getRemoteAddr();
                 auditFacade.createAudit(AuditType.CREAR_ARCHIVO, loggedUser, ipAddress, newFile.getId(), organisation);
             } else {
                 FacesUtil.addErrorMessage("viewClassForm:msg", "Error, el usuario no existe.");
                 return "";
             }
-        } catch (Exception e) {
+        } catch (IOException e) {
             FacesUtil.addErrorMessage("documentsForm:msg", "Lo sentimos, no ha sido posible crear el nuevo archivo.");
             Logger.getLogger(FilesController.class.getName()).log(Level.SEVERE, null, e);
             return "";
@@ -124,6 +132,9 @@ public class FilesController implements Serializable {
                 context.execute("PF('newFileDialog').hide();");
 
                 FacesUtil.addSuccessMessage("documentsForm:msg", "El archivo ha sido eliminado correctamente.");
+
+                // Create appointment activation notification
+                notificationFacade.createNotification(NotificationType.ARCHIVO_BORRADO, document.getFileUser(), loggedUser, document.getId(), organisation);
 
                 // Audit document deletion
                 String ipAddress = FacesUtil.getRequest().getRemoteAddr();
@@ -220,13 +231,5 @@ public class FilesController implements Serializable {
 
     public void setSelectedUserId(long selectedUserId) {
         this.selectedUserId = selectedUserId;
-    }
-
-    public void upload() {
-        if (file != null) {
-            System.out.println("------------ ARCHIVO SUBIDO: " + file.getFileName());
-        } else {
-            System.out.println("------------ EMPTY FILE");
-        }
     }
 }

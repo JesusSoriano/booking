@@ -32,10 +32,10 @@ public class MessagesController implements Serializable {
     private List<Message> allSentMessages;
     private int allUnreadMessagesCount;
     private List<SelectItem> allUsersItems;
-    private User receiver;
+    private String receiverEmail;
     private String subject;
     private String messageBody;
-    private User logedUser;
+    private User loggedUser;
 
     /**
      * Creates a new instance of MessagesController
@@ -46,18 +46,29 @@ public class MessagesController implements Serializable {
     @PostConstruct
     public void postInitialize() {
 
-        logedUser = FacesUtil.getCurrentUser();
+        loggedUser = FacesUtil.getCurrentUser();
         allUsersItems = new ArrayList<>();
         Organisation organisation = FacesUtil.getCurrentOrganisation();
 
-        allUsersItems.add(new SelectItem(organisation.getEmail(), organisation.getName()));
-        for (User user : userFacade.findAllUsersOfOrganisation(organisation)) {
-            allUsersItems.add(new SelectItem(user.getEmail(), user.getFullName()));
-        }
+        userFacade.findAllUsersOfOrganisation(organisation).forEach((user) -> {
+            if (!loggedUser.equals(user)) {
+                allUsersItems.add(new SelectItem(user.getEmail(), user.getFullName()));
+            }
+        });
 
         String receiverParam = FacesUtil.getParameter("user");
         if (receiverParam != null) {
-            receiver = userFacade.find(Long.valueOf(receiverParam));
+            receiverEmail = userFacade.find(Long.valueOf(receiverParam)).getEmail();
+        }
+
+        String messageId = FacesUtil.getParameter("reply");
+        if (messageId != null) {
+            Message replyMsg = messageFacade.find(Long.valueOf(messageId));
+            if (replyMsg != null) {
+                receiverEmail = replyMsg.getSender().getEmail();
+                subject = "Re: " + replyMsg.getSubject();
+                messageBody = "<br/><br/><div style='color: #656565'>-------------------------------------------------------<br/><br/>" + replyMsg.getBody() + "</div>";
+            }
         }
 
         FacesUtil.removeSessionAttribute("messageSess");
@@ -65,7 +76,8 @@ public class MessagesController implements Serializable {
     }
 
     public String sendMessage() {
-        Message message = messageFacade.sendMessage(subject, messageBody, receiver, logedUser);
+        User receiver = userFacade.findUserByEmail(receiverEmail);
+        Message message = messageFacade.sendMessage(subject, messageBody, receiver, loggedUser);
         FacesUtil.setSessionAttribute("messageSess", message);
         FacesUtil.setSessionAttribute("mailbox", "sent");
         return "view-message.xhtml?faces-redirect=true";
@@ -76,15 +88,14 @@ public class MessagesController implements Serializable {
     }
 
     public String viewMessage(Message message, boolean read, String mailbox) {
-        message.setStatus(read);
-        messageFacade.edit(message);
+        messageFacade.setReadMessage(message, read);
         FacesUtil.setSessionAttribute("messageSess", message);
         FacesUtil.setSessionAttribute("mailbox", mailbox);
         return "view-message.xhtml?faces-redirect=true";
     }
 
     public int getAllUnreadMessagesCount() {
-        allUnreadMessagesCount = messageFacade.getUnreadMessages(logedUser).size();
+        allUnreadMessagesCount = messageFacade.getUnreadMessages(loggedUser).size();
         return allUnreadMessagesCount;
     }
 
@@ -93,12 +104,12 @@ public class MessagesController implements Serializable {
     }
 
     public List<Message> getAllReceivedMessages() {
-        allReceivedMessages = messageFacade.findAllReceivedMessages(logedUser);
+        allReceivedMessages = messageFacade.findAllReceivedMessages(loggedUser);
         return allReceivedMessages;
     }
 
     public List<Message> getAllSentMessages() {
-        allSentMessages = messageFacade.findAllSentMessages(logedUser);
+        allSentMessages = messageFacade.findAllSentMessages(loggedUser);
         return allSentMessages;
     }
 
@@ -110,12 +121,12 @@ public class MessagesController implements Serializable {
         this.messageBody = messageBody;
     }
 
-    public User getReceiver() {
-        return receiver;
+    public String getReceiverEmail() {
+        return receiverEmail;
     }
 
-    public void setReceiver(User receiver) {
-        this.receiver = receiver;
+    public void setReceiverEmail(String receiverEmail) {
+        this.receiverEmail = receiverEmail;
     }
 
     public String getSubject() {

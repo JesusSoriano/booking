@@ -39,7 +39,7 @@
                         <p:column headerText="#{txt['name']}" sortBy="#{service.name}"> 
                             <h:outputText value="#{service.name}" class="#{service.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" /> 
                         </p:column> 
-                        <p:column headerText="#{txt['description']}" sortBy="#{service.description}"> 
+                        <p:column headerText="#{txt['description']}" sortBy="#{service.description}" class="only-desktop-column"> 
                             <h:outputText value="#{service.description}" class="#{service.status eq 'SUSPENDED' ? 'lightgray-color' : ''}"  /> 
                         </p:column> 
                         <p:column headerText="#{txt['number_of_classes']}" sortBy="#{servicesController.getNumberOfClasses(service)}"> 
@@ -52,12 +52,12 @@
                                 <h:outputText value="#{servicesController.getNumberOfAppointments(service)}" class="#{service.status eq 'SUSPENDED' ? 'lightgray-color' : 'blue-link'}" /> 
                             </h:link>
                         </p:column> 
-                        <p:column headerText="#{txt['created_date']}" sortBy="#{service.createdDate}"> 
+                        <p:column headerText="#{txt['created_date']}" sortBy="#{service.createdDate}" rendered="#{servicesController.loggedUserIsAdmin()}" class="only-desktop-column"> 
                             <h:outputText value="#{service.createdDate}" class="#{service.status eq 'SUSPENDED' ? 'lightgray-color' : ''}" >
                                 <f:convertDateTime pattern="#{dateFormatController.dateWithTimeFormatString}" />
                             </h:outputText>
                         </p:column> 
-                        <p:column headerText="#{txt['organisation']}" sortBy="#{service.organisation.name}" rendered="#{servicesController.userRole eq 'SUPER_ADMIN'}"> 
+                        <p:column headerText="#{txt['organisation']}" sortBy="#{service.organisation.name}" rendered="#{servicesController.userRole eq 'SUPER_ADMIN'}" class="only-desktop-column"> 
                             <h:outputText value="#{service.organisation.name}" class="#{service.status eq 'SUSPENDED' ? 'lightgray-color' : ''}"  /> 
                         </p:column> 
                         <p:column headerText="#{txt['options']}" rendered="#{servicesController.loggedUserIsAdmin()}"> 

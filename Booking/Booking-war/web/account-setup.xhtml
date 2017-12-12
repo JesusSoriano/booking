@@ -15,10 +15,15 @@
             <div id="loginformholder">
                 <h:form id="registrationForm">
 
+
                     <div>
                         <ui:include src="/WEB-INF/header-info-login.xhtml" />
 
+
                         <div class="col-xs-offset-1 col-sm-offset-1 col-md-offset-2 col-xs-10 col-sm-10 col-md-8">
+
+                            <h:message for="msg" id="msg" errorClass="msgError" infoClass="msgInfo" /> 
+
                             <div class="login-box">
                                 <h2>#{txt['registration']}</h2>
                                 <div class="main-content">
@@ -156,7 +161,6 @@
                                         </div>
                                     </div>
 
-                                    <h:message for="registrationForm"  styleClass="loginError" errorClass="msgError" infoClass="msgInfo"/>
                                 </div>
                             </div>
                         </div>

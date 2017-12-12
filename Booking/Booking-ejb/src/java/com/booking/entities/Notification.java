@@ -37,9 +37,15 @@ public class Notification implements Serializable {
     @Column(name = "created_date")
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date createdDate;
+    /* User that gets the notification */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "notification_user", referencedColumnName = "id")
     private User notificationUser;
+    /* User that causes the notification. 
+    Example: Admin that cancel an appointment or user that request one. */
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "action_user", referencedColumnName = "id")
+    private User actiontionUser;
     @Column(name = "object_id")
     private long objectId;
     @Column(name = "checked")
@@ -98,5 +104,13 @@ public class Notification implements Serializable {
 
     public void setNotificationType(NotificationType notificationType) {
         this.notificationType = notificationType;
+    }
+
+    public User getActiontionUser() {
+        return actiontionUser;
+    }
+
+    public void setActiontionUser(User actiontionUser) {
+        this.actiontionUser = actiontionUser;
     }
 }

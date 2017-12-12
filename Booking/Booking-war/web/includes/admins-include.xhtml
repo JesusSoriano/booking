@@ -34,11 +34,11 @@
                             <h:outputText value="#{admin.firstLastName} #{admin.secondLastName}" rendered="#{admin.status ne 'SUSPENDED'}" /> 
                             <h:outputText value="#{admin.firstLastName} #{admin.secondLastName}" rendered="#{admin.status eq 'SUSPENDED'}" style="color:lightgray" /> 
                         </p:column> 
-                        <p:column headerText="#{txt['email']}" sortBy="#{admin.email}"> 
+                        <p:column headerText="#{txt['email']}" sortBy="#{admin.email}" class="only-desktop-column"> 
                             <h:outputText value="#{admin.email}" rendered="#{admin.status ne 'SUSPENDED'}" /> 
                             <h:outputText value="#{admin.email}" rendered="#{admin.status eq 'SUSPENDED'}" style="color:lightgray" /> 
                         </p:column> 
-                        <p:column headerText="#{txt['address']}" sortBy="#{admin.address.city}"> 
+                        <p:column headerText="#{txt['address']}" sortBy="#{admin.address.city}" class="only-desktop-column"> 
                             <h:outputText value="#{admin.address.addressLine}" style="display: block" rendered="#{admin.status ne 'SUSPENDED'}" /> 
                             <h:outputText value="#{admin.address.addressLine2}" style="display: block" rendered="#{admin.status ne 'SUSPENDED'}" /> 
                             <h:outputText value="#{admin.address.city}" rendered="#{admin.status ne 'SUSPENDED'}" />
@@ -50,7 +50,7 @@
                             <h:outputText value="#{admin.phone}" rendered="#{admin.status ne 'SUSPENDED'}" /> 
                             <h:outputText value="#{admin.phone}" rendered="#{admin.status eq 'SUSPENDED'}" style="color:lightgray" /> 
                         </p:column> 
-                        <p:column headerText="#{txt['organisation']}" sortBy="#{admin.organisation.name}" rendered="#{usersController.userRole eq 'SUPER_ADMIN'}"> 
+                        <p:column headerText="#{txt['organisation']}" sortBy="#{admin.organisation.name}" rendered="#{usersController.userRole eq 'SUPER_ADMIN'}" class="only-desktop-column"> 
                             <h:outputText value="#{admin.organisation.name}" rendered="#{admin.status ne 'SUSPENDED'}" /> 
                             <h:outputText value="#{admin.organisation.name}" rendered="#{admin.status eq 'SUSPENDED'}" style="color:lightgray" />  
                         </p:column> 

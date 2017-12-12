@@ -121,7 +121,7 @@ public class ClassFacade extends AbstractFacade<ActivityClass> {
     }
 
     public List<ActivityClass> findAllCurrentClassesOfService(Service service, Organisation organisation) {
-        return em.createQuery("SELECT a FROM ActivityClass a WHERE a.service = :service AND a.endDate > :today AND a.organisation = :organisation OR a.service = :service AND a.endDate IS NULL AND a.organisation = :organisation ORDER BY a.endDate ASC").
+        return em.createQuery("SELECT a FROM ActivityClass a WHERE a.service = :service AND a.endDate > :today AND a.organisation = :organisation OR a.service = :service AND a.endDate IS NULL AND a.organisation = :organisation ORDER BY a.endDate DESC").
                 setParameter("service", service).
                 setParameter("today", new Date()).
                 setParameter("organisation", organisation).getResultList();
@@ -129,7 +129,7 @@ public class ClassFacade extends AbstractFacade<ActivityClass> {
 
     public List<ActivityClass> findAllPastActiveClassesOfService(Service service, Organisation organisation) {
         // Take all classes
-        return em.createQuery("SELECT a FROM ActivityClass a WHERE a.service = :service AND a.status = :activeStatus AND a.endDate < :today AND a.organisation = :organisation ORDER BY a.endDate ASC").
+        return em.createQuery("SELECT a FROM ActivityClass a WHERE a.service = :service AND a.status = :activeStatus AND a.endDate < :today AND a.organisation = :organisation ORDER BY a.endDate DESC").
                 setParameter("service", service).
                 setParameter("today", new Date()).
                 setParameter("activeStatus", Status.ACTIVATED).
@@ -137,7 +137,7 @@ public class ClassFacade extends AbstractFacade<ActivityClass> {
     }
 
     public List<ActivityClass> findAllActiveCurrentClassesOfService(Service service, Organisation organisation) {
-        return em.createQuery("SELECT a FROM ActivityClass a WHERE a.service = :service AND a.status = :activeStatus AND a.endDate > :today AND a.organisation = :organisation ORDER BY a.endDate ASC").
+        return em.createQuery("SELECT a FROM ActivityClass a WHERE a.service = :service AND a.status = :activeStatus AND a.endDate > :today AND a.organisation = :organisation ORDER BY a.endDate DESC").
                 setParameter("service", service).
                 setParameter("activeStatus", Status.ACTIVATED).
                 setParameter("today", new Date()).
@@ -149,25 +149,25 @@ public class ClassFacade extends AbstractFacade<ActivityClass> {
     }
 
     public List<ActivityClass> findAllCurrentClassesOfOrganisation(Organisation organisation) {
-        return em.createQuery("SELECT a FROM ActivityClass a WHERE a.organisation = :organisation AND a.endDate > :today OR a.organisation = :organisation AND a.endDate IS NULL ORDER BY a.endDate ASC").
+        return em.createQuery("SELECT a FROM ActivityClass a WHERE a.organisation = :organisation AND a.endDate > :today OR a.organisation = :organisation AND a.endDate IS NULL ORDER BY a.endDate DESC").
                 setParameter("today", new Date()).
                 setParameter("organisation", organisation).getResultList();
     }
 
     public List<ActivityClass> findAllPastClassesOfOrganisation(Organisation organisation) {
-        return em.createQuery("SELECT a FROM ActivityClass a WHERE a.organisation = :organisation AND a.endDate < :today ORDER BY a.endDate ASC").
+        return em.createQuery("SELECT a FROM ActivityClass a WHERE a.organisation = :organisation AND a.endDate < :today ORDER BY a.endDate DESC").
                 setParameter("today", new Date()).
                 setParameter("organisation", organisation).getResultList();
     }
 
     public List<ActivityClass> findAllActiveClassesOfOrganisation(Organisation organisation) {
-        return em.createQuery("SELECT a FROM ActivityClass a WHERE a.status = :activeStatus AND a.organisation = :organisation ORDER BY a.endDate ASC").
+        return em.createQuery("SELECT a FROM ActivityClass a WHERE a.status = :activeStatus AND a.organisation = :organisation ORDER BY a.endDate DESC").
                 setParameter("activeStatus", Status.ACTIVATED).
                 setParameter("organisation", organisation).getResultList();
     }
 
     public ActivityClass findClassOfOrganisation(long classId, Organisation organisation) {
-        return findUniqueResult(em.createQuery("SELECT a FROM ActivityClass a WHERE a.id = :classId AND a.organisation = :organisation ORDER BY a.endDate ASC").
+        return findUniqueResult(em.createQuery("SELECT a FROM ActivityClass a WHERE a.id = :classId AND a.organisation = :organisation ORDER BY a.endDate DESC").
                 setParameter("classId", classId).
                 setParameter("organisation", organisation).getResultList());
     }

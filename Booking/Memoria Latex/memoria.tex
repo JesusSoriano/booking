@@ -60,6 +60,10 @@
 % PROLEGÓMENO
 \part{Prolegómeno}
 \null\vfill
+\noindent En la primera parte de esta memoria de Proyecto Final de Carrera se realizará una descripción del contexto de la disciplina en la que el mismo tiene aplicación, así como la motivación de su desarrollo y su alcance. \\
+
+Además, se aportará información sobre el proceso de desarrollo, como la planificación temporal, recursos y metodología de ingeniería de software a emplear.\\
+
 
 \chapter{Introducción}
 \input{./contenido/introduccion}
@@ -70,12 +74,13 @@
 % DESARROLLO
 \part{Desarrollo}
 \null\vfill
+\noindent A continuación se describirá el desarrollo del proyecto, a través del análisis de requisitos, análisis del sistema, diseño del mismo y centrándonos en la descripción de las principales funciones de la implementación del proyecto. Además, de aportarán las pruebas realizadas para la verificación de requisitos. \\
 
 \chapter{Requisitos del Sistema}
 \input{./contenido/requisitos}
 
 \chapter{Análisis del Sistema}
-%\input{./contenido/analisis}
+\input{./contenido/analisis}
 
 \chapter{Diseño del Sistema}
 \input{./contenido/diseno}
@@ -89,8 +94,7 @@
 % EPILOGO
 \part{Epí­logo}
 \null\vfill
-\noindent En esta última parte quedarán recogidas las conclusiones y los manuales necesarios para el manejo de la aplicación resultado del desarrollo. 
-\vfill
+\noindent En esta última parte quedarán recogidas las conclusiones y los manuales necesarios para el manejo de la aplicación resultado del desarrollo: manual de instalación para modificar o ampliar la aplicación y manual de usuario.\\
 
 \chapter{Manual de implantación y explotación}
 \input{./contenido/manual_instexp}
@@ -101,6 +105,16 @@
 \chapter{Conclusiones}
 \input{./contenido/conclusiones}
 
+\chapter*{\bibname}
+\addcontentsline{toc}{chapter}{\bibname}
+
+\begingroup
+  \def\chapter*#1{}
+\renewcommand{\bibname}{}
+% BibliografÃía con BibTeX
+\nocite{*}
+\bibliographystyle{plain}
+\bibliography{contenido/bibliografia}
 
 \backmatter
 

@@ -10,26 +10,13 @@
         <div class="row">
             <div class="col-xs-12 col-sm-6 col-md-6">
                 <h3>#{txt['b_compose']}</h3>
-
-<!--                <div class="main-content">
-                    <div class="row">
-                        <div class="col-xs-5 col-sm-5 col-md-5">
-                            <h:outputText value="#{txt['current_password']}"/> 
-                        </div>
-                        <div class="col-xs-7 col-sm-7 col-md-7">
-                            <h:inputSecret id="currentPassword" styleClass="form-control" value="#{settingController.currentPassword}" required="true" requiredMessage="Introduce tu contraseña"/>
-                            <h:message for="currentPassword" errorStyle="msgError" infoStyle="msgInfo"/>
-                        </div>
-                    </div>
-                </div>-->
                 
                 <div class="row">
                     <table class="text-left margin-left-30" border="0" >
                         <tr>
                             <td class="padding-right-30"><h:outputText value="#{txt['mail_to']}:" /></td>
-                            <td><h:selectOneMenu id="messageReceiverSelect" value="#{messagesController.receiver}" >
+                            <td><h:selectOneMenu id="messageReceiverSelect" value="#{messagesController.receiverEmail}" >
                                     <f:selectItems value="#{messagesController.allUsersItems}" />
-                                    <f:converter converterId="userConverter" />
                                 </h:selectOneMenu>
                             </td>
                         </tr>

@@ -6,7 +6,6 @@ package com.booking.util;
 
 import com.booking.entities.Organisation;
 import java.io.File;
-import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -19,14 +18,13 @@ public class BookingProperties {
     private static final BookingProperties BOOKING_PROPERTIES = new BookingProperties();
     private static final String OS = System.getProperty("os.name");
     private static final String USER_HOME_PATH = System.getProperty("user.home");
-    private static final Properties appProperties = new Properties();
     private static String ROOT_PATH;
 
     static {
         try {
             // localhost development purpose
             if (OS.toLowerCase().startsWith("windows")) {
-                ROOT_PATH = appProperties.getProperty("windowsRootPath");
+                ROOT_PATH = USER_HOME_PATH + "\\project_files\\booking\\";
             } else if (OS.contains("OS X")) {
                 ROOT_PATH = USER_HOME_PATH + "/project_files/booking/";
             } else {
@@ -50,7 +48,13 @@ public class BookingProperties {
     }
 
     public String getUploadedFilesPath(Organisation organisation) {
-        return getProjectRootPath() + organisation.getDomainName() + File.separator + "uploadedFiles" + File.separator;
+        String organisationPath = getProjectRootPath() + organisation.getDomainName() + File.separator + "uploadedFiles" + File.separator;
+        File organisationPathFolder = new File(organisationPath);
+        if (!organisationPathFolder.exists()) {
+            organisationPathFolder.mkdirs();
+        }
+
+        return organisationPath;
     }
 
     public static BookingProperties getInstance() {

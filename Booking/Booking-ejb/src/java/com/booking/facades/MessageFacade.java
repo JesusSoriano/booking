@@ -33,10 +33,15 @@ public class MessageFacade extends AbstractFacade<Message> {
         message.setBody(body);
         message.setSender(sender);
         message.setReceiver(receiver);
-        message.setSentDate(new Date(System.currentTimeMillis()));
+        message.setSentDate(new Date());
         create(message);
         
         return message;
+    }
+    
+    public void setReadMessage (Message message, boolean read) {
+        message.setStatus(read);
+        edit(message);
     }
 
     public List<Message> findAllReceivedMessages(User user) {

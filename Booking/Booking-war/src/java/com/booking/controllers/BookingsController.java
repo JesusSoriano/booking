@@ -6,6 +6,7 @@ import com.booking.entities.AppointmentRequest;
 import com.booking.entities.Organisation;
 import com.booking.entities.User;
 import com.booking.enums.AuditType;
+import com.booking.enums.NotificationType;
 import com.booking.enums.RequestStatus;
 import com.booking.enums.Role;
 import com.booking.facades.AppointmentFacade;
@@ -13,6 +14,7 @@ import com.booking.facades.AppointmentRequestFacade;
 import com.booking.facades.AuditFacade;
 import com.booking.facades.BookingFacade;
 import com.booking.facades.ClassFacade;
+import com.booking.facades.NotificationFacade;
 import com.booking.facades.UserFacade;
 import com.booking.util.Constants;
 import com.booking.util.FacesUtil;
@@ -37,6 +39,8 @@ public class BookingsController implements Serializable {
     private ClassFacade classFacade;
     @EJB
     private AppointmentFacade appointmentFacade;
+    @EJB
+    private NotificationFacade notificationFacade;
     @EJB
     private AppointmentRequestFacade appointmentRequestFacade;
     @EJB
@@ -105,6 +109,7 @@ public class BookingsController implements Serializable {
 
     public String cancelAppointmentBooking(Appointment appointment) {
         try {
+            boolean pendingRequest = true;
             // Check if there is a appointment request
             AppointmentRequest appointmentRequest = appointmentRequestFacade.findCurrentRequestOfAppointment(appointment);
             if (appointmentRequest == null) {
@@ -114,13 +119,31 @@ public class BookingsController implements Serializable {
                     FacesUtil.addErrorMessage("myBookingsForm:msg", "Error, la solicitud o cita no existe.");
                     return myBookingsWithParam();
                 }
+                pendingRequest = false;
             }
             // Make the request status as CANCELLED
             appointmentRequestFacade.updateRequestStatus(appointmentRequest, RequestStatus.CANCELLED, "Cancelado por " + loggedUser.getFirstName());
             appointmentFacade.makeAppointmentAvailable(appointment);
+            User appointmentUser = appointment.getAppointmentUser();
             appointmentFacade.deleteAppointmentUser(appointment);
             FacesUtil.addSuccessMessage("myBookingsForm:msg", "La solicitud o cita ha sido cancelada correctamente.");
-
+            
+            try {
+                if (loggedUserIsAdmin()) {
+                    if (pendingRequest) {
+                        notificationFacade.createNotification(NotificationType.CITA_RECHAZADA, appointmentUser, loggedUser, appointment.getId(), organisation);
+                    } else if (!appointmentUser.equals(loggedUser)) {
+                        notificationFacade.createNotification(NotificationType.CITA_CANCELADA, appointmentUser, loggedUser, appointment.getId(), organisation);
+                    }
+                } else {
+                    List<User> admins = userFacade.findAllActiveAdminsOfOrganisation(organisation);
+                    notificationFacade.createNotificationForAdmins(NotificationType.CITA_SUSPENDIDA_ADMIN, admins, loggedUser, appointment.getId(), organisation);
+                }
+            } catch (Exception e) {
+                Logger.getLogger(ScheduleController.class.getName()).log(Level.SEVERE, null, e);
+                FacesUtil.addErrorMessage("myBookingsForm:msg", "La notificación de la suspensión no se ha podido crear correctamente.");
+            }
+            
             try {
                 // Audit appointment cancalation
                 String ipAddress = FacesUtil.getRequest().getRemoteAddr();
@@ -142,6 +165,15 @@ public class BookingsController implements Serializable {
         FacesUtil.addSuccessMessage("myBookingsForm:msg", "La cita ha sido activado correctamente.");
 
         try {
+            if (appointment.getAppointmentUser() != null) {
+                // Create appointment activation notification
+                notificationFacade.createNotification(NotificationType.CITA_ACTIVADA, appointment.getAppointmentUser(), loggedUser, appointment.getId(), organisation);
+            }
+        } catch (Exception e) {
+            Logger.getLogger(BookingsController.class.getName()).log(Level.SEVERE, null, e);
+        }
+        
+        try {
             // Audit appointment activation
             String ipAddress = FacesUtil.getRequest().getRemoteAddr();
             auditFacade.createAudit(AuditType.ACTIVAR_SERVICIO, loggedUser, ipAddress, appointment.getId(), organisation);
@@ -156,6 +188,16 @@ public class BookingsController implements Serializable {
         appointmentFacade.deactivateAppointment(appointment);
         FacesUtil.addSuccessMessage("myBookingsForm:msg", "La cita ha sido suspendido correctamente.");
 
+        try {
+            if (appointment.getAppointmentUser() != null) {
+                // Create appointment deactivation notification
+                notificationFacade.createNotification(NotificationType.CITA_ACTIVADA, appointment.getAppointmentUser(), loggedUser, appointment.getId(), organisation);
+            }
+        } catch (Exception e) {
+            Logger.getLogger(BookingsController.class.getName()).log(Level.SEVERE, null, e);
+            FacesUtil.addErrorMessage("myBookingsForm:msg", "La notificación de la suspensión no se ha podido crear correctamente.");
+        }
+        
         try {
             // Audit appointment suspention
             String ipAddress = FacesUtil.getRequest().getRemoteAddr();

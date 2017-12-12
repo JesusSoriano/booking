@@ -21,10 +21,10 @@
         <div class="main-content">
             <h:panelGroup> 
                 <div class="row"> 
-                    <div class="col-xs-5 col-sm-3 col-md-2">
+                    <div class="col-xs-12 col-sm-3 col-md-2 margin-bottom-10">
                         #{txt['notification_type']}
                     </div> 
-                    <div class="col-xs-7 col-sm-6 col-md-5">
+                    <div class="col-xs-12 col-sm-6 col-md-5">
                         <h:selectOneMenu id="notification-type-select" value="#{notificationsController.selectedNotificationType}"> 
                             <f:selectItems value="#{notificationsController.notificationTypes}" /> 
                         </h:selectOneMenu> 
@@ -51,20 +51,18 @@
                 </h:outputText> 
             </p:column> 
             <p:column headerText="#{txt['notification']}" sortBy="#{notification.notificationType}"> 
-                <h:outputText value="#{notificationsController.getUserName(notification.objectId)}" class="#{notification.isChecked() ? '' : 'bold'}" 
-                              rendered="#{notificationsController.loggedUserIsAdmin() and notificationsController.isAdminNotification(notification.notificationType)}"/>
-                <h:outputText value="#{notification.notificationType.label}" class="#{notification.isChecked() ? '' : 'bold'}" />
+                <h:outputText value="#{notificationsController.printNotification(notification)}" class="#{notification.isChecked() ? '' : 'bold'}" />
             </p:column> 
-            <p:column headerText="#{txt['object_id']}" sortBy="#{notification.objectId}" rendered="#{notificationsController.loggedUserIsAdmin()}"> 
-                <h:outputText value="#{notification.objectId}" class="#{notification.isChecked() ? '' : 'bold'}" />
-            </p:column> 
-            <p:column headerText="#{txt['options']}" rendered="#{notificationsController.loggedUserIsAdmin()}"> 
+            <p:column headerText="#{txt['options']}"> 
                 <h:panelGroup>
-                    <p:commandLink action="#{notificationsController.setNotificationCheck(notification)}" >
-                        <h:graphicImage title="#{txt['cap_check']}" value="../resources/images/suspend.png" class="table-action" /> 
+                    <p:commandLink action="#{notificationsController.setNotificationCheck(notification)}" rendered="#{!notification.isChecked()}" update=":notificationsForm:notificationsTable" >
+                        <h:graphicImage title="#{txt['cap_check']}" value="../resources/images/seen.png" class="table-action" /> 
                     </p:commandLink> 
-                    <p:commandLink action="#{notificationsController.setNotificationCheck(notification)}" >
-                        <h:graphicImage title="#{txt['cap_check']}" value="../resources/images/activate.png" class="table-action" /> 
+                    <p:commandLink action="#{notificationsController.setNotificationCheck(notification)}" rendered="#{notification.isChecked()}" update=":notificationsForm:notificationsTable" >
+                        <h:graphicImage title="#{txt['cap_uncheck']}" value="../resources/images/not_seen.png" class="table-action" /> 
+                    </p:commandLink> 
+                    <p:commandLink action="#{notificationsController.takeAction(notification)}" >
+                        <h:graphicImage title="#{txt['cap_view']}" value="../resources/images/view.png" class="table-action" /> 
                     </p:commandLink> 
                 </h:panelGroup>
             </p:column> 

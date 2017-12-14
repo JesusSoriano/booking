@@ -1,0 +1,7 @@
+\select@language {spanish}
+\beamer@sectionintoc {1}{Introducci\IeC {\'o}n}{3}{0}{1}
+\beamer@sectionintoc {2}{Planificaci\IeC {\'o}n}{6}{0}{2}
+\beamer@sectionintoc {3}{Desarrollo del Proyecto}{9}{0}{3}
+\beamer@sectionintoc {4}{Conclusiones}{35}{0}{4}
+\beamer@sectionintoc {5}{Bibliograf\IeC {\'\i }\IeC {\-}a}{39}{0}{5}
+\beamer@sectionintoc {6}{Demostraci\IeC {\'o}n}{42}{0}{6}

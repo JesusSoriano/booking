@@ -1,0 +1,2242 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.11.19)  13 DEC 2017 21:45
+entering extended mode
+ restricted \write18 enabled.
+ file:line:error style messages enabled.
+ %&-line parsing enabled.
+**presentacion.tex
+(./presentacion.tex
+LaTeX2e <2017-04-15>
+Babel <3.10> and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/beamer/beamer.cls
+Document Class: beamer 2017/01/23 v3.41 A class for typesetting presentations
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/etoolbox/etoolbox.sty
+Package: etoolbox 2017/01/02 v2.4 e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count79
+)
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/beamer/beamerbasemodes.sty
+\beamer@tempbox=\box26
+\beamer@tempcount=\count80
+\c@beamerpauses=\count81
+
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/beamer/beamerbasedecode.sty
+\beamer@slideinframe=\count82
+\beamer@minimum=\count83
+)
+\beamer@commentbox=\box27
+\beamer@modecount=\count84
+) (/usr/local/texlive/2017basic/texmf-dist/tex/generic/oberdiek/ifpdf.sty
+Package: ifpdf 2017/03/15 v3.2 Provides the ifpdf switch
+)
+\headheight=\dimen102
+\headdp=\dimen103
+\footheight=\dimen104
+\sidebarheight=\dimen105
+\beamer@tempdim=\dimen106
+\beamer@finalheight=\dimen107
+\beamer@animht=\dimen108
+\beamer@animdp=\dimen109
+\beamer@animwd=\dimen110
+\beamer@leftmargin=\dimen111
+\beamer@rightmargin=\dimen112
+\beamer@leftsidebar=\dimen113
+\beamer@rightsidebar=\dimen114
+\beamer@boxsize=\dimen115
+\beamer@vboxoffset=\dimen116
+\beamer@descdefault=\dimen117
+\beamer@descriptionwidth=\dimen118
+\beamer@lastskip=\skip41
+\beamer@areabox=\box28
+\beamer@animcurrent=\box29
+\beamer@animshowbox=\box30
+\beamer@sectionbox=\box31
+\beamer@logobox=\box32
+\beamer@linebox=\box33
+\beamer@sectioncount=\count85
+\beamer@subsubsectionmax=\count86
+\beamer@subsectionmax=\count87
+\beamer@sectionmax=\count88
+\beamer@totalheads=\count89
+\beamer@headcounter=\count90
+\beamer@partstartpage=\count91
+\beamer@sectionstartpage=\count92
+\beamer@subsectionstartpage=\count93
+\beamer@animationtempa=\count94
+\beamer@animationtempb=\count95
+\beamer@xpos=\count96
+\beamer@ypos=\count97
+\beamer@showpartnumber=\count98
+\beamer@currentsubsection=\count99
+\beamer@coveringdepth=\count100
+\beamer@sectionadjust=\count101
+\beamer@tocsectionnumber=\count102
+
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/beamer/beamerbaseoptions.sty
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks14
+))
+\beamer@paperwidth=\skip42
+\beamer@paperheight=\skip43
+
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/geometry/geometry.sty
+Package: geometry 2010/09/12 v5.6 Page Geometry
+
+(/usr/local/texlive/2017basic/texmf-dist/tex/generic/oberdiek/ifvtex.sty
+Package: ifvtex 2016/05/16 v1.6 Detect VTeX and its facilities (HO)
+Package ifvtex Info: VTeX not detected.
+)
+(/usr/local/texlive/2017basic/texmf-dist/tex/generic/ifxetex/ifxetex.sty
+Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
+)
+\Gm@cnth=\count103
+\Gm@cntv=\count104
+\c@Gm@tempcnt=\count105
+\Gm@bindingoffset=\dimen119
+\Gm@wd@mp=\dimen120
+\Gm@odd@mp=\dimen121
+\Gm@even@mp=\dimen122
+\Gm@layoutwidth=\dimen123
+\Gm@layoutheight=\dimen124
+\Gm@layouthoffset=\dimen125
+\Gm@layoutvoffset=\dimen126
+\Gm@dimlist=\toks15
+)
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/base/size11.clo
+File: size11.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
+)
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/pgf/basiclayer/pgfcore.sty
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2014/10/28 v1.0g Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2017/04/14 v1.1b Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
+)
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 99.
+
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/graphics-def/pdftex.def
+File: pdftex.def 2017/01/12 v0.06k Graphics/color for pdfTeX
+
+(/usr/local/texlive/2017basic/texmf-dist/tex/generic/oberdiek/infwarerr.sty
+Package: infwarerr 2016/05/16 v1.4 Providing info/warning/error messages (HO)
+)
+(/usr/local/texlive/2017basic/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
+Package: ltxcmds 2016/05/16 v1.23 LaTeX kernel commands for general use (HO)
+)
+\Gread@gobject=\count106
+))
+\Gin@req@height=\dimen127
+\Gin@req@width=\dimen128
+)
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/pgf/systemlayer/pgfsys.sty
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/pgf/utilities/pgfrcs.sty
+(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/utilities/pgfutil-comm
+on.tex
+\pgfutil@everybye=\toks16
+\pgfutil@tempdima=\dimen129
+\pgfutil@tempdimb=\dimen130
+
+(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/utilities/pgfutil-comm
+on-lists.tex))
+(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/utilities/pgfutil-late
+x.def
+\pgfutil@abb=\box34
+ (/usr/local/texlive/2017basic/texmf-dist/tex/latex/ms/everyshi.sty
+Package: everyshi 2001/05/15 v3.00 EveryShipout Package (MS)
+))
+(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/utilities/pgfrcs.code.
+tex
+Package: pgfrcs 2015/08/07 v3.0.1a (rcs-revision 1.31)
+))
+(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/systemlayer/pgfsys.cod
+e.tex
+Package: pgfsys 2014/07/09 v3.0.1a (rcs-revision 1.48)
+
+(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code
+.tex
+\pgfkeys@pathtoks=\toks17
+\pgfkeys@temptoks=\toks18
+
+(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/utilities/pgfkeysfilte
+red.code.tex
+\pgfkeys@tmptoks=\toks19
+))
+\pgf@x=\dimen131
+\pgf@y=\dimen132
+\pgf@xa=\dimen133
+\pgf@ya=\dimen134
+\pgf@xb=\dimen135
+\pgf@yb=\dimen136
+\pgf@xc=\dimen137
+\pgf@yc=\dimen138
+\w@pgf@writea=\write3
+\r@pgf@reada=\read1
+\c@pgf@counta=\count107
+\c@pgf@countb=\count108
+\c@pgf@countc=\count109
+\c@pgf@countd=\count110
+\t@pgf@toka=\toks20
+\t@pgf@tokb=\toks21
+\t@pgf@tokc=\toks22
+
+(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/systemlayer/pgf.cfg
+File: pgf.cfg 2008/05/14  (rcs-revision 1.7)
+)
+Driver file for pgf: pgfsys-pdftex.def
+
+(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-pdf
+tex.def
+File: pgfsys-pdftex.def 2014/10/11  (rcs-revision 1.35)
+
+(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-com
+mon-pdf.def
+File: pgfsys-common-pdf.def 2013/10/10  (rcs-revision 1.13)
+)))
+(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/systemlayer/pgfsyssoft
+path.code.tex
+File: pgfsyssoftpath.code.tex 2013/09/09  (rcs-revision 1.9)
+\pgfsyssoftpath@smallbuffer@items=\count111
+\pgfsyssoftpath@bigbuffer@items=\count112
+)
+(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/systemlayer/pgfsysprot
+ocol.code.tex
+File: pgfsysprotocol.code.tex 2006/10/16  (rcs-revision 1.4)
+))
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/xcolor/xcolor.sty
+Package: xcolor 2016/05/11 v2.12 LaTeX color extensions (UK)
+
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/graphics-cfg/color.cfg
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package xcolor Info: Driver file: pdftex.def on input line 225.
+
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/colortbl/colortbl.sty
+Package: colortbl 2012/02/13 v1.0a Color table columns (DPC)
+
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/tools/array.sty
+Package: array 2016/10/06 v2.4d Tabular extension package (FMi)
+\col@sep=\dimen139
+\extrarowheight=\dimen140
+\NC@list=\toks23
+\extratabsurround=\skip44
+\backup@length=\skip45
+)
+\everycr=\toks24
+\minrowclearance=\skip46
+)
+\rownum=\count113
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1348.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1352.
+Package xcolor Info: Model `RGB' extended on input line 1364.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1366.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1367.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1368.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1369.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1370.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1371.
+
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/xcolor/svgnam.def
+File: svgnam.def 2016/05/11 v2.12 Predefined colors according to SVG 1.1 (UK)
+))
+(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/basiclayer/pgfcore.cod
+e.tex
+Package: pgfcore 2010/04/11 v3.0.1a (rcs-revision 1.7)
+
+(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex
+(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/math/pgfmathcalc.code.
+tex
+(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/math/pgfmathutil.code.
+tex)
+(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/math/pgfmathparser.cod
+e.tex
+\pgfmath@dimen=\dimen141
+\pgfmath@count=\count114
+\pgfmath@box=\box35
+\pgfmath@toks=\toks25
+\pgfmath@stack@operand=\toks26
+\pgfmath@stack@operation=\toks27
+)
+(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.
+code.tex
+(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.
+basic.code.tex)
+(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.
+trigonometric.code.tex)
+(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.
+random.code.tex)
+(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.
+comparison.code.tex)
+(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.
+base.code.tex)
+(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.
+round.code.tex)
+(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.
+misc.code.tex)
+(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.
+integerarithmetics.code.tex)))
+(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/math/pgfmathfloat.code
+.tex
+\c@pgfmathroundto@lastzeros=\count115
+))
+(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepoin
+ts.code.tex
+File: pgfcorepoints.code.tex 2013/10/07  (rcs-revision 1.27)
+\pgf@picminx=\dimen142
+\pgf@picmaxx=\dimen143
+\pgf@picminy=\dimen144
+\pgf@picmaxy=\dimen145
+\pgf@pathminx=\dimen146
+\pgf@pathmaxx=\dimen147
+\pgf@pathminy=\dimen148
+\pgf@pathmaxy=\dimen149
+\pgf@xx=\dimen150
+\pgf@xy=\dimen151
+\pgf@yx=\dimen152
+\pgf@yy=\dimen153
+\pgf@zx=\dimen154
+\pgf@zy=\dimen155
+)
+(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepath
+construct.code.tex
+File: pgfcorepathconstruct.code.tex 2013/10/07  (rcs-revision 1.29)
+\pgf@path@lastx=\dimen156
+\pgf@path@lasty=\dimen157
+)
+(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepath
+usage.code.tex
+File: pgfcorepathusage.code.tex 2014/11/02  (rcs-revision 1.24)
+\pgf@shorten@end@additional=\dimen158
+\pgf@shorten@start@additional=\dimen159
+)
+(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/basiclayer/pgfcorescop
+es.code.tex
+File: pgfcorescopes.code.tex 2015/05/08  (rcs-revision 1.46)
+\pgfpic=\box36
+\pgf@hbox=\box37
+\pgf@layerbox@main=\box38
+\pgf@picture@serial@count=\count116
+)
+(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/basiclayer/pgfcoregrap
+hicstate.code.tex
+File: pgfcoregraphicstate.code.tex 2014/11/02  (rcs-revision 1.12)
+\pgflinewidth=\dimen160
+)
+(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/basiclayer/pgfcoretran
+sformations.code.tex
+File: pgfcoretransformations.code.tex 2015/08/07  (rcs-revision 1.20)
+\pgf@pt@x=\dimen161
+\pgf@pt@y=\dimen162
+\pgf@pt@temp=\dimen163
+)
+(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/basiclayer/pgfcorequic
+k.code.tex
+File: pgfcorequick.code.tex 2008/10/09  (rcs-revision 1.3)
+)
+(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreobje
+cts.code.tex
+File: pgfcoreobjects.code.tex 2006/10/11  (rcs-revision 1.2)
+)
+(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepath
+processing.code.tex
+File: pgfcorepathprocessing.code.tex 2013/09/09  (rcs-revision 1.9)
+)
+(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/basiclayer/pgfcorearro
+ws.code.tex
+File: pgfcorearrows.code.tex 2015/05/14  (rcs-revision 1.43)
+\pgfarrowsep=\dimen164
+)
+(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreshad
+e.code.tex
+File: pgfcoreshade.code.tex 2013/07/15  (rcs-revision 1.15)
+\pgf@max=\dimen165
+\pgf@sys@shading@range@num=\count117
+)
+(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreimag
+e.code.tex
+File: pgfcoreimage.code.tex 2013/07/15  (rcs-revision 1.18)
+
+(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreexte
+rnal.code.tex
+File: pgfcoreexternal.code.tex 2014/07/09  (rcs-revision 1.21)
+\pgfexternal@startupbox=\box39
+))
+(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/basiclayer/pgfcorelaye
+rs.code.tex
+File: pgfcorelayers.code.tex 2013/07/18  (rcs-revision 1.7)
+)
+(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/basiclayer/pgfcoretran
+sparency.code.tex
+File: pgfcoretransparency.code.tex 2013/09/30  (rcs-revision 1.5)
+)
+(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepatt
+erns.code.tex
+File: pgfcorepatterns.code.tex 2013/11/07  (rcs-revision 1.5)
+)))
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/pgf/utilities/xxcolor.sty
+Package: xxcolor 2003/10/24 ver 0.1
+\XC@nummixins=\count118
+\XC@countmixins=\count119
+)
+(/usr/local/texlive/2017basic/texmf-dist/tex/generic/oberdiek/atbegshi.sty
+Package: atbegshi 2016/06/09 v1.18 At begin shipout hook (HO)
+)
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/hyperref/hyperref.sty
+Package: hyperref 2017/03/14 v6.85a Hypertext links for LaTeX
+
+(/usr/local/texlive/2017basic/texmf-dist/tex/generic/oberdiek/hobsub-hyperref.s
+ty
+Package: hobsub-hyperref 2016/05/16 v1.14 Bundle oberdiek, subset hyperref (HO)
+
+
+(/usr/local/texlive/2017basic/texmf-dist/tex/generic/oberdiek/hobsub-generic.st
+y
+Package: hobsub-generic 2016/05/16 v1.14 Bundle oberdiek, subset generic (HO)
+Package: hobsub 2016/05/16 v1.14 Construct package bundles (HO)
+Package hobsub Info: Skipping package `infwarerr' (already loaded).
+Package hobsub Info: Skipping package `ltxcmds' (already loaded).
+Package: ifluatex 2016/05/16 v1.4 Provides the ifluatex switch (HO)
+Package ifluatex Info: LuaTeX not detected.
+Package hobsub Info: Skipping package `ifvtex' (already loaded).
+Package: intcalc 2016/05/16 v1.2 Expandable calculations with integers (HO)
+Package hobsub Info: Skipping package `ifpdf' (already loaded).
+Package: etexcmds 2016/05/16 v1.6 Avoid name clashes with e-TeX commands (HO)
+Package etexcmds Info: Could not find \expanded.
+(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
+(etexcmds)             that some package has redefined \expanded.
+(etexcmds)             In the latter case, load this package earlier.
+Package: kvsetkeys 2016/05/16 v1.17 Key value parser (HO)
+Package: kvdefinekeys 2016/05/16 v1.4 Define keys (HO)
+Package: pdftexcmds 2017/03/19 v0.25 Utility functions of pdfTeX for LuaTeX (HO
+)
+Package pdftexcmds Info: LuaTeX not detected.
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+Package: pdfescape 2016/05/16 v1.14 Implements pdfTeX's escape features (HO)
+Package: bigintcalc 2016/05/16 v1.4 Expandable calculations on big integers (HO
+)
+Package: bitset 2016/05/16 v1.2 Handle bit-vector datatype (HO)
+Package: uniquecounter 2016/05/16 v1.3 Provide unlimited unique counter (HO)
+)
+Package hobsub Info: Skipping package `hobsub' (already loaded).
+Package: letltxmacro 2016/05/16 v1.5 Let assignment for LaTeX macros (HO)
+Package: hopatch 2016/05/16 v1.3 Wrapper for package hooks (HO)
+Package: xcolor-patch 2016/05/16 xcolor patch
+Package: atveryend 2016/05/16 v1.9 Hooks at the very end of document (HO)
+Package hobsub Info: Skipping package `atbegshi' (already loaded).
+Package: refcount 2016/05/16 v3.5 Data extraction from label references (HO)
+Package: hycolor 2016/05/16 v1.8 Color options for hyperref/bookmark (HO)
+) (/usr/local/texlive/2017basic/texmf-dist/tex/latex/oberdiek/auxhook.sty
+Package: auxhook 2016/05/16 v1.4 Hooks for auxiliary files (HO)
+)
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/oberdiek/kvoptions.sty
+Package: kvoptions 2016/05/16 v3.12 Key value format for package options (HO)
+)
+\@linkdim=\dimen166
+\Hy@linkcounter=\count120
+\Hy@pagecounter=\count121
+
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/hyperref/pd1enc.def
+File: pd1enc.def 2017/03/14 v6.85a Hyperref: PDFDocEncoding definition (HO)
+)
+\Hy@SavedSpaceFactor=\count122
+
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/latexconfig/hyperref.cfg
+File: hyperref.cfg 2002/06/06 v1.2 hyperref configuration of TeXLive
+)
+Package hyperref Info: Option `bookmarks' set `true' on input line 4374.
+Package hyperref Info: Option `bookmarksopen' set `true' on input line 4374.
+Package hyperref Info: Option `implicit' set `false' on input line 4374.
+Package hyperref Info: Hyper figures OFF on input line 4498.
+Package hyperref Info: Link nesting OFF on input line 4503.
+Package hyperref Info: Hyper index ON on input line 4506.
+Package hyperref Info: Plain pages OFF on input line 4513.
+Package hyperref Info: Backreferencing OFF on input line 4518.
+Package hyperref Info: Implicit mode OFF; no redefinition of LaTeX internals.
+Package hyperref Info: Bookmarks ON on input line 4751.
+\c@Hy@tempcnt=\count123
+
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/url/url.sty
+\Urlmuskip=\muskip10
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+)
+LaTeX Info: Redefining \url on input line 5104.
+\XeTeXLinkMargin=\dimen167
+\Fld@menulength=\count124
+\Field@Width=\dimen168
+\Fld@charsize=\dimen169
+Package hyperref Info: Hyper figures OFF on input line 6358.
+Package hyperref Info: Link nesting OFF on input line 6363.
+Package hyperref Info: Hyper index ON on input line 6366.
+Package hyperref Info: backreferencing OFF on input line 6373.
+Package hyperref Info: Link coloring OFF on input line 6378.
+Package hyperref Info: Link coloring with OCG OFF on input line 6383.
+Package hyperref Info: PDF/A mode OFF on input line 6388.
+LaTeX Info: Redefining \ref on input line 6428.
+LaTeX Info: Redefining \pageref on input line 6432.
+\Hy@abspage=\count125
+
+
+Package hyperref Message: Stopped early.
+
+)
+
+Package hyperref Message: Driver (autodetected): hpdftex.
+
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/hyperref/hpdftex.def
+File: hpdftex.def 2017/03/14 v6.85a Hyperref driver for pdfTeX
+\Fld@listcount=\count126
+\c@bookmark@seq@number=\count127
+
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/oberdiek/rerunfilecheck.sty
+Package: rerunfilecheck 2016/05/16 v1.8 Rerun checks for auxiliary files (HO)
+Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
+82.
+))
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/beamer/beamerbaserequires.st
+y
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/beamer/beamerbasecompatibili
+ty.sty)
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/beamer/beamerbasefont.sty
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/amsfonts/amssymb.sty
+Package: amssymb 2013/01/14 v3.01 AMS font symbols
+
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\@emptytoks=\toks28
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+)))
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/beamer/beamerbasetranslator.
+sty
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/beamer/translator/translator
+.sty
+Package: translator 2010/06/12 ver 1.10
+
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/beamer/translator/translator
+-language-mappings.tex)))
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/beamer/beamerbasemisc.sty)
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/beamer/beamerbasetwoscreens.
+sty)
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/beamer/beamerbaseoverlay.sty
+\beamer@argscount=\count128
+\beamer@lastskipcover=\skip47
+\beamer@trivlistdepth=\count129
+) (/usr/local/texlive/2017basic/texmf-dist/tex/latex/beamer/beamerbasetitle.sty
+)
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/beamer/beamerbasesection.sty
+\c@lecture=\count130
+\c@part=\count131
+\c@section=\count132
+\c@subsection=\count133
+\c@subsubsection=\count134
+) (/usr/local/texlive/2017basic/texmf-dist/tex/latex/beamer/beamerbaseframe.sty
+\beamer@framebox=\box40
+\beamer@frametitlebox=\box41
+\beamer@zoombox=\box42
+\beamer@zoomcount=\count135
+\beamer@zoomframecount=\count136
+\beamer@frametextheight=\dimen170
+\c@subsectionslide=\count137
+\beamer@frametopskip=\skip48
+\beamer@framebottomskip=\skip49
+\beamer@frametopskipautobreak=\skip50
+\beamer@framebottomskipautobreak=\skip51
+\beamer@envbody=\toks29
+\framewidth=\dimen171
+\c@framenumber=\count138
+)
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/beamer/beamerbaseverbatim.st
+y
+\beamer@verbatimfileout=\write4
+)
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/beamer/beamerbaseframesize.s
+ty
+\beamer@splitbox=\box43
+\beamer@autobreakcount=\count139
+\beamer@autobreaklastheight=\dimen172
+\beamer@frametitletoks=\toks30
+\beamer@framesubtitletoks=\toks31
+)
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/beamer/beamerbaseframecompon
+ents.sty
+\beamer@footins=\box44
+)
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/beamer/beamerbasecolor.sty)
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/beamer/beamerbasenotes.sty
+\beamer@frameboxcopy=\box45
+)
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/beamer/beamerbasetoc.sty)
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/beamer/beamerbasetemplates.s
+ty
+\beamer@sbttoks=\toks32
+
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/beamer/beamerbaseauxtemplate
+s.sty
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/beamer/beamerbaseboxes.sty
+\bmb@box=\box46
+\bmb@colorbox=\box47
+\bmb@boxshadow=\box48
+\bmb@boxshadowball=\box49
+\bmb@boxshadowballlarge=\box50
+\bmb@temp=\dimen173
+\bmb@dima=\dimen174
+\bmb@dimb=\dimen175
+\bmb@prevheight=\dimen176
+)
+\beamer@blockheadheight=\dimen177
+))
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/beamer/beamerbaselocalstruct
+ure.sty (/usr/local/texlive/2017basic/texmf-dist/tex/latex/tools/enumerate.sty
+Package: enumerate 2015/07/23 v3.00 enumerate extensions (DPC)
+\@enLab=\toks33
+)
+\c@figure=\count140
+\c@table=\count141
+\abovecaptionskip=\skip52
+\belowcaptionskip=\skip53
+)
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/beamer/beamerbasenavigation.
+sty
+\beamer@section@min@dim=\dimen178
+)
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/beamer/beamerbasetheorems.st
+y (/usr/local/texlive/2017basic/texmf-dist/tex/latex/amsmath/amsmath.sty
+Package: amsmath 2016/11/05 v2.16a AMS math features
+\@mathmargin=\skip54
+
+For additional information on amsmath, use the `?' option.
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/amsmath/amstext.sty
+Package: amstext 2000/06/29 v2.01 AMS text
+
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/amsmath/amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0 generic functions
+\@emptytoks=\toks34
+\ex@=\dimen179
+))
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/amsmath/amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d Bold Symbols
+\pmbraise@=\dimen180
+)
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/amsmath/amsopn.sty
+Package: amsopn 2016/03/08 v2.02 operator names
+)
+\inf@bad=\count142
+LaTeX Info: Redefining \frac on input line 213.
+\uproot@=\count143
+\leftroot@=\count144
+LaTeX Info: Redefining \overline on input line 375.
+\classnum@=\count145
+\DOTSCASE@=\count146
+LaTeX Info: Redefining \ldots on input line 472.
+LaTeX Info: Redefining \dots on input line 475.
+LaTeX Info: Redefining \cdots on input line 596.
+\Mathstrutbox@=\box51
+\strutbox@=\box52
+\big@size=\dimen181
+LaTeX Font Info:    Redeclaring font encoding OML on input line 712.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 713.
+\macc@depth=\count147
+\c@MaxMatrixCols=\count148
+\dotsspace@=\muskip11
+\c@parentequation=\count149
+\dspbrk@lvl=\count150
+\tag@help=\toks35
+\row@=\count151
+\column@=\count152
+\maxfields@=\count153
+\andhelp@=\toks36
+\eqnshift@=\dimen182
+\alignsep@=\dimen183
+\tagshift@=\dimen184
+\tagwidth@=\dimen185
+\totwidth@=\dimen186
+\lineht@=\dimen187
+\@envbody=\toks37
+\multlinegap=\skip55
+\multlinetaggap=\skip56
+\mathdisplay@stack=\toks38
+LaTeX Info: Redefining \[ on input line 2817.
+LaTeX Info: Redefining \] on input line 2818.
+)
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/amscls/amsthm.sty
+Package: amsthm 2015/03/04 v2.20.2
+\thm@style=\toks39
+\thm@bodyfont=\toks40
+\thm@headfont=\toks41
+\thm@notefont=\toks42
+\thm@headpunct=\toks43
+\thm@preskip=\skip57
+\thm@postskip=\skip58
+\thm@headsep=\skip59
+\dth@everypar=\toks44
+)
+\c@theorem=\count154
+)
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/beamer/beamerbasethemes.sty)
+)
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/beamer/themes/theme/beamerth
+emedefault.sty
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/beamer/themes/font/beamerfon
+tthemedefault.sty)
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/beamer/themes/color/beamerco
+lorthemedefault.sty)
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/beamer/themes/inner/beamerin
+nerthemedefault.sty
+\beamer@dima=\dimen188
+\beamer@dimb=\dimen189
+)
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/beamer/themes/outer/beamerou
+terthemedefault.sty)))
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/beamer/themes/color/beamerco
+lorthemestructure.sty)
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/beamer/themes/theme/beamerth
+emeWarsaw.sty
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/beamer/themes/inner/beamerin
+nerthemerounded.sty)
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/beamer/themes/outer/beamerou
+terthemeshadow.sty
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/beamer/themes/outer/beamerou
+terthemesplit.sty))
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/beamer/themes/color/beamerco
+lorthemeorchid.sty)
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/beamer/themes/color/beamerco
+lorthemewhale.sty))
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/listings/listings.sty
+\lst@mode=\count155
+\lst@gtempboxa=\box53
+\lst@token=\toks45
+\lst@length=\count156
+\lst@currlwidth=\dimen190
+\lst@column=\count157
+\lst@pos=\count158
+\lst@lostspace=\dimen191
+\lst@width=\dimen192
+\lst@newlines=\count159
+\lst@lineno=\count160
+\lst@maxwidth=\dimen193
+
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2015/06/04 1.6 (Carsten Heinz)
+\c@lstnumber=\count161
+\lst@skipnumbers=\count162
+\lst@framebox=\box54
+)
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/listings/listings.cfg
+File: listings.cfg 2015/06/04 1.6 listings configuration
+))
+Package: listings 2015/06/04 1.6 (Carsten Heinz)
+
+(/usr/local/texlive/2017basic/texmf-dist/tex/generic/babel/babel.sty
+Package: babel 2017/05/19 3.10 The Babel package
+
+(/usr/local/texlive/2017basic/texmf-dist/tex/generic/babel-spanish/spanish.ldf
+Language: spanish.ldf 2016/03/03 v5.0p Spanish support from the babel system
+
+(/usr/local/texlive/2017basic/texmf-dist/tex/generic/babel/babel.def
+File: babel.def 2017/05/19 3.10 Babel common definitions
+\babel@savecnt=\count163
+\U@D=\dimen194
+LaTeX Info: Redefining \textlatin on input line 1648.
+)
+\es@quottoks=\toks46
+\es@quotdepth=\count164
+Package babel Info: Making " an active character on input line 561.
+Package babel Info: Making . an active character on input line 662.
+Package babel Info: Making < an active character on input line 707.
+Package babel Info: Making > an active character on input line 707.
+))
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/base/inputenc.sty
+Package: inputenc 2015/03/17 v1.2c Input encoding file
+\inpenc@prehook=\toks47
+\inpenc@posthook=\toks48
+
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/base/utf8.def
+File: utf8.def 2017/01/28 v1.1t UTF-8 support for inputenc
+Now handling font encoding OML ...
+... no UTF-8 mapping file for font encoding OML
+Now handling font encoding T1 ...
+... processing UTF-8 mapping file for font encoding T1
+
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/base/t1enc.dfu
+File: t1enc.dfu 2017/01/28 v1.1t UTF-8 support for inputenc
+   defining Unicode char U+00A0 (decimal 160)
+   defining Unicode char U+00A1 (decimal 161)
+   defining Unicode char U+00A3 (decimal 163)
+   defining Unicode char U+00AB (decimal 171)
+   defining Unicode char U+00AD (decimal 173)
+   defining Unicode char U+00BB (decimal 187)
+   defining Unicode char U+00BF (decimal 191)
+   defining Unicode char U+00C0 (decimal 192)
+   defining Unicode char U+00C1 (decimal 193)
+   defining Unicode char U+00C2 (decimal 194)
+   defining Unicode char U+00C3 (decimal 195)
+   defining Unicode char U+00C4 (decimal 196)
+   defining Unicode char U+00C5 (decimal 197)
+   defining Unicode char U+00C6 (decimal 198)
+   defining Unicode char U+00C7 (decimal 199)
+   defining Unicode char U+00C8 (decimal 200)
+   defining Unicode char U+00C9 (decimal 201)
+   defining Unicode char U+00CA (decimal 202)
+   defining Unicode char U+00CB (decimal 203)
+   defining Unicode char U+00CC (decimal 204)
+   defining Unicode char U+00CD (decimal 205)
+   defining Unicode char U+00CE (decimal 206)
+   defining Unicode char U+00CF (decimal 207)
+   defining Unicode char U+00D0 (decimal 208)
+   defining Unicode char U+00D1 (decimal 209)
+   defining Unicode char U+00D2 (decimal 210)
+   defining Unicode char U+00D3 (decimal 211)
+   defining Unicode char U+00D4 (decimal 212)
+   defining Unicode char U+00D5 (decimal 213)
+   defining Unicode char U+00D6 (decimal 214)
+   defining Unicode char U+00D8 (decimal 216)
+   defining Unicode char U+00D9 (decimal 217)
+   defining Unicode char U+00DA (decimal 218)
+   defining Unicode char U+00DB (decimal 219)
+   defining Unicode char U+00DC (decimal 220)
+   defining Unicode char U+00DD (decimal 221)
+   defining Unicode char U+00DE (decimal 222)
+   defining Unicode char U+00DF (decimal 223)
+   defining Unicode char U+00E0 (decimal 224)
+   defining Unicode char U+00E1 (decimal 225)
+   defining Unicode char U+00E2 (decimal 226)
+   defining Unicode char U+00E3 (decimal 227)
+   defining Unicode char U+00E4 (decimal 228)
+   defining Unicode char U+00E5 (decimal 229)
+   defining Unicode char U+00E6 (decimal 230)
+   defining Unicode char U+00E7 (decimal 231)
+   defining Unicode char U+00E8 (decimal 232)
+   defining Unicode char U+00E9 (decimal 233)
+   defining Unicode char U+00EA (decimal 234)
+   defining Unicode char U+00EB (decimal 235)
+   defining Unicode char U+00EC (decimal 236)
+   defining Unicode char U+00ED (decimal 237)
+   defining Unicode char U+00EE (decimal 238)
+   defining Unicode char U+00EF (decimal 239)
+   defining Unicode char U+00F0 (decimal 240)
+   defining Unicode char U+00F1 (decimal 241)
+   defining Unicode char U+00F2 (decimal 242)
+   defining Unicode char U+00F3 (decimal 243)
+   defining Unicode char U+00F4 (decimal 244)
+   defining Unicode char U+00F5 (decimal 245)
+   defining Unicode char U+00F6 (decimal 246)
+   defining Unicode char U+00F8 (decimal 248)
+   defining Unicode char U+00F9 (decimal 249)
+   defining Unicode char U+00FA (decimal 250)
+   defining Unicode char U+00FB (decimal 251)
+   defining Unicode char U+00FC (decimal 252)
+   defining Unicode char U+00FD (decimal 253)
+   defining Unicode char U+00FE (decimal 254)
+   defining Unicode char U+00FF (decimal 255)
+   defining Unicode char U+0100 (decimal 256)
+   defining Unicode char U+0101 (decimal 257)
+   defining Unicode char U+0102 (decimal 258)
+   defining Unicode char U+0103 (decimal 259)
+   defining Unicode char U+0104 (decimal 260)
+   defining Unicode char U+0105 (decimal 261)
+   defining Unicode char U+0106 (decimal 262)
+   defining Unicode char U+0107 (decimal 263)
+   defining Unicode char U+0108 (decimal 264)
+   defining Unicode char U+0109 (decimal 265)
+   defining Unicode char U+010A (decimal 266)
+   defining Unicode char U+010B (decimal 267)
+   defining Unicode char U+010C (decimal 268)
+   defining Unicode char U+010D (decimal 269)
+   defining Unicode char U+010E (decimal 270)
+   defining Unicode char U+010F (decimal 271)
+   defining Unicode char U+0110 (decimal 272)
+   defining Unicode char U+0111 (decimal 273)
+   defining Unicode char U+0112 (decimal 274)
+   defining Unicode char U+0113 (decimal 275)
+   defining Unicode char U+0114 (decimal 276)
+   defining Unicode char U+0115 (decimal 277)
+   defining Unicode char U+0116 (decimal 278)
+   defining Unicode char U+0117 (decimal 279)
+   defining Unicode char U+0118 (decimal 280)
+   defining Unicode char U+0119 (decimal 281)
+   defining Unicode char U+011A (decimal 282)
+   defining Unicode char U+011B (decimal 283)
+   defining Unicode char U+011C (decimal 284)
+   defining Unicode char U+011D (decimal 285)
+   defining Unicode char U+011E (decimal 286)
+   defining Unicode char U+011F (decimal 287)
+   defining Unicode char U+0120 (decimal 288)
+   defining Unicode char U+0121 (decimal 289)
+   defining Unicode char U+0122 (decimal 290)
+   defining Unicode char U+0123 (decimal 291)
+   defining Unicode char U+0124 (decimal 292)
+   defining Unicode char U+0125 (decimal 293)
+   defining Unicode char U+0128 (decimal 296)
+   defining Unicode char U+0129 (decimal 297)
+   defining Unicode char U+012A (decimal 298)
+   defining Unicode char U+012B (decimal 299)
+   defining Unicode char U+012C (decimal 300)
+   defining Unicode char U+012D (decimal 301)
+   defining Unicode char U+012E (decimal 302)
+   defining Unicode char U+012F (decimal 303)
+   defining Unicode char U+0130 (decimal 304)
+   defining Unicode char U+0131 (decimal 305)
+   defining Unicode char U+0132 (decimal 306)
+   defining Unicode char U+0133 (decimal 307)
+   defining Unicode char U+0134 (decimal 308)
+   defining Unicode char U+0135 (decimal 309)
+   defining Unicode char U+0136 (decimal 310)
+   defining Unicode char U+0137 (decimal 311)
+   defining Unicode char U+0139 (decimal 313)
+   defining Unicode char U+013A (decimal 314)
+   defining Unicode char U+013B (decimal 315)
+   defining Unicode char U+013C (decimal 316)
+   defining Unicode char U+013D (decimal 317)
+   defining Unicode char U+013E (decimal 318)
+   defining Unicode char U+0141 (decimal 321)
+   defining Unicode char U+0142 (decimal 322)
+   defining Unicode char U+0143 (decimal 323)
+   defining Unicode char U+0144 (decimal 324)
+   defining Unicode char U+0145 (decimal 325)
+   defining Unicode char U+0146 (decimal 326)
+   defining Unicode char U+0147 (decimal 327)
+   defining Unicode char U+0148 (decimal 328)
+   defining Unicode char U+014A (decimal 330)
+   defining Unicode char U+014B (decimal 331)
+   defining Unicode char U+014C (decimal 332)
+   defining Unicode char U+014D (decimal 333)
+   defining Unicode char U+014E (decimal 334)
+   defining Unicode char U+014F (decimal 335)
+   defining Unicode char U+0150 (decimal 336)
+   defining Unicode char U+0151 (decimal 337)
+   defining Unicode char U+0152 (decimal 338)
+   defining Unicode char U+0153 (decimal 339)
+   defining Unicode char U+0154 (decimal 340)
+   defining Unicode char U+0155 (decimal 341)
+   defining Unicode char U+0156 (decimal 342)
+   defining Unicode char U+0157 (decimal 343)
+   defining Unicode char U+0158 (decimal 344)
+   defining Unicode char U+0159 (decimal 345)
+   defining Unicode char U+015A (decimal 346)
+   defining Unicode char U+015B (decimal 347)
+   defining Unicode char U+015C (decimal 348)
+   defining Unicode char U+015D (decimal 349)
+   defining Unicode char U+015E (decimal 350)
+   defining Unicode char U+015F (decimal 351)
+   defining Unicode char U+0160 (decimal 352)
+   defining Unicode char U+0161 (decimal 353)
+   defining Unicode char U+0162 (decimal 354)
+   defining Unicode char U+0163 (decimal 355)
+   defining Unicode char U+0164 (decimal 356)
+   defining Unicode char U+0165 (decimal 357)
+   defining Unicode char U+0168 (decimal 360)
+   defining Unicode char U+0169 (decimal 361)
+   defining Unicode char U+016A (decimal 362)
+   defining Unicode char U+016B (decimal 363)
+   defining Unicode char U+016C (decimal 364)
+   defining Unicode char U+016D (decimal 365)
+   defining Unicode char U+016E (decimal 366)
+   defining Unicode char U+016F (decimal 367)
+   defining Unicode char U+0170 (decimal 368)
+   defining Unicode char U+0171 (decimal 369)
+   defining Unicode char U+0172 (decimal 370)
+   defining Unicode char U+0173 (decimal 371)
+   defining Unicode char U+0174 (decimal 372)
+   defining Unicode char U+0175 (decimal 373)
+   defining Unicode char U+0176 (decimal 374)
+   defining Unicode char U+0177 (decimal 375)
+   defining Unicode char U+0178 (decimal 376)
+   defining Unicode char U+0179 (decimal 377)
+   defining Unicode char U+017A (decimal 378)
+   defining Unicode char U+017B (decimal 379)
+   defining Unicode char U+017C (decimal 380)
+   defining Unicode char U+017D (decimal 381)
+   defining Unicode char U+017E (decimal 382)
+   defining Unicode char U+01CD (decimal 461)
+   defining Unicode char U+01CE (decimal 462)
+   defining Unicode char U+01CF (decimal 463)
+   defining Unicode char U+01D0 (decimal 464)
+   defining Unicode char U+01D1 (decimal 465)
+   defining Unicode char U+01D2 (decimal 466)
+   defining Unicode char U+01D3 (decimal 467)
+   defining Unicode char U+01D4 (decimal 468)
+   defining Unicode char U+01E2 (decimal 482)
+   defining Unicode char U+01E3 (decimal 483)
+   defining Unicode char U+01E6 (decimal 486)
+   defining Unicode char U+01E7 (decimal 487)
+   defining Unicode char U+01E8 (decimal 488)
+   defining Unicode char U+01E9 (decimal 489)
+   defining Unicode char U+01EA (decimal 490)
+   defining Unicode char U+01EB (decimal 491)
+   defining Unicode char U+01F0 (decimal 496)
+   defining Unicode char U+01F4 (decimal 500)
+   defining Unicode char U+01F5 (decimal 501)
+   defining Unicode char U+0218 (decimal 536)
+   defining Unicode char U+0219 (decimal 537)
+   defining Unicode char U+021A (decimal 538)
+   defining Unicode char U+021B (decimal 539)
+   defining Unicode char U+0232 (decimal 562)
+   defining Unicode char U+0233 (decimal 563)
+   defining Unicode char U+1E02 (decimal 7682)
+   defining Unicode char U+1E03 (decimal 7683)
+   defining Unicode char U+200C (decimal 8204)
+   defining Unicode char U+2010 (decimal 8208)
+   defining Unicode char U+2011 (decimal 8209)
+   defining Unicode char U+2012 (decimal 8210)
+   defining Unicode char U+2013 (decimal 8211)
+   defining Unicode char U+2014 (decimal 8212)
+   defining Unicode char U+2015 (decimal 8213)
+   defining Unicode char U+2018 (decimal 8216)
+   defining Unicode char U+2019 (decimal 8217)
+   defining Unicode char U+201A (decimal 8218)
+   defining Unicode char U+201C (decimal 8220)
+   defining Unicode char U+201D (decimal 8221)
+   defining Unicode char U+201E (decimal 8222)
+   defining Unicode char U+2030 (decimal 8240)
+   defining Unicode char U+2031 (decimal 8241)
+   defining Unicode char U+2039 (decimal 8249)
+   defining Unicode char U+203A (decimal 8250)
+   defining Unicode char U+2423 (decimal 9251)
+   defining Unicode char U+1E20 (decimal 7712)
+   defining Unicode char U+1E21 (decimal 7713)
+)
+Now handling font encoding OT1 ...
+... processing UTF-8 mapping file for font encoding OT1
+
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/base/ot1enc.dfu
+File: ot1enc.dfu 2017/01/28 v1.1t UTF-8 support for inputenc
+   defining Unicode char U+00A0 (decimal 160)
+   defining Unicode char U+00A1 (decimal 161)
+   defining Unicode char U+00A3 (decimal 163)
+   defining Unicode char U+00AD (decimal 173)
+   defining Unicode char U+00B8 (decimal 184)
+   defining Unicode char U+00BF (decimal 191)
+   defining Unicode char U+00C5 (decimal 197)
+   defining Unicode char U+00C6 (decimal 198)
+   defining Unicode char U+00D8 (decimal 216)
+   defining Unicode char U+00DF (decimal 223)
+   defining Unicode char U+00E6 (decimal 230)
+   defining Unicode char U+00EC (decimal 236)
+   defining Unicode char U+00ED (decimal 237)
+   defining Unicode char U+00EE (decimal 238)
+   defining Unicode char U+00EF (decimal 239)
+   defining Unicode char U+00F8 (decimal 248)
+   defining Unicode char U+0131 (decimal 305)
+   defining Unicode char U+0141 (decimal 321)
+   defining Unicode char U+0142 (decimal 322)
+   defining Unicode char U+0152 (decimal 338)
+   defining Unicode char U+0153 (decimal 339)
+   defining Unicode char U+0174 (decimal 372)
+   defining Unicode char U+0175 (decimal 373)
+   defining Unicode char U+0176 (decimal 374)
+   defining Unicode char U+0177 (decimal 375)
+   defining Unicode char U+0218 (decimal 536)
+   defining Unicode char U+0219 (decimal 537)
+   defining Unicode char U+021A (decimal 538)
+   defining Unicode char U+021B (decimal 539)
+   defining Unicode char U+2013 (decimal 8211)
+   defining Unicode char U+2014 (decimal 8212)
+   defining Unicode char U+2018 (decimal 8216)
+   defining Unicode char U+2019 (decimal 8217)
+   defining Unicode char U+201C (decimal 8220)
+   defining Unicode char U+201D (decimal 8221)
+)
+Now handling font encoding OMS ...
+... processing UTF-8 mapping file for font encoding OMS
+
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/base/omsenc.dfu
+File: omsenc.dfu 2017/01/28 v1.1t UTF-8 support for inputenc
+   defining Unicode char U+00A7 (decimal 167)
+   defining Unicode char U+00B6 (decimal 182)
+   defining Unicode char U+00B7 (decimal 183)
+   defining Unicode char U+2020 (decimal 8224)
+   defining Unicode char U+2021 (decimal 8225)
+   defining Unicode char U+2022 (decimal 8226)
+)
+Now handling font encoding OMX ...
+... no UTF-8 mapping file for font encoding OMX
+Now handling font encoding U ...
+... no UTF-8 mapping file for font encoding U
+Now handling font encoding PD1 ...
+... no UTF-8 mapping file for font encoding PD1
+   defining Unicode char U+00A9 (decimal 169)
+   defining Unicode char U+00AA (decimal 170)
+   defining Unicode char U+00AE (decimal 174)
+   defining Unicode char U+00BA (decimal 186)
+   defining Unicode char U+02C6 (decimal 710)
+   defining Unicode char U+02DC (decimal 732)
+   defining Unicode char U+200C (decimal 8204)
+   defining Unicode char U+2026 (decimal 8230)
+   defining Unicode char U+2122 (decimal 8482)
+   defining Unicode char U+2423 (decimal 9251)
+))
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/psnfss/charter.sty
+Package: charter 2005/04/12 PSNFSS-v9.2a (P.Dyballa) 
+)
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/base/fontenc.sty
+Package: fontenc 2017/04/05 v2.0i Standard LaTeX package
+
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/base/t1enc.def
+File: t1enc.def 2017/04/05 v2.0i Standard LaTeX file
+LaTeX Font Info:    Redeclaring font encoding T1 on input line 48.
+))
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/fancyvrb/fancyvrb.sty
+Package: fancyvrb 2008/02/07
+
+Style option: `fancyvrb' v2.7a, with DG/SPQR fixes, and firstline=lastline fix 
+<2008/02/07> (tvz)
+\FV@CodeLineNo=\count165
+\FV@InFile=\read2
+\FV@TabBox=\box55
+\c@FancyVerbLine=\count166
+\FV@StepNumber=\count167
+\FV@OutFile=\write5
+)
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/pgf/frontendlayer/tikz.sty
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/pgf/basiclayer/pgf.sty
+Package: pgf 2015/08/07 v3.0.1a (rcs-revision 1.15)
+
+(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/modules/pgfmoduleshape
+s.code.tex
+File: pgfmoduleshapes.code.tex 2014/03/21  (rcs-revision 1.35)
+\pgfnodeparttextbox=\box56
+)
+(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/modules/pgfmoduleplot.
+code.tex
+File: pgfmoduleplot.code.tex 2015/08/03  (rcs-revision 1.13)
+)
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-ve
+rsion-0-65.sty
+Package: pgfcomp-version-0-65 2007/07/03 v3.0.1a (rcs-revision 1.7)
+\pgf@nodesepstart=\dimen195
+\pgf@nodesepend=\dimen196
+)
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-ve
+rsion-1-18.sty
+Package: pgfcomp-version-1-18 2007/07/23 v3.0.1a (rcs-revision 1.1)
+))
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/pgf/utilities/pgffor.sty
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/pgf/utilities/pgfkeys.sty
+(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code
+.tex)) (/usr/local/texlive/2017basic/texmf-dist/tex/latex/pgf/math/pgfmath.sty
+(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex)
+)
+(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/utilities/pgffor.code.
+tex
+Package: pgffor 2013/12/13 v3.0.1a (rcs-revision 1.25)
+
+(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex)
+\pgffor@iter=\dimen197
+\pgffor@skip=\dimen198
+\pgffor@stack=\toks49
+\pgffor@toks=\toks50
+))
+(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/frontendlayer/tikz/tik
+z.code.tex
+Package: tikz 2015/08/07 v3.0.1a (rcs-revision 1.151)
+
+(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/libraries/pgflibrarypl
+othandlers.code.tex
+File: pgflibraryplothandlers.code.tex 2013/08/31 v3.0.1a (rcs-revision 1.20)
+\pgf@plot@mark@count=\count168
+\pgfplotmarksize=\dimen199
+)
+\tikz@lastx=\dimen256
+\tikz@lasty=\dimen257
+\tikz@lastxsaved=\dimen258
+\tikz@lastysaved=\dimen259
+\tikzleveldistance=\dimen260
+\tikzsiblingdistance=\dimen261
+\tikz@figbox=\box57
+\tikz@figbox@bg=\box58
+\tikz@tempbox=\box59
+\tikz@tempbox@bg=\box60
+\tikztreelevel=\count169
+\tikznumberofchildren=\count170
+\tikznumberofcurrentchild=\count171
+\tikz@fig@count=\count172
+
+(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/modules/pgfmodulematri
+x.code.tex
+File: pgfmodulematrix.code.tex 2013/09/17  (rcs-revision 1.8)
+\pgfmatrixcurrentrow=\count173
+\pgfmatrixcurrentcolumn=\count174
+\pgf@matrix@numberofcolumns=\count175
+)
+\tikz@expandcount=\count176
+
+(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/frontendlayer/tikz/lib
+raries/tikzlibrarytopaths.code.tex
+File: tikzlibrarytopaths.code.tex 2008/06/17 v3.0.1a (rcs-revision 1.2)
+)))
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/tools/xspace.sty
+Package: xspace 2014/10/28 v1.13 Space after command names (DPC,MH)
+)
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/ctable/ctable.sty
+Package: ctable 2015/10/17 v1.31 ctable package for flexible typesetting of tab
+le and figure floats using key/value directives
+
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/xkeyval/xkeyval.sty
+Package: xkeyval 2014/12/03 v2.7a package option processing (HA)
+
+(/usr/local/texlive/2017basic/texmf-dist/tex/generic/xkeyval/xkeyval.tex
+(/usr/local/texlive/2017basic/texmf-dist/tex/generic/xkeyval/xkvutils.tex
+\XKV@toks=\toks51
+\XKV@tempa@toks=\toks52
+)
+\XKV@depth=\count177
+File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
+))
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/tools/tabularx.sty
+Package: tabularx 2016/02/03 v2.11 `tabularx' package (DPC)
+\TX@col@width=\dimen262
+\TX@old@table=\dimen263
+\TX@old@col=\dimen264
+\TX@target=\dimen265
+\TX@delta=\dimen266
+\TX@cols=\count178
+\TX@ftn=\toks53
+)
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/booktabs/booktabs.sty
+Package: booktabs 2016/04/27 v1.618033 publication quality tables
+\heavyrulewidth=\dimen267
+\lightrulewidth=\dimen268
+\cmidrulewidth=\dimen269
+\belowrulesep=\dimen270
+\belowbottomsep=\dimen271
+\aboverulesep=\dimen272
+\abovetopsep=\dimen273
+\cmidrulesep=\dimen274
+\cmidrulekern=\dimen275
+\defaultaddspace=\dimen276
+\@cmidla=\count179
+\@cmidlb=\count180
+\@aboverulesep=\dimen277
+\@belowrulesep=\dimen278
+\@thisruleclass=\count181
+\@lastruleclass=\count182
+\@thisrulewidth=\dimen279
+)
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/graphics/rotating.sty
+Package: rotating 2016/08/11 v2.16d rotated objects in LaTeX
+
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/base/ifthen.sty
+Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
+)
+\c@r@tfl@t=\count183
+\rotFPtop=\skip60
+\rotFPbot=\skip61
+\rot@float@box=\box61
+\rot@mess@toks=\toks54
+)
+
+Package ctable Warning:  Transparency disabled: incompatible with tikz package 
+ on input line 36.
+
+\@CTframesep=\dimen280
+\@dfltCTframesep=\dimen281
+\@CTframerule=\dimen282
+\@dfltCTframerule=\dimen283
+\@CTwidth=\dimen284
+\@dfltCTwidth=\dimen285
+\@CTcaptionskip=\dimen286
+\@dfltCTcaptionskip=\dimen287
+\@CTmaxwidth=\dimen288
+\@dfltCTmaxwidth=\dimen289
+\@CTmincapwidth=\dimen290
+\@dfltCTmincapwidth=\dimen291
+\@CTfooterwidth=\dimen292
+\@dfltCTfooterwidth=\dimen293
+\@CTw=\dimen294
+\@CTfloatwidth=\dimen295
+\@CToldsep=\dimen296
+\@CToldrule=\dimen297
+\CT@t=\box62
+\@CTcurftwidth=\dimen298
+) (/usr/local/texlive/2017basic/texmf-dist/tex/latex/base/alltt.sty
+Package: alltt 1997/06/16 v2.0g defines alltt environment
+)
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/tools/multicol.sty
+Package: multicol 2017/04/11 v1.8q multicolumn formatting (FMi)
+\c@tracingmulticols=\count184
+\mult@box=\box63
+\multicol@leftmargin=\dimen299
+\c@unbalance=\count185
+\c@collectmore=\count186
+\doublecol@number=\count187
+\multicoltolerance=\count188
+\multicolpretolerance=\count189
+\full@width=\dimen300
+\page@free=\dimen301
+\premulticols=\dimen302
+\postmulticols=\dimen303
+\multicolsep=\skip62
+\multicolbaselineskip=\skip63
+\partial@page=\box64
+\last@line=\box65
+\maxbalancingoverflow=\dimen304
+\mult@rightbox=\box66
+\mult@grightbox=\box67
+\mult@gfirstbox=\box68
+\mult@firstbox=\box69
+\@tempa=\box70
+\@tempa=\box71
+\@tempa=\box72
+\@tempa=\box73
+\@tempa=\box74
+\@tempa=\box75
+\@tempa=\box76
+\@tempa=\box77
+\@tempa=\box78
+\@tempa=\box79
+\@tempa=\box80
+\@tempa=\box81
+\@tempa=\box82
+\@tempa=\box83
+\@tempa=\box84
+\@tempa=\box85
+\@tempa=\box86
+\c@columnbadness=\count190
+\c@finalcolumnbadness=\count191
+\last@try=\dimen305
+\multicolovershoot=\dimen306
+\multicolundershoot=\dimen307
+\mult@nat@firstbox=\box87
+\colbreak@box=\box88
+\mc@col@check@num=\count192
+)
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\\' on input line 81.
+
+(./presentacion.aux
+LaTeX Info: Redefining \. on input line 23.
+LaTeX Info: Redefining \% on input line 23.
+
+
+LaTeX Warning: Label `fig:estructura-proyecto' multiply defined.
+
+
+LaTeX Warning: Label `fig:estructura-web' multiply defined.
+
+)
+\openout1 = `presentacion.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 87.
+LaTeX Font Info:    ... okay on input line 87.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 87.
+LaTeX Font Info:    ... okay on input line 87.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 87.
+LaTeX Font Info:    ... okay on input line 87.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 87.
+LaTeX Font Info:    ... okay on input line 87.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 87.
+LaTeX Font Info:    ... okay on input line 87.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 87.
+LaTeX Font Info:    ... okay on input line 87.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 87.
+LaTeX Font Info:    ... okay on input line 87.
+
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+*geometry* verbose mode - [ preamble ] result:
+* driver: pdftex
+* paper: custom
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: includehead includefoot 
+* h-part:(L,W,R)=(28.45274pt, 307.28987pt, 28.45274pt)
+* v-part:(T,H,B)=(0.0pt, 273.14662pt, 0.0pt)
+* \paperwidth=364.19536pt
+* \paperheight=273.14662pt
+* \textwidth=307.28987pt
+* \textheight=244.6939pt
+* \oddsidemargin=-43.81725pt
+* \evensidemargin=-43.81725pt
+* \topmargin=-72.26999pt
+* \headheight=14.22636pt
+* \headsep=0.0pt
+* \topskip=11.0pt
+* \footskip=14.22636pt
+* \marginparwidth=4.0pt
+* \marginparsep=10.0pt
+* \columnsep=10.0pt
+* \skip\footins=10.0pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidefalse
+* \@mparswitchfalse
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+(/usr/local/texlive/2017basic/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count193
+\scratchdimen=\dimen308
+\scratchbox=\box89
+\nofMPsegments=\count194
+\nofMParguments=\count195
+\everyMPshowfont=\toks55
+\MPscratchCnt=\count196
+\MPscratchDim=\dimen309
+\MPnumerator=\count197
+\makeMPintoPDFobject=\count198
+\everyMPtoPDFconversion=\toks56
+) (/usr/local/texlive/2017basic/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
+Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/oberdiek/grfext.sty
+Package: grfext 2016/05/16 v1.2 Manage graphics extensions (HO)
+)
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
+38.
+Package grfext Info: Graphics extension search list:
+(grfext)             [.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPE
+G,.JBIG2,.JB2,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 456.
+
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
+)) ABD: EveryShipout initializing macros
+\AtBeginShipoutBox=\box90
+Package hyperref Info: Link coloring OFF on input line 87.
+
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/hyperref/nameref.sty
+Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
+
+(/usr/local/texlive/2017basic/texmf-dist/tex/generic/oberdiek/gettitlestring.st
+y
+Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
+)
+\c@section@level=\count199
+)
+LaTeX Info: Redefining \ref on input line 87.
+LaTeX Info: Redefining \pageref on input line 87.
+LaTeX Info: Redefining \nameref on input line 87.
+ (./presentacion.out) (./presentacion.out)
+\@outlinefile=\write6
+\openout6 = `presentacion.out'.
+
+LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
+(Font)                  OT1/cmr/m/n --> OT1/cmss/m/n on input line 87.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
+(Font)                  OT1/cmr/bx/n --> OT1/cmss/b/n on input line 87.
+\symnumbers=\mathgroup6
+\sympureletters=\mathgroup7
+LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `normal'
+(Font)                  OT1/cmss/m/n --> T1/bch/m/n on input line 87.
+LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 87.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
+(Font)                  OT1/cmr/bx/n --> T1/cmss/b/n on input line 87.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
+(Font)                  OT1/cmr/bx/n --> T1/cmss/b/n on input line 87.
+LaTeX Font Info:    Redeclaring math alphabet \mathsf on input line 87.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
+(Font)                  OT1/cmss/m/n --> T1/cmss/m/n on input line 87.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
+(Font)                  OT1/cmss/bx/n --> T1/cmss/m/n on input line 87.
+LaTeX Font Info:    Redeclaring math alphabet \mathit on input line 87.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
+(Font)                  OT1/cmr/m/it --> T1/cmss/m/it on input line 87.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
+(Font)                  OT1/cmr/bx/it --> T1/cmss/m/it on input line 87.
+LaTeX Font Info:    Redeclaring math alphabet \mathtt on input line 87.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
+(Font)                  OT1/cmtt/m/n --> T1/cmtt/m/n on input line 87.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
+(Font)                  OT1/cmtt/m/n --> T1/cmtt/m/n on input line 87.
+LaTeX Font Info:    Overwriting symbol font `numbers' in version `bold'
+(Font)                  T1/cmss/m/n --> T1/cmss/b/n on input line 87.
+LaTeX Font Info:    Overwriting symbol font `pureletters' in version `bold'
+(Font)                  T1/cmss/m/it --> T1/cmss/b/it on input line 87.
+LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `bold'
+(Font)                  OT1/cmss/b/n --> T1/bch/b/n on input line 87.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
+(Font)                  T1/cmss/b/n --> T1/cmss/b/n on input line 87.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
+(Font)                  T1/cmss/m/n --> T1/cmss/b/n on input line 87.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
+(Font)                  T1/cmss/m/it --> T1/cmss/b/it on input line 87.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
+(Font)                  T1/cmtt/m/n --> T1/cmtt/b/n on input line 87.
+
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/beamer/translator/dicts/tran
+slator-basic-dictionary/translator-basic-dictionary-English.dict
+Dictionary: translator-basic-dictionary, Language: English 
+)
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/beamer/translator/dicts/tran
+slator-basic-dictionary/translator-basic-dictionary-Spanish.dict
+Dictionary: translator-basic-dictionary, Language: Spanish 
+)
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/beamer/translator/dicts/tran
+slator-bibliography-dictionary/translator-bibliography-dictionary-English.dict
+Dictionary: translator-bibliography-dictionary, Language: English 
+)
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/beamer/translator/dicts/tran
+slator-bibliography-dictionary/translator-bibliography-dictionary-Spanish.dict
+Dictionary: translator-bibliography-dictionary, Language: Spanish 
+)
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/beamer/translator/dicts/tran
+slator-environment-dictionary/translator-environment-dictionary-English.dict
+Dictionary: translator-environment-dictionary, Language: English 
+)
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/beamer/translator/dicts/tran
+slator-environment-dictionary/translator-environment-dictionary-Spanish.dict
+Dictionary: translator-environment-dictionary, Language: Spanish 
+)
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/beamer/translator/dicts/tran
+slator-months-dictionary/translator-months-dictionary-English.dict
+Dictionary: translator-months-dictionary, Language: English 
+)
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/beamer/translator/dicts/tran
+slator-months-dictionary/translator-months-dictionary-Spanish.dict
+Dictionary: translator-months-dictionary, Language: Spanish 
+)
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/beamer/translator/dicts/tran
+slator-numbers-dictionary/translator-numbers-dictionary-English.dict
+Dictionary: translator-numbers-dictionary, Language: English 
+)
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/beamer/translator/dicts/tran
+slator-numbers-dictionary/translator-numbers-dictionary-Spanish.dict
+Dictionary: translator-numbers-dictionary, Language: Spanish 
+)
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/beamer/translator/dicts/tran
+slator-theorem-dictionary/translator-theorem-dictionary-English.dict
+Dictionary: translator-theorem-dictionary, Language: English 
+)
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/beamer/translator/dicts/tran
+slator-theorem-dictionary/translator-theorem-dictionary-Spanish.dict
+Dictionary: translator-theorem-dictionary, Language: Spanish 
+)
+LaTeX Info: Redefining \includegraphics on input line 87.
+\c@lstlisting=\count266
+LaTeX Info: Redefining \. on input line 87.
+LaTeX Info: Redefining \% on input line 87.
+
+(./presentacion.nav)
+Overfull \hbox (1.26973pt too wide) in paragraph at lines 87--87
+ [][][][]  
+ []
+
+<logo_uca.pdf, id=56, 309.958pt x 411.136pt>
+File: logo_uca.pdf Graphic file (type pdf)
+ <use logo_uca.pdf>
+Package pdftex.def Info: logo_uca.pdf used on input line 96.
+(pdftex.def)             Requested size: 42.75537pt x 56.71173pt.
+
+Overfull \vbox (4.83171pt too high) detected at line 96
+ []
+
+
+LaTeX Font Warning: Font shape `T1/cmss/m/n' in size <4> not available
+(Font)              size <5> substituted on input line 96.
+
+
+Overfull \hbox (1.26973pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+[1{/usr/local/texlive/2017basic/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
+
+ <./logo_uca.pdf>] (./presentacion.toc
+LaTeX Info: Redefining \. on input line 1.
+LaTeX Info: Redefining \% on input line 1.
+)
+
+./presentacion.tex:98: Package inputenc Error: Unicode char  (U+8D)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.98 ...me{\frametitle{Índice}\tableofcontents}
+                                                  
+? 
+
+Overfull \hbox (1.26973pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+[2
+
+] (./presentacion.toc
+LaTeX Info: Redefining \. on input line 1.
+LaTeX Info: Redefining \% on input line 1.
+)
+Overfull \hbox (1.26973pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+[3
+
+]
+LaTeX Font Info:    Try loading font information for U+msa on input line 129.
+ (/usr/local/texlive/2017basic/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Try loading font information for U+msb on input line 129.
+
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+<img/coresport.png, id=131, 163.812pt x 74.4381pt>
+File: img/coresport.png Graphic file (type png)
+ <use img/coresport.png>
+Package pdftex.def Info: img/coresport.png used on input line 129.
+(pdftex.def)             Requested size: 138.2795pt x 62.84105pt.
+
+Overfull \hbox (1.26973pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+[4
+
+ <./img/coresport.png>]
+Overfull \hbox (1.26973pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+[5
+
+] (./presentacion.toc
+LaTeX Info: Redefining \. on input line 1.
+LaTeX Info: Redefining \% on input line 1.
+)
+Overfull \hbox (1.26973pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+[6
+
+] <img/modelo-incremental.png, id=185, 615.0478pt x 240.14719pt>
+File: img/modelo-incremental.png Graphic file (type png)
+
+<use img/modelo-incremental.png>
+Package pdftex.def Info: img/modelo-incremental.png used on input line 157.
+(pdftex.def)             Requested size: 307.28987pt x 119.98167pt.
+
+Overfull \hbox (1.26973pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+[7
+
+ <./img/modelo-incremental.png>]
+<img/planificacion-gantt.png, id=202, 1030.85126pt x 382.42876pt>
+File: img/planificacion-gantt.png Graphic file (type png)
+
+<use img/planificacion-gantt.png>
+Package pdftex.def Info: img/planificacion-gantt.png used on input line 170.
+(pdftex.def)             Requested size: 307.28987pt x 113.99425pt.
+
+Overfull \hbox (1.26973pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+[8
+
+ <./img/planificacion-gantt.png>] (./presentacion.toc
+LaTeX Info: Redefining \. on input line 1.
+LaTeX Info: Redefining \% on input line 1.
+)
+Overfull \hbox (1.26973pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+[9
+
+]
+./presentacion.tex:199: Undefined control sequence.
+\beamerx@\beamer@columnenv ...3->\beamer@colclose 
+                                                  \def \beamer@colclose {}\b...
+l.199 \end{frame}
+                 
+? 
+./presentacion.tex:199: Undefined control sequence.
+\XKV@tempa ->\beamer@colmode 
+                             
+l.199 \end{frame}
+                 
+? 
+./presentacion.tex:199: Undefined control sequence.
+\XKV@tkey ->\beamer@colmode 
+                            
+l.199 \end{frame}
+                 
+? 
+./presentacion.tex:199: Undefined control sequence.
+\beamerx@\beamer@columnenv ...\beamer@colheadskip 
+                                                  \ignorespaces 
+l.199 \end{frame}
+                 
+? 
+./presentacion.tex:199: Undefined control sequence.
+<argument> \beamer@colalign 
+                            
+l.199 \end{frame}
+                 
+? 
+./presentacion.tex:199: Undefined control sequence.
+<argument> \beamer@colalign 
+                            
+l.199 \end{frame}
+                 
+? 
+./presentacion.tex:199: Undefined control sequence.
+\beamerx@\beamer@columnenv ...3->\beamer@colclose 
+                                                  \def \beamer@colclose {}\b...
+l.199 \end{frame}
+                 
+? 
+./presentacion.tex:199: Undefined control sequence.
+\XKV@tempa ->\beamer@colmode 
+                             
+l.199 \end{frame}
+                 
+? 
+./presentacion.tex:199: Undefined control sequence.
+\XKV@tkey ->\beamer@colmode 
+                            
+l.199 \end{frame}
+                 
+? 
+./presentacion.tex:199: Undefined control sequence.
+\beamerx@\beamer@columnenv ...\beamer@colheadskip 
+                                                  \ignorespaces 
+l.199 \end{frame}
+                 
+? 
+./presentacion.tex:199: Undefined control sequence.
+<argument> \beamer@colalign 
+                            
+l.199 \end{frame}
+                 
+? 
+./presentacion.tex:199: Undefined control sequence.
+<argument> \beamer@colalign 
+                            
+l.199 \end{frame}
+                 
+? 
+
+Overfull \hbox (1.26973pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+[10
+
+]
+Overfull \hbox (1.26973pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+[11
+
+] <img/modelo-conceptual.jpeg, id=280, 1101.36469pt x 654.94687pt>
+File: img/modelo-conceptual.jpeg Graphic file (type jpg)
+
+<use img/modelo-conceptual.jpeg>
+Package pdftex.def Info: img/modelo-conceptual.jpeg used on input line 226.
+(pdftex.def)             Requested size: 261.19826pt x 155.32164pt.
+
+Overfull \hbox (1.26973pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+[12
+
+ <./img/modelo-conceptual.jpeg>]
+<img/comparativa-interfaces.png, id=298, 1312.905pt x 494.84875pt>
+File: img/comparativa-interfaces.png Graphic file (type png)
+
+<use img/comparativa-interfaces.png>
+Package pdftex.def Info: img/comparativa-interfaces.png used on input line 238.
+
+(pdftex.def)             Requested size: 215.10196pt x 81.07266pt.
+
+Overfull \hbox (1.26973pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+[13
+
+ <./img/comparativa-interfaces.png>]
+<img/navegacion.jpg, id=317, 953.5625pt x 262.9825pt>
+File: img/navegacion.jpg Graphic file (type jpg)
+ <use img/navegacion.jpg>
+Package pdftex.def Info: img/navegacion.jpg used on input line 248.
+(pdftex.def)             Requested size: 307.28987pt x 84.74599pt.
+
+Overfull \hbox (1.26973pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+[14
+
+ <./img/navegacion.jpg>]
+<img/logos-combinados.jpg, id=335, 1525.7pt x 1200.485pt>
+File: img/logos-combinados.jpg Graphic file (type jpg)
+
+<use img/logos-combinados.jpg>
+Package pdftex.def Info: img/logos-combinados.jpg used on input line 263.
+(pdftex.def)             Requested size: 230.46739pt x 181.32892pt.
+
+Overfull \vbox (3.78839pt too high) detected at line 263
+ []
+
+
+Overfull \hbox (1.26973pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+[15
+
+ <./img/logos-combinados.jpg>]
+<img/logos-combinados-java.jpg, id=353, 1525.7pt x 1200.485pt>
+File: img/logos-combinados-java.jpg Graphic file (type jpg)
+
+<use img/logos-combinados-java.jpg>
+Package pdftex.def Info: img/logos-combinados-java.jpg used on input line 272.
+(pdftex.def)             Requested size: 230.46739pt x 181.32892pt.
+
+Overfull \vbox (3.78839pt too high) detected at line 272
+ []
+
+
+Overfull \hbox (1.26973pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+[16
+
+ <./img/logos-combinados-java.jpg>]
+<img/logos-combinados-postgresql.jpg, id=371, 1525.7pt x 1200.485pt>
+File: img/logos-combinados-postgresql.jpg Graphic file (type jpg)
+
+<use img/logos-combinados-postgresql.jpg>
+Package pdftex.def Info: img/logos-combinados-postgresql.jpg used on input line
+ 281.
+(pdftex.def)             Requested size: 230.46739pt x 181.32892pt.
+
+Overfull \vbox (3.78839pt too high) detected at line 281
+ []
+
+
+Overfull \hbox (1.26973pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+[17
+
+ <./img/logos-combinados-postgresql.jpg>]
+<img/logos-combinados-frontend.jpg, id=390, 1525.7pt x 1200.485pt>
+File: img/logos-combinados-frontend.jpg Graphic file (type jpg)
+
+<use img/logos-combinados-frontend.jpg>
+Package pdftex.def Info: img/logos-combinados-frontend.jpg used on input line 2
+90.
+(pdftex.def)             Requested size: 230.46739pt x 181.32892pt.
+
+Overfull \vbox (3.78839pt too high) detected at line 290
+ []
+
+
+Overfull \hbox (1.26973pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+[18
+
+ <./img/logos-combinados-frontend.jpg>]
+<img/logos-combinados-latex.jpg, id=408, 1525.7pt x 1200.485pt>
+File: img/logos-combinados-latex.jpg Graphic file (type jpg)
+
+<use img/logos-combinados-latex.jpg>
+Package pdftex.def Info: img/logos-combinados-latex.jpg used on input line 299.
+
+(pdftex.def)             Requested size: 230.46739pt x 181.32892pt.
+
+Overfull \vbox (3.78839pt too high) detected at line 299
+ []
+
+
+Overfull \hbox (1.26973pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+[19
+
+ <./img/logos-combinados-latex.jpg>]
+<img/logos-combinados-git.jpg, id=427, 1525.7pt x 1200.485pt>
+File: img/logos-combinados-git.jpg Graphic file (type jpg)
+
+<use img/logos-combinados-git.jpg>
+Package pdftex.def Info: img/logos-combinados-git.jpg used on input line 308.
+(pdftex.def)             Requested size: 230.46739pt x 181.32892pt.
+
+Overfull \vbox (3.78839pt too high) detected at line 308
+ []
+
+
+Overfull \hbox (1.26973pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+[20
+
+ <./img/logos-combinados-git.jpg>]
+<img/arquitectura-jee.jpg, id=445, 497.60907pt x 230.36063pt>
+File: img/arquitectura-jee.jpg Graphic file (type jpg)
+
+<use img/arquitectura-jee.jpg>
+Package pdftex.def Info: img/arquitectura-jee.jpg used on input line 319.
+(pdftex.def)             Requested size: 230.46739pt x 106.69125pt.
+
+Overfull \hbox (1.26973pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+[21
+
+ <./img/arquitectura-jee.jpg>]
+<img/estructura-ficheros.jpg, id=463, 279.0425pt x 351.3125pt>
+File: img/estructura-ficheros.jpg Graphic file (type jpg)
+
+<use img/estructura-ficheros.jpg>
+Package pdftex.def Info: img/estructura-ficheros.jpg used on input line 337.
+(pdftex.def)             Requested size: 107.55098pt x 135.40314pt.
+
+Overfull \hbox (1.26973pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+[22
+
+ <./img/estructura-ficheros.jpg>]
+<img/estructura-ficheros-web.jpg, id=481, 279.0425pt x 351.3125pt>
+File: img/estructura-ficheros-web.jpg Graphic file (type jpg)
+
+<use img/estructura-ficheros-web.jpg>
+Package pdftex.def Info: img/estructura-ficheros-web.jpg used on input line 362
+.
+(pdftex.def)             Requested size: 107.55098pt x 135.40314pt.
+pdfTeX warning (ext4): destination with the same identifier (name{fig:estructur
+a-proyecto}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.362 \end{frame}
+                  <img/web-pages.jpg, id=482, 302.12875pt x 372.39125pt>
+File: img/web-pages.jpg Graphic file (type jpg)
+
+<use img/web-pages.jpg>
+Package pdftex.def Info: img/web-pages.jpg used on input line 362.
+(pdftex.def)             Requested size: 107.55098pt x 132.56064pt.
+
+Overfull \hbox (1.26973pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+[23
+
+ <./img/estructura-ficheros-web.jpg> <./img/web-pages.jpg>]
+<img/web-xml-client.jpg, id=501, 1778.645pt x 900.36375pt>
+File: img/web-xml-client.jpg Graphic file (type jpg)
+
+<use img/web-xml-client.jpg>
+Package pdftex.def Info: img/web-xml-client.jpg used on input line 372.
+(pdftex.def)             Requested size: 307.28987pt x 155.54646pt.
+
+Overfull \hbox (1.26973pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+[24
+
+ <./img/web-xml-client.jpg>]
+<img/web-xml-includes.jpg, id=519, 1778.645pt x 900.36375pt>
+File: img/web-xml-includes.jpg Graphic file (type jpg)
+
+<use img/web-xml-includes.jpg>
+Package pdftex.def Info: img/web-xml-includes.jpg used on input line 381.
+(pdftex.def)             Requested size: 307.28987pt x 155.54646pt.
+
+Overfull \hbox (1.26973pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+[25
+
+ <./img/web-xml-includes.jpg>]
+<img/web-xml-errores.jpg, id=538, 1778.645pt x 900.36375pt>
+File: img/web-xml-errores.jpg Graphic file (type jpg)
+
+<use img/web-xml-errores.jpg>
+Package pdftex.def Info: img/web-xml-errores.jpg used on input line 390.
+(pdftex.def)             Requested size: 307.28987pt x 155.54646pt.
+
+Overfull \hbox (1.26973pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+[26
+
+ <./img/web-xml-errores.jpg>]
+<img/web-xml-sesion.jpg, id=556, 1778.645pt x 900.36375pt>
+File: img/web-xml-sesion.jpg Graphic file (type jpg)
+
+<use img/web-xml-sesion.jpg>
+Package pdftex.def Info: img/web-xml-sesion.jpg used on input line 399.
+(pdftex.def)             Requested size: 307.28987pt x 155.54646pt.
+
+Overfull \hbox (1.26973pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+[27
+
+ <./img/web-xml-sesion.jpg>]
+<img/web-xml-login.jpg, id=574, 1778.645pt x 900.36375pt>
+File: img/web-xml-login.jpg Graphic file (type jpg)
+
+<use img/web-xml-login.jpg>
+Package pdftex.def Info: img/web-xml-login.jpg used on input line 408.
+(pdftex.def)             Requested size: 307.28987pt x 155.54646pt.
+
+Overfull \hbox (1.26973pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+[28
+
+ <./img/web-xml-login.jpg>]
+File: img/estructura-ficheros.jpg Graphic file (type jpg)
+ <use img/estructura-ficheros.jpg>
+Package pdftex.def Info: img/estructura-ficheros.jpg used on input line 426.
+(pdftex.def)             Requested size: 107.55098pt x 135.40314pt.
+
+Overfull \hbox (1.26973pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+[29
+
+]
+<img/estructura-ficheros-war-ejb-sources.jpg, id=609, 279.0425pt x 351.3125pt>
+File: img/estructura-ficheros-war-ejb-sources.jpg Graphic file (type jpg)
+
+<use img/estructura-ficheros-war-ejb-sources.jpg>
+Package pdftex.def Info: img/estructura-ficheros-war-ejb-sources.jpg used on in
+put line 450.
+(pdftex.def)             Requested size: 107.55098pt x 135.40314pt.
+
+<img/estructura-ficheros-war-ejb-sources-abierto.jpg, id=610, 626.34pt x 938.50
+626pt>
+File: img/estructura-ficheros-war-ejb-sources-abierto.jpg Graphic file (type jp
+g)
+ <use img/estructura-ficheros-war-ejb-sources-abierto.jpg>
+Package pdftex.def Info: img/estructura-ficheros-war-ejb-sources-abierto.jpg us
+ed on input line 450.
+(pdftex.def)             Requested size: 107.55098pt x 161.14784pt.
+pdfTeX warning (ext4): destination with the same identifier (name{fig:estructur
+a-web}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.450 \end{frame}
+                 
+Overfull \hbox (1.26973pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+[30
+
+ <./img/estructura-ficheros-war-ejb-sources.jpg> <./img/estructura-ficheros-war
+-ejb-sources-abierto.jpg>]
+<img/comunicacion-ficheros-xhtml.jpg, id=629, 2610.75375pt x 1075.01625pt>
+File: img/comunicacion-ficheros-xhtml.jpg Graphic file (type jpg)
+
+<use img/comunicacion-ficheros-xhtml.jpg>
+Package pdftex.def Info: img/comunicacion-ficheros-xhtml.jpg used on input line
+ 460.
+(pdftex.def)             Requested size: 307.28987pt x 126.51947pt.
+
+Overfull \hbox (1.26973pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+[31
+
+ <./img/comunicacion-ficheros-xhtml.jpg>]
+<img/comunicacion-ficheros-controlador.jpg, id=648, 2610.75375pt x 1075.01625pt
+>
+File: img/comunicacion-ficheros-controlador.jpg Graphic file (type jpg)
+ <use img/comunicacion-ficheros-controlador.jpg>
+Package pdftex.def Info: img/comunicacion-ficheros-controlador.jpg used on inpu
+t line 469.
+(pdftex.def)             Requested size: 307.28987pt x 126.51947pt.
+
+Overfull \hbox (1.26973pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+[32
+
+ <./img/comunicacion-ficheros-controlador.jpg>]
+<img/comunicacion-ficheros-facade.jpg, id=666, 2610.75375pt x 1075.01625pt>
+File: img/comunicacion-ficheros-facade.jpg Graphic file (type jpg)
+
+<use img/comunicacion-ficheros-facade.jpg>
+Package pdftex.def Info: img/comunicacion-ficheros-facade.jpg used on input lin
+e 478.
+(pdftex.def)             Requested size: 307.28987pt x 126.51947pt.
+
+Overfull \hbox (1.26973pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+[33
+
+ <./img/comunicacion-ficheros-facade.jpg>]
+Overfull \hbox (1.26973pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+[34
+
+] (./presentacion.toc
+LaTeX Info: Redefining \. on input line 1.
+LaTeX Info: Redefining \% on input line 1.
+)
+Overfull \hbox (1.26973pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+[35
+
+]
+Overfull \hbox (1.26973pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+[36
+
+]
+Overfull \hbox (1.26973pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+[37
+
+]
+Overfull \hbox (1.26973pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+[38
+
+] (./presentacion.toc
+LaTeX Info: Redefining \. on input line 1.
+LaTeX Info: Redefining \% on input line 1.
+)
+Overfull \hbox (1.26973pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+[39
+
+]
+Overfull \hbox (1.26973pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+[40
+
+ </usr/local/texlive/2017basic/texmf-dist/tex/latex/beamer/art/beamericonbook.p
+df>]
+Overfull \hbox (1.26973pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+[41
+
+] (./presentacion.toc
+LaTeX Info: Redefining \. on input line 1.
+LaTeX Info: Redefining \% on input line 1.
+)
+Overfull \hbox (1.26973pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+[42
+
+]
+LaTeX Font Info:    Try loading font information for T1+cmtt on input line 590.
+
+ (/usr/local/texlive/2017basic/texmf-dist/tex/latex/base/t1cmtt.fd
+File: t1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+)
+Overfull \hbox (1.26973pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+[43
+
+]
+\tf@nav=\write7
+\openout7 = `presentacion.nav'.
+
+\tf@toc=\write8
+\openout8 = `presentacion.toc'.
+
+\tf@snm=\write9
+\openout9 = `presentacion.snm'.
+
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 591.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 591.
+ (./presentacion.aux
+LaTeX Info: Redefining \. on input line 23.
+LaTeX Info: Redefining \% on input line 23.
+)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 591.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 591.
+Package rerunfilecheck Info: File `presentacion.out' has not changed.
+(rerunfilecheck)             Checksum: D6E3746A8335C8160807CBB64F10D456;350.
+
+
+LaTeX Font Warning: Size substitutions with differences
+(Font)              up to 1.0pt have occurred.
+
+
+LaTeX Warning: There were multiply-defined labels.
+
+ ) 
+Here is how much of TeX's memory you used:
+ 24751 strings out of 494437
+ 471211 string characters out of 6166644
+ 552231 words of memory out of 5000000
+ 27341 multiletter control sequences out of 15000+600000
+ 16755 words of font info for 44 fonts, out of 8000000 for 9000
+ 319 hyphenation exceptions out of 8191
+ 55i,20n,62p,826b,1037s stack positions out of 5000i,500n,10000p,200000b,80000s
+ </Users/nuku/Library/texlive/2017basic/texmf-var/fonts/pk/ljfour/jknappen/ec
+/ectt1095.600pk> </Users/nuku/Library/texlive/2017basic/texmf-var/fonts/pk/ljfo
+ur/jknappen/ec/ecss2488.600pk> </Users/nuku/Library/texlive/2017basic/texmf-var
+/fonts/pk/ljfour/jknappen/ec/ecsi1095.600pk> </Users/nuku/Library/texlive/2017b
+asic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecss1000.600pk> </Users/nuku/Library
+/texlive/2017basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecss0800.600pk> </User
+s/nuku/Library/texlive/2017basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecss1095
+.600pk> </Users/nuku/Library/texlive/2017basic/texmf-var/fonts/pk/ljfour/jknapp
+en/ec/ecss1440.600pk> </Users/nuku/Library/texlive/2017basic/texmf-var/fonts/pk
+/ljfour/jknappen/ec/ecss0600.600pk>
+Output written on presentacion.pdf (43 pages, 5026214 bytes).
+PDF statistics:
+ 1219 PDF objects out of 1440 (max. 8388607)
+ 807 compressed objects within 9 object streams
+ 139 named destinations out of 1000 (max. 500000)
+ 294 words of extra memory for PDF output out of 10000 (max. 10000000)
+

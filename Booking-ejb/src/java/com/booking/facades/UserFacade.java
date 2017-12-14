@@ -97,6 +97,16 @@ public class UserFacade extends AbstractFacade<User> {
         edit(user);
     }
 
+    public void makeUserAsAdmin (User user) {
+        user.getUserRole().setRole(Role.ADMIN);
+        edit(user);
+    }
+
+    public void makeAdminAsUser (User user) {
+        user.getUserRole().setRole(Role.USER);
+        edit(user);
+    }
+    
     public List<User> findAllUsersOfOrganisation(Organisation organisation) {
         return em.createQuery("SELECT u FROM User u WHERE u.organisation = :organisation ORDER BY u.firstName ASC, u.firstLastName ASC").
                 setParameter("organisation", organisation).getResultList();

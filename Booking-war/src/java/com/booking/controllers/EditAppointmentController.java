@@ -73,9 +73,9 @@ public class EditAppointmentController implements Serializable {
         organisation = FacesUtil.getCurrentOrganisation();
 
         services = new ArrayList<>();
-        for (Service s : serviceFacade.findAllActiveServicesOfOrganisation(organisation)) {
+        serviceFacade.findAllActiveServicesOfOrganisation(organisation).forEach((s) -> {
             services.add(new SelectItem(s.getId(), s.getName()));
-        }
+        });
 
         appointmentId = FacesUtil.getParameter("appointment");
         if (appointmentId != null) {

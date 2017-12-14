@@ -106,7 +106,7 @@
                                     </h:outputText>
                                 </div>
                             </div>
-                            <h:panelGroup rendered="#{editClassController.userRole eq 'ADMIN' or editClassController.userRole eq 'SUPER_ADMIN'}">
+                            <h:panelGroup rendered="#{editClassController.loggedUserIsAdmin()}">
                                 <div class="row">
                                     <div class="col-xs-4">
                                         <p class="italics">#{txt['created_date']}</p>
@@ -167,7 +167,7 @@
                                 </p:column> 
 
                                 <p:column headerText="#{txt['options']}"> 
-                                    <h:panelGroup rendered="#{editClassController.userRole eq 'ADMIN' or editClassController.userRole eq 'SUPER_ADMIN'}">
+                                    <h:panelGroup rendered="#{editClassController.loggedUserIsAdmin()}">
                                         <p:commandLink action="#{editClassController.prepareClassDay(classDay)}" update=":newClassDayForm:newClassDay" oncomplete="PF('newClassDayDialog').show()" >
                                             <h:graphicImage title="#{txt['cap_edit']}" value="../resources/images/edit.png" class="table-action" /> 
                                         </p:commandLink> 
@@ -182,7 +182,7 @@
                             </p:dataTable>
                         </div>
 
-                        <h:panelGroup rendered="#{editClassController.userRole eq 'ADMIN' or editClassController.userRole eq 'SUPER_ADMIN'}">
+                        <h:panelGroup rendered="#{editClassController.loggedUserIsAdmin()}">
                             <div class="row">
                                 <p:commandLink action="#{editClassController.prepareNewClassDay()}" update=":newClassDayForm:newClassDay" oncomplete="PF('newClassDayDialog').show()" >
                                     <h:outputText value="+ #{txt['b_add_day']}" class="blue-link"/>
@@ -191,7 +191,7 @@
                         </h:panelGroup>
                     </div>
 
-                    <h:panelGroup rendered="#{editClassController.userRole eq 'ADMIN' or editClassController.userRole eq 'SUPER_ADMIN'}">
+                    <h:panelGroup rendered="#{editClassController.loggedUserIsAdmin()}">
                         <div class="row margin-top-50">
                             <div class="row page-subtitle-no-spacing margin-bottom-10">
                                 <h4>#{txt['class_users_list']}:</h4>

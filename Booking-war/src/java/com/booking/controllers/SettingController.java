@@ -4,6 +4,7 @@ import com.booking.entities.User;
 import com.booking.facades.UserFacade;
 import com.booking.security.PBKDF2HashGenerator;
 import com.booking.util.FacesUtil;
+import com.booking.util.StringsUtil;
 import java.io.Serializable;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
@@ -66,17 +67,12 @@ public class SettingController implements Serializable {
             return;
         }
 
-        boolean isValidPassword;
-        try {
-            isValidPassword = PBKDF2HashGenerator.validatePassword(currentPassword, currentUser.getPassword());
-        } catch (NumberFormatException | NoSuchAlgorithmException | InvalidKeySpecException ex) {
-            FacesUtil.addErrorMessage("settings", "Lo sentimos, no ha sido posible actualizar tu contraseña.");
-            Logger.getLogger(SettingController.class.getName()).log(Level.SEVERE, null, ex);
+        if (StringsUtil.isNotNullNotEmpty(newPassword)) {
+            FacesUtil.addErrorMessage("settings", "Introduce contraseña");
             return;
         }
-
-        if (!isValidPassword) {
-            FacesUtil.addErrorMessage("settings", "La contraseña introducida no es correcta.");
+        if (StringsUtil.notSecure(newPassword)) {
+            FacesUtil.addErrorMessage("settings", "La contraseña debe contener al menos 6 caracteres, incluyendo una letra mayúscula y una minúscula.");
             return;
         }
 

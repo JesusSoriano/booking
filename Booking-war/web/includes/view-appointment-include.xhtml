@@ -16,12 +16,12 @@
         <h:panelGroup rendered="#{!editAppointmentController.isPastAppointment()}">
             <div class="row">
                 <div class="col-xs-offset-6 col-sm-offset-9 col-md-offset-9 col-xs-6 col-sm-3 col-md-3 text-right">
-                    <h:commandLink action="#{editAppointmentController.bookAppointmentForUser()}" rendered="#{editAppointmentController.currentAppointment.available}"> 
+                    <h:commandLink action="#{editAppointmentController.bookAppointmentForUser()}" rendered="#{editAppointmentController.currentAppointment.available and editAppointmentController.currentAppointment.status ne 'SUSPENDED'}"> 
                         <span class="btn btn-primary btn-block btn-green">#{txt['b_request_appointment']}</span>
                     </h:commandLink>
                 </div>
                 <div class="col-xs-offset-6 col-sm-offset-9 col-md-offset-9 col-xs-6 col-sm-3 col-md-3 text-right">
-                    <h:commandLink action="#{editAppointmentController.acceptCurrentAppointmentRequest()}" rendered="#{editAppointmentController.loggedUserIsAdmin() and editAppointmentController.isUserAppointmentRequestOrAdminCanSeeRequest()}"> 
+                    <h:commandLink action="#{editAppointmentController.acceptCurrentAppointmentRequest()}" rendered="#{editAppointmentController.loggedUserIsAdmin() and editAppointmentController.isUserAppointmentRequestOrAdminCanSeeRequest() and editAppointmentController.currentAppointment.status ne 'SUSPENDED'}"> 
                         <span class="btn btn-primary btn-block btn-green">#{txt['b_accept_request']}</span>
                     </h:commandLink>
                 </div>

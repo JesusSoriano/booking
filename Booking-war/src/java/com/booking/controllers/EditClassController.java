@@ -68,6 +68,7 @@ public class EditClassController implements Serializable {
     private String newDayDescription;
     private boolean isNewDay;
     private ClassDay selectedClassDay;
+    private Role userRole;
 
     public EditClassController() {
     }
@@ -75,16 +76,18 @@ public class EditClassController implements Serializable {
     @PostConstruct
     public void init() {
         loggedUser = FacesUtil.getCurrentUser();
+        userRole = loggedUser.getUserRole().getRole();
         organisation = FacesUtil.getCurrentOrganisation();
 
         services = new ArrayList<>();
-        for (Service s : serviceFacade.findAllActiveServicesOfOrganisation(organisation)) {
+        serviceFacade.findAllActiveServicesOfOrganisation(organisation).forEach((s) -> {
             services.add(new SelectItem(s.getId(), s.getName()));
-        }
+        });
+        
         allUsers = new ArrayList<>();
-        for (User u : userFacade.findAllActiveAdminsAndClientsOfOrganisation(organisation)) {
+        userFacade.findAllActiveAdminsAndClientsOfOrganisation(organisation).forEach((u) -> {
             allUsers.add(new SelectItem(u.getId(), u.getFullName()));
-        }
+        });
         selectedUserId = (long) allUsers.get(0).getValue();
 
         classId = FacesUtil.getParameter("class");
@@ -358,6 +361,10 @@ public class EditClassController implements Serializable {
         return viewClassWithParam();
     }
 
+    public boolean loggedUserIsAdmin() {
+        return userRole == Role.ADMIN || userRole == Role.SUPER_ADMIN;
+    }
+    
     public boolean existsBooking() {
         return bookingFacade.existsBooking(loggedUser, currentClass);
     }
